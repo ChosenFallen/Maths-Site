@@ -37,7 +37,6 @@ let minimumFlashDuration = 200;
 let round = 0;
 
 const statusText = document.getElementById("status");
-const startButton = document.getElementById("start");
 const buttons = document.querySelectorAll(".simon-btn");
 
 const menuScreen = document.getElementById("menu-screen");
