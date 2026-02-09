@@ -1,12 +1,25 @@
 const generateBtn = document.getElementById("generate-btn");
 const printBtn = document.getElementById("print-btn");
 const toggleAnswersBtn = document.getElementById("toggle-answers-btn");
+const copyIdBtn = document.getElementById("copy-id-btn");
 const output = document.getElementById("worksheet-output");
 
 let answerDivGlobal; // store reference to answer key for toggling
 
 const worksheetIdInput = document.getElementById("worksheet-id");
 const generatedIdText = document.getElementById("generated-id-text");
+const copyStatus = document.getElementById("copy-status");
+const problemTypeSelect = document.getElementById("problem-type");
+const difficultySelect = document.getElementById("difficulty");
+const numProblemsInput = document.getElementById("num-problems");
+
+function setActionButtonsEnabled(enabled) {
+    printBtn.disabled = !enabled;
+    toggleAnswersBtn.disabled = !enabled;
+    copyIdBtn.disabled = !enabled;
+}
+
+setActionButtonsEnabled(false);
 
 function mulberry32(seed) {
     return function () {
@@ -27,21 +40,50 @@ function stringToSeed(str) {
     return hash;
 }
 
+function buildWorksheetId(baseId, type, difficulty, numProblems) {
+    return `${baseId}|${type}|${difficulty}|${numProblems}`;
+}
+
+function parseWorksheetId(id) {
+    const parts = id.split("|");
+    if (parts.length !== 4) return null;
+    const [baseId, type, difficulty, numProblemsRaw] = parts;
+    const numProblems = parseInt(numProblemsRaw, 10);
+    if (!baseId || Number.isNaN(numProblems)) return null;
+    return { baseId, type, difficulty, numProblems };
+}
+
 function generateWorksheet() {
     // Determine seed
-    let id = worksheetIdInput.value;
+    let id = worksheetIdInput.value.trim();
+    let type = problemTypeSelect.value;
+    let difficulty = difficultySelect.value;
+    let numProblems = parseInt(numProblemsInput.value);
+
     if (!id) {
-        id = Math.random().toString(36).substring(2, 10); // random 8-char ID
-        worksheetIdInput.value = id;
+        const baseId = Math.random().toString(36).substring(2, 10); // random 8-char ID
+        id = buildWorksheetId(baseId, type, difficulty, numProblems);
+    } else {
+        const parsed = parseWorksheetId(id);
+        if (parsed) {
+            type = parsed.type;
+            difficulty = parsed.difficulty;
+            numProblems = parsed.numProblems;
+            problemTypeSelect.value = type;
+            difficultySelect.value = difficulty;
+            numProblemsInput.value = numProblems;
+        } else {
+            id = buildWorksheetId(id, type, difficulty, numProblems);
+        }
     }
+
+    worksheetIdInput.value = id;
     generatedIdText.textContent = `Worksheet ID: ${id}`;
+    copyStatus.textContent = "";
+    setActionButtonsEnabled(true);
 
     const seed = stringToSeed(id);
     const rand = mulberry32(seed); // deterministic RNG function
-
-    const type = document.getElementById("problem-type").value;
-    const difficulty = document.getElementById("difficulty").value;
-    const numProblems = parseInt(document.getElementById("num-problems").value);
 
     const problems = [];
 
@@ -66,6 +108,11 @@ function generateWorksheet() {
         if (type === "division") {
             b = Math.max(1, b);
             a = a * b;
+        }
+        if (type === "subtraction" && a < b) {
+            const temp = a;
+            a = b;
+            b = temp;
         }
 
         const answer = calculateAnswer(a, b, type);
@@ -101,7 +148,7 @@ function renderWorksheet(problems) {
 
         const cell1 = document.createElement("td");
         cell1.style.padding = "8px";
-        cell1.textContent = `${i + 1}. ${p.a} ${symbol(p.type)} ${p.b} = `;
+        cell1.textContent = `${i + 1}) ${p.a} ${symbol(p.type)} ${p.b} = `;
         row.appendChild(cell1);
 
         table.appendChild(row);
@@ -152,3 +199,30 @@ toggleAnswersBtn.addEventListener("click", () => {
         answerDivGlobal.style.display = "block";
     else answerDivGlobal.style.display = "none";
 });
+
+copyIdBtn.addEventListener("click", async () => {
+    const id = worksheetIdInput.value.trim();
+    if (!id) return;
+
+    try {
+        await navigator.clipboard.writeText(id);
+        copyStatus.textContent = "Copied!";
+    } catch {
+        copyStatus.textContent = "Copy failed. Select and copy manually.";
+    }
+});
+
+function clearIdOnSettingsChange() {
+    worksheetIdInput.value = "";
+    generatedIdText.textContent = "";
+    copyStatus.textContent = "";
+    // Keep print/toggle enabled if a worksheet is already rendered
+    const hasWorksheet = output.hasChildNodes();
+    printBtn.disabled = !hasWorksheet;
+    toggleAnswersBtn.disabled = !hasWorksheet;
+    copyIdBtn.disabled = true;
+}
+
+problemTypeSelect.addEventListener("change", clearIdOnSettingsChange);
+difficultySelect.addEventListener("change", clearIdOnSettingsChange);
+numProblemsInput.addEventListener("input", clearIdOnSettingsChange);

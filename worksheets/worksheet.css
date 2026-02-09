@@ -1,24 +1,152 @@
+/* Layout */
+.worksheet-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.worksheet-options {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.worksheet-options label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+.worksheet-options select,
+.worksheet-options input[type="number"],
+.worksheet-options input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.worksheet-options button {
+    margin-top: 12px;
+    margin-right: 8px;
+    padding: 10px 14px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    background: #0066cc;
+    color: white;
+    cursor: pointer;
+}
+
+.worksheet-options button:disabled {
+    background: #9bbde6;
+    cursor: not-allowed;
+}
+
+.helper-text {
+    margin: 6px 0 0;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.generated-id {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.copy-status {
+    margin-top: 6px;
+    color: #2e7d32;
+    min-height: 1em;
+}
+
+.worksheet-output {
+    margin-top: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
 /* Problems table styling */
+#worksheet-output table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 #worksheet-output table td {
-    font-size: 1.4em;
-    padding: 6px;
-    border-bottom: 1px solid #ccc;
+    font-size: 1.25em;
+    padding: 12px 8px;
+    border-bottom: 1px dashed #c7c7c7;
+    vertical-align: middle;
 }
 
 #worksheet-output table tr:last-child td {
     border-bottom: none;
 }
 
+#worksheet-output table tr:nth-child(odd) td {
+    background: #fafafa;
+}
+
+#worksheet-output table tr td::after {
+    content: "";
+    display: inline-block;
+    width: 55%;
+    min-width: 180px;
+    margin-left: 10px;
+    border-bottom: 2px dotted #999;
+    vertical-align: text-bottom;
+    transform: translateY(2px);
+}
+
+@media (max-width: 600px) {
+    #worksheet-output table td {
+        font-size: 1.1em;
+        padding: 10px 6px;
+    }
+
+    #worksheet-output table tr td::after {
+        width: 45%;
+        min-width: 120px;
+    }
+}
+
 /* Answer key styling */
 #worksheet-output .answers {
     margin-top: 30px;
     font-size: 1.2em;
+    text-align: left;
+}
+
+#worksheet-output .answers ol {
+    padding-left: 0;
+    margin: 8px 0 0;
+    list-style: none;
+    counter-reset: answer;
+}
+
+#worksheet-output .answers li {
+    margin: 4px 0;
+    counter-increment: answer;
+}
+
+#worksheet-output .answers li::before {
+    content: counter(answer) ") ";
 }
 
 /* Print layout: separate pages */
 @media print {
     /* Hide the toggle button and generate button during printing */
     #worksheet-options button {
+        display: none;
+    }
+    /* Hide settings and backlink in print */
+    #worksheet-options,
+    #menu-container,
+    body > p {
         display: none;
     }
 

@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Maths Worksheets</title>
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="worksheet.css" />
@@ -10,14 +11,9 @@
         <!-- Shared menu -->
         <div id="menu-container"></div>
 
-        <h1 style="text-align: center; margin-top: 20px">
-            📝 Maths Worksheets Generator
-        </h1>
+        <h1 class="worksheet-title">📝 Maths Worksheets Generator</h1>
 
-        <div
-            id="worksheet-options"
-            style="max-width: 600px; margin: 0 auto; text-align: left"
-        >
+        <div id="worksheet-options" class="worksheet-options">
             <label>Type of problems:</label>
             <select id="problem-type">
                 <option value="addition">Addition</option>
@@ -48,24 +44,21 @@
                 id="worksheet-id"
                 placeholder="Leave empty for new ID"
             />
+            <p class="helper-text">
+                Share this ID to regenerate the exact same worksheet later.
+            </p>
 
             <button id="generate-btn">Generate Worksheet</button>
             <button id="print-btn">Print / Save as PDF</button>
             <button id="toggle-answers-btn">Show/Hide Answer Key</button>
-            <p id="generated-id-text" style="font-weight: bold"></p>
+            <button id="copy-id-btn">Copy Worksheet ID</button>
+            <p id="generated-id-text" class="generated-id"></p>
+            <p id="copy-status" class="copy-status" aria-live="polite"></p>
         </div>
 
-        <div
-            id="worksheet-output"
-            style="
-                margin-top: 30px;
-                max-width: 700px;
-                margin-left: auto;
-                margin-right: auto;
-            "
-        ></div>
+        <div id="worksheet-output" class="worksheet-output"></div>
 
-        <p><a href="../../index.html">⬅ Back to games</a></p>
+        <p><a href="../index.html">⬅ Back to games</a></p>
 
         <script src="worksheet.js"></script>
     </body>
