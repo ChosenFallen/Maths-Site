@@ -1,28 +1,47 @@
-let num1;
-let num2;
+let num1, num2;
+let correctAnswer;
 
 function generateQuestion() {
   num1 = Math.floor(Math.random() * 10);
   num2 = Math.floor(Math.random() * 10);
+  correctAnswer = num1 + num2;
 
   document.getElementById("question").textContent =
     `What is ${num1} + ${num2}?`;
 
-  document.getElementById("answer").value = "";
+  generateAnswerButtons();
   document.getElementById("result").textContent = "";
 }
 
-function checkAnswer() {
-  const userAnswer = Number(document.getElementById("answer").value);
+function generateAnswerButtons() {
+  const container = document.getElementById("answers");
+  container.innerHTML = "";
 
-  if (userAnswer === num1 + num2) {
+  let answers = new Set();
+  answers.add(correctAnswer);
+
+  while (answers.size < 4) {
+    answers.add(correctAnswer + Math.floor(Math.random() * 5) - 2);
+  }
+
+  [...answers]
+    .sort(() => Math.random() - 0.5)
+    .forEach((answer) => {
+      const btn = document.createElement("button");
+      btn.className = "answer-btn";
+      btn.textContent = answer;
+      btn.addEventListener("click", () => checkAnswer(answer));
+      container.appendChild(btn);
+    });
+}
+
+function checkAnswer(selected) {
+  if (selected === correctAnswer) {
     document.getElementById("result").textContent = "✅ Correct!";
-    generateQuestion();
+    setTimeout(generateQuestion, 800);
   } else {
     document.getElementById("result").textContent = "❌ Try again!";
   }
 }
-
-document.getElementById("submit").addEventListener("click", checkAnswer);
 
 generateQuestion();
