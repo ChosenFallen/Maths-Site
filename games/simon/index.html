@@ -1,39 +1,40 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Simon Says</title>
-    <link rel="stylesheet" href="../../css/style.css" />
-  </head>
-  <body>
-    <h1>🟢 Simon Says</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Simon Says</title>
+        <link rel="stylesheet" href="../../css/style.css" />
+    </head>
+    <body>
+        <h1>🟢 Simon Says</h1>
 
-    <!-- START / GAME OVER SCREEN -->
-    <div id="menu-screen">
-      <p class="menu-text">Choose difficulty</p>
+        <!-- START / GAME OVER SCREEN -->
+        <div id="menu-screen">
+            <p class="menu-text">Choose difficulty</p>
+            <p id="game-over-text" class="game-over hidden"></p>
 
-      <div class="difficulty-buttons">
-        <button data-difficulty="easy">Easy</button>
-        <button data-difficulty="normal">Normal</button>
-        <button data-difficulty="hard">Hard</button>
-      </div>
-    </div>
+            <div class="difficulty-buttons">
+                <button data-difficulty="easy">Easy</button>
+                <button data-difficulty="normal">Normal</button>
+                <button data-difficulty="hard">Hard</button>
+            </div>
+        </div>
 
-    <!-- GAME SCREEN -->
-    <div id="game-screen" class="hidden">
-      <p id="round-display" class="round">Round: 0</p>
-      <p id="status">Watch closely...</p>
+        <!-- GAME SCREEN -->
+        <div id="game-screen" class="hidden">
+            <p id="round-display" class="round">Round: 0</p>
+            <p id="status">Watch closely...</p>
 
-      <div class="simon-board">
-        <div class="simon-btn green" data-color="green"></div>
-        <div class="simon-btn red" data-color="red"></div>
-        <div class="simon-btn yellow" data-color="yellow"></div>
-        <div class="simon-btn blue" data-color="blue"></div>
-      </div>
-    </div>
+            <div class="simon-board">
+                <div class="simon-btn green" data-color="green"></div>
+                <div class="simon-btn red" data-color="red"></div>
+                <div class="simon-btn yellow" data-color="yellow"></div>
+                <div class="simon-btn blue" data-color="blue"></div>
+            </div>
+        </div>
 
-    <p><a href="../../index.html">⬅ Back to games</a></p>
+        <p><a href="../../index.html">⬅ Back to games</a></p>
 
-    <script src="game.js"></script>
-  </body>
+        <script src="game.js"></script>
+    </body>
 </html>

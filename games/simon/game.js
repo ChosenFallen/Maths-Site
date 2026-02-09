@@ -43,6 +43,8 @@ const buttons = document.querySelectorAll(".simon-btn");
 const menuScreen = document.getElementById("menu-screen");
 const gameScreen = document.getElementById("game-screen");
 
+const gameOverText = document.getElementById("game-over-text");
+
 document.querySelectorAll(".difficulty-buttons button").forEach((btn) => {
     btn.addEventListener("click", () => {
         currentDifficulty = btn.dataset.difficulty;
@@ -58,7 +60,6 @@ buttons.forEach((btn) => {
 });
 
 function startGame() {
-    console.log("Starting game with difficulty: " + currentDifficulty);
     audioContext.resume();
 
     const settings = difficultySettings[currentDifficulty];
@@ -70,6 +71,8 @@ function startGame() {
     flashDuration = settings.startFlash;
     pauseBetweenFlashes = 200;
     speedUpAmount = settings.speedUp;
+
+    gameOverText.classList.add("hidden");
 
     menuScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
@@ -120,6 +123,9 @@ function handlePlayerInput(color) {
     if (color !== sequence[playerIndex]) {
         acceptingInput = false;
         statusText.textContent = "❌ Wrong!";
+
+        gameOverText.textContent = `You reached Round ${round}`;
+        gameOverText.classList.remove("hidden");
 
         setTimeout(() => {
             gameScreen.classList.add("hidden");
