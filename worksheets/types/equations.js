@@ -5,6 +5,12 @@ import { randInt } from "./utils.js";
 export default {
     id: "equations",
     label: "Solving Equations",
+    instruction(options = {}) {
+        const mode = options.equationMode || "mixed";
+        if (mode === "one") return "Solve the one-step equations.";
+        if (mode === "two") return "Solve the two-step equations.";
+        return "Solve the equations.";
+    },
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         const mode = options.equationMode || "mixed";

@@ -9,6 +9,7 @@ import equivalentFractions from "./types/equivalent-fractions.js";
 import fractionAddSub from "./types/fraction-add-sub.js";
 import equations from "./types/equations.js";
 import fractionMulDiv from "./types/fraction-mul-div.js";
+import mixedNumbers from "./types/mixed-numbers.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -21,7 +22,27 @@ const WORKSHEET_TYPES = [
     equivalentFractions,
     fractionAddSub,
     fractionMulDiv,
+    mixedNumbers,
     equations,
+];
+
+const WORKSHEET_GROUPS = [
+    {
+        label: "Arithmetic",
+        types: ["addition", "subtraction", "multiplication", "division", "mixed"],
+    },
+    {
+        label: "Fractions",
+        types: [
+            "simplify-fractions",
+            "equivalent-fractions",
+            "fraction-add-sub",
+            "fraction-mul-div",
+            "mixed-numbers",
+        ],
+    },
+    { label: "Powers", types: ["indices"] },
+    { label: "Algebra", types: ["equations"] },
 ];
 
 const generateBtn = document.getElementById("generate-btn");
@@ -49,9 +70,13 @@ const fractionMulDivOptions = document.getElementById(
 const fractionMulDivModeSelect = document.getElementById(
     "fraction-mul-div-mode",
 );
+const mixedNumberOptions = document.getElementById("mixed-number-options");
+const mixedNumberModeSelect = document.getElementById("mixed-number-mode");
 const equationOptions = document.getElementById("equation-options");
 const equationModeSelect = document.getElementById("equation-mode");
 const uniquenessNote = document.getElementById("uniqueness-note");
+const printTitle = document.getElementById("print-title");
+const worksheetInstruction = document.getElementById("worksheet-instruction");
 
 function setActionButtonsEnabled(enabled) {
     printBtn.disabled = !enabled;
@@ -174,6 +199,8 @@ function generateWorksheetInternal(forceNewId) {
             "Note: Range too small to avoid all duplicates.";
     }
 
+    setPrintTitle(worksheetType, options);
+    setInstructionText(worksheetType, options);
     renderWorksheet(result.problems);
 }
 
@@ -270,6 +297,7 @@ numProblemsInput.addEventListener("input", clearIdOnSettingsChange);
 includePowersInput.addEventListener("change", clearIdOnSettingsChange);
 denominatorModeSelect.addEventListener("change", clearIdOnSettingsChange);
 fractionMulDivModeSelect.addEventListener("change", clearIdOnSettingsChange);
+mixedNumberModeSelect.addEventListener("change", clearIdOnSettingsChange);
 equationModeSelect.addEventListener("change", clearIdOnSettingsChange);
 
 function getWorksheetType(typeId) {
@@ -278,7 +306,31 @@ function getWorksheetType(typeId) {
 
 function populateWorksheetTypes() {
     problemTypeSelect.innerHTML = "";
+    const typeMap = new Map(WORKSHEET_TYPES.map((t) => [t.id, t]));
+    const added = new Set();
+
+    WORKSHEET_GROUPS.forEach((group) => {
+        const optgroup = document.createElement("optgroup");
+        optgroup.label = group.label;
+
+        group.types.forEach((typeId) => {
+            const type = typeMap.get(typeId);
+            if (!type || added.has(type.id)) return;
+            const option = document.createElement("option");
+            option.value = type.id;
+            option.textContent = type.label;
+            optgroup.appendChild(option);
+            added.add(type.id);
+        });
+
+        if (optgroup.children.length > 0) {
+            problemTypeSelect.appendChild(optgroup);
+        }
+    });
+
+    // Add any ungrouped types at the end
     WORKSHEET_TYPES.forEach((type) => {
+        if (added.has(type.id)) return;
         const option = document.createElement("option");
         option.value = type.id;
         option.textContent = type.label;
@@ -294,10 +346,12 @@ function syncOptionsVisibility() {
     const showMixed = type === "mixed";
     const showFractions = type === "fraction-add-sub";
     const showFractionMulDiv = type === "fraction-mul-div";
+    const showMixedNumbers = type === "mixed-numbers";
     const showEquations = type === "equations";
     mixedOptions.classList.toggle("hidden", !showMixed);
     fractionOptions.classList.toggle("hidden", !showFractions);
     fractionMulDivOptions.classList.toggle("hidden", !showFractionMulDiv);
+    mixedNumberOptions.classList.toggle("hidden", !showMixedNumbers);
     equationOptions.classList.toggle("hidden", !showEquations);
 }
 
@@ -314,6 +368,9 @@ function readOptionsFromUI(type) {
     }
     if (type === "fraction-mul-div") {
         return { fractionMulDivMode: fractionMulDivModeSelect.value };
+    }
+    if (type === "mixed-numbers") {
+        return { mixedNumberMode: mixedNumberModeSelect.value };
     }
     if (type === "equations") {
         return { equationMode: equationModeSelect.value };
@@ -337,11 +394,61 @@ function applyOptionsToUI(type, options) {
     } else {
         fractionMulDivModeSelect.value = "mixed";
     }
+    if (type === "mixed-numbers") {
+        mixedNumberModeSelect.value = options.mixedNumberMode || "mixed";
+    } else {
+        mixedNumberModeSelect.value = "mixed";
+    }
     if (type === "equations") {
         equationModeSelect.value = options.equationMode || "mixed";
     } else {
         equationModeSelect.value = "mixed";
     }
+}
+
+function setPrintTitle(worksheetType, options) {
+    if (!worksheetType) {
+        printTitle.textContent = "";
+        return;
+    }
+    let title = worksheetType.label;
+    if (worksheetType.id === "equations") {
+        const mode = options.equationMode || "mixed";
+        if (mode === "one") title = "One-Step Equations";
+        if (mode === "two") title = "Two-Step Equations";
+    }
+    if (worksheetType.id === "fraction-add-sub") {
+        const mode = options.denominatorMode || "mixed";
+        if (mode === "like") title = "Add/Subtract Fractions (Same Denominators)";
+        if (mode === "unlike")
+            title = "Add/Subtract Fractions (Different Denominators)";
+    }
+    if (worksheetType.id === "fraction-mul-div") {
+        const mode = options.fractionMulDivMode || "mixed";
+        if (mode === "multiply") title = "Multiply Fractions";
+        if (mode === "divide") title = "Divide Fractions";
+    }
+    if (worksheetType.id === "mixed-numbers") {
+        const mode = options.mixedNumberMode || "mixed";
+        if (mode === "to-improper") title = "Mixed to Improper Fractions";
+        if (mode === "to-mixed") title = "Improper to Mixed Fractions";
+    }
+    if (worksheetType.id === "mixed") {
+        title = "Mixed Operations";
+    }
+    printTitle.textContent = title;
+}
+
+function setInstructionText(worksheetType, options) {
+    if (!worksheetType) {
+        worksheetInstruction.textContent = "";
+        return;
+    }
+    const text =
+        typeof worksheetType.instruction === "function"
+            ? worksheetType.instruction(options)
+            : "Solve the following.";
+    worksheetInstruction.textContent = text;
 }
 
 function encodeOptions(options) {

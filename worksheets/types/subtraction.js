@@ -3,6 +3,9 @@ import { randInt, difficultyRange } from "./utils.js";
 export default {
     id: "subtraction",
     label: "Subtraction",
+    instruction() {
+        return "Solve the following.";
+    },
     generate(rand, difficulty, count) {
         const [min, max] = difficultyRange(difficulty);
         const problems = [];

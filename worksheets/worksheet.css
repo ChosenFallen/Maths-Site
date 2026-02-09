@@ -4,6 +4,19 @@
     margin-top: 20px;
 }
 
+.print-title {
+    display: none;
+    text-align: center;
+    margin: 10px 0 20px;
+}
+
+.worksheet-instruction {
+    text-align: center;
+    margin: 0 0 16px;
+    color: #444;
+    font-weight: 600;
+}
+
 .worksheet-options {
     max-width: 600px;
     margin: 0 auto;
@@ -168,6 +181,16 @@
     min-width: 56px;
 }
 
+.mixed {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mixed .whole {
+    font-weight: 600;
+}
+
 .worksheet-output {
     margin-top: 30px;
     max-width: 700px;
@@ -264,8 +287,15 @@
     /* Hide settings and backlink in print */
     #worksheet-options,
     #menu-container,
-    body > p {
+    body > p,
+    .worksheet-title {
         display: none;
+    }
+    #print-title {
+        display: block;
+    }
+    #worksheet-instruction {
+        display: block;
     }
 
     /* Page break before the answer key */

@@ -3,6 +3,9 @@ import { randInt, difficultyRange } from "./utils.js";
 export default {
     id: "equation2",
     label: "Two-Step Equations",
+    instruction() {
+        return "Solve the two-step equations.";
+    },
     generate(rand, difficulty, count) {
         const X = "𝑥";
         const [min, max] = difficultyRange(difficulty);

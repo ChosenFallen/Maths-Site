@@ -3,6 +3,9 @@ import { randInt, gcd } from "./utils.js";
 export default {
     id: "simplify-fractions",
     label: "Simplify Fractions",
+    instruction() {
+        return "Simplify each fraction.";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         for (let i = 0; i < count; i++) {

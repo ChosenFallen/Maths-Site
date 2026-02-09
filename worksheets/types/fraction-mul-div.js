@@ -3,6 +3,14 @@ import { randInt, gcd } from "./utils.js";
 export default {
     id: "fraction-mul-div",
     label: "Multiply/Divide Fractions",
+    instruction(options = {}) {
+        const mode = options.fractionMulDivMode || "mixed";
+        if (mode === "multiply")
+            return "Multiply the fractions and simplify your answers.";
+        if (mode === "divide")
+            return "Divide the fractions and simplify your answers.";
+        return "Multiply or divide and simplify your answers.";
+    },
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         const mode = options.fractionMulDivMode || "mixed";

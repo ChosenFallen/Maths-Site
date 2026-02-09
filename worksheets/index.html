@@ -12,6 +12,7 @@
         <div id="menu-container"></div>
 
         <h1 class="worksheet-title">📝 Maths Worksheets Generator</h1>
+        <h1 id="print-title" class="print-title"></h1>
 
         <div id="worksheet-options" class="worksheet-options">
             <label>Type of problems:</label>
@@ -47,6 +48,15 @@
                     <option value="mixed">Mixed</option>
                     <option value="multiply">Multiply</option>
                     <option value="divide">Divide</option>
+                </select>
+            </div>
+
+            <div id="mixed-number-options" class="options-group hidden">
+                <label for="mixed-number-mode">Direction:</label>
+                <select id="mixed-number-mode">
+                    <option value="mixed">Mixed</option>
+                    <option value="to-improper">Mixed → Improper</option>
+                    <option value="to-mixed">Improper → Mixed</option>
                 </select>
             </div>
 
@@ -106,6 +116,7 @@
             <p id="uniqueness-note" class="helper-text"></p>
         </div>
 
+        <p id="worksheet-instruction" class="worksheet-instruction"></p>
         <div id="worksheet-output" class="worksheet-output"></div>
 
         <p><a href="../index.html">⬅ Back to games</a></p>

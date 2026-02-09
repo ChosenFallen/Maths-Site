@@ -9,6 +9,9 @@ import {
 export default {
     id: "mixed",
     label: "Mixed Operations",
+    instruction() {
+        return "Solve the following.";
+    },
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         for (let i = 0; i < count; i++) {

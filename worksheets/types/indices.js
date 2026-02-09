@@ -3,6 +3,9 @@ import { randInt } from "./utils.js";
 export default {
     id: "indices",
     label: "Indices (Powers)",
+    instruction() {
+        return "Evaluate the powers.";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         for (let i = 0; i < count; i++) {

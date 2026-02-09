@@ -3,6 +3,14 @@ import { randInt, gcd, lcm } from "./utils.js";
 export default {
     id: "fraction-add-sub",
     label: "Add/Subtract Fractions",
+    instruction(options = {}) {
+        const mode = options.denominatorMode || "mixed";
+        if (mode === "like")
+            return "Add or subtract fractions with the same denominators and simplify.";
+        if (mode === "unlike")
+            return "Add or subtract fractions with different denominators and simplify.";
+        return "Add or subtract and simplify your answers.";
+    },
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         const mode = options.denominatorMode || "mixed";
