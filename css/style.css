@@ -94,3 +94,9 @@ a:hover {
   padding: 15px 40px;
   margin-top: 20px;
 }
+
+.round {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 10px 0 20px;
+}

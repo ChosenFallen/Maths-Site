@@ -17,6 +17,8 @@ let pauseBetweenFlashes = 200;
 const speedUpAmount = 40;
 const minimumFlashDuration = 200;
 
+let round = 0;
+
 const statusText = document.getElementById("status");
 const startButton = document.getElementById("start");
 const buttons = document.querySelectorAll(".simon-btn");
@@ -35,10 +37,12 @@ function startGame() {
 
   sequence = [];
   playerIndex = 0;
+  round = 0;
 
   flashDuration = 600;
   pauseBetweenFlashes = 200;
 
+  updateRoundDisplay();
   statusText.textContent = "Watch closely...";
   nextRound();
 }
@@ -46,6 +50,9 @@ function startGame() {
 function nextRound() {
   acceptingInput = false;
   playerIndex = 0;
+
+  round++;
+  updateRoundDisplay();
 
   sequence.push(randomColor());
 
@@ -115,4 +122,8 @@ function playSound(color) {
   setTimeout(() => {
     oscillator.stop();
   }, 300);
+}
+
+function updateRoundDisplay() {
+  document.getElementById("round-display").textContent = `Round: ${round}`;
 }
