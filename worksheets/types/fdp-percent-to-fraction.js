@@ -13,8 +13,9 @@ export default {
             const percent = randomPercent(rand, dp);
             const frac = percentToFraction(percent, dp);
             const question = formatPercent(percent, dp);
-            const answerHtml = formatFraction(frac.n, frac.d);
-            const answer = `${frac.n}/${frac.d}`;
+            const formatted = formatFractionOrWhole(frac.n, frac.d);
+            const answerHtml = formatted.html;
+            const answer = formatted.text;
             problems.push({ question, answerHtml, answer });
         }
         return problems;
@@ -52,4 +53,14 @@ function formatPercent(value, dp) {
 
 function formatFraction(numerator, denominator) {
     return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
+}
+
+function formatFractionOrWhole(numerator, denominator) {
+    if (denominator === 1) {
+        return { html: `${numerator}`, text: `${numerator}` };
+    }
+    return {
+        html: formatFraction(numerator, denominator),
+        text: `${numerator}/${denominator}`,
+    };
 }

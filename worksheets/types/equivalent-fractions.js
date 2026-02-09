@@ -52,8 +52,8 @@ function generateFraction(rand, difficulty) {
         maxFactor = 8;
     }
 
-    let numerator = randInt(rand, 1, maxDen - 1);
     let denominator = randInt(rand, minDen, maxDen);
+    let numerator = randInt(rand, 1, denominator - 1);
 
     const divisor = gcd(numerator, denominator);
     numerator /= divisor;

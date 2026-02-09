@@ -62,5 +62,5 @@ export function lcm(a, b) {
 
 export function ensureNonUnitDenominator(numerator, denominator) {
     if (denominator !== 1) return { numerator, denominator };
-    return { numerator, denominator: 2 };
+    return { numerator: numerator * 2, denominator: 2 };
 }

@@ -80,8 +80,9 @@ function generateProblem(rand, difficulty, like) {
     const right = formatFraction(n2, d2);
     const op = doSub ? "−" : "+";
     const questionHtml = `${left} ${op} ${right} =`;
-    const answerHtml = formatFraction(simpNum, simpDen);
-    const answer = `${simpNum}/${simpDen}`;
+    const formatted = formatFractionOrWhole(simpNum, simpDen);
+    const answerHtml = formatted.html;
+    const answer = formatted.text;
 
     return { questionHtml, answerHtml, answer };
 }
@@ -101,4 +102,14 @@ function denominatorRange(difficulty) {
 
 function formatFraction(numerator, denominator) {
     return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
+}
+
+function formatFractionOrWhole(numerator, denominator) {
+    if (denominator === 1) {
+        return { html: `${numerator}`, text: `${numerator}` };
+    }
+    return {
+        html: formatFraction(numerator, denominator),
+        text: `${numerator}/${denominator}`,
+    };
 }

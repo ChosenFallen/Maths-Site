@@ -14,8 +14,12 @@ export default {
             const simpNum = numerator / divisor;
             const simpDen = denominator / divisor;
             const questionHtml = `${formatFraction(numerator, denominator)} =`;
-            const answerHtml = formatFraction(simpNum, simpDen);
-            problems.push({ questionHtml, answerHtml, answer: `${simpNum}/${simpDen}` });
+            const formatted = formatFractionOrWhole(simpNum, simpDen);
+            problems.push({
+                questionHtml,
+                answerHtml: formatted.html,
+                answer: formatted.text,
+            });
         }
         return problems;
     },
@@ -55,4 +59,14 @@ function generateFraction(rand, difficulty) {
 
 function formatFraction(numerator, denominator) {
     return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
+}
+
+function formatFractionOrWhole(numerator, denominator) {
+    if (denominator === 1) {
+        return { html: `${numerator}`, text: `${numerator}` };
+    }
+    return {
+        html: formatFraction(numerator, denominator),
+        text: `${numerator}/${denominator}`,
+    };
 }

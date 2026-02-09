@@ -13,8 +13,9 @@ export default {
             const value = randomDecimal(rand, dp);
             const asFraction = decimalToFraction(value, dp);
             const question = formatDecimal(value, dp);
-            const answerHtml = formatFraction(asFraction.n, asFraction.d);
-            const answer = `${asFraction.n}/${asFraction.d}`;
+            const formatted = formatFractionOrWhole(asFraction.n, asFraction.d);
+            const answerHtml = formatted.html;
+            const answer = formatted.text;
             problems.push({ question, answerHtml, answer });
         }
         return problems;
@@ -49,4 +50,14 @@ function formatDecimal(value, dp) {
 
 function formatFraction(numerator, denominator) {
     return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
+}
+
+function formatFractionOrWhole(numerator, denominator) {
+    if (denominator === 1) {
+        return { html: `${numerator}`, text: `${numerator}` };
+    }
+    return {
+        html: formatFraction(numerator, denominator),
+        text: `${numerator}/${denominator}`,
+    };
 }

@@ -36,13 +36,14 @@ function generateProblem(rand, difficulty, toImproper) {
 
     const mixedHtml = formatMixedNumber(whole, num, den);
     const improperNum = whole * den + num;
-    const improperHtml = formatFraction(improperNum, den);
+    const improper = formatFractionOrWhole(improperNum, den);
+    const improperHtml = improper.html;
 
     if (toImproper) {
         return {
             questionHtml: `${mixedHtml} =`,
             answerHtml: improperHtml,
-            answer: `${improperNum}/${den}`,
+            answer: improper.text,
         };
     }
 
@@ -68,6 +69,16 @@ function ranges(difficulty) {
 
 function formatFraction(numerator, denominator) {
     return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
+}
+
+function formatFractionOrWhole(numerator, denominator) {
+    if (denominator === 1) {
+        return { html: `${numerator}`, text: `${numerator}` };
+    }
+    return {
+        html: formatFraction(numerator, denominator),
+        text: `${numerator}/${denominator}`,
+    };
 }
 
 function formatMixedNumber(whole, numerator, denominator) {
