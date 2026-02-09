@@ -136,8 +136,12 @@ a:hover {
 }
 
 .best-round {
-    font-size: 1.4em;
-    margin-bottom: 15px;
+    font-size: 1.3em;
+    margin-bottom: 20px;
     color: #2e7d32;
     font-weight: bold;
+}
+
+.best-round p {
+    margin: 4px 0;
 }

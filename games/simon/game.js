@@ -44,7 +44,12 @@ const menuScreen = document.getElementById("menu-screen");
 const gameScreen = document.getElementById("game-screen");
 
 const gameOverText = document.getElementById("game-over-text");
-const bestRoundText = document.getElementById("best-round-text");
+
+const bestRoundsBox = document.getElementById("best-rounds");
+
+const bestEasy = document.getElementById("best-easy");
+const bestNormal = document.getElementById("best-normal");
+const bestHard = document.getElementById("best-hard");
 
 document.querySelectorAll(".difficulty-buttons button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -128,13 +133,14 @@ function handlePlayerInput(color) {
         gameOverText.textContent = `You reached Round ${round}`;
         gameOverText.classList.remove("hidden");
 
-        const best = getBestRoundToday();
+        const best = getBestRoundsToday();
 
-        if (round > best.round) {
-            setBestRoundToday(round, currentDifficulty);
+        if (round > best[currentDifficulty]) {
+            best[currentDifficulty] = round;
+            setBestRoundsToday(best);
         }
 
-        updateBestRoundDisplay();
+        updateBestRoundsDisplay();
 
         setTimeout(() => {
             gameScreen.classList.add("hidden");
@@ -184,18 +190,17 @@ function updateRoundDisplay() {
     document.getElementById("round-display").textContent = `Round: ${round}`;
 }
 
-function updateBestRoundDisplay() {
-    const best = getBestRoundToday();
+function updateBestRoundsDisplay() {
+    const best = getBestRoundsToday();
+    console.log("Best rounds today:", best);
+    bestEasy.textContent = `Easy: ${best.easy || "–"}`;
+    bestNormal.textContent = `Normal: ${best.normal || "–"}`;
+    bestHard.textContent = `Hard: ${best.hard || "–"}`;
 
-    if (best.round > 0) {
-        const difficultyLabel =
-            best.difficulty.charAt(0).toUpperCase() + best.difficulty.slice(1);
-
-        bestRoundText.textContent = `🏆 Best Round Today: ${best.round} (${difficultyLabel})`;
-
-        bestRoundText.classList.remove("hidden");
+    if (best.easy || best.normal || best.hard) {
+        bestRoundsBox.classList.remove("hidden");
     } else {
-        bestRoundText.classList.add("hidden");
+        bestRoundsBox.classList.add("hidden");
     }
 }
 
@@ -204,21 +209,22 @@ function getTodayKey() {
     return `simon-best-${today}`;
 }
 
-function getBestRoundToday() {
+function getBestRoundsToday() {
     const data = localStorage.getItem(getTodayKey());
 
-    if (!data) return { round: 0, difficulty: null };
+    if (!data) {
+        return { easy: 0, normal: 0, hard: 0 };
+    }
 
     try {
         return JSON.parse(data);
     } catch {
-        return { round: Number(data) || 0, difficulty: null };
+        return { easy: 0, normal: 0, hard: 0 };
     }
 }
 
-function setBestRoundToday(round, difficulty) {
-    const value = { round, difficulty };
-    localStorage.setItem(getTodayKey(), JSON.stringify(value));
+function setBestRoundsToday(bestRounds) {
+    localStorage.setItem(getTodayKey(), JSON.stringify(bestRounds));
 }
 
-updateBestRoundDisplay();
+updateBestRoundsDisplay();
