@@ -25,6 +25,40 @@
                 <option value="equation2">Two-Step Equations</option>
             </select>
 
+            <div id="mixed-options" class="options-group hidden">
+                <label class="inline-option">
+                    <input type="checkbox" id="include-powers" />
+                    Include powers (indices)
+                </label>
+            </div>
+
+            <div id="fraction-options" class="options-group hidden">
+                <label for="denominator-mode">Denominators:</label>
+                <select id="denominator-mode">
+                    <option value="mixed">Mixed</option>
+                    <option value="like">Same</option>
+                    <option value="unlike">Different</option>
+                </select>
+            </div>
+
+            <div id="fraction-mul-div-options" class="options-group hidden">
+                <label for="fraction-mul-div-mode">Operation:</label>
+                <select id="fraction-mul-div-mode">
+                    <option value="mixed">Mixed</option>
+                    <option value="multiply">Multiply</option>
+                    <option value="divide">Divide</option>
+                </select>
+            </div>
+
+            <div id="equation-options" class="options-group hidden">
+                <label for="equation-mode">Equation steps:</label>
+                <select id="equation-mode">
+                    <option value="mixed">Mixed</option>
+                    <option value="one">One step</option>
+                    <option value="two">Two steps</option>
+                </select>
+            </div>
+
             <label>Difficulty:</label>
             <select id="difficulty">
                 <option value="easy">Easy</option>
@@ -42,21 +76,34 @@
             />
 
             <label>Worksheet ID (optional):</label>
-            <input
-                type="text"
-                id="worksheet-id"
-                placeholder="Leave empty for new ID"
-            />
+            <div class="id-actions" data-layout="inline">
+                <input
+                    type="text"
+                    id="worksheet-id"
+                    placeholder="Leave empty for new ID"
+                />
+                <button id="generate-btn">Generate Worksheet</button>
+                <button id="copy-id-btn" class="secondary copy-inline">
+                    Copy ID
+                </button>
+            </div>
             <p class="helper-text">
                 Share this ID to regenerate the exact same worksheet later.
             </p>
-
-            <button id="generate-btn">Generate Worksheet</button>
-            <button id="print-btn">Print / Save as PDF</button>
-            <button id="toggle-answers-btn">Show/Hide Answer Key</button>
-            <button id="copy-id-btn">Copy Worksheet ID</button>
+            <div class="action-row">
+                <button id="new-random-btn" class="secondary">
+                    New Random Worksheet
+                </button>
+                <button id="print-btn" class="secondary">
+                    Print / Save as PDF
+                </button>
+                <button id="toggle-answers-btn" class="secondary">
+                    Show/Hide Answer Key
+                </button>
+            </div>
             <p id="generated-id-text" class="generated-id"></p>
             <p id="copy-status" class="copy-status" aria-live="polite"></p>
+            <p id="uniqueness-note" class="helper-text"></p>
         </div>
 
         <div id="worksheet-output" class="worksheet-output"></div>

@@ -4,6 +4,7 @@ export default {
     id: "equation2",
     label: "Two-Step Equations",
     generate(rand, difficulty, count) {
+        const X = "𝑥";
         const [min, max] = difficultyRange(difficulty);
         const problems = [];
 
@@ -16,10 +17,10 @@ export default {
             const c = useMinus ? a * x - b : a * x + b;
 
             const question = useMinus
-                ? `${a}x − ${b} = ${c}`
-                : `${a}x + ${b} = ${c}`;
+                ? `${a}${X} − ${b} = ${c}`
+                : `${a}${X} + ${b} = ${c}`;
 
-            problems.push({ question, answer: x });
+            problems.push({ question, answer: x, answerPrefix: `→ ${X} = ` });
         }
 
         return problems;

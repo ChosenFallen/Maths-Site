@@ -4,6 +4,7 @@ export default {
     id: "equation1",
     label: "One-Step Equations",
     generate(rand, difficulty, count) {
+        const X = "𝑥";
         const [min, max] = difficultyRange(difficulty);
         const ops = ["+", "−", "×", "÷"];
         const problems = [];
@@ -18,26 +19,26 @@ export default {
 
             switch (op) {
                 case "+":
-                    left = `x + ${a}`;
+                    left = `${X} + ${a}`;
                     right = x + a;
                     break;
                 case "−":
-                    left = `x − ${a}`;
+                    left = `${X} − ${a}`;
                     right = x - a;
                     break;
                 case "×":
-                    left = `${a}x`;
+                    left = `${a}${X}`;
                     right = x * a;
                     break;
                 case "÷":
                     x = x * a;
-                    left = `x ÷ ${a}`;
+                    left = `${X} ÷ ${a}`;
                     right = x / a;
                     break;
             }
 
             const question = `${left} = ${right}`;
-            problems.push({ question, answer: x });
+            problems.push({ question, answer: x, answerPrefix: `→ ${X} = ` });
         }
 
         return problems;

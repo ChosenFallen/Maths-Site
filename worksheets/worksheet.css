@@ -40,9 +40,83 @@
     cursor: pointer;
 }
 
+.worksheet-options button.secondary {
+    background: #e2e6ef;
+    color: #263042;
+}
+
 .worksheet-options button:disabled {
     background: #9bbde6;
     cursor: not-allowed;
+}
+
+.worksheet-options button.secondary:disabled {
+    background: #f0f2f6;
+    color: #8a93a3;
+}
+
+.id-actions {
+    display: grid;
+    gap: 10px;
+    align-items: center;
+}
+
+.id-actions input[type="text"] {
+    min-width: 0;
+}
+
+.id-actions button {
+    white-space: nowrap;
+    margin-top: 0;
+}
+
+.id-actions[data-layout="inline"] {
+    grid-template-columns: 1fr auto auto;
+}
+
+.id-actions[data-layout="inline"] #worksheet-id {
+    grid-column: 1;
+}
+
+.id-actions[data-layout="inline"] #generate-btn {
+    grid-column: 2;
+}
+
+.id-actions[data-layout="inline"] #copy-id-btn {
+    grid-column: 3;
+}
+
+
+.options-group {
+    margin-top: 10px;
+}
+
+.action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.action-row button {
+    margin-top: 0;
+    margin-right: 0;
+}
+
+.inline-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.inline-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.hidden {
+    display: none;
 }
 
 .helper-text {
@@ -60,6 +134,38 @@
     margin-top: 6px;
     color: #2e7d32;
     min-height: 1em;
+}
+
+.frac {
+    display: inline-grid;
+    grid-template-rows: 1em 1em;
+    justify-items: center;
+    align-items: center;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.frac .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 1em;
+    padding: 0 8px;
+    border-bottom: 2px solid #222;
+}
+
+.frac .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 1em;
+    padding: 2px 8px 0;
+}
+
+.frac .blank {
+    min-width: 56px;
 }
 
 .worksheet-output {
@@ -103,6 +209,17 @@
 }
 
 @media (max-width: 600px) {
+    .id-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .id-actions #worksheet-id,
+    .id-actions #generate-btn,
+    .id-actions #copy-id-btn {
+        grid-column: 1;
+        width: 100%;
+    }
+
     #worksheet-output table td {
         font-size: 1.1em;
         padding: 10px 6px;
@@ -136,6 +253,7 @@
 #worksheet-output .answers li::before {
     content: counter(answer) ") ";
 }
+
 
 /* Print layout: separate pages */
 @media print {

@@ -43,3 +43,19 @@ export function getRandomFactor(value, rand) {
     }
     return factors[randInt(rand, 0, factors.length - 1)];
 }
+
+export function gcd(a, b) {
+    let x = Math.abs(a);
+    let y = Math.abs(b);
+    while (y !== 0) {
+        const t = y;
+        y = x % y;
+        x = t;
+    }
+    return x;
+}
+
+export function lcm(a, b) {
+    if (a === 0 || b === 0) return 0;
+    return Math.abs(a * b) / gcd(a, b);
+}
