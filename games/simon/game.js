@@ -44,6 +44,7 @@ const menuScreen = document.getElementById("menu-screen");
 const gameScreen = document.getElementById("game-screen");
 
 const gameOverText = document.getElementById("game-over-text");
+const bestRoundText = document.getElementById("best-round-text");
 
 document.querySelectorAll(".difficulty-buttons button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -127,6 +128,14 @@ function handlePlayerInput(color) {
         gameOverText.textContent = `You reached Round ${round}`;
         gameOverText.classList.remove("hidden");
 
+        const best = getBestRoundToday();
+
+        if (round > best) {
+            setBestRoundToday(round);
+        }
+
+        updateBestRoundDisplay();
+
         setTimeout(() => {
             gameScreen.classList.add("hidden");
             menuScreen.classList.remove("hidden");
@@ -174,3 +183,29 @@ function playSound(color) {
 function updateRoundDisplay() {
     document.getElementById("round-display").textContent = `Round: ${round}`;
 }
+
+function updateBestRoundDisplay() {
+    const best = getBestRoundToday();
+
+    if (best > 0) {
+        bestRoundText.textContent = `🏆 Best Round Today: ${best}`;
+        bestRoundText.classList.remove("hidden");
+    } else {
+        bestRoundText.classList.add("hidden");
+    }
+}
+
+function getTodayKey() {
+    const today = new Date().toISOString().split("T")[0];
+    return `simon-best-${today}`;
+}
+
+function getBestRoundToday() {
+    return Number(localStorage.getItem(getTodayKey())) || 0;
+}
+
+function setBestRoundToday(value) {
+    localStorage.setItem(getTodayKey(), value);
+}
+
+updateBestRoundDisplay();
