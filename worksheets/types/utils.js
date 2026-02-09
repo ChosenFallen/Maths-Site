@@ -59,3 +59,8 @@ export function lcm(a, b) {
     if (a === 0 || b === 0) return 0;
     return Math.abs(a * b) / gcd(a, b);
 }
+
+export function ensureNonUnitDenominator(numerator, denominator) {
+    if (denominator !== 1) return { numerator, denominator };
+    return { numerator, denominator: 2 };
+}

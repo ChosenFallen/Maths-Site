@@ -10,6 +10,12 @@ import fractionAddSub from "./types/fraction-add-sub.js";
 import equations from "./types/equations.js";
 import fractionMulDiv from "./types/fraction-mul-div.js";
 import mixedNumbers from "./types/mixed-numbers.js";
+import fdpFractionToDecimal from "./types/fdp-fraction-to-decimal.js";
+import fdpDecimalToFraction from "./types/fdp-decimal-to-fraction.js";
+import fdpFractionToPercent from "./types/fdp-fraction-to-percent.js";
+import fdpPercentToFraction from "./types/fdp-percent-to-fraction.js";
+import fdpDecimalToPercent from "./types/fdp-decimal-to-percent.js";
+import fdpPercentToDecimal from "./types/fdp-percent-to-decimal.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -23,6 +29,12 @@ const WORKSHEET_TYPES = [
     fractionAddSub,
     fractionMulDiv,
     mixedNumbers,
+    fdpFractionToDecimal,
+    fdpDecimalToFraction,
+    fdpFractionToPercent,
+    fdpPercentToFraction,
+    fdpDecimalToPercent,
+    fdpPercentToDecimal,
     equations,
 ];
 
@@ -39,6 +51,17 @@ const WORKSHEET_GROUPS = [
             "fraction-add-sub",
             "fraction-mul-div",
             "mixed-numbers",
+        ],
+    },
+    {
+        label: "FDP (Fractions/Decimals/Percentages)",
+        types: [
+            "fdp-fraction-to-decimal",
+            "fdp-decimal-to-fraction",
+            "fdp-fraction-to-percent",
+            "fdp-percent-to-fraction",
+            "fdp-decimal-to-percent",
+            "fdp-percent-to-decimal",
         ],
     },
     { label: "Powers", types: ["indices"] },
