@@ -1,3 +1,21 @@
+import addition from "./types/addition.js";
+import subtraction from "./types/subtraction.js";
+import multiplication from "./types/multiplication.js";
+import division from "./types/division.js";
+import mixed from "./types/mixed.js";
+import equation1 from "./types/equation1.js";
+import equation2 from "./types/equation2.js";
+
+const WORKSHEET_TYPES = [
+    addition,
+    subtraction,
+    multiplication,
+    division,
+    mixed,
+    equation1,
+    equation2,
+];
+
 const generateBtn = document.getElementById("generate-btn");
 const printBtn = document.getElementById("print-btn");
 const toggleAnswersBtn = document.getElementById("toggle-answers-btn");
@@ -77,6 +95,12 @@ function generateWorksheet() {
         }
     }
 
+    if (!getWorksheetType(type)) {
+        type = WORKSHEET_TYPES[0].id;
+        problemTypeSelect.value = type;
+        id = buildWorksheetId(id.split("|")[0], type, difficulty, numProblems);
+    }
+
     worksheetIdInput.value = id;
     generatedIdText.textContent = `Worksheet ID: ${id}`;
     copyStatus.textContent = "";
@@ -85,54 +109,10 @@ function generateWorksheet() {
     const seed = stringToSeed(id);
     const rand = mulberry32(seed); // deterministic RNG function
 
-    const problems = [];
-
-    for (let i = 0; i < numProblems; i++) {
-        let a, b;
-
-        switch (difficulty) {
-            case "easy":
-                a = Math.floor(rand() * 10) + 1;
-                b = Math.floor(rand() * 10) + 1;
-                break;
-            case "normal":
-                a = Math.floor(rand() * 50) + 1;
-                b = Math.floor(rand() * 50) + 1;
-                break;
-            case "hard":
-                a = Math.floor(rand() * 100) + 1;
-                b = Math.floor(rand() * 100) + 1;
-                break;
-        }
-
-        if (type === "division") {
-            b = Math.max(1, b);
-            a = a * b;
-        }
-        if (type === "subtraction" && a < b) {
-            const temp = a;
-            a = b;
-            b = temp;
-        }
-
-        const answer = calculateAnswer(a, b, type);
-        problems.push({ a, b, type, answer });
-    }
+    const worksheetType = getWorksheetType(type);
+    const problems = worksheetType.generate(rand, difficulty, numProblems);
 
     renderWorksheet(problems);
-}
-
-function calculateAnswer(a, b, type) {
-    switch (type) {
-        case "addition":
-            return a + b;
-        case "subtraction":
-            return a - b;
-        case "multiplication":
-            return a * b;
-        case "division":
-            return a / b;
-    }
 }
 
 function renderWorksheet(problems) {
@@ -148,7 +128,7 @@ function renderWorksheet(problems) {
 
         const cell1 = document.createElement("td");
         cell1.style.padding = "8px";
-        cell1.textContent = `${i + 1}) ${p.a} ${symbol(p.type)} ${p.b} = `;
+        cell1.textContent = `${i + 1}) ${p.question}`;
         row.appendChild(cell1);
 
         table.appendChild(row);
@@ -164,7 +144,7 @@ function renderWorksheet(problems) {
     const answerList = document.createElement("ol");
     problems.forEach((p) => {
         const li = document.createElement("li");
-        li.textContent = `${p.a} ${symbol(p.type)} ${p.b} = ${p.answer}`;
+        li.textContent = `${p.question} ${p.answer}`;
         answerList.appendChild(li);
     });
 
@@ -176,17 +156,57 @@ function renderWorksheet(problems) {
     answerDivGlobal = answerDiv; // store for toggle button
 }
 
-function symbol(type) {
-    switch (type) {
-        case "addition":
-            return "+";
-        case "subtraction":
-            return "−";
-        case "multiplication":
-            return "×";
-        case "division":
-            return "÷";
+function generateOneStepEquation(rand, difficulty) {
+    const [min, max] = difficultyRange(difficulty);
+    const ops = ["+", "−", "×", "÷"];
+
+    const op = ops[randInt(rand, 0, ops.length - 1)];
+    let x = randInt(rand, min, max);
+    let a = randInt(rand, min, max);
+
+    let left;
+    let right;
+
+    switch (op) {
+        case "+":
+            left = `x + ${a}`;
+            right = x + a;
+            break;
+        case "−":
+            left = `x − ${a}`;
+            right = x - a;
+            break;
+        case "×":
+            left = `${a}x`;
+            right = x * a;
+            break;
+        case "÷":
+            left = `x ÷ ${a}`;
+            right = x / a;
+            x = x * a;
+            left = `x ÷ ${a}`;
+            right = x / a;
+            break;
     }
+
+    const question = `${left} = ${right}`;
+    return { question, answer: x };
+}
+
+function generateTwoStepEquation(rand, difficulty) {
+    const [min, max] = difficultyRange(difficulty);
+    const a = randInt(rand, Math.max(2, min), Math.max(4, Math.min(12, max)));
+    const x = randInt(rand, min, max);
+    const b = randInt(rand, min, Math.min(20, max));
+
+    const useMinus = randInt(rand, 0, 1) === 1;
+    const c = useMinus ? a * x - b : a * x + b;
+
+    const question = useMinus
+        ? `${a}x − ${b} = ${c}`
+        : `${a}x + ${b} = ${c}`;
+
+    return { question, answer: x };
 }
 
 // Event listeners
@@ -226,3 +246,19 @@ function clearIdOnSettingsChange() {
 problemTypeSelect.addEventListener("change", clearIdOnSettingsChange);
 difficultySelect.addEventListener("change", clearIdOnSettingsChange);
 numProblemsInput.addEventListener("input", clearIdOnSettingsChange);
+
+function getWorksheetType(typeId) {
+    return WORKSHEET_TYPES.find((type) => type.id === typeId);
+}
+
+function populateWorksheetTypes() {
+    problemTypeSelect.innerHTML = "";
+    WORKSHEET_TYPES.forEach((type) => {
+        const option = document.createElement("option");
+        option.value = type.id;
+        option.textContent = type.label;
+        problemTypeSelect.appendChild(option);
+    });
+}
+
+populateWorksheetTypes();
