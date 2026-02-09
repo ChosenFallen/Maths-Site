@@ -130,8 +130,8 @@ function handlePlayerInput(color) {
 
         const best = getBestRoundToday();
 
-        if (round > best) {
-            setBestRoundToday(round);
+        if (round > best.round) {
+            setBestRoundToday(round, currentDifficulty);
         }
 
         updateBestRoundDisplay();
@@ -187,8 +187,12 @@ function updateRoundDisplay() {
 function updateBestRoundDisplay() {
     const best = getBestRoundToday();
 
-    if (best > 0) {
-        bestRoundText.textContent = `🏆 Best Round Today: ${best}`;
+    if (best.round > 0) {
+        const difficultyLabel =
+            best.difficulty.charAt(0).toUpperCase() + best.difficulty.slice(1);
+
+        bestRoundText.textContent = `🏆 Best Round Today: ${best.round} (${difficultyLabel})`;
+
         bestRoundText.classList.remove("hidden");
     } else {
         bestRoundText.classList.add("hidden");
@@ -201,11 +205,20 @@ function getTodayKey() {
 }
 
 function getBestRoundToday() {
-    return Number(localStorage.getItem(getTodayKey())) || 0;
+    const data = localStorage.getItem(getTodayKey());
+
+    if (!data) return { round: 0, difficulty: null };
+
+    try {
+        return JSON.parse(data);
+    } catch {
+        return { round: Number(data) || 0, difficulty: null };
+    }
 }
 
-function setBestRoundToday(value) {
-    localStorage.setItem(getTodayKey(), value);
+function setBestRoundToday(round, difficulty) {
+    const value = { round, difficulty };
+    localStorage.setItem(getTodayKey(), JSON.stringify(value));
 }
 
 updateBestRoundDisplay();
