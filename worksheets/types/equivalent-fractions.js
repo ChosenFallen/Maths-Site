@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Fill in the missing value to make the fractions equivalent.";
     },
+    printTitle() {
+        return "Equivalent Fractions";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         for (let i = 0; i < count; i++) {

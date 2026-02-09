@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Convert each fraction to a decimal.";
     },
+    printTitle() {
+        return "Fraction → Decimal";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         const dp = decimalPlaces(difficulty);

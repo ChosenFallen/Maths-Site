@@ -20,48 +20,7 @@
                 <option value="" disabled selected>Loading…</option>
             </select>
 
-            <div id="mixed-options" class="options-group hidden">
-                <label class="inline-option">
-                    <input type="checkbox" id="include-powers" />
-                    Include powers (indices)
-                </label>
-            </div>
-
-            <div id="fraction-options" class="options-group hidden">
-                <label for="denominator-mode">Denominators:</label>
-                <select id="denominator-mode">
-                    <option value="mixed">Mixed</option>
-                    <option value="like">Same</option>
-                    <option value="unlike">Different</option>
-                </select>
-            </div>
-
-            <div id="fraction-mul-div-options" class="options-group hidden">
-                <label for="fraction-mul-div-mode">Operation:</label>
-                <select id="fraction-mul-div-mode">
-                    <option value="mixed">Mixed</option>
-                    <option value="multiply">Multiply</option>
-                    <option value="divide">Divide</option>
-                </select>
-            </div>
-
-            <div id="mixed-number-options" class="options-group hidden">
-                <label for="mixed-number-mode">Direction:</label>
-                <select id="mixed-number-mode">
-                    <option value="mixed">Mixed</option>
-                    <option value="to-improper">Mixed → Improper</option>
-                    <option value="to-mixed">Improper → Mixed</option>
-                </select>
-            </div>
-
-            <div id="equation-options" class="options-group hidden">
-                <label for="equation-mode">Equation steps:</label>
-                <select id="equation-mode">
-                    <option value="mixed">Mixed</option>
-                    <option value="one">One step</option>
-                    <option value="two">Two steps</option>
-                </select>
-            </div>
+            <div id="dynamic-options"></div>
 
             <label>Difficulty:</label>
             <select id="difficulty">

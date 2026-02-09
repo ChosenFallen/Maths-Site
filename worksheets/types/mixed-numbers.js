@@ -9,6 +9,25 @@ export default {
         if (mode === "to-mixed") return "Convert to mixed numbers.";
         return "Convert between mixed and improper fractions.";
     },
+    printTitle(options = {}) {
+        const mode = options.mixedNumberMode || "mixed";
+        if (mode === "to-improper") return "Mixed to Improper Fractions";
+        if (mode === "to-mixed") return "Improper to Mixed Fractions";
+        return "Mixed Numbers/Improper Fractions";
+    },
+    options: [
+        {
+            id: "mixedNumberMode",
+            label: "Direction:",
+            type: "select",
+            default: "mixed",
+            values: [
+                { value: "mixed", label: "Mixed" },
+                { value: "to-improper", label: "Mixed → Improper" },
+                { value: "to-mixed", label: "Improper → Mixed" },
+            ],
+        },
+    ],
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         const mode = options.mixedNumberMode || "mixed";

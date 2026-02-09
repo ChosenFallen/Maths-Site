@@ -11,6 +11,25 @@ export default {
         if (mode === "two") return "Solve the two-step equations.";
         return "Solve the equations.";
     },
+    printTitle(options = {}) {
+        const mode = options.equationMode || "mixed";
+        if (mode === "one") return "One-Step Equations";
+        if (mode === "two") return "Two-Step Equations";
+        return "Solving Equations";
+    },
+    options: [
+        {
+            id: "equationMode",
+            label: "Equation steps:",
+            type: "select",
+            default: "mixed",
+            values: [
+                { value: "mixed", label: "Mixed" },
+                { value: "one", label: "One step" },
+                { value: "two", label: "Two steps" },
+            ],
+        },
+    ],
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         const mode = options.equationMode || "mixed";

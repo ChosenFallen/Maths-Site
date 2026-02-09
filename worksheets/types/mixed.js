@@ -12,6 +12,17 @@ export default {
     instruction() {
         return "Solve the following.";
     },
+    printTitle() {
+        return "Mixed Operations";
+    },
+    options: [
+        {
+            id: "includePowers",
+            label: "Include powers (indices)",
+            type: "checkbox",
+            default: false,
+        },
+    ],
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         for (let i = 0; i < count; i++) {

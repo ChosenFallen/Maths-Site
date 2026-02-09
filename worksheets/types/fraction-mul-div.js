@@ -11,6 +11,25 @@ export default {
             return "Divide the fractions and simplify your answers.";
         return "Multiply or divide and simplify your answers.";
     },
+    printTitle(options = {}) {
+        const mode = options.fractionMulDivMode || "mixed";
+        if (mode === "multiply") return "Multiply Fractions";
+        if (mode === "divide") return "Divide Fractions";
+        return "Multiply/Divide Fractions";
+    },
+    options: [
+        {
+            id: "fractionMulDivMode",
+            label: "Operation:",
+            type: "select",
+            default: "mixed",
+            values: [
+                { value: "mixed", label: "Mixed" },
+                { value: "multiply", label: "Multiply" },
+                { value: "divide", label: "Divide" },
+            ],
+        },
+    ],
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         const mode = options.fractionMulDivMode || "mixed";

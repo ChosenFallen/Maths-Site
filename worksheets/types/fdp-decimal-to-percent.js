@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Convert each decimal to a percentage.";
     },
+    printTitle() {
+        return "Decimal → Percentage";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         const dp = decimalPlaces(difficulty);

@@ -16,6 +16,10 @@ import fdpFractionToPercent from "./types/fdp-fraction-to-percent.js";
 import fdpPercentToFraction from "./types/fdp-percent-to-fraction.js";
 import fdpDecimalToPercent from "./types/fdp-decimal-to-percent.js";
 import fdpPercentToDecimal from "./types/fdp-percent-to-decimal.js";
+import decimalAddSub from "./types/decimal-add-sub.js";
+import fractionCompare from "./types/fraction-compare.js";
+import decimalMulDiv from "./types/decimal-mul-div.js";
+import decimalCompare from "./types/decimal-compare.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -35,6 +39,10 @@ const WORKSHEET_TYPES = [
     fdpPercentToFraction,
     fdpDecimalToPercent,
     fdpPercentToDecimal,
+    decimalAddSub,
+    decimalMulDiv,
+    decimalCompare,
+    fractionCompare,
     equations,
 ];
 
@@ -51,6 +59,7 @@ const WORKSHEET_GROUPS = [
             "fraction-add-sub",
             "fraction-mul-div",
             "mixed-numbers",
+            "fraction-compare",
         ],
     },
     {
@@ -63,6 +72,10 @@ const WORKSHEET_GROUPS = [
             "fdp-decimal-to-percent",
             "fdp-percent-to-decimal",
         ],
+    },
+    {
+        label: "Decimals",
+        types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare"],
     },
     { label: "Powers", types: ["indices"] },
     { label: "Algebra", types: ["equations"] },
@@ -83,20 +96,7 @@ const copyStatus = document.getElementById("copy-status");
 const problemTypeSelect = document.getElementById("problem-type");
 const difficultySelect = document.getElementById("difficulty");
 const numProblemsInput = document.getElementById("num-problems");
-const mixedOptions = document.getElementById("mixed-options");
-const includePowersInput = document.getElementById("include-powers");
-const fractionOptions = document.getElementById("fraction-options");
-const denominatorModeSelect = document.getElementById("denominator-mode");
-const fractionMulDivOptions = document.getElementById(
-    "fraction-mul-div-options",
-);
-const fractionMulDivModeSelect = document.getElementById(
-    "fraction-mul-div-mode",
-);
-const mixedNumberOptions = document.getElementById("mixed-number-options");
-const mixedNumberModeSelect = document.getElementById("mixed-number-mode");
-const equationOptions = document.getElementById("equation-options");
-const equationModeSelect = document.getElementById("equation-mode");
+const dynamicOptions = document.getElementById("dynamic-options");
 const uniquenessNote = document.getElementById("uniqueness-note");
 const printTitle = document.getElementById("print-title");
 const worksheetInstruction = document.getElementById("worksheet-instruction");
@@ -182,7 +182,7 @@ function generateWorksheetInternal(forceNewId) {
             problemTypeSelect.value = type;
             difficultySelect.value = difficulty;
             numProblemsInput.value = numProblems;
-            applyOptionsToUI(type, options);
+            renderOptions(getWorksheetType(type), options);
         } else {
             id = buildWorksheetId(id, type, difficulty, numProblems, options);
         }
@@ -261,7 +261,9 @@ function renderWorksheet(problems) {
     problems.forEach((p) => {
         const li = document.createElement("li");
         const prefix = p.answerPrefix || "";
-        if (p.questionHtml && p.answerHtml) {
+        if (p.answerKeyHtml) {
+            li.innerHTML = p.answerKeyHtml;
+        } else if (p.questionHtml && p.answerHtml) {
             li.innerHTML = `${p.questionHtml} ${prefix}${p.answerHtml}`;
         } else if (p.questionHtml) {
             li.innerHTML = `${p.questionHtml} ${prefix}${p.answer}`;
@@ -317,12 +319,6 @@ function clearIdOnSettingsChange() {
 problemTypeSelect.addEventListener("change", clearIdOnSettingsChange);
 difficultySelect.addEventListener("change", clearIdOnSettingsChange);
 numProblemsInput.addEventListener("input", clearIdOnSettingsChange);
-includePowersInput.addEventListener("change", clearIdOnSettingsChange);
-denominatorModeSelect.addEventListener("change", clearIdOnSettingsChange);
-fractionMulDivModeSelect.addEventListener("change", clearIdOnSettingsChange);
-mixedNumberModeSelect.addEventListener("change", clearIdOnSettingsChange);
-equationModeSelect.addEventListener("change", clearIdOnSettingsChange);
-
 function getWorksheetType(typeId) {
     return WORKSHEET_TYPES.find((type) => type.id === typeId);
 }
@@ -362,71 +358,23 @@ function populateWorksheetTypes() {
 }
 
 populateWorksheetTypes();
-syncOptionsVisibility();
-
-function syncOptionsVisibility() {
-    const type = problemTypeSelect.value;
-    const showMixed = type === "mixed";
-    const showFractions = type === "fraction-add-sub";
-    const showFractionMulDiv = type === "fraction-mul-div";
-    const showMixedNumbers = type === "mixed-numbers";
-    const showEquations = type === "equations";
-    mixedOptions.classList.toggle("hidden", !showMixed);
-    fractionOptions.classList.toggle("hidden", !showFractions);
-    fractionMulDivOptions.classList.toggle("hidden", !showFractionMulDiv);
-    mixedNumberOptions.classList.toggle("hidden", !showMixedNumbers);
-    equationOptions.classList.toggle("hidden", !showEquations);
-}
-
-problemTypeSelect.addEventListener("change", () => {
-    syncOptionsVisibility();
-});
+renderOptions(getWorksheetType(problemTypeSelect.value), {});
 
 function readOptionsFromUI(type) {
-    if (type === "mixed") {
-        return { includePowers: includePowersInput.checked };
-    }
-    if (type === "fraction-add-sub") {
-        return { denominatorMode: denominatorModeSelect.value };
-    }
-    if (type === "fraction-mul-div") {
-        return { fractionMulDivMode: fractionMulDivModeSelect.value };
-    }
-    if (type === "mixed-numbers") {
-        return { mixedNumberMode: mixedNumberModeSelect.value };
-    }
-    if (type === "equations") {
-        return { equationMode: equationModeSelect.value };
-    }
-    return {};
-}
+    const worksheetType = getWorksheetType(type);
+    if (!worksheetType || !Array.isArray(worksheetType.options)) return {};
 
-function applyOptionsToUI(type, options) {
-    if (type === "mixed") {
-        includePowersInput.checked = !!options.includePowers;
-    } else {
-        includePowersInput.checked = false;
-    }
-    if (type === "fraction-add-sub") {
-        denominatorModeSelect.value = options.denominatorMode || "mixed";
-    } else {
-        denominatorModeSelect.value = "mixed";
-    }
-    if (type === "fraction-mul-div") {
-        fractionMulDivModeSelect.value = options.fractionMulDivMode || "mixed";
-    } else {
-        fractionMulDivModeSelect.value = "mixed";
-    }
-    if (type === "mixed-numbers") {
-        mixedNumberModeSelect.value = options.mixedNumberMode || "mixed";
-    } else {
-        mixedNumberModeSelect.value = "mixed";
-    }
-    if (type === "equations") {
-        equationModeSelect.value = options.equationMode || "mixed";
-    } else {
-        equationModeSelect.value = "mixed";
-    }
+    const options = {};
+    worksheetType.options.forEach((opt) => {
+        const el = dynamicOptions.querySelector(`[data-option-id="${opt.id}"]`);
+        if (!el) return;
+        if (opt.type === "checkbox") {
+            options[opt.id] = el.checked;
+        } else {
+            options[opt.id] = el.value;
+        }
+    });
+    return options;
 }
 
 function setPrintTitle(worksheetType, options) {
@@ -434,33 +382,64 @@ function setPrintTitle(worksheetType, options) {
         printTitle.textContent = "";
         return;
     }
-    let title = worksheetType.label;
-    if (worksheetType.id === "equations") {
-        const mode = options.equationMode || "mixed";
-        if (mode === "one") title = "One-Step Equations";
-        if (mode === "two") title = "Two-Step Equations";
-    }
-    if (worksheetType.id === "fraction-add-sub") {
-        const mode = options.denominatorMode || "mixed";
-        if (mode === "like") title = "Add/Subtract Fractions (Same Denominators)";
-        if (mode === "unlike")
-            title = "Add/Subtract Fractions (Different Denominators)";
-    }
-    if (worksheetType.id === "fraction-mul-div") {
-        const mode = options.fractionMulDivMode || "mixed";
-        if (mode === "multiply") title = "Multiply Fractions";
-        if (mode === "divide") title = "Divide Fractions";
-    }
-    if (worksheetType.id === "mixed-numbers") {
-        const mode = options.mixedNumberMode || "mixed";
-        if (mode === "to-improper") title = "Mixed to Improper Fractions";
-        if (mode === "to-mixed") title = "Improper to Mixed Fractions";
-    }
-    if (worksheetType.id === "mixed") {
-        title = "Mixed Operations";
-    }
+    const title =
+        typeof worksheetType.printTitle === "function"
+            ? worksheetType.printTitle(options)
+            : worksheetType.label;
     printTitle.textContent = title;
 }
+
+function renderOptions(worksheetType, options) {
+    dynamicOptions.innerHTML = "";
+    if (!worksheetType || !Array.isArray(worksheetType.options)) return;
+
+    worksheetType.options.forEach((opt) => {
+        const group = document.createElement("div");
+        group.className = "options-group";
+
+        if (opt.type === "checkbox") {
+            const label = document.createElement("label");
+            label.className = "inline-option";
+
+            const input = document.createElement("input");
+            input.type = "checkbox";
+            input.dataset.optionId = opt.id;
+            input.checked =
+                options[opt.id] !== undefined
+                    ? options[opt.id]
+                    : !!opt.default;
+            input.addEventListener("change", clearIdOnSettingsChange);
+
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(` ${opt.label}`));
+            group.appendChild(label);
+        } else if (opt.type === "select") {
+            const label = document.createElement("label");
+            label.textContent = opt.label;
+            group.appendChild(label);
+
+            const select = document.createElement("select");
+            select.dataset.optionId = opt.id;
+            opt.values.forEach((v) => {
+                const option = document.createElement("option");
+                option.value = v.value;
+                option.textContent = v.label;
+                select.appendChild(option);
+            });
+            select.value =
+                options[opt.id] !== undefined ? options[opt.id] : opt.default;
+            select.addEventListener("change", clearIdOnSettingsChange);
+            group.appendChild(select);
+        }
+
+        dynamicOptions.appendChild(group);
+    });
+}
+
+problemTypeSelect.addEventListener("change", () => {
+    renderOptions(getWorksheetType(problemTypeSelect.value), {});
+    clearIdOnSettingsChange();
+});
 
 function setInstructionText(worksheetType, options) {
     if (!worksheetType) {

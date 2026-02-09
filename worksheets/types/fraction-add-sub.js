@@ -11,6 +11,26 @@ export default {
             return "Add or subtract fractions with different denominators and simplify.";
         return "Add or subtract and simplify your answers.";
     },
+    printTitle(options = {}) {
+        const mode = options.denominatorMode || "mixed";
+        if (mode === "like") return "Add/Subtract Fractions (Same Denominators)";
+        if (mode === "unlike")
+            return "Add/Subtract Fractions (Different Denominators)";
+        return "Add/Subtract Fractions";
+    },
+    options: [
+        {
+            id: "denominatorMode",
+            label: "Denominators:",
+            type: "select",
+            default: "mixed",
+            values: [
+                { value: "mixed", label: "Mixed" },
+                { value: "like", label: "Same" },
+                { value: "unlike", label: "Different" },
+            ],
+        },
+    ],
     generate(rand, difficulty, count, options = {}) {
         const problems = [];
         const mode = options.denominatorMode || "mixed";

@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Evaluate the powers.";
     },
+    printTitle() {
+        return "Indices (Powers)";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         for (let i = 0; i < count; i++) {

@@ -72,6 +72,8 @@ function checkType(type) {
         optionsList.push({ denominatorMode: "like" }, { denominatorMode: "unlike" });
     if (type.id === "fraction-mul-div")
         optionsList.push({ fractionMulDivMode: "multiply" }, { fractionMulDivMode: "divide" });
+    if (type.id === "fraction-compare")
+        optionsList.push({ fractionCompareMode: "no-equals" });
     if (type.id === "mixed-numbers")
         optionsList.push({ mixedNumberMode: "to-improper" }, { mixedNumberMode: "to-mixed" });
     if (type.id === "equations")
@@ -81,6 +83,28 @@ function checkType(type) {
 
     if (typeof type.instruction !== "function") {
         errors.push("Missing instruction() for worksheet type.");
+    }
+    if (type.options) {
+        if (!Array.isArray(type.options)) {
+            errors.push("Options must be an array.");
+        } else {
+            type.options.forEach((opt) => {
+                if (!opt.id || !opt.type) {
+                    errors.push("Option missing id or type.");
+                }
+                if (opt.type === "select" && !Array.isArray(opt.values)) {
+                    errors.push(`Option "${opt.id}" missing values.`);
+                }
+                if (opt.default === undefined) {
+                    errors.push(`Option "${opt.id}" missing default.`);
+                } else if (opt.type === "select") {
+                    const valid = opt.values.some((v) => v.value === opt.default);
+                    if (!valid) {
+                        errors.push(`Option "${opt.id}" default not in values.`);
+                    }
+                }
+            });
+        }
     }
 
     optionsList.forEach((options) => {
@@ -97,26 +121,16 @@ function checkType(type) {
             }
         }
 
-        const expectedTitle = expectedPrintTitle(type, options || {});
-        const mode = options || {};
-        const isDefaultMode =
-            (type.id === "equations" && (mode.equationMode || "mixed") === "mixed") ||
-            (type.id === "fraction-add-sub" &&
-                (mode.denominatorMode || "mixed") === "mixed") ||
-            (type.id === "fraction-mul-div" &&
-                (mode.fractionMulDivMode || "mixed") === "mixed") ||
-            (type.id === "mixed-numbers" &&
-                (mode.mixedNumberMode || "mixed") === "mixed") ||
-            ![
-                "equations",
-                "fraction-add-sub",
-                "fraction-mul-div",
-                "mixed-numbers",
-            ].includes(type.id);
-        if (isDefaultMode && type.label !== expectedTitle) {
-            errors.push(
-                `Print title mismatch: expected "${expectedTitle}", got "${type.label}".`,
-            );
+        if (typeof type.printTitle !== "function") {
+            errors.push("Missing printTitle() for worksheet type.");
+        } else {
+            const expectedTitle = expectedPrintTitle(type, options || {});
+            const actualTitle = type.printTitle(options || {});
+            if (actualTitle !== expectedTitle) {
+                errors.push(
+                    `Print title mismatch: expected "${expectedTitle}", got "${actualTitle}".`,
+                );
+            }
         }
 
         const seen = new Set();
@@ -165,26 +179,26 @@ function expectedPrintTitle(type, options) {
         const mode = options?.equationMode || "mixed";
         if (mode === "one") return "One-Step Equations";
         if (mode === "two") return "Two-Step Equations";
-        return type.label;
+        return "Solving Equations";
     }
     if (typeId === "fraction-add-sub") {
         const mode = options?.denominatorMode || "mixed";
         if (mode === "like") return "Add/Subtract Fractions (Same Denominators)";
         if (mode === "unlike")
             return "Add/Subtract Fractions (Different Denominators)";
-        return type.label;
+        return "Add/Subtract Fractions";
     }
     if (typeId === "fraction-mul-div") {
         const mode = options?.fractionMulDivMode || "mixed";
         if (mode === "multiply") return "Multiply Fractions";
         if (mode === "divide") return "Divide Fractions";
-        return type.label;
+        return "Multiply/Divide Fractions";
     }
     if (typeId === "mixed-numbers") {
         const mode = options?.mixedNumberMode || "mixed";
         if (mode === "to-improper") return "Mixed to Improper Fractions";
         if (mode === "to-mixed") return "Improper to Mixed Fractions";
-        return type.label;
+        return "Mixed Numbers/Improper Fractions";
     }
     if (typeId === "mixed") return "Mixed Operations";
     return type.label;

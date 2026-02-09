@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Simplify each fraction.";
     },
+    printTitle() {
+        return "Simplify Fractions";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         for (let i = 0; i < count; i++) {

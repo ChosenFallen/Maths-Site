@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Solve the following.";
     },
+    printTitle() {
+        return "Addition";
+    },
     generate(rand, difficulty, count) {
         const [min, max] = difficultyRange(difficulty);
         const problems = [];

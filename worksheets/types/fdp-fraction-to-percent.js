@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Convert each fraction to a percentage.";
     },
+    printTitle() {
+        return "Fraction → Percentage";
+    },
     generate(rand, difficulty, count) {
         const problems = [];
         const dp = percentPlaces(difficulty);
