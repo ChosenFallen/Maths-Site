@@ -5,7 +5,40 @@ const output = document.getElementById("worksheet-output");
 
 let answerDivGlobal; // store reference to answer key for toggling
 
+const worksheetIdInput = document.getElementById("worksheet-id");
+const generatedIdText = document.getElementById("generated-id-text");
+
+function mulberry32(seed) {
+    return function () {
+        let t = (seed += 0x6d2b79f5);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
+function stringToSeed(str) {
+    // simple hash function
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0; // convert to 32-bit int
+    }
+    return hash;
+}
+
 function generateWorksheet() {
+    // Determine seed
+    let id = worksheetIdInput.value;
+    if (!id) {
+        id = Math.random().toString(36).substring(2, 10); // random 8-char ID
+        worksheetIdInput.value = id;
+    }
+    generatedIdText.textContent = `Worksheet ID: ${id}`;
+
+    const seed = stringToSeed(id);
+    const rand = mulberry32(seed); // deterministic RNG function
+
     const type = document.getElementById("problem-type").value;
     const difficulty = document.getElementById("difficulty").value;
     const numProblems = parseInt(document.getElementById("num-problems").value);
@@ -17,22 +50,22 @@ function generateWorksheet() {
 
         switch (difficulty) {
             case "easy":
-                a = Math.floor(Math.random() * 10) + 1;
-                b = Math.floor(Math.random() * 10) + 1;
+                a = Math.floor(rand() * 10) + 1;
+                b = Math.floor(rand() * 10) + 1;
                 break;
             case "normal":
-                a = Math.floor(Math.random() * 50) + 1;
-                b = Math.floor(Math.random() * 50) + 1;
+                a = Math.floor(rand() * 50) + 1;
+                b = Math.floor(rand() * 50) + 1;
                 break;
             case "hard":
-                a = Math.floor(Math.random() * 100) + 1;
-                b = Math.floor(Math.random() * 100) + 1;
+                a = Math.floor(rand() * 100) + 1;
+                b = Math.floor(rand() * 100) + 1;
                 break;
         }
 
         if (type === "division") {
             b = Math.max(1, b);
-            a = a * b; // exact division
+            a = a * b;
         }
 
         const answer = calculateAnswer(a, b, type);
@@ -90,10 +123,10 @@ function renderWorksheet(problems) {
 
     answerDiv.appendChild(answerList);
     answerDiv.classList.add("answers");
-    answerDiv.style.display = "none"; // hide initially
+    answerDiv.style.display = "none"; // hidden on screen
     output.appendChild(answerDiv);
 
-    answerDivGlobal = answerDiv; // store reference for toggle
+    answerDivGlobal = answerDiv; // store for toggle button
 }
 
 function symbol(type) {

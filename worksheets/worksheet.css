@@ -1,0 +1,30 @@
+/* Problems table styling */
+#worksheet-output table td {
+    font-size: 1.4em;
+    padding: 6px;
+    border-bottom: 1px solid #ccc;
+}
+
+#worksheet-output table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Answer key styling */
+#worksheet-output .answers {
+    margin-top: 30px;
+    font-size: 1.2em;
+}
+
+/* Print layout: separate pages */
+@media print {
+    /* Hide the toggle button and generate button during printing */
+    #worksheet-options button {
+        display: none;
+    }
+
+    /* Page break before the answer key */
+    #worksheet-output .answers {
+        display: block !important; /* always show in print */
+        page-break-before: always;
+    }
+}

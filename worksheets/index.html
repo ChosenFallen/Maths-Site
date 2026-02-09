@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Maths Worksheets</title>
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="worksheet.css" />
+    </head>
+    <body>
+        <!-- Shared menu -->
+        <div id="menu-container"></div>
+
+        <h1 style="text-align: center; margin-top: 20px">
+            📝 Maths Worksheets Generator
+        </h1>
+
+        <div
+            id="worksheet-options"
+            style="max-width: 600px; margin: 0 auto; text-align: left"
+        >
+            <label>Type of problems:</label>
+            <select id="problem-type">
+                <option value="addition">Addition</option>
+                <option value="subtraction">Subtraction</option>
+                <option value="multiplication">Multiplication</option>
+                <option value="division">Division</option>
+            </select>
+
+            <label>Difficulty:</label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <label>Number of problems:</label>
+            <input
+                type="number"
+                id="num-problems"
+                value="10"
+                min="1"
+                max="100"
+            />
+
+            <label>Worksheet ID (optional):</label>
+            <input
+                type="text"
+                id="worksheet-id"
+                placeholder="Leave empty for new ID"
+            />
+
+            <button id="generate-btn">Generate Worksheet</button>
+            <button id="print-btn">Print / Save as PDF</button>
+            <button id="toggle-answers-btn">Show/Hide Answer Key</button>
+            <p id="generated-id-text" style="font-weight: bold"></p>
+        </div>
+
+        <div
+            id="worksheet-output"
+            style="
+                margin-top: 30px;
+                max-width: 700px;
+                margin-left: auto;
+                margin-right: auto;
+            "
+        ></div>
+
+        <p><a href="../../index.html">⬅ Back to games</a></p>
+
+        <script src="worksheet.js"></script>
+    </body>
+</html>
