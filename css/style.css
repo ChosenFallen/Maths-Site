@@ -145,3 +145,28 @@ a:hover {
 .best-round p {
     margin: 4px 0;
 }
+
+@keyframes shake {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    20% {
+        transform: translate(-10px, 0px);
+    }
+    40% {
+        transform: translate(10px, 0px);
+    }
+    60% {
+        transform: translate(-10px, 0px);
+    }
+    80% {
+        transform: translate(10px, 0px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}

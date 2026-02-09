@@ -130,18 +130,22 @@ function handlePlayerInput(color) {
         acceptingInput = false;
         statusText.textContent = "❌ Wrong!";
 
-        gameOverText.textContent = `You reached Round ${round}`;
-        gameOverText.classList.remove("hidden");
+        // Play buzzer and shake screen
+        playWrongSound();
+        gameScreen.classList.add("shake");
+        setTimeout(() => gameScreen.classList.remove("shake"), 500);
 
+        // Show final round for this difficulty
         const best = getBestRoundsToday();
-
         if (round > best[currentDifficulty]) {
             best[currentDifficulty] = round;
             setBestRoundsToday(best);
         }
-
         updateBestRoundsDisplay();
+        gameOverText.textContent = `You reached Round ${round}`;
+        gameOverText.classList.remove("hidden");
 
+        // Go back to menu after short delay
         setTimeout(() => {
             gameScreen.classList.add("hidden");
             menuScreen.classList.remove("hidden");
@@ -184,6 +188,21 @@ function playSound(color) {
     setTimeout(() => {
         oscillator.stop();
     }, 300);
+}
+
+function playWrongSound() {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.type = "square"; // buzzy sound
+    oscillator.frequency.value = 120; // low pitch
+    gainNode.gain.value = 0.4;
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.start();
+    setTimeout(() => oscillator.stop(), 400);
 }
 
 function updateRoundDisplay() {
