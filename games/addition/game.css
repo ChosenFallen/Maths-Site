@@ -1,0 +1,25 @@
+.question {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.answers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.answer-btn {
+    font-size: 2em;
+    padding: 30px;
+    border: none;
+    border-radius: 12px;
+    background: #4caf50;
+    color: white;
+}
+
+.answer-btn:active {
+    transform: scale(0.95);
+}
