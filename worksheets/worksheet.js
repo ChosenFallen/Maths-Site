@@ -53,7 +53,13 @@ const WORKSHEET_TYPES = [
 const WORKSHEET_GROUPS = [
     {
         label: "Arithmetic",
-        types: ["addition", "subtraction", "multiplication", "division", "mixed"],
+        types: [
+            "addition",
+            "subtraction",
+            "multiplication",
+            "division",
+            "mixed",
+        ],
     },
     {
         label: "Fractions",
@@ -68,6 +74,14 @@ const WORKSHEET_GROUPS = [
         ],
     },
     {
+        label: "Decimals",
+        types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare"],
+    },
+    {
+        label: "Percentages",
+        types: ["percentage-of-amount"],
+    },
+    {
         label: "FDP (Fractions/Decimals/Percentages)",
         types: [
             "fdp-fraction-to-decimal",
@@ -77,14 +91,6 @@ const WORKSHEET_GROUPS = [
             "fdp-decimal-to-percent",
             "fdp-percent-to-decimal",
         ],
-    },
-    {
-        label: "Decimals",
-        types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare"],
-    },
-    {
-        label: "Percentages",
-        types: ["percentage-of-amount"],
     },
     { label: "Powers", types: ["indices"] },
     { label: "Algebra", types: ["equations"] },
@@ -414,9 +420,7 @@ function renderOptions(worksheetType, options) {
             input.type = "checkbox";
             input.dataset.optionId = opt.id;
             input.checked =
-                options[opt.id] !== undefined
-                    ? options[opt.id]
-                    : !!opt.default;
+                options[opt.id] !== undefined ? options[opt.id] : !!opt.default;
             input.addEventListener("change", clearIdOnSettingsChange);
 
             label.appendChild(input);
