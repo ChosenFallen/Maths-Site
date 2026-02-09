@@ -20,6 +20,8 @@ import decimalAddSub from "./types/decimal-add-sub.js";
 import fractionCompare from "./types/fraction-compare.js";
 import decimalMulDiv from "./types/decimal-mul-div.js";
 import decimalCompare from "./types/decimal-compare.js";
+import percentageOfAmount from "./types/percentage-of-amount.js";
+import fractionOfAmount from "./types/fraction-of-amount.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -42,6 +44,8 @@ const WORKSHEET_TYPES = [
     decimalAddSub,
     decimalMulDiv,
     decimalCompare,
+    percentageOfAmount,
+    fractionOfAmount,
     fractionCompare,
     equations,
 ];
@@ -60,6 +64,7 @@ const WORKSHEET_GROUPS = [
             "fraction-mul-div",
             "mixed-numbers",
             "fraction-compare",
+            "fraction-of-amount",
         ],
     },
     {
@@ -76,6 +81,10 @@ const WORKSHEET_GROUPS = [
     {
         label: "Decimals",
         types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare"],
+    },
+    {
+        label: "Percentages",
+        types: ["percentage-of-amount"],
     },
     { label: "Powers", types: ["indices"] },
     { label: "Algebra", types: ["equations"] },

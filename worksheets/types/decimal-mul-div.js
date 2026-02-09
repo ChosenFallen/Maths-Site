@@ -44,6 +44,7 @@ export default {
                         ? "×"
                         : "÷";
 
+            const answerDp = Math.min(2, dp * 2);
             if (op === "×") {
                 const a = randInt(rand, 1, max * Math.pow(10, dp)) / Math.pow(10, dp);
                 const b = randInt(rand, 1, max * Math.pow(10, dp)) / Math.pow(10, dp);
@@ -52,7 +53,7 @@ export default {
                     b,
                     dp,
                 )} =`;
-                const answer = formatDecimal(result, dp);
+                const answer = formatDecimal(result, answerDp);
                 problems.push({ question, answer });
             } else {
                 // Create clean division: dividend = divisor * quotient
@@ -65,7 +66,7 @@ export default {
                     divisor,
                     dp,
                 )} =`;
-                const answer = formatDecimal(quotient, dp);
+                const answer = formatDecimal(quotient, answerDp);
                 problems.push({ question, answer });
             }
         }
