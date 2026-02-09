@@ -7,17 +7,30 @@
   </head>
   <body>
     <h1>🟢 Simon Says</h1>
-    <p id="round-display" class="round">Round: 0</p>
-    <p id="status">Tap Start to begin</p>
 
-    <div class="simon-board">
-      <div class="simon-btn green" data-color="green"></div>
-      <div class="simon-btn red" data-color="red"></div>
-      <div class="simon-btn yellow" data-color="yellow"></div>
-      <div class="simon-btn blue" data-color="blue"></div>
+    <!-- START / GAME OVER SCREEN -->
+    <div id="menu-screen">
+      <p class="menu-text">Choose difficulty</p>
+
+      <div class="difficulty-buttons">
+        <button data-difficulty="easy">Easy</button>
+        <button data-difficulty="normal">Normal</button>
+        <button data-difficulty="hard">Hard</button>
+      </div>
     </div>
 
-    <button id="start">Start</button>
+    <!-- GAME SCREEN -->
+    <div id="game-screen" class="hidden">
+      <p id="round-display" class="round">Round: 0</p>
+      <p id="status">Watch closely...</p>
+
+      <div class="simon-board">
+        <div class="simon-btn green" data-color="green"></div>
+        <div class="simon-btn red" data-color="red"></div>
+        <div class="simon-btn yellow" data-color="yellow"></div>
+        <div class="simon-btn blue" data-color="blue"></div>
+      </div>
+    </div>
 
     <p><a href="../../index.html">⬅ Back to games</a></p>
 

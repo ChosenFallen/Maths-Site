@@ -100,3 +100,31 @@ a:hover {
   font-weight: bold;
   margin: 10px 0 20px;
 }
+
+.hidden {
+  display: none;
+}
+
+.menu-text {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.difficulty-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.difficulty-buttons button {
+  font-size: 1.5em;
+  padding: 20px 40px;
+  border-radius: 12px;
+  border: none;
+  background: #673ab7;
+  color: white;
+}
+
+.difficulty-buttons button:active {
+  transform: scale(0.95);
+}
