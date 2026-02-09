@@ -12,6 +12,11 @@ const soundMap = {
   blue: 523.3, // C5
 };
 
+let flashDuration = 600;
+let pauseBetweenFlashes = 200;
+const speedUpAmount = 40;
+const minimumFlashDuration = 200;
+
 const statusText = document.getElementById("status");
 const startButton = document.getElementById("start");
 const buttons = document.querySelectorAll(".simon-btn");
@@ -26,10 +31,14 @@ buttons.forEach((btn) => {
 });
 
 function startGame() {
-  audioContext.resume(); // unlocks audio on touch devices
+  audioContext.resume();
 
   sequence = [];
   playerIndex = 0;
+
+  flashDuration = 600;
+  pauseBetweenFlashes = 200;
+
   statusText.textContent = "Watch closely...";
   nextRound();
 }
@@ -39,6 +48,9 @@ function nextRound() {
   playerIndex = 0;
 
   sequence.push(randomColor());
+
+  flashDuration = Math.max(minimumFlashDuration, flashDuration - speedUpAmount);
+
   playSequence();
 }
 
@@ -51,7 +63,7 @@ function playSequence() {
 
   sequence.forEach((color) => {
     setTimeout(() => flash(color), delay);
-    delay += 800;
+    delay += flashDuration + pauseBetweenFlashes;
   });
 
   setTimeout(() => {
@@ -83,7 +95,7 @@ function flash(color) {
   playSound(color);
 
   btn.classList.add("active");
-  setTimeout(() => btn.classList.remove("active"), 300);
+  setTimeout(() => btn.classList.remove("active"), flashDuration);
 }
 
 function playSound(color) {
