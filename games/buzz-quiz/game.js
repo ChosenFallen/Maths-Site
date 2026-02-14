@@ -35,6 +35,8 @@ let buzzerTimeLeft = 0;
 let timerInterval = null;
 let timeLeft = 0;
 let allAnswered = false;
+let questionStartTime = 0;
+let answerTimes = [];
 
 // Button state tracking for debouncing
 let previousButtonStates = [];
@@ -356,6 +358,7 @@ function startRound() {
     activePlayer = -1;
     allAnswered = false;
     frozenPlayers = []; // Reset frozen players for new question
+    answerTimes = new Array(activePlayers.length).fill(null);
 
     // Clear any existing buzzer timer
     if (buzzerTimer) {
@@ -686,6 +689,8 @@ function startTimer() {
 
     timerBar.style.width = "100%";
     timerBar.classList.remove("warning", "danger");
+
+    questionStartTime = Date.now();
     timerText.textContent = `${timeLeft}s`;
 
     if (timerInterval) clearInterval(timerInterval);
@@ -716,6 +721,7 @@ function handleAllAnswer(playerIndex, answerIndex) {
     if (playerAnswers[playerIndex] !== null) return;
 
     playerAnswers[playerIndex] = answerIndex;
+    answerTimes[playerIndex] = Date.now() - questionStartTime; // Record time in milliseconds
 
     // Turn off LED for this player (they've answered)
     const controllerIndex = activePlayers[playerIndex];
@@ -740,6 +746,31 @@ function revealAnswers() {
     const answerOptions = document.querySelectorAll(".answer-option");
     answerOptions[currentQuestionData.correctIndex].classList.add("correct");
 
+    // Calculate speed bonuses for correct answers
+    const correctAnswers = [];
+    playerAnswers.forEach((answerIndex, playerIndex) => {
+        if (answerIndex === currentQuestionData.correctIndex && answerTimes[playerIndex] !== null) {
+            correctAnswers.push({
+                playerIndex: playerIndex,
+                time: answerTimes[playerIndex]
+            });
+        }
+    });
+
+    // Sort by time (fastest first)
+    correctAnswers.sort((a, b) => a.time - b.time);
+
+    // Calculate speed bonuses (5 points for fastest, decreasing to 0 for slowest)
+    const speedBonuses = {};
+    correctAnswers.forEach((entry, rank) => {
+        if (correctAnswers.length === 1) {
+            speedBonuses[entry.playerIndex] = 5; // Only one correct, full bonus
+        } else {
+            // Linear decrease from 5 to 0 based on rank
+            speedBonuses[entry.playerIndex] = Math.round(5 * (1 - rank / (correctAnswers.length - 1)));
+        }
+    });
+
     // Check each player's answer
     playerAnswers.forEach((answerIndex, playerIndex) => {
         if (answerIndex === null) return;
@@ -750,9 +781,17 @@ function revealAnswers() {
         panel.classList.add(isCorrect ? "correct" : "wrong");
 
         if (isCorrect) {
-            playerScores[playerIndex] += 10;
+            const basePoints = 10;
+            const bonus = speedBonuses[playerIndex] || 0;
+            const totalPoints = basePoints + bonus;
+
+            playerScores[playerIndex] += totalPoints;
             playerCorrect[playerIndex]++;
-            panel.querySelector(".player-status").textContent = "✓ Correct!";
+
+            const statusText = bonus > 0
+                ? `✓ Correct! +${totalPoints} (+${bonus} speed)`
+                : "✓ Correct! +10";
+            panel.querySelector(".player-status").textContent = statusText;
             panel.querySelector(".answer-indicator").textContent = "✓";
         } else {
             panel.querySelector(".player-status").textContent = "✗ Wrong";
@@ -808,7 +847,17 @@ function displayResults() {
 
     results.sort((a, b) => b.score - a.score);
 
-    results.forEach((result, rank) => {
+    // Calculate proper ranks (handle ties)
+    let currentRank = 1;
+    results.forEach((result, index) => {
+        // If this player has a different score than the previous, update rank
+        if (index > 0 && result.score < results[index - 1].score) {
+            currentRank = index + 1;
+        }
+        result.displayRank = currentRank;
+    });
+
+    results.forEach((result, index) => {
         const card = document.createElement("div");
         card.className = `result-card player-${result.controllerIndex}`;
         card.style.background = playerColors[result.controllerIndex].bg;
@@ -817,8 +866,12 @@ function displayResults() {
 
         const accuracy = Math.round((result.correct / totalQuestions) * 100);
 
+        // Check if this is a tie (same score as someone else with same rank)
+        const isTied = results.filter(r => r.displayRank === result.displayRank).length > 1;
+        const rankDisplay = isTied ? `T${result.displayRank}` : result.displayRank;
+
         card.innerHTML = `
-            <div class="result-rank rank-${rank + 1}">${rank + 1}</div>
+            <div class="result-rank rank-${result.displayRank}">${rankDisplay}</div>
             <div class="result-player-name">Player ${result.controllerIndex + 1}</div>
             <div class="result-score">${result.score}</div>
             <div class="result-stats">
@@ -829,11 +882,26 @@ function displayResults() {
         podium.appendChild(card);
     });
 
-    // Winner announcement
-    const winner = results[0];
+    // Winner announcement - handle ties
+    const topScore = results[0].score;
+    const winners = results.filter(r => r.score === topScore);
+
+    let winnerText;
+    if (winners.length === 1) {
+        winnerText = `🏆 Player ${winners[0].controllerIndex + 1} Wins!`;
+    } else if (winners.length === results.length) {
+        // All players tied
+        const playerNumbers = winners.map(w => w.controllerIndex + 1).join(", ");
+        winnerText = `🏆 It's a Draw! Players ${playerNumbers}`;
+    } else {
+        // Some players tied for first
+        const playerNumbers = winners.map(w => w.controllerIndex + 1).join(", ");
+        winnerText = `🏆 It's a Tie! Players ${playerNumbers}`;
+    }
+
     statsDiv.innerHTML = `
-        <h3>🏆 Player ${winner.controllerIndex + 1} Wins!</h3>
-        <p>Final Score: ${winner.score} points</p>
+        <h3>${winnerText}</h3>
+        <p>Final Score: ${topScore} points</p>
         <p>Mode: ${selectedMode === "buzzer" ? "Buzzer Race" : "All Answer"}</p>
         <p>Difficulty: ${selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1)}</p>
     `;
