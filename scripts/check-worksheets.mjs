@@ -16,6 +16,13 @@ import fdpPercentToFraction from "../worksheets/types/fdp-percent-to-fraction.js
 import fdpDecimalToPercent from "../worksheets/types/fdp-decimal-to-percent.js";
 import fdpPercentToDecimal from "../worksheets/types/fdp-percent-to-decimal.js";
 import equations from "../worksheets/types/equations.js";
+import decimalAddSub from "../worksheets/types/decimal-add-sub.js";
+import decimalMulDiv from "../worksheets/types/decimal-mul-div.js";
+import decimalCompare from "../worksheets/types/decimal-compare.js";
+import percentageOfAmount from "../worksheets/types/percentage-of-amount.js";
+import fractionOfAmount from "../worksheets/types/fraction-of-amount.js";
+import fractionCompare from "../worksheets/types/fraction-compare.js";
+import recurringDecimals from "../worksheets/types/recurring-decimals.js";
 
 const TYPES = [
     addition,
@@ -36,6 +43,13 @@ const TYPES = [
     fdpDecimalToPercent,
     fdpPercentToDecimal,
     equations,
+    decimalAddSub,
+    decimalMulDiv,
+    decimalCompare,
+    percentageOfAmount,
+    fractionOfAmount,
+    fractionCompare,
+    recurringDecimals,
 ];
 
 const SAMPLE_COUNT = 50;
@@ -52,6 +66,8 @@ const DUPLICATE_TOLERANCE = {
     "fraction-add-sub": 10,
     "mixed-numbers": 15,
     "equivalent-fractions": 8,
+    "recurring-decimals": 40,
+    "fraction-compare": 10,
 };
 
 function mulberry32(seed) {

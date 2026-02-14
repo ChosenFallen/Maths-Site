@@ -22,6 +22,7 @@ import decimalMulDiv from "./types/decimal-mul-div.js";
 import decimalCompare from "./types/decimal-compare.js";
 import percentageOfAmount from "./types/percentage-of-amount.js";
 import fractionOfAmount from "./types/fraction-of-amount.js";
+import recurringDecimals from "./types/recurring-decimals.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -48,6 +49,7 @@ const WORKSHEET_TYPES = [
     fractionOfAmount,
     fractionCompare,
     equations,
+    recurringDecimals,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -75,7 +77,7 @@ const WORKSHEET_GROUPS = [
     },
     {
         label: "Decimals",
-        types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare"],
+        types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare", "recurring-decimals"],
     },
     {
         label: "Percentages",

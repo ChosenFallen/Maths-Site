@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "name": "maths-site",
+  "version": "1.0.0",
+  "description": "Interactive maths worksheets and games"
+}

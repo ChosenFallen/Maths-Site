@@ -25,7 +25,7 @@
 - [x] Fraction multiplication and division
 - [x] Mixed numbers and improper fractions conversion
 - [x] Operations with mixed numbers
-- [ ] Recurring decimals
+- [x] Recurring decimals
 - [x] Fractions of amounts
 - [x] Decimal place value and ordering (decimal-compare)
 - [x] Multiplying/dividing decimals by 10, 100, 1000 (decimal-mul-div)
