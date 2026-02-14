@@ -1,7 +1,7 @@
 # Game Ideas
 
 ## General Improvements
-- [ ] Use buzz controllers for a quiz game
+- [x] **Use buzz controllers for a quiz game**
 - [ ] Japanese pencil puzzles (suitable for interactive whiteboard)
 - [x] Prevent mobile double click zooming in (especially on the simon says game)
 - [x] Prevent right-click menu in games
@@ -65,3 +65,12 @@
   - Difficulty levels: Easy, Normal, Hard (different target ranges and time limits)
   - Scoring, high scores, accuracy tracking
   - Touch-friendly for interactive whiteboards
+- [x] **Buzz Quiz** - Multiplayer quiz game with PlayStation Buzz Controller support:
+  - Two game modes: Buzzer Race (first to buzz in) and All Answer (everyone answers)
+  - Supports 2-4 players with Buzz controllers via Gamepad API
+  - Generated maths questions with multiple choice answers
+  - Difficulty levels: Easy, Normal, Hard
+  - Keyboard fallback mode for testing without controllers
+  - Player-specific colored panels and scoring
+  - Timer system for all-answer mode
+  - Results screen with rankings and statistics
