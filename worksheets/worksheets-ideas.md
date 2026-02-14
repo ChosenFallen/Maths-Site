@@ -53,6 +53,8 @@
 - [ ] Percentages: expressing as a percentage
 - [ ] Percentages: multipliers
 - [ ] Percentages: reverse percentages
+- [ ] Percentages: repeated percentage change
+- [ ] Recurring decimals to fractions (reverse conversion)
 
 ## Times Tables
 
@@ -130,6 +132,7 @@
 - [ ] Vertical lines (x=a)
 - [ ] Real-life linear graphs
 - [ ] Distance-time graphs
+- [ ] Velocity-time graphs (speed-time graphs)
 - [ ] Filling containers graphs
 - [ ] Conversion graphs (draw and interpret)
 
@@ -309,6 +312,8 @@
 - [ ] Compensation strategies (e.g., 99 × n)
 - [ ] Estimation and approximation
 - [ ] Checking answers using inverse operations
+- [ ] Using a calculator effectively
+- [ ] Calculator problems (mixed operations)
 
 ## Word Problems
 
