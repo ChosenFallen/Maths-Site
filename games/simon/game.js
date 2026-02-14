@@ -83,7 +83,8 @@ function startGame() {
     gameScreen.classList.remove("hidden");
 
     updateRoundDisplay();
-    statusText.textContent = "Watch closely...";
+    statusText.textContent = "👀 Watch closely...";
+    statusText.className = "watching";
     nextRound();
 }
 
@@ -118,7 +119,8 @@ function playSequence() {
 
     setTimeout(() => {
         acceptingInput = true;
-        statusText.textContent = "Your turn!";
+        statusText.textContent = "👆 Your turn!";
+        statusText.className = "your-turn";
     }, delay);
 }
 
@@ -128,6 +130,7 @@ function handlePlayerInput(color) {
     if (color !== sequence[playerIndex]) {
         acceptingInput = false;
         statusText.textContent = "❌ Wrong!";
+        statusText.className = "wrong";
 
         // Play buzzer and shake screen
         playWrongSound();
@@ -156,7 +159,8 @@ function handlePlayerInput(color) {
     playerIndex++;
 
     if (playerIndex === sequence.length) {
-        statusText.textContent = "✅ Well done!";
+        statusText.textContent = "✅ Perfect!";
+        statusText.className = "correct";
         setTimeout(nextRound, 1000);
     }
 }
