@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Maths Challenge</title>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="game.css" />
+    </head>
+    <body>
+        <h1>🧮 Maths Challenge</h1>
+
+        <!-- MENU SCREEN -->
+        <div id="menu-screen">
+            <p class="menu-text">Choose your challenge</p>
+            <p id="game-over-text" class="game-over hidden"></p>
+
+            <div id="high-scores" class="high-scores hidden">
+                <p class="scores-title">🏆 High Scores</p>
+                <div id="scores-list"></div>
+            </div>
+
+            <div class="menu-section">
+                <label>Operation:</label>
+                <div class="button-group">
+                    <button class="option-btn active" data-operation="addition">➕ Addition</button>
+                    <button class="option-btn" data-operation="subtraction">➖ Subtraction</button>
+                    <button class="option-btn" data-operation="multiplication">✖️ Multiplication</button>
+                    <button class="option-btn" data-operation="division">➗ Division</button>
+                    <button class="option-btn" data-operation="mixed">🔀 Mixed</button>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <label>Difficulty:</label>
+                <div class="button-group">
+                    <button class="option-btn" data-difficulty="easy">Easy</button>
+                    <button class="option-btn active" data-difficulty="normal">Normal</button>
+                    <button class="option-btn" data-difficulty="hard">Hard</button>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <label>Mode:</label>
+                <div class="button-group">
+                    <button class="option-btn active" data-mode="practice">🎯 Practice</button>
+                    <button class="option-btn" data-mode="timed">⏱️ Timed (60s)</button>
+                </div>
+            </div>
+
+            <button id="start-btn" class="start-btn">Start Game</button>
+        </div>
+
+        <!-- GAME SCREEN -->
+        <div id="game-screen" class="hidden">
+            <div class="game-header">
+                <div class="stat">Score: <span id="score">0</span></div>
+                <div class="stat streak">Streak: <span id="streak">0</span>🔥</div>
+                <div class="stat" id="timer-display"></div>
+            </div>
+
+            <button id="finish-btn" class="finish-btn hidden">Finish & See Results</button>
+
+            <p id="question" class="question"></p>
+
+            <div id="answers" class="answers"></div>
+
+            <p id="feedback" class="feedback"></p>
+        </div>
+
+        <p><a href="../../index.html">⬅ Back to games</a></p>
+
+        <script src="game.js"></script>
+    </body>
+</html>

@@ -46,9 +46,13 @@ const gameOverText = document.getElementById("game-over-text");
 
 const bestRoundsBox = document.getElementById("best-rounds");
 
-const bestEasy = document.getElementById("best-easy");
-const bestNormal = document.getElementById("best-normal");
-const bestHard = document.getElementById("best-hard");
+const bestEasyToday = document.getElementById("best-easy-today");
+const bestNormalToday = document.getElementById("best-normal-today");
+const bestHardToday = document.getElementById("best-hard-today");
+
+const bestEasyAlltime = document.getElementById("best-easy-alltime");
+const bestNormalAlltime = document.getElementById("best-normal-alltime");
+const bestHardAlltime = document.getElementById("best-hard-alltime");
 
 document.querySelectorAll(".difficulty-buttons button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -138,11 +142,18 @@ function handlePlayerInput(color) {
         setTimeout(() => gameScreen.classList.remove("shake"), 500);
 
         // Show final round for this difficulty
-        const best = getBestRoundsToday();
-        if (round > best[currentDifficulty]) {
-            best[currentDifficulty] = round;
-            setBestRoundsToday(best);
+        const bestToday = getBestRoundsToday();
+        if (round > bestToday[currentDifficulty]) {
+            bestToday[currentDifficulty] = round;
+            setBestRoundsToday(bestToday);
         }
+
+        const bestAlltime = getBestRoundsAlltime();
+        if (round > bestAlltime[currentDifficulty]) {
+            bestAlltime[currentDifficulty] = round;
+            setBestRoundsAlltime(bestAlltime);
+        }
+
         updateBestRoundsDisplay();
         gameOverText.textContent = `You reached Round ${round}`;
         gameOverText.classList.remove("hidden");
@@ -214,13 +225,22 @@ function updateRoundDisplay() {
 }
 
 function updateBestRoundsDisplay() {
-    const best = getBestRoundsToday();
-    console.log("Best rounds today:", best);
-    bestEasy.textContent = `Easy: ${best.easy || "–"}`;
-    bestNormal.textContent = `Normal: ${best.normal || "–"}`;
-    bestHard.textContent = `Hard: ${best.hard || "–"}`;
+    const bestToday = getBestRoundsToday();
+    const bestAlltime = getBestRoundsAlltime();
 
-    if (best.easy || best.normal || best.hard) {
+    console.log("Best rounds today:", bestToday);
+    console.log("Best rounds all-time:", bestAlltime);
+
+    bestEasyToday.textContent = `Easy: ${bestToday.easy || "–"}`;
+    bestNormalToday.textContent = `Normal: ${bestToday.normal || "–"}`;
+    bestHardToday.textContent = `Hard: ${bestToday.hard || "–"}`;
+
+    bestEasyAlltime.textContent = `Easy: ${bestAlltime.easy || "–"}`;
+    bestNormalAlltime.textContent = `Normal: ${bestAlltime.normal || "–"}`;
+    bestHardAlltime.textContent = `Hard: ${bestAlltime.hard || "–"}`;
+
+    if (bestToday.easy || bestToday.normal || bestToday.hard ||
+        bestAlltime.easy || bestAlltime.normal || bestAlltime.hard) {
         bestRoundsBox.classList.remove("hidden");
     } else {
         bestRoundsBox.classList.add("hidden");
@@ -248,6 +268,24 @@ function getBestRoundsToday() {
 
 function setBestRoundsToday(bestRounds) {
     localStorage.setItem(getTodayKey(), JSON.stringify(bestRounds));
+}
+
+function getBestRoundsAlltime() {
+    const data = localStorage.getItem("simon-best-alltime");
+
+    if (!data) {
+        return { easy: 0, normal: 0, hard: 0 };
+    }
+
+    try {
+        return JSON.parse(data);
+    } catch {
+        return { easy: 0, normal: 0, hard: 0 };
+    }
+}
+
+function setBestRoundsAlltime(bestRounds) {
+    localStorage.setItem("simon-best-alltime", JSON.stringify(bestRounds));
 }
 
 updateBestRoundsDisplay();

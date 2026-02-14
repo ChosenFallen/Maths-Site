@@ -148,14 +148,59 @@ body {
 }
 
 .best-round {
-    font-size: 1.3em;
+    font-size: 1.2em;
     margin-bottom: 20px;
-    color: #2e7d32;
     font-weight: bold;
 }
 
+.scores-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.daily-scores,
+.alltime-scores {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+}
+
+.daily-scores {
+    border-left: 4px solid #2196f3;
+}
+
+.alltime-scores {
+    border-left: 4px solid #ff9800;
+}
+
+.scores-title {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.daily-scores .scores-title {
+    color: #2196f3;
+}
+
+.alltime-scores .scores-title {
+    color: #ff9800;
+}
+
 .best-round p {
-    margin: 4px 0;
+    margin: 6px 0;
+    color: #333;
+}
+
+@media (max-width: 600px) {
+    .scores-container {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
 
 @keyframes shake {
