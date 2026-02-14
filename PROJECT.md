@@ -544,6 +544,70 @@ See `worksheets-ideas.md` for planned worksheet types:
 - Geometry (angles, area, perimeter, volume)
 - And 150+ more topics
 
+## Testing
+
+### Automated Tests
+
+The project includes an automated test suite to validate all worksheet types:
+
+**File:** `scripts/check-worksheets.mjs`
+
+**Purpose:** Validates worksheet modules for correctness and consistency
+
+**What It Tests:**
+1. **Required Functions**
+   - `instruction()` function exists and returns non-empty text
+   - `printTitle()` function exists and returns correct title
+   - `generate()` function returns valid problem arrays
+
+2. **Problem Generation**
+   - Generates sample problems successfully
+   - No NaN answers
+   - Numeric answers within reasonable bounds (< 999, or type-specific max)
+   - No fractions with denominator of 1
+   - Duplicate detection (with type-specific tolerances)
+
+3. **Options Validation**
+   - Options array structure is valid
+   - Each option has `id`, `type`, and `default`
+   - Select options have valid `values` array
+   - Default value exists in values list
+
+4. **Type-Specific Rules**
+   - Multiplication: max answer 10,000
+   - Equations: max answer 10,000
+   - Mixed operations: no max limit
+   - Indices: max answer 5,000
+
+5. **Duplicate Tolerances**
+   - Default: 5 duplicates allowed
+   - Indices: 40 duplicates (limited prime bases)
+   - Simplify fractions: 10 duplicates
+   - Fraction operations: 8-15 duplicates
+   - Recurring decimals: 40 duplicates (limited fractions)
+   - FDP conversions: unlimited (expected to have duplicates)
+
+**Running Tests:**
+```bash
+node scripts/check-worksheets.mjs
+```
+
+**Expected Output:**
+```
+✅ addition: OK
+✅ subtraction: OK
+✅ multiplication: OK
+...
+All checks passed.
+```
+
+**Adding Tests for New Worksheets:**
+1. Import the new worksheet in `check-worksheets.mjs`
+2. Add to `TYPES` array
+3. Add options test cases if worksheet has options
+4. Add custom tolerance to `DUPLICATE_TOLERANCE` if needed
+5. Run tests to verify
+
 ## Troubleshooting
 
 ### Worksheet ID doesn't reproduce same problems

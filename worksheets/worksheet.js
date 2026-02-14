@@ -23,6 +23,7 @@ import decimalCompare from "./types/decimal-compare.js";
 import percentageOfAmount from "./types/percentage-of-amount.js";
 import fractionOfAmount from "./types/fraction-of-amount.js";
 import recurringDecimals from "./types/recurring-decimals.js";
+import ratioSimplify from "./types/ratio-simplify.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -50,6 +51,7 @@ const WORKSHEET_TYPES = [
     fractionCompare,
     equations,
     recurringDecimals,
+    ratioSimplify,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -96,6 +98,7 @@ const WORKSHEET_GROUPS = [
     },
     { label: "Powers", types: ["indices"] },
     { label: "Algebra", types: ["equations"] },
+    { label: "Ratio & Proportion", types: ["ratio-simplify"] },
 ];
 
 const generateBtn = document.getElementById("generate-btn");

@@ -23,6 +23,7 @@ import percentageOfAmount from "../worksheets/types/percentage-of-amount.js";
 import fractionOfAmount from "../worksheets/types/fraction-of-amount.js";
 import fractionCompare from "../worksheets/types/fraction-compare.js";
 import recurringDecimals from "../worksheets/types/recurring-decimals.js";
+import ratioSimplify from "../worksheets/types/ratio-simplify.js";
 
 const TYPES = [
     addition,
@@ -50,6 +51,7 @@ const TYPES = [
     fractionOfAmount,
     fractionCompare,
     recurringDecimals,
+    ratioSimplify,
 ];
 
 const SAMPLE_COUNT = 50;
@@ -68,6 +70,7 @@ const DUPLICATE_TOLERANCE = {
     "equivalent-fractions": 8,
     "recurring-decimals": 40,
     "fraction-compare": 10,
+    "ratio-simplify": 10,
 };
 
 function mulberry32(seed) {
@@ -80,6 +83,19 @@ function mulberry32(seed) {
 }
 
 function checkType(type) {
+    const errors = [];
+
+    // Test 1: Check required properties
+    if (!type.id || typeof type.id !== "string") {
+        errors.push("Missing or invalid id property.");
+    }
+    if (!type.label || typeof type.label !== "string") {
+        errors.push("Missing or invalid label property.");
+    }
+    if (typeof type.generate !== "function") {
+        errors.push("Missing generate() function.");
+    }
+
     const rand = mulberry32(123456);
     const optionsList = [undefined];
 
@@ -95,8 +111,7 @@ function checkType(type) {
     if (type.id === "equations")
         optionsList.push({ equationMode: "one" }, { equationMode: "two" });
 
-    const errors = [];
-
+    // Test 2: Check instruction function
     if (typeof type.instruction !== "function") {
         errors.push("Missing instruction() for worksheet type.");
     }
@@ -128,6 +143,16 @@ function checkType(type) {
         if (!Array.isArray(problems) || problems.length === 0) {
             errors.push("No problems generated.");
             return;
+        }
+
+        // Check all problems have required fields
+        for (const p of problems) {
+            if (!p.question && !p.questionHtml) {
+                errors.push("Problem missing both question and questionHtml.");
+            }
+            if (p.answer === undefined && !p.answerHtml) {
+                errors.push("Problem missing both answer and answerHtml.");
+            }
         }
 
         if (type.instruction) {
@@ -183,6 +208,34 @@ function checkType(type) {
         const tolerance = DUPLICATE_TOLERANCE[type.id] ?? 5;
         if (!isFdp && duplicates > tolerance) {
             errors.push(`High duplicates: ${duplicates}/${problems.length}.`);
+        }
+    });
+
+    // Test 3: Determinism check (same seed = same problems)
+    const rand1 = mulberry32(99999);
+    const rand2 = mulberry32(99999);
+    const problems1 = type.generate(rand1, "easy", 5, {});
+    const problems2 = type.generate(rand2, "easy", 5, {});
+
+    for (let i = 0; i < Math.min(problems1.length, problems2.length); i++) {
+        const q1 = problems1[i].question || problems1[i].questionHtml;
+        const q2 = problems2[i].question || problems2[i].questionHtml;
+        if (q1 !== q2) {
+            errors.push("Determinism check failed: same seed produced different problems.");
+            break;
+        }
+    }
+
+    // Test 4: All difficulty levels work
+    ["easy", "normal", "hard"].forEach((difficulty) => {
+        try {
+            const testRand = mulberry32(789);
+            const testProblems = type.generate(testRand, difficulty, 3, {});
+            if (!Array.isArray(testProblems) || testProblems.length === 0) {
+                errors.push(`Difficulty "${difficulty}" generated no problems.`);
+            }
+        } catch (err) {
+            errors.push(`Difficulty "${difficulty}" threw error: ${err.message}`);
         }
     });
 

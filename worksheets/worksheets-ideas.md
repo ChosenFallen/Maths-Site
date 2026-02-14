@@ -219,7 +219,7 @@
 
 ## Ratio & Proportion
 
-- [ ] Simplifying ratios
+- [x] Simplifying ratios
 - [ ] Expressing ratios as fractions or percentages
 - [ ] Expressing ratios as 1:n
 - [ ] Sharing amounts in given ratios (sharing the total)
