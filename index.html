@@ -2,18 +2,35 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
         <title>Maths Games</title>
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <h1>🧮 Maths Games</h1>
-        <p>Choose a game:</p>
+        <div class="container">
+            <h1>🧮 Maths Games</h1>
+            <p class="subtitle">Choose an activity:</p>
 
-        <ul class="game-list">
-            <li><a href="games/addition/">Addition Game</a></li>
-            <li><a href="games/simon/">Simon Says</a></li>
-            <li><a href="worksheets/">Worksheets</a></li>
-        </ul>
+            <div class="game-grid">
+                <a href="games/addition/" class="game-card">
+                    <div class="game-icon">➕</div>
+                    <div class="game-title">Addition Game</div>
+                    <div class="game-description">Practice addition skills</div>
+                </a>
+
+                <a href="games/simon/" class="game-card">
+                    <div class="game-icon">🎮</div>
+                    <div class="game-title">Simon Says</div>
+                    <div class="game-description">Memory pattern game</div>
+                </a>
+
+                <a href="worksheets/" class="game-card worksheets">
+                    <div class="game-icon">📝</div>
+                    <div class="game-title">Worksheets</div>
+                    <div class="game-description">Printable practice sheets</div>
+                </a>
+            </div>
+        </div>
 
         <script src="js/main.js"></script>
     </body>
