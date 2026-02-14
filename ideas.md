@@ -3,7 +3,8 @@
 ## General Improvements
 - [ ] Use buzz controllers for a quiz game
 - [ ] Japanese pencil puzzles (suitable for interactive whiteboard)
-- [ ] Prevent mobile double click zooming in (especially on the simon says game)
+- [x] Prevent mobile double click zooming in (especially on the simon says game)
+- [x] Prevent right-click menu in games
 
 ## Mental Maths Games
 - [ ] Number Ninja - rapid-fire arithmetic with increasing difficulty

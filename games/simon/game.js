@@ -209,7 +209,8 @@ function playWrongSound() {
 }
 
 function updateRoundDisplay() {
-    document.getElementById("round-display").textContent = `Round: ${round}`;
+    const difficultyLabel = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
+    document.getElementById("round-display").textContent = `Round: ${round} (${difficultyLabel})`;
 }
 
 function updateBestRoundsDisplay() {
@@ -250,3 +251,8 @@ function setBestRoundsToday(bestRounds) {
 }
 
 updateBestRoundsDisplay();
+
+// Prevent right-click context menu
+document.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+});
