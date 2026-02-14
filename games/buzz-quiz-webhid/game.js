@@ -1,11 +1,15 @@
 // WebHID variables
 let hidDevices = [];
 let hidDevice = null;
+let ledStates = [false, false, false, false]; // Track LED state for all 4 players
+let webHIDPromptShown = false; // Track if we've already prompted for WebHID
 
 // Game settings
 let selectedMode = "buzzer";
 let selectedDifficulty = "normal";
 let totalQuestions = 10;
+let buzzerTimeLimit = 10; // Configurable buzzer answer time
+let allAnswerTimeLimit = 15; // Configurable all-answer time
 let isKeyboardMode = false;
 let isHubMode = false; // True if all controllers are in one gamepad
 
@@ -23,6 +27,9 @@ let activePlayers = [];
 // Buzzer mode state
 let buzzerPressed = false;
 let activePlayer = -1;
+let frozenPlayers = []; // Players locked out for current question
+let buzzerTimer = null;
+let buzzerTimeLeft = 0;
 
 // All-answer mode state
 let timerInterval = null;
@@ -96,10 +103,26 @@ document.querySelectorAll(".option-btn").forEach((btn) => {
         );
         btn.classList.add("active");
 
-        if (btn.dataset.mode) selectedMode = btn.dataset.mode;
+        if (btn.dataset.mode) {
+            selectedMode = btn.dataset.mode;
+            // Toggle timer sections based on selected mode
+            const buzzerTimerSection = document.getElementById("buzzer-timer-section");
+            const allAnswerTimerSection = document.getElementById("all-answer-timer-section");
+            if (selectedMode === "buzzer") {
+                buzzerTimerSection.classList.remove("hidden");
+                allAnswerTimerSection.classList.add("hidden");
+            } else if (selectedMode === "all-answer") {
+                buzzerTimerSection.classList.add("hidden");
+                allAnswerTimerSection.classList.remove("hidden");
+            }
+        }
         if (btn.dataset.difficulty) selectedDifficulty = btn.dataset.difficulty;
         if (btn.dataset.questions)
             totalQuestions = parseInt(btn.dataset.questions);
+        if (btn.dataset.buzzerTime)
+            buzzerTimeLimit = parseInt(btn.dataset.buzzerTime);
+        if (btn.dataset.allAnswerTime)
+            allAnswerTimeLimit = parseInt(btn.dataset.allAnswerTime);
     });
 });
 
@@ -179,6 +202,12 @@ function updateControllerStatus() {
     if (numPlayers >= 2 || isKeyboardMode) {
         updateStartButton();
     }
+
+    // Auto-prompt for WebHID connection when controllers detected
+    if (!isKeyboardMode && numPlayers >= 2 && !hidDevice?.opened && !webHIDPromptShown) {
+        webHIDPromptShown = true;
+        showWebHIDPrompt();
+    }
 }
 
 function updatePlayerReadyDisplay() {
@@ -243,6 +272,25 @@ window.addEventListener("gamepaddisconnected", (e) => {
 
 // Start game
 function startGame() {
+    // Check if WebHID is connected for LED control
+    if (!isKeyboardMode && !hidDevice?.opened) {
+        const confirmStart = confirm(
+            "⚠️ WebHID device not connected!\n\n" +
+            "The game will work, but LED control won't be available.\n\n" +
+            "Click 'Cancel' to connect WebHID first, or 'OK' to continue without LEDs."
+        );
+
+        if (!confirmStart) {
+            // User wants to connect WebHID first
+            document.getElementById("connect-webhid-btn").scrollIntoView({ behavior: "smooth" });
+            document.getElementById("connect-webhid-btn").classList.add("pulse-animation");
+            setTimeout(() => {
+                document.getElementById("connect-webhid-btn").classList.remove("pulse-animation");
+            }, 2000);
+            return;
+        }
+    }
+
     // Get only ready players
     const readyPlayerIndices = [];
     for (let i = 0; i < playerReady.length; i++) {
@@ -307,6 +355,28 @@ function startRound() {
     buzzerPressed = false;
     activePlayer = -1;
     allAnswered = false;
+    frozenPlayers = []; // Reset frozen players for new question
+
+    // Clear any existing buzzer timer
+    if (buzzerTimer) {
+        clearInterval(buzzerTimer);
+        buzzerTimer = null;
+    }
+
+    // LED behavior depends on game mode
+    if (selectedMode === "all-answer") {
+        // All-answer mode: Turn on all active players' LEDs
+        for (let i = 0; i < activePlayers.length; i++) {
+            const controllerIndex = activePlayers[i];
+            setPlayerLED(controllerIndex, true);
+        }
+    } else {
+        // Buzzer mode: Turn off all LEDs (will light up when someone buzzes)
+        for (let i = 0; i < activePlayers.length; i++) {
+            const controllerIndex = activePlayers[i];
+            setPlayerLED(controllerIndex, false);
+        }
+    }
 
     // Update question number
     document.getElementById("question-num").textContent = currentQuestion;
@@ -435,10 +505,15 @@ function setupBuzzerMode() {
 
 function handleBuzzerPress(playerIndex) {
     if (selectedMode !== "buzzer") return;
-    if (buzzerPressed) return;
+    if (buzzerPressed) return; // Someone already buzzing
+    if (frozenPlayers.includes(playerIndex)) return; // Player is frozen out
 
     buzzerPressed = true;
     activePlayer = playerIndex;
+
+    // Turn on LED for player who buzzed
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, true);
 
     // Highlight active player
     const panels = document.querySelectorAll(".player-panel");
@@ -450,16 +525,45 @@ function handleBuzzerPress(playerIndex) {
     indicator.textContent = "🔴";
     indicator.classList.add("buzzer-active");
 
+    // Start countdown timer
+    buzzerTimeLeft = buzzerTimeLimit;
+    startBuzzerTimer();
+
     // Update status
     const statusDiv = document.getElementById("game-status");
-    statusDiv.textContent = `Player ${playerIndex + 1} buzzed in! Select your answer...`;
+    statusDiv.textContent = `Player ${activePlayers[playerIndex] + 1} buzzed in! ${buzzerTimeLeft}s remaining...`;
     statusDiv.className = "game-status buzzer-locked";
+}
+
+function startBuzzerTimer() {
+    if (buzzerTimer) clearInterval(buzzerTimer);
+
+    buzzerTimer = setInterval(() => {
+        buzzerTimeLeft--;
+
+        // Update status message
+        const statusDiv = document.getElementById("game-status");
+        statusDiv.textContent = `Player ${activePlayers[activePlayer] + 1} buzzed in! ${buzzerTimeLeft}s remaining...`;
+
+        if (buzzerTimeLeft <= 0) {
+            clearInterval(buzzerTimer);
+            buzzerTimer = null;
+            // Time's up! Freeze this player
+            freezePlayer(activePlayer, "Time's up!");
+        }
+    }, 1000);
 }
 
 function handleBuzzerAnswer(playerIndex, answerIndex) {
     if (selectedMode !== "buzzer") return;
     if (!buzzerPressed || playerIndex !== activePlayer) return;
     if (playerAnswers[playerIndex] !== null) return;
+
+    // Stop the timer
+    if (buzzerTimer) {
+        clearInterval(buzzerTimer);
+        buzzerTimer = null;
+    }
 
     playerAnswers[playerIndex] = answerIndex;
 
@@ -474,7 +578,6 @@ function checkBuzzerAnswer(playerIndex, answerIndex) {
     answerOptions[answerIndex].classList.add(
         isCorrect ? "correct" : "wrong",
     );
-    answerOptions[currentQuestionData.correctIndex].classList.add("correct");
 
     // Update player panel
     const panel = document.querySelectorAll(".player-panel")[playerIndex];
@@ -486,27 +589,82 @@ function checkBuzzerAnswer(playerIndex, answerIndex) {
     indicator.classList.remove("buzzer-active");
 
     if (isCorrect) {
+        // Correct answer - award points and end round
         playerScores[playerIndex] += 10;
         playerCorrect[playerIndex]++;
         panel.querySelector(".player-status").textContent = "✓ Correct!";
         indicator.textContent = "✓";
+        panel.querySelector(".player-score").textContent = playerScores[playerIndex];
+
+        // Show correct answer
+        answerOptions[currentQuestionData.correctIndex].classList.add("correct");
+
+        // Turn off LED
+        const controllerIndex = activePlayers[playerIndex];
+        setPlayerLED(controllerIndex, false);
+
+        // Next round after delay
+        setTimeout(() => {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                startRound();
+            } else {
+                endGame();
+            }
+        }, 2000);
     } else {
-        panel.querySelector(".player-status").textContent = "✗ Wrong";
-        indicator.textContent = "✗";
+        // Wrong answer - freeze this player and let others try
+        panel.querySelector(".player-status").textContent = "✗ Wrong - Frozen!";
+        indicator.textContent = "❄️";
+
+        freezePlayer(playerIndex, "Wrong answer!");
     }
+}
 
-    // Update score display
-    panel.querySelector(".player-score").textContent = playerScores[playerIndex];
+function freezePlayer(playerIndex, reason) {
+    // Add to frozen list
+    frozenPlayers.push(playerIndex);
 
-    // Next round after delay
-    setTimeout(() => {
-        if (currentQuestion < totalQuestions) {
-            currentQuestion++;
-            startRound();
-        } else {
-            endGame();
-        }
-    }, 2000);
+    // Turn off their LED
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, false);
+
+    // Update panel
+    const panel = document.querySelectorAll(".player-panel")[playerIndex];
+    panel.classList.add("wrong");
+    panel.querySelector(".player-status").textContent = `❄️ ${reason}`;
+    const indicator = panel.querySelector(".answer-indicator");
+    indicator.textContent = "❄️";
+    indicator.classList.remove("buzzer-active");
+
+    // Reset buzzer state to allow others to try
+    buzzerPressed = false;
+    activePlayer = -1;
+
+    // Check if all players are frozen
+    if (frozenPlayers.length >= activePlayers.length) {
+        // All frozen - show answer and move on
+        const answerOptions = document.querySelectorAll(".answer-option");
+        answerOptions[currentQuestionData.correctIndex].classList.add("correct");
+
+        const statusDiv = document.getElementById("game-status");
+        statusDiv.textContent = "All players frozen! No points awarded.";
+        statusDiv.className = "game-status";
+
+        setTimeout(() => {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                startRound();
+            } else {
+                endGame();
+            }
+        }, 3000);
+    } else {
+        // Let other players try
+        const statusDiv = document.getElementById("game-status");
+        statusDiv.textContent = `Player ${controllerIndex + 1} frozen! Others can buzz in...`;
+        statusDiv.className = "game-status buzzer-waiting";
+    }
 }
 
 // All-answer mode
@@ -518,7 +676,7 @@ function setupAllAnswerMode() {
     const timerContainer = document.getElementById("timer-container");
     timerContainer.classList.remove("hidden");
 
-    timeLeft = 15;
+    timeLeft = allAnswerTimeLimit;
     startTimer();
 }
 
@@ -536,7 +694,7 @@ function startTimer() {
         timeLeft--;
         timerText.textContent = `${timeLeft}s`;
 
-        const percentage = (timeLeft / 15) * 100;
+        const percentage = (timeLeft / allAnswerTimeLimit) * 100;
         timerBar.style.width = percentage + "%";
 
         if (timeLeft <= 5) {
@@ -558,6 +716,10 @@ function handleAllAnswer(playerIndex, answerIndex) {
     if (playerAnswers[playerIndex] !== null) return;
 
     playerAnswers[playerIndex] = answerIndex;
+
+    // Turn off LED for this player (they've answered)
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, false);
 
     // Show checkmark
     const panel = document.querySelectorAll(".player-panel")[playerIndex];
@@ -619,6 +781,9 @@ function endGame() {
         clearInterval(timerInterval);
         timerInterval = null;
     }
+
+    // Turn off all LEDs when game ends
+    setAllLEDs(false);
 
     gameScreen.classList.add("hidden");
     resultsScreen.classList.remove("hidden");
@@ -725,6 +890,9 @@ function pollSetupGamepads() {
                             // Toggle ready status
                             playerReady[playerIndex] = !playerReady[playerIndex];
                             updatePlayerReadyDisplay();
+
+                            // Update LED to reflect ready status
+                            setPlayerLED(playerIndex, playerReady[playerIndex]);
                         }
 
                         previousButtonStates[0][buzzerBtnIndex] = pressed;
@@ -753,6 +921,9 @@ function pollSetupGamepads() {
                             // Toggle ready status
                             playerReady[i] = !playerReady[i];
                             updatePlayerReadyDisplay();
+
+                            // Update LED to reflect ready status
+                            setPlayerLED(i, playerReady[i]);
                             break; // Only process first buzzer button
                         }
 
@@ -903,18 +1074,22 @@ document.addEventListener("keydown", (e) => {
             e.preventDefault();
             playerReady[0] = !playerReady[0];
             updatePlayerReadyDisplay();
+            setPlayerLED(0, playerReady[0]);
         } else if (key === "enter") {
             e.preventDefault();
             playerReady[1] = !playerReady[1];
             updatePlayerReadyDisplay();
+            setPlayerLED(1, playerReady[1]);
         } else if (key === "shift") {
             e.preventDefault();
             playerReady[2] = !playerReady[2];
             updatePlayerReadyDisplay();
+            setPlayerLED(2, playerReady[2]);
         } else if (key === "control") {
             e.preventDefault();
             playerReady[3] = !playerReady[3];
             updatePlayerReadyDisplay();
+            setPlayerLED(3, playerReady[3]);
         }
         return;
     }
@@ -984,7 +1159,7 @@ function handleAnswer(playerIndex, answerIndex) {
 // Debug panel
 let debugPanelVisible = false;
 
-document.getElementById("toggle-debug-btn").addEventListener("click", () => {
+function toggleDebugPanel() {
     debugPanelVisible = !debugPanelVisible;
     const debugInfo = document.getElementById("debug-info");
     const toggleBtn = document.getElementById("toggle-debug-btn");
@@ -996,6 +1171,27 @@ document.getElementById("toggle-debug-btn").addEventListener("click", () => {
     } else {
         debugInfo.classList.add("hidden");
         toggleBtn.textContent = "🔧 Show Controller Debug Info";
+    }
+}
+
+document.getElementById("toggle-debug-btn").addEventListener("click", toggleDebugPanel);
+
+// Keyboard shortcut: Press "d" to toggle debug and WebHID panels
+let debugSectionsVisible = false;
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "d" || e.key === "D") {
+        debugSectionsVisible = !debugSectionsVisible;
+        const webhidPanel = document.querySelector(".webhid-panel");
+        const debugPanel = document.querySelector(".debug-panel");
+
+        if (debugSectionsVisible) {
+            webhidPanel.classList.remove("hidden");
+            debugPanel.classList.remove("hidden");
+        } else {
+            webhidPanel.classList.add("hidden");
+            debugPanel.classList.add("hidden");
+        }
     }
 });
 
@@ -1159,8 +1355,100 @@ function checkWebHIDSupport() {
     return true;
 }
 
+// Show WebHID prompt when controllers detected
+function showWebHIDPrompt() {
+    if (!checkWebHIDSupport()) return;
+    if (hidDevice?.opened) return; // Already connected
+
+    // Create notification banner
+    const banner = document.createElement('div');
+    banner.id = 'webhid-prompt-banner';
+    banner.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        z-index: 10000;
+        text-align: center;
+        max-width: 500px;
+        animation: slideDown 0.3s ease-out;
+    `;
+
+    banner.innerHTML = `
+        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">
+            🎮 Buzz Controllers Detected!
+        </div>
+        <div style="margin-bottom: 15px; opacity: 0.95;">
+            Enable LED control for a better experience
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="webhid-prompt-connect" style="
+                background: #4caf50;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 1.1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+            ">
+                ✨ Enable LEDs
+            </button>
+            <button id="webhid-prompt-dismiss" style="
+                background: rgba(255,255,255,0.2);
+                color: white;
+                border: 2px solid white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 1.1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+            ">
+                Skip
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(banner);
+
+    // Add animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Connect button
+    document.getElementById('webhid-prompt-connect').addEventListener('click', async () => {
+        banner.remove();
+        await connectWebHID();
+    });
+
+    // Dismiss button
+    document.getElementById('webhid-prompt-dismiss').addEventListener('click', () => {
+        banner.style.animation = 'slideDown 0.3s ease-out reverse';
+        setTimeout(() => banner.remove(), 300);
+    });
+}
+
 // Connect to HID devices
-document.getElementById("connect-webhid-btn").addEventListener("click", async () => {
+async function connectWebHID() {
     if (!checkWebHIDSupport()) return;
 
     try {
@@ -1181,7 +1469,7 @@ document.getElementById("connect-webhid-btn").addEventListener("click", async ()
         }
 
         hidDevice = devices[0];
-        updateWebHIDStatus(`Connected: ${hidDevice.productName || "Unknown Device"}`);
+        updateWebHIDStatus(`✅ Connected: ${hidDevice.productName || "Unknown Device"}`);
 
         // Open the device
         if (!hidDevice.opened) {
@@ -1197,10 +1485,25 @@ document.getElementById("connect-webhid-btn").addEventListener("click", async ()
             console.log("Input Report ID:", reportId, "Data:", new Uint8Array(data.buffer));
         });
 
+        // Sync LEDs with current player ready states
+        if (!setupScreen.classList.contains("hidden")) {
+            // Set ALL LED states to match ready status
+            for (let i = 0; i < 4; i++) {
+                const isReady = playerReady[i] === true;
+                setPlayerLED(i, isReady);
+            }
+        }
+
     } catch (error) {
         console.error("WebHID Error:", error);
         updateWebHIDStatus(`Error: ${error.message}`);
+        webHIDPromptShown = false; // Allow retry
     }
+}
+
+// Manual connection button
+document.getElementById("connect-webhid-btn").addEventListener("click", async () => {
+    await connectWebHID();
 });
 
 function updateWebHIDStatus(message) {
@@ -1259,48 +1562,51 @@ function displayHIDInfo(device) {
 
 async function setPlayerLED(playerIndex, state) {
     if (!hidDevice || !hidDevice.opened) {
-        console.warn("HID device not connected");
-        return;
+        return; // Silently fail if not connected
     }
 
     try {
-        // EXPERIMENTAL: Try different report formats
-        // This is guesswork - the actual protocol is unknown
+        // CONFIRMED WORKING PROTOCOL:
+        // Report ID: 0 (7 bytes)
+        // Byte position playerIndex+1 controls that player's LED
+        // Player 1: byte[1], Player 2: byte[2], Player 3: byte[3], Player 4: byte[4]
+        // IMPORTANT: Must send ALL LED states at once (0x00 turns off LEDs)
 
-        // Attempt 1: Simple byte array with player bit flags
-        const data1 = new Uint8Array(8);
-        data1[0] = state ? (1 << playerIndex) : 0; // Set bit for player
+        // Update the state for this player
+        ledStates[playerIndex] = state;
 
-        // Attempt 2: More complex format with player index and state
-        const data2 = new Uint8Array(8);
-        data2[0] = 0x01; // Possible command byte
-        data2[1] = playerIndex; // Player index
-        data2[2] = state ? 0xff : 0x00; // State on/off
-
-        // Attempt 3: Array with all player states
-        const data3 = new Uint8Array(8);
+        // Build data array with ALL current LED states
+        const data = new Uint8Array(7);
         for (let i = 0; i < 4; i++) {
-            data3[i] = (i === playerIndex && state) ? 0xff : 0x00;
+            data[i + 1] = ledStates[i] ? 0xff : 0x00;
         }
 
-        // Try sending with different report IDs
-        const reportIds = [0, 1, 2, 3, 4, 5];
+        await hidDevice.sendReport(0, data);
+        console.log(`Player ${playerIndex + 1} LED ${state ? "ON" : "OFF"}`);
+    } catch (error) {
+        console.error("LED Control Error:", error);
+    }
+}
 
-        for (const reportId of reportIds) {
-            try {
-                // Try all three data formats
-                await hidDevice.sendReport(reportId, data1);
-                await new Promise(r => setTimeout(r, 10));
-                await hidDevice.sendReport(reportId, data2);
-                await new Promise(r => setTimeout(r, 10));
-                await hidDevice.sendReport(reportId, data3);
-                await new Promise(r => setTimeout(r, 10));
-            } catch (err) {
-                // Ignore errors for unsupported report IDs
-            }
+async function setAllLEDs(state) {
+    if (!hidDevice || !hidDevice.opened) {
+        return; // Silently fail if not connected
+    }
+
+    try {
+        // Update all LED states
+        for (let i = 0; i < 4; i++) {
+            ledStates[i] = state;
         }
 
-        console.log(`Attempted to set Player ${playerIndex + 1} LED to ${state ? "ON" : "OFF"}`);
+        // Build data array with all LEDs in same state
+        const data = new Uint8Array(7);
+        for (let i = 0; i < 4; i++) {
+            data[i + 1] = state ? 0xff : 0x00;
+        }
+
+        await hidDevice.sendReport(0, data);
+        console.log(`All LEDs ${state ? "ON" : "OFF"}`);
     } catch (error) {
         console.error("LED Control Error:", error);
     }
@@ -1323,21 +1629,8 @@ document.getElementById("led-all-off-btn").addEventListener("click", async () =>
     }
 });
 
-// Integrate LED control with game buzzer events
-const originalHandleBuzzerPress = handleBuzzerPress;
-window.handleBuzzerPress = function(playerIndex) {
-    originalHandleBuzzerPress(playerIndex);
-
-    // Turn on LED for player who buzzed
-    const controllerIndex = activePlayers[playerIndex];
-    setPlayerLED(controllerIndex, true);
-};
-
-const originalCheckBuzzerAnswer = checkBuzzerAnswer;
-window.checkBuzzerAnswer = function(playerIndex, answerIndex) {
-    originalCheckBuzzerAnswer(playerIndex, answerIndex);
-
-    // Turn off LED after answering
-    const controllerIndex = activePlayers[playerIndex];
-    setPlayerLED(controllerIndex, false);
-};
+// LED control is integrated directly into game functions
+// - Setup: LEDs show ready status
+// - Buzzer mode: LED turns on when player buzzes, off when frozen or answered
+// - All-answer mode: LEDs on at question start, off when answered
+// - Game end: All LEDs off

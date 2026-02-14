@@ -9,7 +9,6 @@
     </head>
     <body>
         <div class="container">
-            <a href="../../" class="back-link">← Back to Games</a>
             <h1>🔴🔵 Buzz Quiz (WebHID Experimental)</h1>
             <p class="instructions" style="background: #fff3e0; padding: 15px; border-radius: 10px; border-left: 4px solid #ff9800;">
                 ⚠️ <strong>Experimental Version:</strong> This version uses WebHID API to attempt LED control.
@@ -18,11 +17,6 @@
 
             <!-- Setup Screen -->
             <div id="setup-screen">
-                <p class="instructions">
-                    Connect 2-4 PlayStation Buzz Controllers to play!<br />
-                    Compete in a maths quiz using your buzzers.
-                </p>
-
                 <!-- Controller Status -->
                 <div class="controller-status">
                     <h3>Controllers Detected</h3>
@@ -76,6 +70,26 @@
                     </div>
                 </div>
 
+                <!-- Buzzer Mode Timer -->
+                <div id="buzzer-timer-section" class="menu-section">
+                    <h3>Buzzer Mode: Answer Time</h3>
+                    <div class="options-grid">
+                        <button class="option-btn" data-buzzer-time="5">5 Seconds</button>
+                        <button class="option-btn active" data-buzzer-time="10">10 Seconds</button>
+                        <button class="option-btn" data-buzzer-time="15">15 Seconds</button>
+                    </div>
+                </div>
+
+                <!-- All Answer Mode Timer -->
+                <div id="all-answer-timer-section" class="menu-section hidden">
+                    <h3>All Answer Mode: Time Limit</h3>
+                    <div class="options-grid">
+                        <button class="option-btn" data-all-answer-time="10">10 Seconds</button>
+                        <button class="option-btn active" data-all-answer-time="15">15 Seconds</button>
+                        <button class="option-btn" data-all-answer-time="20">20 Seconds</button>
+                    </div>
+                </div>
+
                 <!-- Start Button -->
                 <button id="start-btn" class="start-btn" disabled>
                     Waiting for controllers...
@@ -87,7 +101,7 @@
                 </button>
 
                 <!-- WebHID Panel -->
-                <div class="webhid-panel">
+                <div class="webhid-panel hidden">
                     <button id="connect-webhid-btn" class="toggle-debug-btn">
                         🔌 Connect WebHID Devices (For LED Control)
                     </button>
@@ -115,7 +129,7 @@
                 </div>
 
                 <!-- Debug Panel -->
-                <div class="debug-panel">
+                <div class="debug-panel hidden">
                     <button id="toggle-debug-btn" class="toggle-debug-btn">
                         🔧 Show Controller Debug Info
                     </button>
@@ -194,6 +208,8 @@
 
                 <button id="play-again-btn" class="start-btn">Play Again</button>
             </div>
+
+            <a href="../../" class="back-link" style="display: block; text-align: center; margin-top: 30px;">← Back to Games</a>
         </div>
 
         <script src="game.js"></script>
