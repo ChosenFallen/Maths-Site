@@ -210,6 +210,32 @@ body {
     transform: scale(1.02);
 }
 
+/* WebHID Panel */
+.webhid-panel {
+    margin: 30px 0;
+}
+
+.led-test-btn {
+    padding: 10px;
+    font-size: 0.95em;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.led-test-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.led-test-btn:active {
+    transform: scale(0.95);
+}
+
 /* Debug Panel */
 .debug-panel {
     margin: 30px 0;

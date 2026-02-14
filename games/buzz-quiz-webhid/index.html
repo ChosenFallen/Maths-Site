@@ -3,14 +3,18 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        <title>Buzz Quiz - Maths Games</title>
+        <title>Buzz Quiz WebHID - Maths Games</title>
         <link rel="stylesheet" href="../../css/style.css" />
         <link rel="stylesheet" href="game.css" />
     </head>
     <body>
         <div class="container">
             <a href="../../" class="back-link">← Back to Games</a>
-            <h1>🔴🔵 Buzz Quiz</h1>
+            <h1>🔴🔵 Buzz Quiz (WebHID Experimental)</h1>
+            <p class="instructions" style="background: #fff3e0; padding: 15px; border-radius: 10px; border-left: 4px solid #ff9800;">
+                ⚠️ <strong>Experimental Version:</strong> This version uses WebHID API to attempt LED control.
+                Requires Chrome/Edge browser. LED control is experimental and may not work.
+            </p>
 
             <!-- Setup Screen -->
             <div id="setup-screen">
@@ -81,6 +85,34 @@
                 <button id="keyboard-mode-btn" class="keyboard-mode-btn">
                     Play with Keyboard (Testing)
                 </button>
+
+                <!-- WebHID Panel -->
+                <div class="webhid-panel">
+                    <button id="connect-webhid-btn" class="toggle-debug-btn">
+                        🔌 Connect WebHID Devices (For LED Control)
+                    </button>
+                    <div id="webhid-info" class="debug-info hidden">
+                        <h3>WebHID Device Information</h3>
+                        <div id="webhid-status"></div>
+                        <div id="webhid-output"></div>
+
+                        <div style="margin-top: 15px; padding: 15px; background: #37474f; border-radius: 8px;">
+                            <h4 style="color: #81c784; margin-top: 0;">LED Test Controls</h4>
+                            <p style="color: #b0bec5; font-size: 0.9em; margin-bottom: 10px;">
+                                Experiment with different HID report values to try controlling LEDs:
+                            </p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 15px;">
+                                <button class="led-test-btn" data-player="0">Player 1 LED</button>
+                                <button class="led-test-btn" data-player="1">Player 2 LED</button>
+                                <button class="led-test-btn" data-player="2">Player 3 LED</button>
+                                <button class="led-test-btn" data-player="3">Player 4 LED</button>
+                            </div>
+                            <button id="led-all-off-btn" class="led-test-btn" style="width: 100%; background: #f44336;">
+                                Turn All LEDs Off
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Debug Panel -->
                 <div class="debug-panel">

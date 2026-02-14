@@ -1,3 +1,7 @@
+// WebHID variables
+let hidDevices = [];
+let hidDevice = null;
+
 // Game settings
 let selectedMode = "buzzer";
 let selectedDifficulty = "normal";
@@ -1136,3 +1140,204 @@ pollSetupGamepads(); // Start polling for player ready status
 document.addEventListener("contextmenu", (e) => {
     e.preventDefault();
 });
+
+// ============================================
+// WebHID LED Control (Experimental)
+// ============================================
+
+// Check if WebHID is supported
+function checkWebHIDSupport() {
+    if (!("hid" in navigator)) {
+        document.getElementById("webhid-status").innerHTML = `
+            <div style="color: #f44336; padding: 10px; background: #ffcdd2; border-radius: 5px;">
+                ❌ WebHID API not supported in this browser.<br>
+                Please use Chrome or Edge (version 89+)
+            </div>
+        `;
+        return false;
+    }
+    return true;
+}
+
+// Connect to HID devices
+document.getElementById("connect-webhid-btn").addEventListener("click", async () => {
+    if (!checkWebHIDSupport()) return;
+
+    try {
+        const webhidInfo = document.getElementById("webhid-info");
+        webhidInfo.classList.remove("hidden");
+
+        // Request HID device (Sony vendor ID for PlayStation devices)
+        const devices = await navigator.hid.requestDevice({
+            filters: [
+                { vendorId: 0x054c }, // Sony
+                { vendorId: 0x0e8f }, // Logitech (some Buzz controllers)
+            ],
+        });
+
+        if (devices.length === 0) {
+            updateWebHIDStatus("No devices selected");
+            return;
+        }
+
+        hidDevice = devices[0];
+        updateWebHIDStatus(`Connected: ${hidDevice.productName || "Unknown Device"}`);
+
+        // Open the device
+        if (!hidDevice.opened) {
+            await hidDevice.open();
+        }
+
+        // Display device information
+        displayHIDInfo(hidDevice);
+
+        // Set up input report listener
+        hidDevice.addEventListener("inputreport", (event) => {
+            const { data, reportId } = event;
+            console.log("Input Report ID:", reportId, "Data:", new Uint8Array(data.buffer));
+        });
+
+    } catch (error) {
+        console.error("WebHID Error:", error);
+        updateWebHIDStatus(`Error: ${error.message}`);
+    }
+});
+
+function updateWebHIDStatus(message) {
+    document.getElementById("webhid-status").innerHTML = `
+        <div style="padding: 10px; background: #37474f; border-radius: 5px; margin-bottom: 10px;">
+            ${message}
+        </div>
+    `;
+}
+
+function displayHIDInfo(device) {
+    const output = document.getElementById("webhid-output");
+
+    let html = `
+        <div style="background: #37474f; padding: 15px; border-radius: 8px; margin-top: 10px;">
+            <h4 style="color: #4caf50; margin-top: 0;">Device Details</h4>
+            <div style="color: #b0bec5; font-size: 0.9em; line-height: 1.8;">
+                <strong>Product:</strong> ${device.productName || "Unknown"}<br>
+                <strong>Vendor ID:</strong> 0x${device.vendorId.toString(16).padStart(4, '0')}<br>
+                <strong>Product ID:</strong> 0x${device.productId.toString(16).padStart(4, '0')}<br>
+                <strong>Collections:</strong> ${device.collections.length}<br>
+            </div>
+        </div>
+
+        <div style="background: #37474f; padding: 15px; border-radius: 8px; margin-top: 10px;">
+            <h4 style="color: #4caf50; margin-top: 0;">Output Reports (For LED Control)</h4>
+            <div style="color: #b0bec5; font-size: 0.85em; line-height: 1.6;">
+    `;
+
+    device.collections.forEach((collection, idx) => {
+        html += `<strong>Collection ${idx}:</strong><br>`;
+        html += `&nbsp;&nbsp;Usage: 0x${collection.usage.toString(16)} (Page: 0x${collection.usagePage.toString(16)})<br>`;
+
+        if (collection.outputReports && collection.outputReports.length > 0) {
+            collection.outputReports.forEach(report => {
+                html += `&nbsp;&nbsp;📤 Output Report ID: ${report.reportId}, Size: ${report.items.length} items<br>`;
+                report.items.forEach((item, i) => {
+                    html += `&nbsp;&nbsp;&nbsp;&nbsp;Item ${i}: ${item.reportSize} bits, Count: ${item.reportCount}<br>`;
+                });
+            });
+        } else {
+            html += `&nbsp;&nbsp;No output reports found<br>`;
+        }
+    });
+
+    html += `
+            </div>
+        </div>
+    `;
+
+    output.innerHTML = html;
+}
+
+// LED control functions - EXPERIMENTAL
+// These are attempts to control LEDs. The exact protocol is unknown.
+
+async function setPlayerLED(playerIndex, state) {
+    if (!hidDevice || !hidDevice.opened) {
+        console.warn("HID device not connected");
+        return;
+    }
+
+    try {
+        // EXPERIMENTAL: Try different report formats
+        // This is guesswork - the actual protocol is unknown
+
+        // Attempt 1: Simple byte array with player bit flags
+        const data1 = new Uint8Array(8);
+        data1[0] = state ? (1 << playerIndex) : 0; // Set bit for player
+
+        // Attempt 2: More complex format with player index and state
+        const data2 = new Uint8Array(8);
+        data2[0] = 0x01; // Possible command byte
+        data2[1] = playerIndex; // Player index
+        data2[2] = state ? 0xff : 0x00; // State on/off
+
+        // Attempt 3: Array with all player states
+        const data3 = new Uint8Array(8);
+        for (let i = 0; i < 4; i++) {
+            data3[i] = (i === playerIndex && state) ? 0xff : 0x00;
+        }
+
+        // Try sending with different report IDs
+        const reportIds = [0, 1, 2, 3, 4, 5];
+
+        for (const reportId of reportIds) {
+            try {
+                // Try all three data formats
+                await hidDevice.sendReport(reportId, data1);
+                await new Promise(r => setTimeout(r, 10));
+                await hidDevice.sendReport(reportId, data2);
+                await new Promise(r => setTimeout(r, 10));
+                await hidDevice.sendReport(reportId, data3);
+                await new Promise(r => setTimeout(r, 10));
+            } catch (err) {
+                // Ignore errors for unsupported report IDs
+            }
+        }
+
+        console.log(`Attempted to set Player ${playerIndex + 1} LED to ${state ? "ON" : "OFF"}`);
+    } catch (error) {
+        console.error("LED Control Error:", error);
+    }
+}
+
+// LED test button handlers
+document.querySelectorAll(".led-test-btn[data-player]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        const playerIndex = parseInt(btn.dataset.player);
+        await setPlayerLED(playerIndex, true);
+
+        // Auto-turn off after 2 seconds
+        setTimeout(() => setPlayerLED(playerIndex, false), 2000);
+    });
+});
+
+document.getElementById("led-all-off-btn").addEventListener("click", async () => {
+    for (let i = 0; i < 4; i++) {
+        await setPlayerLED(i, false);
+    }
+});
+
+// Integrate LED control with game buzzer events
+const originalHandleBuzzerPress = handleBuzzerPress;
+window.handleBuzzerPress = function(playerIndex) {
+    originalHandleBuzzerPress(playerIndex);
+
+    // Turn on LED for player who buzzed
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, true);
+};
+
+const originalCheckBuzzerAnswer = checkBuzzerAnswer;
+window.checkBuzzerAnswer = function(playerIndex, answerIndex) {
+    originalCheckBuzzerAnswer(playerIndex, answerIndex);
+
+    // Turn off LED after answering
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, false);
+};
