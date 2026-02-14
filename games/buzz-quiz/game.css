@@ -210,6 +210,32 @@ body {
     transform: scale(1.02);
 }
 
+/* WebHID Panel */
+.webhid-panel {
+    margin: 30px 0;
+}
+
+.led-test-btn {
+    padding: 10px;
+    font-size: 0.95em;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.led-test-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.led-test-btn:active {
+    transform: scale(0.95);
+}
+
 /* Debug Panel */
 .debug-panel {
     margin: 30px 0;
@@ -456,9 +482,12 @@ body {
 /* Answer Options */
 .answers-section {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 15px;
     margin-bottom: 25px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .answer-option {
@@ -681,14 +710,25 @@ body {
     animation: redBuzzerPulse 1s ease-in-out infinite;
 }
 
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 152, 0, 0);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 1s ease-in-out 2;
+}
+
 /* Responsive Design */
 @media (max-width: 900px) {
     .question-text {
         font-size: 2em;
-    }
-
-    .answers-section {
-        grid-template-columns: 1fr;
     }
 
     .player-panels {
