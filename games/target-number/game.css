@@ -1,0 +1,445 @@
+/* Target Number Game Styles */
+
+body {
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #673ab7;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: transform 0.2s;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+}
+
+.instructions {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* Menu Screen */
+.menu-section {
+    margin: 30px 0;
+}
+
+.menu-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.option-btn {
+    background: white;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    padding: 15px 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.option-btn:hover {
+    border-color: #673ab7;
+    transform: translateY(-2px);
+}
+
+.option-btn.active {
+    background: #673ab7;
+    color: white;
+    border-color: #673ab7;
+}
+
+.start-btn {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.8em;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 30px 0;
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+.start-btn:hover {
+    background: #45a049;
+    transform: scale(1.02);
+}
+
+.game-over {
+    background: #e3f2fd;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.high-scores {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.high-scores h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+#scores-list p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+/* Game Screen */
+#game-screen {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: #f5f5f5;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+}
+
+.stat span {
+    color: #673ab7;
+}
+
+/* Target Display */
+.target-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.target-label {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.target-number {
+    font-size: 4em;
+    font-weight: bold;
+}
+
+/* Expression Display */
+.expression-section {
+    background: white;
+    border: 3px solid #673ab7;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    min-height: 120px;
+}
+
+.expression-label {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.expression-display {
+    font-size: 2em;
+    font-weight: 600;
+    color: #333;
+    min-height: 50px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.expression-value {
+    font-size: 1.5em;
+    color: #673ab7;
+    font-weight: bold;
+}
+
+/* Numbers Grid */
+.numbers-section,
+.operations-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.number-btn {
+    background: white;
+    border: 3px solid #673ab7;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    color: #673ab7;
+    cursor: pointer;
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+.number-btn:hover:not(:disabled) {
+    background: #673ab7;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.number-btn:disabled {
+    background: #e0e0e0;
+    color: #999;
+    border-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Operations Grid */
+.operations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.op-btn {
+    background: #fff3e0;
+    border: 3px solid #ff9800;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ff9800;
+    cursor: pointer;
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+.op-btn:hover {
+    background: #ff9800;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.action-btn {
+    padding: 15px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+
+.undo-btn {
+    background: #2196f3;
+    color: white;
+}
+
+.undo-btn:hover {
+    background: #1976d2;
+    transform: scale(1.02);
+}
+
+.clear-btn {
+    background: #ff9800;
+    color: white;
+}
+
+.clear-btn:hover {
+    background: #f57c00;
+    transform: scale(1.02);
+}
+
+.submit-btn {
+    background: #4caf50;
+    color: white;
+}
+
+.submit-btn:hover {
+    background: #45a049;
+    transform: scale(1.02);
+}
+
+.submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Feedback */
+.feedback {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    min-height: 30px;
+}
+
+.feedback.correct {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+
+.feedback.wrong {
+    background: #ffcdd2;
+    color: #c62828;
+}
+
+.feedback.timeout {
+    background: #fff9c4;
+    color: #f57f17;
+}
+
+/* Finish Button */
+.finish-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: all 0.2s;
+}
+
+.finish-btn:hover {
+    background: #f57c00;
+    transform: scale(1.02);
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes scoreUp {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+        color: #4caf50;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.score-animation {
+    animation: scoreUp 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+.shake {
+    animation: shake 0.4s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .target-number {
+        font-size: 3em;
+    }
+
+    .expression-display {
+        font-size: 1.5em;
+    }
+
+    .number-btn {
+        font-size: 1.5em;
+        padding: 15px;
+    }
+
+    .op-btn {
+        font-size: 1.5em;
+        padding: 12px;
+    }
+
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .game-header {
+        flex-direction: column;
+    }
+
+    .stat {
+        min-width: auto;
+    }
+}
+
+@media (min-width: 900px) {
+    .numbers-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}

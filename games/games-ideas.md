@@ -8,7 +8,7 @@
 
 ## Mental Maths Games
 - [ ] Number Ninja - rapid-fire arithmetic with increasing difficulty
-- [ ] Target Number - use 4-6 numbers and operations to reach a target (Countdown-style)
+- [x] **Target Number** - use 6 numbers and operations to reach a target (Countdown-style)
 - [ ] Number Bonds Speed Challenge - complete as many bonds to 10/100/1000 as possible
 - [ ] Mental Multiplication Mayhem - timed times tables with visual feedback
 - [ ] Estimation Station - estimate answers then check accuracy (points for closeness)
@@ -59,3 +59,9 @@
   - Difficulty levels: Easy, Normal, Hard
   - Modes: Practice (unlimited) & Timed (60s challenge)
   - Scoring, streaks, accuracy tracking, high scores
+- [x] **Target Number** - Countdown-style number puzzle with:
+  - Visual expression builder (click numbers and operations)
+  - Countdown-style number selection (mix of small 1-10 and large 25/50/75/100)
+  - Difficulty levels: Easy, Normal, Hard (different target ranges and time limits)
+  - Scoring, high scores, accuracy tracking
+  - Touch-friendly for interactive whiteboards
