@@ -4,7 +4,7 @@ export default {
     id: "recurring-decimals",
     label: "Recurring Decimals",
     instruction() {
-        return "Convert each fraction to a recurring decimal. Use dot notation (e.g., 0.3̇ for 0.333...).";
+        return "Convert each fraction to a recurring decimal. Use bracket notation (e.g., 0.(3) for 0.333...).";
     },
     printTitle() {
         return "Recurring Decimals";
@@ -170,25 +170,9 @@ function longDivision(numerator, denominator) {
     const nonRecurring = digits.slice(0, recurringStart).join("");
     const recurring = digits.slice(recurringStart).join("");
 
-    // Create notation for text answer (simple format)
-    const notation = wholeNumber + "." + nonRecurring + recurring + " (recurring)";
-
-    // Create HTML with combining dot above (&#775;)
-    let html = wholeNumber + "." + nonRecurring;
-
-    if (recurring.length === 1) {
-        // Single digit recurring: one dot above using combining character
-        html += recurring + "&#775;";
-    } else {
-        // Multiple digits recurring: dots above first and last using combining character
-        const recurringDigits = recurring.split('');
-        html += recurringDigits.map((digit, i) => {
-            if (i === 0 || i === recurringDigits.length - 1) {
-                return digit + "&#775;";
-            }
-            return digit;
-        }).join('');
-    }
+    // Create notation using bracket notation
+    const notation = wholeNumber + "." + nonRecurring + "(" + recurring + ")";
+    const html = wholeNumber + "." + nonRecurring + "(" + recurring + ")";
 
     return { notation, html };
 }

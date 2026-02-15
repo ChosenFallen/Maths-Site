@@ -1,3 +1,41 @@
+/* Recurring decimal notation */
+.recurring-dot {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    margin-left: -0.35em;
+    margin-right: -0.35em;
+}
+
+.recurring-dot::after {
+    content: '·';
+    position: absolute;
+    top: -0.6em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.recurring-overline {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    margin-left: -0.05em;
+}
+
+.recurring-overline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: currentColor;
+}
+
 /* Layout */
 .worksheet-title {
     text-align: center;

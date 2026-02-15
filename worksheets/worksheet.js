@@ -24,6 +24,8 @@ import percentageOfAmount from "./types/percentage-of-amount.js";
 import fractionOfAmount from "./types/fraction-of-amount.js";
 import recurringDecimals from "./types/recurring-decimals.js";
 import ratioSimplify from "./types/ratio-simplify.js";
+import hcfLcm from "./types/hcf-lcm.js";
+import rounding from "./types/rounding.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -52,6 +54,8 @@ const WORKSHEET_TYPES = [
     equations,
     recurringDecimals,
     ratioSimplify,
+    hcfLcm,
+    rounding,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -99,6 +103,7 @@ const WORKSHEET_GROUPS = [
     { label: "Powers", types: ["indices"] },
     { label: "Algebra", types: ["equations"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
+    { label: "Number Theory", types: ["hcf-lcm", "rounding"] },
 ];
 
 const generateBtn = document.getElementById("generate-btn");
