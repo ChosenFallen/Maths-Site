@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(node scripts/check-worksheets.mjs:*)",
-      "Bash(npm run generate-pdfs:*)"
+      "Bash(npm run generate-pdfs:*)",
+      "Bash(node scripts/test-pdf.mjs:*)",
+      "Bash(node scripts/test-single.mjs:*)",
+      "Bash(node scripts/generate-worksheet-pdfs.mjs:*)"
     ]
   }
 }

@@ -128,9 +128,9 @@ async function generatePDFs() {
             // Set difficulty to normal
             await page.select("#difficulty", "normal");
 
-            // Set number of problems to 10 for good example
+            // Set number of problems to 20
             await page.evaluate(() => {
-                document.getElementById("num-problems").value = "10";
+                document.getElementById("num-problems").value = "20";
             });
 
             // Click generate button

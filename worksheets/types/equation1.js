@@ -41,7 +41,7 @@ export default {
             }
 
             const question = `${left} = ${right}`;
-            problems.push({ question, answer: x, answerPrefix: `→ ${X} = ` });
+            problems.push({ question, answer: x, answerPrefix: `${X} = ` });
         }
 
         return problems;

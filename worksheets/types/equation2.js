@@ -23,7 +23,7 @@ export default {
                 ? `${a}${X} − ${b} = ${c}`
                 : `${a}${X} + ${b} = ${c}`;
 
-            problems.push({ question, answer: x, answerPrefix: `→ ${X} = ` });
+            problems.push({ question, answer: x, answerPrefix: `${X} = ` });
         }
 
         return problems;

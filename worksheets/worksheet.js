@@ -295,12 +295,10 @@ function renderWorksheet(problems) {
         const prefix = p.answerPrefix || "";
         if (p.answerKeyHtml) {
             li.innerHTML = p.answerKeyHtml;
-        } else if (p.questionHtml && p.answerHtml) {
-            li.innerHTML = `${p.questionHtml} ${prefix}${p.answerHtml}`;
-        } else if (p.questionHtml) {
-            li.innerHTML = `${p.questionHtml} ${prefix}${p.answer}`;
+        } else if (p.answerHtml) {
+            li.innerHTML = `${prefix}${p.answerHtml}`;
         } else {
-            li.innerHTML = `${p.question} ${prefix}${p.answer}`;
+            li.innerHTML = `${prefix}${p.answer}`;
         }
         answerList.appendChild(li);
     });

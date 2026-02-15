@@ -23,8 +23,15 @@ export default {
                 : formatFractionBlank(scaledNum, false);
 
             const questionHtml = `${left} = ${right}`;
-            const answer = hideTop ? scaledNum : scaledDen;
-            const answerHtml = answer;
+            const missingValue = hideTop ? scaledNum : scaledDen;
+
+            // Format answer as complete equation for answer key with bold missing value
+            const leftFrac = formatFraction(numerator, denominator);
+            const rightFrac = hideTop
+                ? formatFractionWithBold(scaledNum, scaledDen, true)
+                : formatFractionWithBold(scaledNum, scaledDen, false);
+            const answerHtml = `${leftFrac} = ${rightFrac}`;
+            const answer = `${numerator}/${denominator} = ${scaledNum}/${scaledDen}`;
 
             problems.push({ questionHtml, answer, answerHtml });
         }
@@ -75,4 +82,10 @@ function formatFractionBlank(knownValue, blankTop) {
         return `<span class="frac"><span class="top blank"></span><span class="bottom">${knownValue}</span></span>`;
     }
     return `<span class="frac"><span class="top">${knownValue}</span><span class="bottom blank"></span></span>`;
+}
+
+function formatFractionWithBold(numerator, denominator, boldTop) {
+    const numHtml = boldTop ? `<strong>${numerator}</strong>` : numerator;
+    const denHtml = !boldTop ? `<strong>${denominator}</strong>` : denominator;
+    return `<span class="frac"><span class="top">${numHtml}</span><span class="bottom">${denHtml}</span></span>`;
 }
