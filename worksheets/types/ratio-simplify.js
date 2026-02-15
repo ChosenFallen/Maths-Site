@@ -58,7 +58,7 @@ function generateRatio(rand, difficulty) {
     const finalB = unsimplifiedB / g;
 
     return {
-        question: `${unsimplifiedA} : ${unsimplifiedB}`,
+        question: `${unsimplifiedA} : ${unsimplifiedB} =`,
         answer: `${finalA} : ${finalB}`,
     };
 }
