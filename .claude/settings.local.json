@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node scripts/check-worksheets.mjs:*)"
+      "Bash(node scripts/check-worksheets.mjs:*)",
+      "Bash(npm run generate-pdfs:*)"
     ]
   }
 }
