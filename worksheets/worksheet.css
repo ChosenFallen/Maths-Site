@@ -193,13 +193,99 @@
 
 .worksheet-output {
     margin-top: 30px;
-    max-width: 700px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
 }
 
-/* Problems table styling */
+/* Problems grid styling */
+.problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.problem-item {
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+}
+
+.problem-item:hover {
+    border-color: #0066cc;
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.1);
+}
+
+.problem-number {
+    display: inline-block;
+    background: #0066cc;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 0;
+    grid-column: 1 / -1;
+}
+
+.problem-question {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin: 0;
+    color: #222;
+    line-height: 1.6;
+    align-self: center;
+}
+
+.problem-answer-box {
+    background: #f8f9fa;
+    border: 2px solid #d0d0d0;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 60px;
+    margin-top: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.problem-answer-box::before {
+    content: "Answer:";
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background: white;
+    padding: 0 8px;
+    font-size: 0.85em;
+    color: #666;
+    font-weight: 600;
+}
+
+.problem-answer-box::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: repeating-linear-gradient(
+        90deg,
+        #d0d0d0 0,
+        #d0d0d0 8px,
+        transparent 8px,
+        transparent 12px
+    );
+    margin-top: auto;
+}
+
+/* Problems table styling (legacy fallback) */
 #worksheet-output table {
     width: 100%;
     border-collapse: collapse;
@@ -243,6 +329,29 @@
         width: 100%;
     }
 
+    .problems-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .problem-question {
+        font-size: 1.1em;
+    }
+
+    .problem-item {
+        padding: 10px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .problem-number {
+        grid-column: 1;
+    }
+
+    .problem-answer-box {
+        min-height: 40px;
+    }
+
     #worksheet-output table td {
         font-size: 1.1em;
         padding: 10px 6px;
@@ -256,25 +365,53 @@
 
 /* Answer key styling */
 #worksheet-output .answers {
-    margin-top: 30px;
-    font-size: 1.2em;
-    text-align: left;
+    margin-top: 40px;
+    padding: 20px;
+    background: #f0f7ff;
+    border: 2px solid #0066cc;
+    border-radius: 12px;
+}
+
+#worksheet-output .answers h3 {
+    margin: 0 0 15px 0;
+    color: #0066cc;
+    font-size: 1.3em;
+    text-align: center;
 }
 
 #worksheet-output .answers ol {
-    padding-left: 0;
-    margin: 8px 0 0;
+    padding: 0;
+    margin: 0;
     list-style: none;
     counter-reset: answer;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
 }
 
 #worksheet-output .answers li {
-    margin: 4px 0;
+    margin: 0;
     counter-increment: answer;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #worksheet-output .answers li::before {
-    content: counter(answer) ") ";
+    content: counter(answer);
+    background: #0066cc;
+    color: white;
+    font-weight: bold;
+    font-size: 0.85em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    min-width: 24px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 
@@ -298,9 +435,38 @@
         display: block;
     }
 
+    /* Print grid layout optimization */
+    .problems-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .problem-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none;
+        border-color: #ccc;
+    }
+
+    .problem-item:hover {
+        border-color: #ccc;
+        box-shadow: none;
+    }
+
     /* Page break before the answer key */
     #worksheet-output .answers {
         display: block !important; /* always show in print */
         page-break-before: always;
+        background: white;
+        border-color: #999;
+    }
+
+    #worksheet-output .answers ol {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #worksheet-output .answers li {
+        box-shadow: none;
+        border: 1px solid #ddd;
     }
 }

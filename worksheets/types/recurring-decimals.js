@@ -173,24 +173,18 @@ function longDivision(numerator, denominator) {
     // Create notation for text answer (simple format)
     const notation = wholeNumber + "." + nonRecurring + recurring + " (recurring)";
 
-    // Create HTML with dots above recurring digits
+    // Create HTML with combining dot above (&#775;)
     let html = wholeNumber + "." + nonRecurring;
 
     if (recurring.length === 1) {
-        // Single digit recurring: one dot above
-        html += `<span style="position: relative; display: inline-block;">
-            ${recurring}
-            <span style="position: absolute; top: -0.6em; left: 50%; transform: translateX(-50%); font-size: 1.2em;">·</span>
-        </span>`;
+        // Single digit recurring: one dot above using combining character
+        html += recurring + "&#775;";
     } else {
-        // Multiple digits recurring: dots above first and last
+        // Multiple digits recurring: dots above first and last using combining character
         const recurringDigits = recurring.split('');
         html += recurringDigits.map((digit, i) => {
             if (i === 0 || i === recurringDigits.length - 1) {
-                return `<span style="position: relative; display: inline-block;">
-                    ${digit}
-                    <span style="position: absolute; top: -0.6em; left: 50%; transform: translateX(-50%); font-size: 1.2em;">·</span>
-                </span>`;
+                return digit + "&#775;";
             }
             return digit;
         }).join('');

@@ -97,14 +97,16 @@ function generateMixedProblem(rand, difficulty, options) {
             b = Math.max(1, b);
             a = a * b;
         }
-        const firstVal = applyOpExtended(a, b, op1);
+        let firstVal = applyOpExtended(a, b, op1);
 
         if (op2 === "÷") {
-            const factor = getRandomFactor(firstVal, rand);
+            // Ensure firstVal is a whole number for clean division
+            firstVal = Math.round(firstVal);
+            const factor = getRandomFactor(Math.abs(firstVal), rand);
             c = factor;
         }
         if (op2 === "−") {
-            c = Math.min(c, firstVal);
+            c = Math.min(c, Math.floor(firstVal));
         }
 
         const question = `${formatOp(a, b, op1)} ${formatOpSymbol(
@@ -119,14 +121,16 @@ function generateMixedProblem(rand, difficulty, options) {
         c = Math.max(1, c);
         b = b * c;
     }
-    const secondVal = applyOpExtended(b, c, op2);
+    let secondVal = applyOpExtended(b, c, op2);
 
     if (op1 === "÷") {
-        const factor = getRandomFactor(secondVal, rand);
+        // Ensure secondVal is a whole number for clean division
+        secondVal = Math.round(secondVal);
+        const factor = getRandomFactor(Math.abs(secondVal), rand);
         a = secondVal * factor;
     }
     if (op1 === "−") {
-        a = Math.max(a, secondVal);
+        a = Math.max(a, Math.ceil(secondVal));
     }
 
     const question = `${a} ${formatOpSymbol(op1)} ${formatOp(
@@ -140,7 +144,12 @@ function generateMixedProblem(rand, difficulty, options) {
 
 function applyOpExtended(x, y, op) {
     if (op === "^") return Math.pow(x, y);
-    return applyOp(x, y, op);
+    const result = applyOp(x, y, op);
+    // Round division results to avoid long decimals
+    if (op === "÷") {
+        return Math.round(result * 10) / 10; // Max 1 decimal place
+    }
+    return result;
 }
 
 function isHighPrecedenceExtended(op) {

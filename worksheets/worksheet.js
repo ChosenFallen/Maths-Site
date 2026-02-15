@@ -250,27 +250,39 @@ function generateWorksheetInternal(forceNewId) {
 function renderWorksheet(problems) {
     output.innerHTML = "";
 
-    // Problem table
-    const table = document.createElement("table");
-    table.style.width = "100%";
-    table.style.borderCollapse = "collapse";
+    // Problems grid
+    const grid = document.createElement("div");
+    grid.className = "problems-grid";
 
     problems.forEach((p, i) => {
-        const row = document.createElement("tr");
+        const item = document.createElement("div");
+        item.className = "problem-item";
 
-        const cell1 = document.createElement("td");
-        cell1.style.padding = "8px";
+        // Problem number
+        const numberSpan = document.createElement("div");
+        numberSpan.className = "problem-number";
+        numberSpan.textContent = `Question ${i + 1}`;
+        item.appendChild(numberSpan);
+
+        // Question
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "problem-question";
         if (p.questionHtml) {
-            cell1.innerHTML = `${i + 1}) ${p.questionHtml}`;
+            questionDiv.innerHTML = p.questionHtml;
         } else {
-            cell1.textContent = `${i + 1}) ${p.question}`;
+            questionDiv.textContent = p.question;
         }
-        row.appendChild(cell1);
+        item.appendChild(questionDiv);
 
-        table.appendChild(row);
+        // Answer box
+        const answerBox = document.createElement("div");
+        answerBox.className = "problem-answer-box";
+        item.appendChild(answerBox);
+
+        grid.appendChild(item);
     });
 
-    output.appendChild(table);
+    output.appendChild(grid);
 
     // Answer key section
     const answerDiv = document.createElement("div");
