@@ -38,6 +38,10 @@ const WORKSHEET_TYPES = [
     { id: "fraction-compare", name: "Comparing Fractions" },
     { id: "recurring-decimals", name: "Recurring Decimals" },
     { id: "ratio-simplify", name: "Simplify Ratios" },
+    { id: "hcf-lcm", name: "HCF & LCM" },
+    { id: "rounding", name: "Rounding" },
+    { id: "standard-form", name: "Standard Form" },
+    { id: "prime-factorization", name: "Prime Factorization" },
 ];
 
 // Simple HTTP server to serve files
