@@ -76,7 +76,7 @@ function generateProblem(rand, difficulty, op) {
     const simpDen = resultDen / divisor;
 
     const questionHtml = `${left} ${op} ${right} =`;
-    const formatted = formatFractionOrWhole(simpNum, simpDen);
+    const formatted = formatFracOrWhole(simpNum, simpDen);
     const answerHtml = formatted.html;
     const answer = formatted.text;
 

@@ -2,7 +2,7 @@
 
 ## Number & Operations
 
-- [ ] Missing number (e.g., \_\_ + 7 = 15)
+- [x] Missing number (e.g., \_\_ + 7 = 15)
 - [x] Multi‑digit with carrying/borrowing (addition, subtraction)
 - [x] Long multiplication
 - [x] Long division (step‑by‑step)
@@ -49,7 +49,7 @@
 - [x] Multiplying/dividing decimals by 10, 100, 1000 (decimal-mul-div)
 - [x] Decimal addition and subtraction
 - [x] Percentages of amounts (calculator and non-calculator)
-- [ ] Percentages: percentage change (increase/decrease)
+- [x] Percentages: percentage change (increase/decrease)
 - [ ] Percentages: expressing as a percentage
 - [ ] Percentages: multipliers
 - [ ] Percentages: reverse percentages
@@ -68,7 +68,7 @@
 
 ## Algebra
 
-- [ ] Substitution (evaluate expressions)
+- [x] Substitution (evaluate expressions)
 - [ ] Notation (algebraic)
 - [x] Two‑step equations
 - [ ] Equations involving fractions

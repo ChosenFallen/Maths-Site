@@ -28,6 +28,9 @@ import hcfLcm from "./types/hcf-lcm.js";
 import rounding from "./types/rounding.js";
 import standardForm from "./types/standard-form.js";
 import primeFactorization from "./types/prime-factorization.js";
+import missingNumber from "./types/missing-number.js";
+import percentageChange from "./types/percentage-change.js";
+import substitution from "./types/substitution.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -60,6 +63,9 @@ const WORKSHEET_TYPES = [
     rounding,
     standardForm,
     primeFactorization,
+    missingNumber,
+    percentageChange,
+    substitution,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -71,6 +77,7 @@ const WORKSHEET_GROUPS = [
             "multiplication",
             "division",
             "mixed",
+            "missing-number",
         ],
     },
     {
@@ -91,7 +98,7 @@ const WORKSHEET_GROUPS = [
     },
     {
         label: "Percentages",
-        types: ["percentage-of-amount"],
+        types: ["percentage-of-amount", "percentage-change"],
     },
     {
         label: "FDP (Fractions/Decimals/Percentages)",
@@ -105,7 +112,7 @@ const WORKSHEET_GROUPS = [
         ],
     },
     { label: "Powers", types: ["indices"] },
-    { label: "Algebra", types: ["equations"] },
+    { label: "Algebra", types: ["equations", "substitution"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
 ];

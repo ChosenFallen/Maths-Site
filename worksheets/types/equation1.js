@@ -6,6 +6,9 @@ export default {
     instruction() {
         return "Solve the one-step equations.";
     },
+    printTitle() {
+        return "One-Step Equations";
+    },
     generate(rand, difficulty, count) {
         const X = "𝑥";
         const [min, max] = difficultyRange(difficulty);

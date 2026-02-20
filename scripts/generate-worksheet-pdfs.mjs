@@ -10,39 +10,35 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = join(__dirname, "..");
 
-// All worksheet types to generate
-const WORKSHEET_TYPES = [
-    { id: "addition", name: "Addition" },
-    { id: "subtraction", name: "Subtraction" },
-    { id: "multiplication", name: "Multiplication" },
-    { id: "division", name: "Division" },
-    { id: "mixed", name: "Mixed Operations" },
-    { id: "indices", name: "Indices (Powers)" },
-    { id: "simplify-fractions", name: "Simplify Fractions" },
-    { id: "equivalent-fractions", name: "Equivalent Fractions" },
-    { id: "fraction-add-sub", name: "Fraction Addition & Subtraction" },
-    { id: "fraction-mul-div", name: "Fraction Multiplication & Division" },
-    { id: "mixed-numbers", name: "Mixed Numbers" },
-    { id: "fdp-fraction-to-decimal", name: "Fractions to Decimals" },
-    { id: "fdp-decimal-to-fraction", name: "Decimals to Fractions" },
-    { id: "fdp-fraction-to-percent", name: "Fractions to Percentages" },
-    { id: "fdp-percent-to-fraction", name: "Percentages to Fractions" },
-    { id: "fdp-decimal-to-percent", name: "Decimals to Percentages" },
-    { id: "fdp-percent-to-decimal", name: "Percentages to Decimals" },
-    { id: "equations", name: "Solving Equations" },
-    { id: "decimal-add-sub", name: "Decimal Addition & Subtraction" },
-    { id: "decimal-mul-div", name: "Decimal Multiplication & Division" },
-    { id: "decimal-compare", name: "Comparing Decimals" },
-    { id: "percentage-of-amount", name: "Percentage of Amount" },
-    { id: "fraction-of-amount", name: "Fraction of Amount" },
-    { id: "fraction-compare", name: "Comparing Fractions" },
-    { id: "recurring-decimals", name: "Recurring Decimals" },
-    { id: "ratio-simplify", name: "Simplify Ratios" },
-    { id: "hcf-lcm", name: "HCF & LCM" },
-    { id: "rounding", name: "Rounding" },
-    { id: "standard-form", name: "Standard Form" },
-    { id: "prime-factorization", name: "Prime Factorization" },
-];
+// Discover worksheet types dynamically from worksheets/types directory
+async function discoverWorksheets() {
+    const worksheetsDir = join(projectRoot, "worksheets", "types");
+    const files = fs.readdirSync(worksheetsDir).filter(file => {
+        return file.endsWith(".js") && file !== "utils.js" && file !== "index.js";
+    });
+
+    const worksheets = [];
+    for (const file of files) {
+        try {
+            const modulePath = join(worksheetsDir, file);
+            const module = await import(`file://${modulePath}`);
+            const worksheet = module.default;
+
+            if (worksheet && worksheet.id && worksheet.label) {
+                worksheets.push({
+                    id: worksheet.id,
+                    name: worksheet.label
+                });
+            }
+        } catch (error) {
+            console.warn(`⚠️  Failed to import ${file}: ${error.message}`);
+        }
+    }
+
+    // Sort by id for consistent output
+    worksheets.sort((a, b) => a.id.localeCompare(b.id));
+    return worksheets;
+}
 
 // Simple HTTP server to serve files
 function createServer() {
@@ -87,6 +83,10 @@ function createServer() {
 
 async function generatePDFs() {
     console.log("🚀 Starting PDF generation...\n");
+
+    // Discover worksheets dynamically
+    const WORKSHEET_TYPES = await discoverWorksheets();
+    console.log(`📚 Discovered ${WORKSHEET_TYPES.length} worksheet types\n`);
 
     // Create examples directory if it doesn't exist
     const examplesDir = join(projectRoot, "examples");

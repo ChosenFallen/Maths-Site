@@ -100,7 +100,7 @@ function generateProblem(rand, difficulty, like) {
     const right = formatFrac(n2, d2);
     const op = doSub ? "−" : "+";
     const questionHtml = `${left} ${op} ${right} =`;
-    const formatted = formatFractionOrWhole(simpNum, simpDen);
+    const formatted = formatFracOrWhole(simpNum, simpDen);
     const answerHtml = formatted.html;
     const answer = formatted.text;
 

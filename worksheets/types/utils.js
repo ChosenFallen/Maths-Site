@@ -103,3 +103,11 @@ export function formatPower(base, exponent) {
     // HTML fallback
     return `${base}<sup>${exponent}</sup>`;
 }
+
+export function shuffle(rand, array) {
+    // Fisher-Yates shuffle using provided rand function
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(rand() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}

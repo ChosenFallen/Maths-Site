@@ -1,64 +1,45 @@
-import addition from "../worksheets/types/addition.js";
-import subtraction from "../worksheets/types/subtraction.js";
-import multiplication from "../worksheets/types/multiplication.js";
-import division from "../worksheets/types/division.js";
-import mixed from "../worksheets/types/mixed.js";
-import indices from "../worksheets/types/indices.js";
-import simplifyFractions from "../worksheets/types/simplify-fractions.js";
-import equivalentFractions from "../worksheets/types/equivalent-fractions.js";
-import fractionAddSub from "../worksheets/types/fraction-add-sub.js";
-import fractionMulDiv from "../worksheets/types/fraction-mul-div.js";
-import mixedNumbers from "../worksheets/types/mixed-numbers.js";
-import fdpFractionToDecimal from "../worksheets/types/fdp-fraction-to-decimal.js";
-import fdpDecimalToFraction from "../worksheets/types/fdp-decimal-to-fraction.js";
-import fdpFractionToPercent from "../worksheets/types/fdp-fraction-to-percent.js";
-import fdpPercentToFraction from "../worksheets/types/fdp-percent-to-fraction.js";
-import fdpDecimalToPercent from "../worksheets/types/fdp-decimal-to-percent.js";
-import fdpPercentToDecimal from "../worksheets/types/fdp-percent-to-decimal.js";
-import equations from "../worksheets/types/equations.js";
-import decimalAddSub from "../worksheets/types/decimal-add-sub.js";
-import decimalMulDiv from "../worksheets/types/decimal-mul-div.js";
-import decimalCompare from "../worksheets/types/decimal-compare.js";
-import percentageOfAmount from "../worksheets/types/percentage-of-amount.js";
-import fractionOfAmount from "../worksheets/types/fraction-of-amount.js";
-import fractionCompare from "../worksheets/types/fraction-compare.js";
-import recurringDecimals from "../worksheets/types/recurring-decimals.js";
-import ratioSimplify from "../worksheets/types/ratio-simplify.js";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+import fs from "fs";
 
-const TYPES = [
-    addition,
-    subtraction,
-    multiplication,
-    division,
-    mixed,
-    indices,
-    simplifyFractions,
-    equivalentFractions,
-    fractionAddSub,
-    fractionMulDiv,
-    mixedNumbers,
-    fdpFractionToDecimal,
-    fdpDecimalToFraction,
-    fdpFractionToPercent,
-    fdpPercentToFraction,
-    fdpDecimalToPercent,
-    fdpPercentToDecimal,
-    equations,
-    decimalAddSub,
-    decimalMulDiv,
-    decimalCompare,
-    percentageOfAmount,
-    fractionOfAmount,
-    fractionCompare,
-    recurringDecimals,
-    ratioSimplify,
-];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const projectRoot = join(__dirname, "..");
+
+// Discover worksheet types dynamically from worksheets/types directory
+async function discoverWorksheets() {
+    const worksheetsDir = join(projectRoot, "worksheets", "types");
+    const files = fs.readdirSync(worksheetsDir).filter(file => {
+        return file.endsWith(".js") && file !== "utils.js" && file !== "index.js";
+    });
+
+    const worksheets = [];
+    for (const file of files) {
+        try {
+            const modulePath = join(worksheetsDir, file);
+            const module = await import(`file://${modulePath}`);
+            if (module.default) {
+                worksheets.push(module.default);
+            }
+        } catch (error) {
+            console.warn(`⚠️  Failed to import ${file}: ${error.message}`);
+        }
+    }
+
+    // Sort by id for consistent output
+    worksheets.sort((a, b) => (a.id || "").localeCompare(b.id || ""));
+    return worksheets;
+}
+
+const TYPES = await discoverWorksheets();
 
 const SAMPLE_COUNT = 50;
 const MAX_ABS_ANSWER = 999;
 const MAX_BY_TYPE = {
     multiplication: 10000,
     equations: 10000,
+    equation1: 2500,
+    equation2: 2500,
     mixed: Number.POSITIVE_INFINITY,
     indices: 5000,
 };
@@ -71,6 +52,8 @@ const DUPLICATE_TOLERANCE = {
     "recurring-decimals": 40,
     "fraction-compare": 10,
     "ratio-simplify": 10,
+    "percentage-change": 15,
+    "prime-factorization": 10,
 };
 
 function mulberry32(seed) {
@@ -99,6 +82,7 @@ function checkType(type) {
     const rand = mulberry32(123456);
     const optionsList = [undefined];
 
+    // Test worksheet options
     if (type.id === "mixed") optionsList.push({ includePowers: true });
     if (type.id === "fraction-add-sub")
         optionsList.push({ denominatorMode: "like" }, { denominatorMode: "unlike" });
@@ -110,6 +94,12 @@ function checkType(type) {
         optionsList.push({ mixedNumberMode: "to-improper" }, { mixedNumberMode: "to-mixed" });
     if (type.id === "equations")
         optionsList.push({ equationMode: "one" }, { equationMode: "two" });
+    if (type.id === "missing-number")
+        optionsList.push({ operation: "addition" }, { operation: "subtraction" });
+    if (type.id === "percentage-change")
+        optionsList.push({ changeType: "increase" }, { changeType: "decrease" });
+    if (type.id === "substitution")
+        optionsList.push({ variableMode: "one" }, { variableMode: "two" });
 
     // Test 2: Check instruction function
     if (typeof type.instruction !== "function") {
@@ -268,6 +258,23 @@ function expectedPrintTitle(type, options) {
         if (mode === "to-improper") return "Mixed to Improper Fractions";
         if (mode === "to-mixed") return "Improper to Mixed Fractions";
         return "Mixed Numbers/Improper Fractions";
+    }
+    if (typeId === "missing-number") {
+        const mode = options?.operation || "mixed";
+        if (mode === "mixed") return "Missing Number";
+        const names = { addition: "Addition", subtraction: "Subtraction", multiplication: "Multiplication", division: "Division" };
+        return `Missing Number (${names[mode]})`;
+    }
+    if (typeId === "percentage-change") {
+        const mode = options?.changeType || "mixed";
+        if (mode === "increase") return "Percentage Increase";
+        if (mode === "decrease") return "Percentage Decrease";
+        return "Percentage Change";
+    }
+    if (typeId === "substitution") {
+        const mode = options?.variableMode || "one";
+        if (mode === "one") return "Substitution (One Variable)";
+        return "Substitution (Two Variables)";
     }
     if (typeId === "mixed") return "Mixed Operations";
     return type.label;

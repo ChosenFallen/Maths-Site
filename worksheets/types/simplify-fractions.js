@@ -17,7 +17,7 @@ export default {
             const simpNum = numerator / divisor;
             const simpDen = denominator / divisor;
             const questionHtml = `${formatFrac(numerator, denominator)} =`;
-            const formatted = formatFractionOrWhole(simpNum, simpDen);
+            const formatted = formatFracOrWhole(simpNum, simpDen);
             problems.push({
                 questionHtml,
                 answerHtml: formatted.html,
