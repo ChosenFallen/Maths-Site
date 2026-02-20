@@ -1,4 +1,4 @@
-import { randInt } from "./utils.js";
+import { randInt, formatPower } from "./utils.js";
 
 export default {
     id: "indices",
@@ -13,7 +13,7 @@ export default {
         const problems = [];
         for (let i = 0; i < count; i++) {
             const { base, power } = pickBaseAndPower(rand, difficulty);
-            const questionHtml = `${base}<sup>${power}</sup> =`;
+            const questionHtml = `${formatPower(base, power)} =`;
             const answer = Math.pow(base, power);
             problems.push({ questionHtml, answer });
         }

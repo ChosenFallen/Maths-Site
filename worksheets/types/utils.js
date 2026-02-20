@@ -64,3 +64,42 @@ export function ensureNonUnitDenominator(numerator, denominator) {
     if (denominator !== 1) return { numerator, denominator };
     return { numerator: numerator * 2, denominator: 2 };
 }
+
+// KaTeX-based math rendering
+function renderKatex(latex) {
+    if (typeof katex !== 'undefined') {
+        return katex.renderToString(latex, { throwOnError: false });
+    }
+    return null;
+}
+
+export function formatFrac(numerator, denominator) {
+    const rendered = renderKatex(`\\frac{${numerator}}{${denominator}}`);
+    if (rendered) return rendered;
+    // CSS fallback
+    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
+}
+
+export function formatFracOrWhole(numerator, denominator) {
+    if (denominator === 1) {
+        return { html: `${numerator}`, text: `${numerator}` };
+    }
+    return {
+        html: formatFrac(numerator, denominator),
+        text: `${numerator}/${denominator}`,
+    };
+}
+
+export function formatMixedNum(whole, numerator, denominator) {
+    const rendered = renderKatex(`${whole}\\frac{${numerator}}{${denominator}}`);
+    if (rendered) return rendered;
+    // CSS fallback
+    return `<span class="mixed"><span class="whole">${whole}</span><span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span></span>`;
+}
+
+export function formatPower(base, exponent) {
+    const rendered = renderKatex(`${base}^{${exponent}}`);
+    if (rendered) return rendered;
+    // HTML fallback
+    return `${base}<sup>${exponent}</sup>`;
+}

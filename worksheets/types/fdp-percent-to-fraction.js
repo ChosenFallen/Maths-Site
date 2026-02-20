@@ -1,4 +1,4 @@
-import { randInt, gcd, ensureNonUnitDenominator } from "./utils.js";
+import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator } from "./utils.js";
 
 export default {
     id: "fdp-percent-to-fraction",
@@ -16,7 +16,7 @@ export default {
             const percent = randomPercent(rand, dp);
             const frac = percentToFraction(percent, dp);
             const question = formatPercent(percent, dp);
-            const formatted = formatFractionOrWhole(frac.n, frac.d);
+            const formatted = formatFracOrWhole(frac.n, frac.d);
             const answerHtml = formatted.html;
             const answer = formatted.text;
             problems.push({ question, answerHtml, answer });
@@ -52,18 +52,4 @@ function formatPercent(value, dp) {
     let s = value.toFixed(dp);
     s = s.replace(/\.?0+$/, "");
     return `${s}%`;
-}
-
-function formatFraction(numerator, denominator) {
-    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
-}
-
-function formatFractionOrWhole(numerator, denominator) {
-    if (denominator === 1) {
-        return { html: `${numerator}`, text: `${numerator}` };
-    }
-    return {
-        html: formatFraction(numerator, denominator),
-        text: `${numerator}/${denominator}`,
-    };
 }

@@ -1,4 +1,4 @@
-import { randInt, gcd } from "./utils.js";
+import { formatFrac, formatFracOrWhole, randInt, gcd } from "./utils.js";
 
 export default {
     id: "fdp-decimal-to-fraction",
@@ -16,7 +16,7 @@ export default {
             const value = randomDecimal(rand, dp);
             const asFraction = decimalToFraction(value, dp);
             const question = formatDecimal(value, dp);
-            const formatted = formatFractionOrWhole(asFraction.n, asFraction.d);
+            const formatted = formatFracOrWhole(asFraction.n, asFraction.d);
             const answerHtml = formatted.html;
             const answer = formatted.text;
             problems.push({ question, answerHtml, answer });
@@ -49,18 +49,4 @@ function formatDecimal(value, dp) {
     let s = value.toFixed(dp);
     s = s.replace(/\.?0+$/, "");
     return s;
-}
-
-function formatFraction(numerator, denominator) {
-    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
-}
-
-function formatFractionOrWhole(numerator, denominator) {
-    if (denominator === 1) {
-        return { html: `${numerator}`, text: `${numerator}` };
-    }
-    return {
-        html: formatFraction(numerator, denominator),
-        text: `${numerator}/${denominator}`,
-    };
 }

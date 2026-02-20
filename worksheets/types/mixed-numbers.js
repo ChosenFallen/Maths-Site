@@ -1,4 +1,4 @@
-import { randInt, gcd } from "./utils.js";
+import { formatMixedNum, formatFrac, formatFracOrWhole, randInt, gcd } from "./utils.js";
 
 export default {
     id: "mixed-numbers",
@@ -53,9 +53,9 @@ function generateProblem(rand, difficulty, toImproper) {
     den = den / divisor;
     const whole = randInt(rand, minWhole, maxWhole);
 
-    const mixedHtml = formatMixedNumber(whole, num, den);
+    const mixedHtml = formatMixedNum(whole, num, den);
     const improperNum = whole * den + num;
-    const improper = formatFractionOrWhole(improperNum, den);
+    const improper = formatFracOrWhole(improperNum, den);
     const improperHtml = improper.html;
 
     if (toImproper) {
@@ -86,22 +86,13 @@ function ranges(difficulty) {
     }
 }
 
-function formatFraction(numerator, denominator) {
+function utilFormatFrac(numerator, denominator) {
     return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
 }
 
-function formatFractionOrWhole(numerator, denominator) {
-    if (denominator === 1) {
-        return { html: `${numerator}`, text: `${numerator}` };
-    }
-    return {
-        html: formatFraction(numerator, denominator),
-        text: `${numerator}/${denominator}`,
-    };
-}
 
-function formatMixedNumber(whole, numerator, denominator) {
-    return `<span class="mixed"><span class="whole">${whole}</span>${formatFraction(
+function utilFormatMixedNum(whole, numerator, denominator) {
+    return `<span class="mixed"><span class="whole">${whole}</span>${utilFormatFrac(
         numerator,
         denominator,
     )}</span>`;

@@ -123,11 +123,17 @@ async function generatePDFs() {
         try {
             console.log(`📝 Generating ${worksheet.name}...`);
 
+            // Clear previous content
+            await page.evaluate(() => {
+                const output = document.getElementById("worksheet-output");
+                if (output) output.innerHTML = "";
+            });
+
             // Select the worksheet type
             await page.select("#problem-type", worksheet.id);
 
-            // Wait a bit for dynamic options to load
-            await page.waitForTimeout(100);
+            // Wait for dynamic options to load
+            await page.waitForTimeout(300);
 
             // Set difficulty to normal
             await page.select("#difficulty", "normal");
@@ -142,7 +148,8 @@ async function generatePDFs() {
 
             // Wait for worksheet to be generated (wait for problems grid to appear)
             await page.waitForSelector(".problems-grid", { timeout: 5000 });
-            await page.waitForTimeout(500);
+            // Wait for KaTeX to render all math
+            await page.waitForTimeout(1500);
 
             // Show answer key
             await page.evaluate(() => {

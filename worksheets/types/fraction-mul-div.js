@@ -1,4 +1,4 @@
-import { randInt, gcd } from "./utils.js";
+import { randInt, gcd, formatFrac, formatFracOrWhole } from "./utils.js";
 
 export default {
     id: "fraction-mul-div",
@@ -56,8 +56,8 @@ function generateProblem(rand, difficulty, op) {
     const n1 = randInt(rand, 1, d1 - 1);
     const n2 = randInt(rand, 1, d2 - 1);
 
-    const left = formatFraction(n1, d1);
-    const right = formatFraction(n2, d2);
+    const left = formatFrac(n1, d1);
+    const right = formatFrac(n2, d2);
 
     let resultNum;
     let resultDen;
@@ -94,18 +94,4 @@ function denominatorRange(difficulty) {
         default:
             return [2, 8];
     }
-}
-
-function formatFraction(numerator, denominator) {
-    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
-}
-
-function formatFractionOrWhole(numerator, denominator) {
-    if (denominator === 1) {
-        return { html: `${numerator}`, text: `${numerator}` };
-    }
-    return {
-        html: formatFraction(numerator, denominator),
-        text: `${numerator}/${denominator}`,
-    };
 }

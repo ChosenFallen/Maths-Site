@@ -1,4 +1,4 @@
-import { randInt, gcd } from "./utils.js";
+import { randInt, gcd, formatFrac, formatFracOrWhole } from "./utils.js";
 
 export default {
     id: "simplify-fractions",
@@ -16,7 +16,7 @@ export default {
             const divisor = gcd(numerator, denominator);
             const simpNum = numerator / divisor;
             const simpDen = denominator / divisor;
-            const questionHtml = `${formatFraction(numerator, denominator)} =`;
+            const questionHtml = `${formatFrac(numerator, denominator)} =`;
             const formatted = formatFractionOrWhole(simpNum, simpDen);
             problems.push({
                 questionHtml,
@@ -57,19 +57,5 @@ function generateFraction(rand, difficulty) {
     return {
         numerator: baseNum * factor,
         denominator: baseDen * factor,
-    };
-}
-
-function formatFraction(numerator, denominator) {
-    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
-}
-
-function formatFractionOrWhole(numerator, denominator) {
-    if (denominator === 1) {
-        return { html: `${numerator}`, text: `${numerator}` };
-    }
-    return {
-        html: formatFraction(numerator, denominator),
-        text: `${numerator}/${denominator}`,
     };
 }

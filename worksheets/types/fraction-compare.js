@@ -1,4 +1,4 @@
-import { randInt, gcd, lcm } from "./utils.js";
+import { formatFrac, formatFracOrWhole, randInt, gcd, lcm } from "./utils.js";
 
 export default {
     id: "fraction-compare",
@@ -50,8 +50,8 @@ function generateProblem(rand, difficulty, mode = "mixed") {
         }
     }
 
-    const left = formatFraction(n1, d1);
-    const right = formatFraction(n2, d2);
+    const left = formatFrac(n1, d1);
+    const right = formatFrac(n2, d2);
     const cmp = compareFractions(n1, d1, n2, d2);
     const answer = cmp === 0 ? "=" : cmp > 0 ? ">" : "<";
     const questionHtml = `${left}  ?  ${right}`;
@@ -77,11 +77,4 @@ function denominatorRange(difficulty) {
         default:
             return [2, 8];
     }
-}
-
-function formatFraction(numerator, denominator) {
-    const g = gcd(numerator, denominator);
-    const n = numerator / g;
-    const d = denominator / g;
-    return `<span class="frac"><span class="top">${n}</span><span class="bottom">${d}</span></span>`;
 }

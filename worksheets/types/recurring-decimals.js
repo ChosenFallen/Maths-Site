@@ -1,10 +1,18 @@
-import { randInt, gcd } from "./utils.js";
+import { formatFrac, formatFracOrWhole, gcd } from "./utils.js";
+
+// Helper function to render KaTeX
+function renderKatex(latex) {
+    if (typeof katex !== 'undefined') {
+        return katex.renderToString(latex, { throwOnError: false });
+    }
+    return null;
+}
 
 export default {
     id: "recurring-decimals",
     label: "Recurring Decimals",
     instruction() {
-        return "Convert each fraction to a recurring decimal. Use bracket notation (e.g., 0.(3) for 0.333...).";
+        return "Convert each fraction to a recurring decimal. Use a dot above the first and last repeating digit.";
     },
     printTitle() {
         return "Recurring Decimals";
@@ -32,7 +40,7 @@ export default {
             const fraction = fractions[i];
             const decimal = fractionToRecurringDecimal(fraction.n, fraction.d);
 
-            const questionHtml = formatFraction(fraction.n, fraction.d);
+            const questionHtml = formatFrac(fraction.n, fraction.d);
             const question = `${fraction.n}/${fraction.d}`;
             const answer = decimal.notation;
             const answerHtml = decimal.html;
@@ -170,13 +178,30 @@ function longDivision(numerator, denominator) {
     const nonRecurring = digits.slice(0, recurringStart).join("");
     const recurring = digits.slice(recurringStart).join("");
 
-    // Create notation using bracket notation
+    // Create notation using bracket notation for plain text
     const notation = wholeNumber + "." + nonRecurring + "(" + recurring + ")";
-    const html = wholeNumber + "." + nonRecurring + "(" + recurring + ")";
 
-    return { notation, html };
-}
+    // Create KaTeX notation with dots above first and last repeating digits
+    let katexRecurring;
+    if (recurring.length === 1) {
+        // Single repeating digit: put dot above it
+        katexRecurring = `\\dot{${recurring}}`;
+    } else {
+        // Multiple repeating digits: dot above first and last only
+        const firstDigit = recurring[0];
+        const lastDigit = recurring[recurring.length - 1];
+        const middleDigits = recurring.slice(1, -1);
+        katexRecurring = `\\dot{${firstDigit}}${middleDigits}\\dot{${lastDigit}}`;
+    }
 
-function formatFraction(numerator, denominator) {
-    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
+    const katexNotation = `${wholeNumber}.${nonRecurring}${katexRecurring}`;
+    const katexHtml = renderKatex(katexNotation);
+
+    // Use KaTeX if available, otherwise fallback to bracket notation
+    const html = katexHtml || notation;
+
+    return {
+        notation,
+        html
+    };
 }

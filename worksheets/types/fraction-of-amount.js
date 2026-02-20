@@ -1,4 +1,4 @@
-import { randInt, gcd } from "./utils.js";
+import { formatFrac, formatFracOrWhole, randInt, gcd } from "./utils.js";
 
 export default {
     id: "fraction-of-amount",
@@ -15,7 +15,7 @@ export default {
             const { numerator, denominator } = fractionSet(rand, difficulty);
             const amount = amountForFraction(rand, difficulty, denominator);
             const answer = (amount * numerator) / denominator;
-            const questionHtml = `${formatFraction(numerator, denominator)} of ${amount} =`;
+            const questionHtml = `${formatFrac(numerator, denominator)} of ${amount} =`;
             problems.push({ questionHtml, answer: formatNumber(answer) });
         }
         return problems;
@@ -67,10 +67,6 @@ function amountForFraction(rand, difficulty, denominator) {
     const max = difficulty === "easy" ? 200 : difficulty === "normal" ? 500 : 1000;
     const value = randInt(rand, 10, max);
     return Math.max(denominator, Math.round(value / denominator) * denominator);
-}
-
-function formatFraction(numerator, denominator) {
-    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
 }
 
 function formatNumber(value) {

@@ -1,4 +1,4 @@
-import { randInt, gcd, lcm } from "./utils.js";
+import { randInt, gcd, lcm, formatFrac, formatFracOrWhole } from "./utils.js";
 
 export default {
     id: "fraction-add-sub",
@@ -96,8 +96,8 @@ function generateProblem(rand, difficulty, like) {
     const simpNum = resultNum / divisor;
     const simpDen = resultDen / divisor;
 
-    const left = formatFraction(n1, d1);
-    const right = formatFraction(n2, d2);
+    const left = formatFrac(n1, d1);
+    const right = formatFrac(n2, d2);
     const op = doSub ? "−" : "+";
     const questionHtml = `${left} ${op} ${right} =`;
     const formatted = formatFractionOrWhole(simpNum, simpDen);
@@ -118,18 +118,4 @@ function denominatorRange(difficulty) {
         default:
             return [2, 8];
     }
-}
-
-function formatFraction(numerator, denominator) {
-    return `<span class="frac"><span class="top">${numerator}</span><span class="bottom">${denominator}</span></span>`;
-}
-
-function formatFractionOrWhole(numerator, denominator) {
-    if (denominator === 1) {
-        return { html: `${numerator}`, text: `${numerator}` };
-    }
-    return {
-        html: formatFraction(numerator, denominator),
-        text: `${numerator}/${denominator}`,
-    };
 }
