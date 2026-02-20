@@ -54,6 +54,10 @@ const DUPLICATE_TOLERANCE = {
     "ratio-simplify": 10,
     "percentage-change": 15,
     "prime-factorization": 10,
+    "multiplying-terms": 15,
+    "factorising-quadratics": 10,
+    "equations-fractions": 10,
+    "difference-of-two-squares": 25,
 };
 
 function mulberry32(seed) {
@@ -102,6 +106,12 @@ function checkType(type) {
         optionsList.push({ variableMode: "one" }, { variableMode: "two" });
     if (type.id === "expanding-brackets")
         optionsList.push({ bracketMode: "single" }, { bracketMode: "double" });
+    if (type.id === "multiplying-terms")
+        optionsList.push({ multiplyingTermsMode: "multiply" }, { multiplyingTermsMode: "divide" });
+    if (type.id === "rounding")
+        optionsList.push({ roundingMode: "dp" }, { roundingMode: "sf" }, { roundingMode: "place" });
+    if (type.id === "reverse-percentages")
+        optionsList.push({ changeType: "increase" }, { changeType: "decrease" });
 
     // Test 2: Check instruction function
     if (typeof type.instruction !== "function") {
@@ -284,6 +294,30 @@ function expectedPrintTitle(type, options) {
         if (mode === "double") return "Expanding Double Brackets";
         return "Expanding Brackets";
     }
+    if (typeId === "multiplying-terms") {
+        const mode = options?.multiplyingTermsMode || "mixed";
+        if (mode === "multiply") return "Multiplying Terms";
+        if (mode === "divide") return "Dividing Terms";
+        return "Multiplying and Dividing Terms";
+    }
+    if (typeId === "rounding") {
+        const mode = options?.roundingMode || "mixed";
+        if (mode === "dp") return "Rounding to Decimal Places";
+        if (mode === "sf") return "Rounding to Significant Figures";
+        if (mode === "place") return "Rounding to Place Values";
+        return "Rounding";
+    }
+    if (typeId === "reverse-percentages") {
+        const mode = options?.changeType || "mixed";
+        if (mode === "increase") return "Reverse Percentages (Increase)";
+        if (mode === "decrease") return "Reverse Percentages (Decrease)";
+        return "Reverse Percentages";
+    }
+    if (typeId === "equations-both-sides") return "Equations: Letters on Both Sides";
+    if (typeId === "equations-fractions") return "Equations with Fractions";
+    if (typeId === "factorising") return "Factorising Expressions";
+    if (typeId === "factorising-quadratics") return "Factorising Quadratics";
+    if (typeId === "difference-of-two-squares") return "Difference of Two Squares";
     if (typeId === "mixed") return "Mixed Operations";
     return type.label;
 }

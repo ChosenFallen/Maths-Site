@@ -33,6 +33,13 @@ import percentageChange from "./types/percentage-change.js";
 import substitution from "./types/substitution.js";
 import collectingLikeTerms from "./types/collecting-like-terms.js";
 import expandingBrackets from "./types/expanding-brackets.js";
+import multiplyingTerms from "./types/multiplying-terms.js";
+import equationsBothSides from "./types/equations-both-sides.js";
+import factorising from "./types/factorising.js";
+import factorisingQuadratics from "./types/factorising-quadratics.js";
+import reversePercentages from "./types/reverse-percentages.js";
+import equationsFractions from "./types/equations-fractions.js";
+import differenceOfTwoSquares from "./types/difference-of-two-squares.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -70,6 +77,13 @@ const WORKSHEET_TYPES = [
     substitution,
     collectingLikeTerms,
     expandingBrackets,
+    multiplyingTerms,
+    equationsBothSides,
+    factorising,
+    factorisingQuadratics,
+    reversePercentages,
+    equationsFractions,
+    differenceOfTwoSquares,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -102,7 +116,7 @@ const WORKSHEET_GROUPS = [
     },
     {
         label: "Percentages",
-        types: ["percentage-of-amount", "percentage-change"],
+        types: ["percentage-of-amount", "percentage-change", "reverse-percentages"],
     },
     {
         label: "FDP (Fractions/Decimals/Percentages)",
@@ -116,7 +130,7 @@ const WORKSHEET_GROUPS = [
         ],
     },
     { label: "Powers", types: ["indices"] },
-    { label: "Algebra", types: ["equations", "substitution", "collecting-like-terms", "expanding-brackets"] },
+    { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
 ];

@@ -6,19 +6,19 @@
 - [x] Multi‑digit with carrying/borrowing (addition, subtraction)
 - [x] Long multiplication
 - [x] Long division (step‑by‑step)
-- [ ] Rounding to whole numbers, 10, 100, 1000
-- [ ] Rounding to decimal places
-- [ ] Rounding to significant figures
+- [x] Rounding to whole numbers, 10, 100, 1000
+- [x] Rounding to decimal places
+- [x] Rounding to significant figures
 - [ ] Estimation and sensible estimates
 - [ ] Negative number operations (all four operations)
 - [ ] Negative numbers ordering
 - [x] Order of operations (BIDMAS/BODMAS) - mixed operations
 - [x] Powers and roots (squares, cubes, square roots) - indices
-- [ ] Standard form / scientific notation
+- [x] Standard form / scientific notation
 - [ ] Standard form addition/subtraction
 - [ ] Standard form multiplication/division
-- [ ] Prime factorization (product of primes)
-- [ ] HCF and LCM problems
+- [x] Prime factorization (product of primes)
+- [x] HCF and LCM problems
 - [ ] HCF and LCM using product of primes
 - [x] Index laws (multiplication and division)
 - [ ] Fractional indices
@@ -52,7 +52,7 @@
 - [x] Percentages: percentage change (increase/decrease)
 - [ ] Percentages: expressing as a percentage
 - [ ] Percentages: multipliers
-- [ ] Percentages: reverse percentages
+- [x] Percentages: reverse percentages
 - [ ] Percentages: repeated percentage change
 - [ ] Recurring decimals to fractions (reverse conversion)
 
@@ -65,26 +65,27 @@
 - [ ] Square numbers up to 15²
 - [ ] Times tables with negative numbers
 - [ ] Times tables in different bases (optional challenge)
+- [ ] Systematic listing (counting outcomes, combinations)
 
 ## Algebra
 
 - [x] Substitution (evaluate expressions)
 - [ ] Notation (algebraic)
 - [x] Two‑step equations
-- [ ] Equations involving fractions
-- [ ] Equations with letters on both sides
+- [x] Equations involving fractions
+- [x] Equations with letters on both sides
 - [ ] Equations using angles and perimeter
 - [ ] Forming equations
 - [ ] Equations with x²
 - [x] Expressions with brackets (expand/simplify)
 - [ ] Worded algebra problems
 - [x] Collecting like terms
-- [ ] Dividing and multiplying terms
-- [ ] Factorizing expressions (common factors)
-- [ ] Factorizing quadratics
+- [x] Dividing and multiplying terms
+- [x] Factorizing expressions (common factors)
+- [x] Factorizing quadratics
 - [ ] Factorizing quadratics (harder)
 - [ ] Factorizing (splitting the middle)
-- [ ] Factorizing difference of two squares
+- [x] Factorizing difference of two squares
 - [ ] Factorizing with brackets
 - [ ] Expanding single and double brackets
 - [ ] Expanding triple brackets
@@ -103,6 +104,8 @@
 - [ ] Simultaneous equations (graphical)
 - [ ] Simultaneous equations (advanced - one linear, one quadratic)
 - [ ] Simultaneous equations (3 unknowns)
+- [ ] Simultaneous equations (both quadratic)
+- [ ] Non-linear simultaneous equations (mixed types)
 - [ ] Sequences (nth term, linear and quadratic)
 - [ ] Function notation and composite functions
 - [ ] Inverse functions
@@ -110,6 +113,7 @@
 - [ ] Algebraic fractions (simplifying)
 - [ ] Algebraic fractions (addition/subtraction)
 - [ ] Algebraic fractions (multiplication/division)
+- [ ] Algebraic fractions (equations)
 - [ ] Forming expressions
 - [ ] Think of a number problems
 - [ ] Trial and improvement (iterative methods)
@@ -133,6 +137,7 @@
 - [ ] Real-life linear graphs
 - [ ] Distance-time graphs
 - [ ] Velocity-time graphs (speed-time graphs)
+- [ ] Quadratic graphs (drawing and sketching)
 - [ ] Filling containers graphs
 - [ ] Conversion graphs (draw and interpret)
 
@@ -145,6 +150,7 @@
 - [ ] Area of compound shapes (L-shapes)
 - [ ] Area on a grid
 - [ ] Area of hexagons
+- [ ] Compound shapes (area and perimeter of irregular shapes)
 - [ ] Area and circumference of circles
 - [ ] Area of sectors and segments
 - [ ] Area of semi-circles and quarter-circles
@@ -255,6 +261,7 @@
 - [ ] Range from frequency tables
 - [ ] Combined mean
 - [ ] Quartiles and distributions
+- [ ] Reverse mean (working backwards from mean)
 - [ ] Reading and interpreting bar charts
 - [ ] Reading and interpreting composite/dual bar charts
 - [ ] Reading and interpreting vertical line charts
