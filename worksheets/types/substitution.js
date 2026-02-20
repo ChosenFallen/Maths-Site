@@ -43,6 +43,13 @@ export default {
     },
 };
 
+// Helper function to format coefficient (omit 1, but keep -1 as -)
+function formatCoeff(coeff, variable) {
+    if (coeff === 1) return variable;
+    if (coeff === -1) return `-${variable}`;
+    return `${coeff}${variable}`;
+}
+
 function generateProblem(rand, difficulty, variableMode) {
     if (variableMode === "two") {
         return generateTwoVariableProblem(rand, difficulty);
@@ -68,48 +75,48 @@ function generateProblem(rand, difficulty, variableMode) {
     // Generate expression
     if (exprType === 0 && difficulty === "easy") {
         // ax + b
-        expression = `${a}x + ${b}`;
-        latex = `${a}x + ${b}`;
+        expression = `${formatCoeff(a, "x")} + ${b}`;
+        latex = `${formatCoeff(a, "x")} + ${b}`;
         answer = a * x + b;
     } else if (exprType === 1 && difficulty === "easy") {
         // ax - b
-        expression = `${a}x − ${b}`;
-        latex = `${a}x - ${b}`;
+        expression = `${formatCoeff(a, "x")} − ${b}`;
+        latex = `${formatCoeff(a, "x")} - ${b}`;
         answer = a * x - b;
     } else if (exprType === 2 && difficulty === "easy") {
         // a - bx
-        expression = `${a} − ${b}x`;
-        latex = `${a} - ${b}x`;
+        expression = `${a} − ${formatCoeff(b, "x")}`;
+        latex = `${a} - ${formatCoeff(b, "x")}`;
         answer = a - b * x;
     } else if (exprType === 0 && difficulty === "normal") {
         // ax^2 + b
-        expression = `${a}x² + ${b}`;
-        latex = `${a}x^{2} + ${b}`;
+        expression = `${formatCoeff(a, "x²")} + ${b}`;
+        latex = `${formatCoeff(a, "x^{2}")} + ${b}`;
         answer = a * x * x + b;
     } else if (exprType === 1 && difficulty === "normal") {
         // ax^2 - bx
-        expression = `${a}x² − ${b}x`;
-        latex = `${a}x^{2} - ${b}x`;
+        expression = `${formatCoeff(a, "x²")} − ${formatCoeff(b, "x")}`;
+        latex = `${formatCoeff(a, "x^{2}")} - ${formatCoeff(b, "x")}`;
         answer = a * x * x - b * x;
     } else if (exprType === 2 && difficulty === "normal") {
         // ax + b (repeat for variety)
-        expression = `${a}x + ${b}`;
-        latex = `${a}x + ${b}`;
+        expression = `${formatCoeff(a, "x")} + ${b}`;
+        latex = `${formatCoeff(a, "x")} + ${b}`;
         answer = a * x + b;
     } else if (exprType === 0 && difficulty === "hard") {
         // ax^2 + bx + c
-        expression = `${a}x² + ${b}x + ${c}`;
-        latex = `${a}x^{2} + ${b}x + ${c}`;
+        expression = `${formatCoeff(a, "x²")} + ${formatCoeff(b, "x")} + ${c}`;
+        latex = `${formatCoeff(a, "x^{2}")} + ${formatCoeff(b, "x")} + ${c}`;
         answer = a * x * x + b * x + c;
     } else if (exprType === 1 && difficulty === "hard") {
         // ax^3 + b
-        expression = `${a}x³ + ${b}`;
-        latex = `${a}x^{3} + ${b}`;
+        expression = `${formatCoeff(a, "x³")} + ${b}`;
+        latex = `${formatCoeff(a, "x^{3}")} + ${b}`;
         answer = a * x * x * x + b;
     } else {
         // ax^2 + by^2 treated as one variable version for simplicity
-        expression = `${a}x² + ${b}`;
-        latex = `${a}x^{2} + ${b}`;
+        expression = `${formatCoeff(a, "x²")} + ${b}`;
+        latex = `${formatCoeff(a, "x^{2}")} + ${b}`;
         answer = a * x * x + b;
     }
 
@@ -139,26 +146,26 @@ function generateTwoVariableProblem(rand, difficulty) {
 
     if (difficulty === "easy") {
         // ax + by
-        expression = `${a}x + ${b}y`;
-        latex = `${a}x + ${b}y`;
+        expression = `${formatCoeff(a, "x")} + ${formatCoeff(b, "y")}`;
+        latex = `${formatCoeff(a, "x")} + ${formatCoeff(b, "y")}`;
         answer = a * x + b * y;
     } else if (difficulty === "normal") {
         const type = randInt(rand, 0, 1);
         if (type === 0) {
             // ax + by
-            expression = `${a}x + ${b}y`;
-            latex = `${a}x + ${b}y`;
+            expression = `${formatCoeff(a, "x")} + ${formatCoeff(b, "y")}`;
+            latex = `${formatCoeff(a, "x")} + ${formatCoeff(b, "y")}`;
             answer = a * x + b * y;
         } else {
             // ax^2 + by
-            expression = `${a}x² + ${b}y`;
-            latex = `${a}x^{2} + ${b}y`;
+            expression = `${formatCoeff(a, "x²")} + ${formatCoeff(b, "y")}`;
+            latex = `${formatCoeff(a, "x^{2}")} + ${formatCoeff(b, "y")}`;
             answer = a * x * x + b * y;
         }
     } else {
         // Hard: ax^2 + by^2
-        expression = `${a}x² + ${b}y²`;
-        latex = `${a}x^{2} + ${b}y^{2}`;
+        expression = `${formatCoeff(a, "x²")} + ${formatCoeff(b, "y²")}`;
+        latex = `${formatCoeff(a, "x^{2}")} + ${formatCoeff(b, "y^{2}")}`;
         answer = a * x * x + b * y * y;
     }
 

@@ -31,6 +31,8 @@ import primeFactorization from "./types/prime-factorization.js";
 import missingNumber from "./types/missing-number.js";
 import percentageChange from "./types/percentage-change.js";
 import substitution from "./types/substitution.js";
+import collectingLikeTerms from "./types/collecting-like-terms.js";
+import expandingBrackets from "./types/expanding-brackets.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -66,6 +68,8 @@ const WORKSHEET_TYPES = [
     missingNumber,
     percentageChange,
     substitution,
+    collectingLikeTerms,
+    expandingBrackets,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -112,7 +116,7 @@ const WORKSHEET_GROUPS = [
         ],
     },
     { label: "Powers", types: ["indices"] },
-    { label: "Algebra", types: ["equations", "substitution"] },
+    { label: "Algebra", types: ["equations", "substitution", "collecting-like-terms", "expanding-brackets"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
 ];

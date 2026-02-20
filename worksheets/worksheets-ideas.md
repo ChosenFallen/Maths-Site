@@ -76,9 +76,9 @@
 - [ ] Equations using angles and perimeter
 - [ ] Forming equations
 - [ ] Equations with x²
-- [ ] Expressions with brackets (expand/simplify)
+- [x] Expressions with brackets (expand/simplify)
 - [ ] Worded algebra problems
-- [ ] Collecting like terms
+- [x] Collecting like terms
 - [ ] Dividing and multiplying terms
 - [ ] Factorizing expressions (common factors)
 - [ ] Factorizing quadratics

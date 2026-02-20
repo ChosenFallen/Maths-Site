@@ -100,6 +100,8 @@ function checkType(type) {
         optionsList.push({ changeType: "increase" }, { changeType: "decrease" });
     if (type.id === "substitution")
         optionsList.push({ variableMode: "one" }, { variableMode: "two" });
+    if (type.id === "expanding-brackets")
+        optionsList.push({ bracketMode: "single" }, { bracketMode: "double" });
 
     // Test 2: Check instruction function
     if (typeof type.instruction !== "function") {
@@ -275,6 +277,12 @@ function expectedPrintTitle(type, options) {
         const mode = options?.variableMode || "one";
         if (mode === "one") return "Substitution (One Variable)";
         return "Substitution (Two Variables)";
+    }
+    if (typeId === "expanding-brackets") {
+        const mode = options?.bracketMode || "mixed";
+        if (mode === "single") return "Expanding Single Brackets";
+        if (mode === "double") return "Expanding Double Brackets";
+        return "Expanding Brackets";
     }
     if (typeId === "mixed") return "Mixed Operations";
     return type.label;
