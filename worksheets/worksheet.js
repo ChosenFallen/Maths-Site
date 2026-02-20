@@ -40,6 +40,7 @@ import factorisingQuadratics from "./types/factorising-quadratics.js";
 import reversePercentages from "./types/reverse-percentages.js";
 import equationsFractions from "./types/equations-fractions.js";
 import differenceOfTwoSquares from "./types/difference-of-two-squares.js";
+import simplifyAlgebraicFractions from "./types/simplify-algebraic-fractions.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -84,6 +85,7 @@ const WORKSHEET_TYPES = [
     reversePercentages,
     equationsFractions,
     differenceOfTwoSquares,
+    simplifyAlgebraicFractions,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -130,7 +132,7 @@ const WORKSHEET_GROUPS = [
         ],
     },
     { label: "Powers", types: ["indices"] },
-    { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares"] },
+    { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
 ];

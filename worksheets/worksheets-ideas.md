@@ -110,7 +110,7 @@
 - [ ] Function notation and composite functions
 - [ ] Inverse functions
 - [ ] Function machines
-- [ ] Algebraic fractions (simplifying)
+- [x] Algebraic fractions (simplifying)
 - [ ] Algebraic fractions (addition/subtraction)
 - [ ] Algebraic fractions (multiplication/division)
 - [ ] Algebraic fractions (equations)
