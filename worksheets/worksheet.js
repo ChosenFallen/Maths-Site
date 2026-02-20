@@ -41,6 +41,10 @@ import reversePercentages from "./types/reverse-percentages.js";
 import equationsFractions from "./types/equations-fractions.js";
 import differenceOfTwoSquares from "./types/difference-of-two-squares.js";
 import simplifyAlgebraicFractions from "./types/simplify-algebraic-fractions.js";
+import simplifySurds from "./types/simplify-surds.js";
+import surdsAddSub from "./types/surds-add-sub.js";
+import surdsExpand from "./types/surds-expand.js";
+import surdsRationalise from "./types/surds-rationalise.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -86,6 +90,10 @@ const WORKSHEET_TYPES = [
     equationsFractions,
     differenceOfTwoSquares,
     simplifyAlgebraicFractions,
+    simplifySurds,
+    surdsAddSub,
+    surdsExpand,
+    surdsRationalise,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -135,6 +143,7 @@ const WORKSHEET_GROUPS = [
     { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
+    { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
 ];
 
 const generateBtn = document.getElementById("generate-btn");

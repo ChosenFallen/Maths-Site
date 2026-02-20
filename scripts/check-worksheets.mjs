@@ -59,6 +59,10 @@ const DUPLICATE_TOLERANCE = {
     "equations-fractions": 10,
     "difference-of-two-squares": 25,
     "simplify-algebraic-fractions": 20,
+    "simplify-surds": 30,
+    "surds-add-sub": 20,
+    "surds-expand": 20,
+    "surds-rationalise": 25,
 };
 
 function mulberry32(seed) {

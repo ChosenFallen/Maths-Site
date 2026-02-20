@@ -30,6 +30,30 @@ function formatLinear(coeff, constant) {
     return `${xTerm} ${sign} ${absConst}`;
 }
 
+// Format a linear factor for KaTeX: "x + 3" or "x - 3"
+function formatLinearLatex(c) {
+    if (c >= 0) return `x + ${c}`;
+    return `x - ${Math.abs(c)}`;
+}
+
+// Format a linear factor as plain text (Unicode minus)
+function formatLinearText(c) {
+    if (c >= 0) return `x + ${c}`;
+    return `x − ${Math.abs(c)}`;
+}
+
+// Format a quadratic in KaTeX with proper signs (handles b=±1 for just "x")
+function formatQuadraticLatex(b, c) {
+    let result = "x^2";
+    if (b === 1)       result += " + x";
+    else if (b === -1) result += " - x";
+    else if (b > 0)    result += ` + ${b}x`;
+    else if (b < 0)    result += ` - ${Math.abs(b)}x`;
+    if (c > 0)         result += ` + ${c}`;
+    else if (c < 0)    result += ` - ${Math.abs(c)}`;
+    return result;
+}
+
 export default {
     id: "simplify-algebraic-fractions",
     label: "Simplify Algebraic Fractions",
@@ -123,19 +147,20 @@ function generateNormal(rand) {
             answerHtml: answer,
         };
     } else {
-        // Type B: (cx + ca) / (x + a) = c
+        // Type B: (cx + ca) / (x + a) = c (with 50% negative a)
         const c = randInt(rand, 2, 7);
-        const a = randInt(rand, 1, 10);
+        const aMag = randInt(rand, 1, 10);
+        const a = randInt(rand, 0, 1) === 0 ? aMag : -aMag;
         const ca = c * a;
 
-        const questionLatex = `\\frac{${c}x + ${ca}}{x + ${a}}`;
+        const questionLatex = `\\frac{${c}x ${ca >= 0 ? '+' : '-'} ${Math.abs(ca)}}{${formatLinearLatex(a)}}`;
         const answer = `${c}`;
 
-        const questionHtml = renderKatex(questionLatex) || `(${c}x + ${ca})/(x + ${a})`;
+        const questionHtml = renderKatex(questionLatex) || `(${c}x ${ca >= 0 ? '+' : '−'} ${Math.abs(ca)})/(${formatLinearText(a)})`;
 
         return {
             questionHtml,
-            question: `(${c}x + ${ca})/(x + ${a})`,
+            question: `(${c}x ${ca >= 0 ? '+' : '−'} ${Math.abs(ca)})/(${formatLinearText(a)})`,
             answer,
             answerHtml: answer,
         };
@@ -147,43 +172,52 @@ function generateHard(rand) {
     const typeA = randInt(rand, 0, 1) === 0;
 
     if (typeA) {
-        // Type A: (x+p)(x+q) / (x+p) = x + q
+        // Type A: (x+p)(x+q) / (x+p) = x + q (with signed p and q)
         // Expand numerator to x^2 + (p+q)x + pq
-        let p = randInt(rand, 1, 8);
-        let q = randInt(rand, 1, 8);
+        const pMag = randInt(rand, 1, 8);
+        const qMag = randInt(rand, 1, 8);
+        let p = randInt(rand, 0, 1) === 0 ? pMag : -pMag;
+        let q = randInt(rand, 0, 1) === 0 ? qMag : -qMag;
         // Ensure p ≠ q
         if (p === q) {
-            q = (q % 6) + 1; // cycle through 1-6
+            q = -q; // flip sign
         }
 
         const bCoeff = p + q;
         const cCoeff = p * q;
 
-        const questionLatex = `\\frac{x^2 + ${bCoeff}x + ${cCoeff}}{x + ${p}}`;
-        const answer = `x + ${q}`;
+        const questionLatex = `\\frac{${formatQuadraticLatex(bCoeff, cCoeff)}}{${formatLinearLatex(p)}}`;
+        const answerLatex = formatLinearLatex(q);
+        const answer = formatLinearText(q);
 
-        const questionHtml = renderKatex(questionLatex) || `(x^2 + ${bCoeff}x + ${cCoeff})/(x + ${p})`;
+        const questionHtml = renderKatex(questionLatex) || `(x^2 + ${bCoeff}x + ${cCoeff})/(${formatLinearText(p)})`;
+        const answerHtml = renderKatex(answerLatex) || answer;
 
         return {
             questionHtml,
-            question: `(x^2 + ${bCoeff}x + ${cCoeff})/(x + ${p})`,
+            question: `(x^2 + ${bCoeff}x + ${cCoeff})/(${formatLinearText(p)})`,
             answer,
-            answerHtml: answer,
+            answerHtml,
         };
     } else {
-        // Type B: (x+p)(x+q) / ((x+p)(x+r)) = (x+q)/(x+r)
-        let p = randInt(rand, 1, 6);
-        let q = randInt(rand, 1, 8);
-        let r = randInt(rand, 1, 6);
+        // Type B: (x+p)(x+q) / ((x+p)(x+r)) = (x+q)/(x+r) (with signed p, q, r)
+        const pMag = randInt(rand, 1, 6);
+        const qMag = randInt(rand, 1, 8);
+        const rMag = randInt(rand, 1, 6);
+        let p = randInt(rand, 0, 1) === 0 ? pMag : -pMag;
+        let q = randInt(rand, 0, 1) === 0 ? qMag : -qMag;
+        let r = randInt(rand, 0, 1) === 0 ? rMag : -rMag;
 
-        // Ensure all distinct
+        // Ensure all distinct as signed values
         if (p === q) {
-            q = (q % 6) + 1;
+            q = -q;
         }
-        if (p === r || q === r) {
-            r = (r % 4) + 1;
-            if (p === r) r = (r % 4) + 1;
-            if (q === r) r = (r % 4) + 1;
+        if (p === r) {
+            r = -r;
+        }
+        if (q === r) {
+            r = (Math.abs(r) % 5) + 1;
+            if (randInt(rand, 0, 1) === 0) r = -r;
         }
 
         const numBCoeff = p + q;
@@ -191,9 +225,9 @@ function generateHard(rand) {
         const denBCoeff = p + r;
         const denCCoeff = p * r;
 
-        const questionLatex = `\\frac{x^2 + ${numBCoeff}x + ${numCCoeff}}{x^2 + ${denBCoeff}x + ${denCCoeff}}`;
-        const answerLatex = `\\frac{x + ${q}}{x + ${r}}`;
-        const answer = `(x + ${q})/(x + ${r})`;
+        const questionLatex = `\\frac{${formatQuadraticLatex(numBCoeff, numCCoeff)}}{${formatQuadraticLatex(denBCoeff, denCCoeff)}}`;
+        const answerLatex = `\\frac{${formatLinearLatex(q)}}{${formatLinearLatex(r)}}`;
+        const answer = `(${formatLinearText(q)})/(${formatLinearText(r)})`;
 
         const questionHtml = renderKatex(questionLatex) || `(x^2 + ${numBCoeff}x + ${numCCoeff})/(x^2 + ${denBCoeff}x + ${denCCoeff})`;
         const answerHtml = renderKatex(answerLatex) || answer;

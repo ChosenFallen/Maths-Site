@@ -362,10 +362,10 @@
 
 ## Advanced/GCSE Topics
 
-- [ ] Surds (intro, simplifying, rules)
-- [ ] Surds (addition/subtraction)
-- [ ] Surds (rationalizing denominators)
-- [ ] Surds (expanding brackets)
+- [x] Surds (intro, simplifying, rules)
+- [x] Surds (addition/subtraction)
+- [x] Surds (rationalizing denominators)
+- [x] Surds (expanding brackets)
 - [ ] Bounds and error intervals
 - [ ] Limits of accuracy (applying)
 - [ ] Iterative methods (trial and improvement)
