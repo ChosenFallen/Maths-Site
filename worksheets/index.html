@@ -17,6 +17,15 @@
 
         <div id="worksheet-options" class="worksheet-options">
             <label>Type of problems:</label>
+            <div class="worksheet-search-container">
+                <input
+                    type="text"
+                    id="worksheet-search"
+                    placeholder="Search worksheets..."
+                    autocomplete="off"
+                />
+                <div id="worksheet-search-results" class="worksheet-search-results"></div>
+            </div>
             <select id="problem-type">
                 <option value="" disabled selected>Loading…</option>
             </select>

@@ -424,6 +424,82 @@ function populateWorksheetTypes() {
 populateWorksheetTypes();
 renderOptions(getWorksheetType(problemTypeSelect.value), {});
 
+// Worksheet search functionality
+function setupWorksheetSearch() {
+    const searchInput = document.getElementById("worksheet-search");
+    const searchResults = document.getElementById("worksheet-search-results");
+
+    if (!searchInput || !searchResults) return;
+
+    searchInput.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase().trim();
+
+        if (!query) {
+            searchResults.classList.remove("active");
+            return;
+        }
+
+        // Filter worksheets by name and category
+        const results = [];
+        const categoryMap = new Map();
+
+        WORKSHEET_GROUPS.forEach((group) => {
+            group.types.forEach((typeId) => {
+                const type = WORKSHEET_TYPES.find(t => t.id === typeId);
+                if (type) {
+                    if (
+                        type.label.toLowerCase().includes(query) ||
+                        type.id.toLowerCase().includes(query)
+                    ) {
+                        results.push({ type, category: group.label });
+                    }
+                }
+            });
+        });
+
+        // Render search results
+        if (results.length === 0) {
+            searchResults.innerHTML = '<div style="padding: 12px; color: #999; text-align: center;">No worksheets found</div>';
+            searchResults.classList.add("active");
+            return;
+        }
+
+        searchResults.innerHTML = results
+            .map((result) => `
+                <div class="worksheet-search-result-item" data-value="${result.type.id}">
+                    <div>${result.type.label}</div>
+                    <div class="worksheet-search-result-category">${result.category}</div>
+                </div>
+            `)
+            .join("");
+
+        searchResults.classList.add("active");
+
+        // Add click handlers
+        searchResults.querySelectorAll(".worksheet-search-result-item").forEach((item) => {
+            item.addEventListener("click", () => {
+                const value = item.getAttribute("data-value");
+                problemTypeSelect.value = value;
+                searchInput.value = "";
+                searchResults.classList.remove("active");
+
+                // Trigger change event
+                problemTypeSelect.dispatchEvent(new Event("change"));
+                renderOptions(getWorksheetType(value), {});
+            });
+        });
+    });
+
+    // Close search results when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.classList.remove("active");
+        }
+    });
+}
+
+setupWorksheetSearch();
+
 function readOptionsFromUI(type) {
     const worksheetType = getWorksheetType(type);
     if (!worksheetType || !Array.isArray(worksheetType.options)) return {};

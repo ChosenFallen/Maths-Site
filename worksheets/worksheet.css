@@ -453,6 +453,68 @@
 }
 
 
+/* Worksheet search styling */
+.worksheet-search-container {
+    position: relative;
+    margin-top: 6px;
+}
+
+#worksheet-search {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+#worksheet-search::placeholder {
+    color: #999;
+}
+
+.worksheet-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.worksheet-search-results.active {
+    display: block;
+}
+
+.worksheet-search-result-item {
+    padding: 12px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.worksheet-search-result-item:hover {
+    background-color: #f5f5f5;
+}
+
+.worksheet-search-result-item.selected {
+    background-color: #e8f0ff;
+    color: #0066cc;
+    font-weight: 500;
+}
+
+.worksheet-search-result-category {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 2px;
+}
+
 /* Print layout: separate pages */
 @media print {
     /* Hide the toggle button and generate button during printing */
