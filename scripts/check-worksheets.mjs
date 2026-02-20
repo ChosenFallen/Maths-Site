@@ -65,6 +65,7 @@ const DUPLICATE_TOLERANCE = {
     "surds-rationalise": 25,
     "rearranging-formulae": 30,
     "quadratic-equations": 15,
+    "quadratic-inequalities": 25,
 };
 
 function mulberry32(seed) {

@@ -49,6 +49,7 @@ import solvingInequalities from "./types/solving-inequalities.js";
 import rearrangingFormulae from "./types/rearranging-formulae.js";
 import quadraticEquations from "./types/quadratic-equations.js";
 import compoundInequalities from "./types/compound-inequalities.js";
+import quadraticInequalities from "./types/quadratic-inequalities.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -102,6 +103,7 @@ const WORKSHEET_TYPES = [
     rearrangingFormulae,
     quadraticEquations,
     compoundInequalities,
+    quadraticInequalities,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -148,7 +150,7 @@ const WORKSHEET_GROUPS = [
         ],
     },
     { label: "Powers", types: ["indices"] },
-    { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "solving-inequalities", "rearranging-formulae", "quadratic-equations", "compound-inequalities"] },
+    { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "solving-inequalities", "rearranging-formulae", "quadratic-equations", "compound-inequalities", "quadratic-inequalities"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },

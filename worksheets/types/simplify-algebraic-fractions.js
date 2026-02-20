@@ -1,12 +1,4 @@
-import { randInt, gcd } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
+import { randInt, gcd, renderKatex, formatLinearLatex, formatLinearText, formatSignValue } from "./utils.js";
 
 // Format a monomial like "6x^2" or "x"
 function formatMonomial(coeff, power) {
@@ -25,21 +17,8 @@ function formatMonomial(coeff, power) {
 // Format a linear expression like "x + 3"
 function formatLinear(coeff, constant) {
     const xTerm = coeff === 1 ? "x" : coeff === -1 ? "-x" : `${coeff}x`;
-    const sign = constant >= 0 ? "+" : "−";
-    const absConst = Math.abs(constant);
-    return `${xTerm} ${sign} ${absConst}`;
-}
-
-// Format a linear factor for KaTeX: "x + 3" or "x - 3"
-function formatLinearLatex(c) {
-    if (c >= 0) return `x + ${c}`;
-    return `x - ${Math.abs(c)}`;
-}
-
-// Format a linear factor as plain text (Unicode minus)
-function formatLinearText(c) {
-    if (c >= 0) return `x + ${c}`;
-    return `x − ${Math.abs(c)}`;
+    const { sign, abs } = formatSignValue(constant);
+    return `${xTerm} ${sign} ${abs}`;
 }
 
 // Format a quadratic in KaTeX with proper signs (handles b=±1 for just "x")

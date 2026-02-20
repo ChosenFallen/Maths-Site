@@ -1,19 +1,4 @@
-import { randInt } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
-
-// Format coefficient, handling 1 and -1 specially
-function formatCoeff(coeff, variable) {
-    if (coeff === 1) return variable;
-    if (coeff === -1) return `-${variable}`;
-    return `${coeff}${variable}`;
-}
+import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
 
 export default {
     id: "factorising-quadratics",
@@ -53,19 +38,17 @@ function generateProblem(rand, difficulty) {
         const b = actualP + actualQ;
         const c = actualP * actualQ;
 
-        const bSign = b >= 0 ? "+" : "−";
-        const bAbs = Math.abs(b);
-        const cSign = c >= 0 ? "+" : "−";
-        const cAbs = Math.abs(c);
+        const { sign: bSign, abs: bAbs } = formatSignValue(b);
+        const { sign: bSignLatex } = formatSignValue(b, false);
+        const { sign: cSign, abs: cAbs } = formatSignValue(c);
+        const { sign: cSignLatex } = formatSignValue(c, false);
 
         question = `x² ${bSign} ${bAbs}x ${cSign} ${cAbs}`;
-        latex = `x^2 ${bSign === "−" ? "-" : "+"} ${bAbs}x ${cSign === "−" ? "-" : "+"} ${cAbs}`;
+        latex = `x^2 ${bSignLatex} ${bAbs}x ${cSignLatex} ${cAbs}`;
 
         // Format answer: (x + p)(x + q)
-        const pSign = actualP >= 0 ? "+" : "−";
-        const pAbs = Math.abs(actualP);
-        const qSign = actualQ >= 0 ? "+" : "−";
-        const qAbs = Math.abs(actualQ);
+        const { sign: pSign, abs: pAbs } = formatSignValue(actualP);
+        const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
         answer = `(x ${pSign} ${pAbs})(x ${qSign} ${qAbs})`;
     } else if (difficulty === "normal") {
@@ -82,18 +65,16 @@ function generateProblem(rand, difficulty) {
             const b = actualP + actualQ;
             const c = actualP * actualQ;
 
-            const bSign = b >= 0 ? "+" : "−";
-            const bAbs = Math.abs(b);
-            const cSign = c >= 0 ? "+" : "−";
-            const cAbs = Math.abs(c);
+            const { sign: bSign, abs: bAbs } = formatSignValue(b);
+            const { sign: bSignLatex } = formatSignValue(b, false);
+            const { sign: cSign, abs: cAbs } = formatSignValue(c);
+            const { sign: cSignLatex } = formatSignValue(c, false);
 
             question = `x² ${bSign} ${bAbs}x ${cSign} ${cAbs}`;
-            latex = `x^2 ${bSign === "−" ? "-" : "+"} ${bAbs}x ${cSign === "−" ? "-" : "+"} ${cAbs}`;
+            latex = `x^2 ${bSignLatex} ${bAbs}x ${cSignLatex} ${cAbs}`;
 
-            const pSign = actualP >= 0 ? "+" : "−";
-            const pAbs = Math.abs(actualP);
-            const qSign = actualQ >= 0 ? "+" : "−";
-            const qAbs = Math.abs(actualQ);
+            const { sign: pSign, abs: pAbs } = formatSignValue(actualP);
+            const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
             answer = `(x ${pSign} ${pAbs})(x ${qSign} ${qAbs})`;
         } else {
@@ -110,18 +91,16 @@ function generateProblem(rand, difficulty) {
             const bCoeff = a * actualQ + actualP;
             const cCoeff = actualP * actualQ;
 
-            const bSign = bCoeff >= 0 ? "+" : "−";
-            const bAbs = Math.abs(bCoeff);
-            const cSign = cCoeff >= 0 ? "+" : "−";
-            const cAbs = Math.abs(cCoeff);
+            const { sign: bSign, abs: bAbs } = formatSignValue(bCoeff);
+            const { sign: bSignLatex } = formatSignValue(bCoeff, false);
+            const { sign: cSign, abs: cAbs } = formatSignValue(cCoeff);
+            const { sign: cSignLatex } = formatSignValue(cCoeff, false);
 
             question = `${aCoeff}x² ${bSign} ${bAbs}x ${cSign} ${cAbs}`;
-            latex = `${aCoeff}x^2 ${bSign === "−" ? "-" : "+"} ${bAbs}x ${cSign === "−" ? "-" : "+"} ${cAbs}`;
+            latex = `${aCoeff}x^2 ${bSignLatex} ${bAbs}x ${cSignLatex} ${cAbs}`;
 
-            const pSign = actualP >= 0 ? "+" : "−";
-            const pAbs = Math.abs(actualP);
-            const qSign = actualQ >= 0 ? "+" : "−";
-            const qAbs = Math.abs(actualQ);
+            const { sign: pSign, abs: pAbs } = formatSignValue(actualP);
+            const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
             answer = `(${a}x ${pSign} ${pAbs})(x ${qSign} ${qAbs})`;
         }
@@ -140,18 +119,16 @@ function generateProblem(rand, difficulty) {
         const bCoeff = a * actualQ + b * actualP;
         const cCoeff = actualP * actualQ;
 
-        const bSign = bCoeff >= 0 ? "+" : "−";
-        const bAbs = Math.abs(bCoeff);
-        const cSign = cCoeff >= 0 ? "+" : "−";
-        const cAbs = Math.abs(cCoeff);
+        const { sign: bSign, abs: bAbs } = formatSignValue(bCoeff);
+        const { sign: bSignLatex } = formatSignValue(bCoeff, false);
+        const { sign: cSign, abs: cAbs } = formatSignValue(cCoeff);
+        const { sign: cSignLatex } = formatSignValue(cCoeff, false);
 
         question = `${aCoeff}x² ${bSign} ${bAbs}x ${cSign} ${cAbs}`;
-        latex = `${aCoeff}x^2 ${bSign === "−" ? "-" : "+"} ${bAbs}x ${cSign === "−" ? "-" : "+"} ${cAbs}`;
+        latex = `${aCoeff}x^2 ${bSignLatex} ${bAbs}x ${cSignLatex} ${cAbs}`;
 
-        const pSign = actualP >= 0 ? "+" : "−";
-        const pAbs = Math.abs(actualP);
-        const qSign = actualQ >= 0 ? "+" : "−";
-        const qAbs = Math.abs(actualQ);
+        const { sign: pSign, abs: pAbs } = formatSignValue(actualP);
+        const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
         answer = `(${a}x ${pSign} ${pAbs})(${b}x ${qSign} ${qAbs})`;
     }

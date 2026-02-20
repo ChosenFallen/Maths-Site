@@ -1,12 +1,4 @@
-import { randInt } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
+import { randInt, renderKatex } from "./utils.js";
 
 export default {
     id: "substitution",

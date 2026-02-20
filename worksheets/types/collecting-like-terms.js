@@ -1,19 +1,4 @@
-import { randInt } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
-
-// Format coefficient, handling 1 and -1 specially
-function formatCoeff(coeff, variable) {
-    if (coeff === 1) return variable;
-    if (coeff === -1) return `-${variable}`;
-    return `${coeff}${variable}`;
-}
+import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
 
 export default {
     id: "collecting-like-terms",
@@ -54,8 +39,8 @@ function generateProblem(rand, difficulty) {
             if (i === 0) {
                 terms.push(`${actualCoeff}x`);
             } else {
-                const sign = actualCoeff >= 0 ? "+" : "−";
-                terms.push(`${sign} ${Math.abs(actualCoeff)}x`);
+                const { sign, abs } = formatSignValue(actualCoeff);
+                terms.push(`${sign} ${abs}x`);
             }
         }
 
@@ -96,9 +81,8 @@ function generateProblem(rand, difficulty) {
                 terms.push(formatCoeff(actualCoeff, variable));
             } else {
                 varCoeffs[variable] += actualCoeff;
-                const absCoeff = Math.abs(actualCoeff);
-                const sign = actualCoeff >= 0 ? "+" : "−";
-                terms.push(`${sign} ${formatCoeff(absCoeff, variable)}`);
+                const { sign, abs } = formatSignValue(actualCoeff);
+                terms.push(`${sign} ${formatCoeff(abs, variable)}`);
             }
         }
 
@@ -108,8 +92,8 @@ function generateProblem(rand, difficulty) {
             answer = `${varCoeffs.x}x`;
         }
         if (varCoeffs.y !== 0) {
-            const sign = varCoeffs.y >= 0 ? "+" : "−";
-            answer += answer ? ` ${sign} ${Math.abs(varCoeffs.y)}y` : `${varCoeffs.y}y`;
+            const { sign, abs } = formatSignValue(varCoeffs.y);
+            answer += answer ? ` ${sign} ${abs}y` : `${varCoeffs.y}y`;
         }
         if (answer === "") answer = "0";
 
@@ -153,9 +137,8 @@ function generateProblem(rand, difficulty) {
                 terms.push(formatCoeff(actualCoeff, variable));
             } else {
                 varCoeffs[variable] += actualCoeff;
-                const absCoeff = Math.abs(actualCoeff);
-                const sign = actualCoeff >= 0 ? "+" : "−";
-                terms.push(`${sign} ${formatCoeff(absCoeff, variable)}`);
+                const { sign, abs } = formatSignValue(actualCoeff);
+                terms.push(`${sign} ${formatCoeff(abs, variable)}`);
             }
         }
 
@@ -166,8 +149,8 @@ function generateProblem(rand, difficulty) {
                 if (answer === "") {
                     answer = `${varCoeffs[variable]}${variable}`;
                 } else {
-                    const sign = varCoeffs[variable] >= 0 ? "+" : "−";
-                    answer += ` ${sign} ${Math.abs(varCoeffs[variable])}${variable}`;
+                    const { sign, abs } = formatSignValue(varCoeffs[variable]);
+                    answer += ` ${sign} ${abs}${variable}`;
                 }
             }
         }

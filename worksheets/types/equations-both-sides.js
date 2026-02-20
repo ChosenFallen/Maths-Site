@@ -1,4 +1,4 @@
-import { randInt } from "./utils.js";
+import { randInt, formatSignValue } from "./utils.js";
 
 export default {
     id: "equations-both-sides",
@@ -30,13 +30,9 @@ function generateProblem(rand, difficulty) {
         const b = randInt(rand, 1, a - 1);
         const c = x * (a - b);
 
-        const aSign = a >= 0 ? "" : "−";
-        const bSign = b >= 0 ? "+" : "−";
-        const bAbs = Math.abs(b);
-        const cSign = c >= 0 ? "+" : "−";
-        const cAbs = Math.abs(c);
+        const { sign: cSign, abs: cAbs } = formatSignValue(c);
 
-        question = `${a}x = ${bAbs}x ${cSign} ${cAbs}`;
+        question = `${a}x = ${b}x ${cSign} ${cAbs}`;
         answer = `x = ${x}`;
     } else if (difficulty === "normal") {
         // ax + b = cx + d
@@ -47,14 +43,10 @@ function generateProblem(rand, difficulty) {
         const b = randInt(rand, 1, 9);
         const d = b + x * (a - c);
 
-        const bSign = b >= 0 ? "+" : "−";
-        const bAbs = Math.abs(b);
-        const cSign = c >= 0 ? "+" : "−";
-        const cAbs = Math.abs(c);
-        const dSign = d >= 0 ? "+" : "−";
-        const dAbs = Math.abs(d);
+        const { sign: bSign, abs: bAbs } = formatSignValue(b);
+        const { sign: dSign, abs: dAbs } = formatSignValue(d);
 
-        question = `${a}x ${bSign} ${bAbs} = ${cAbs}x ${dSign} ${dAbs}`;
+        question = `${a}x ${bSign} ${bAbs} = ${c}x ${dSign} ${dAbs}`;
         answer = `x = ${x}`;
     } else {
         // Hard: a(bx + c) = dx + e
@@ -69,14 +61,10 @@ function generateProblem(rand, difficulty) {
         const ac = a * c;
         const e = x * (ab - d) + ac;
 
-        const bSign = b >= 0 ? "+" : "−";
-        const bAbs = Math.abs(b);
-        const cSign = c >= 0 ? "+" : "−";
-        const cAbs = Math.abs(c);
-        const eSign = e >= 0 ? "+" : "−";
-        const eAbs = Math.abs(e);
+        const { sign: cSign, abs: cAbs } = formatSignValue(c);
+        const { sign: eSign, abs: eAbs } = formatSignValue(e);
 
-        question = `${a}(${bAbs}x ${cSign} ${cAbs}) = ${d}x ${eSign} ${eAbs}`;
+        question = `${a}(${b}x ${cSign} ${cAbs}) = ${d}x ${eSign} ${eAbs}`;
         answer = `x = ${x}`;
     }
 

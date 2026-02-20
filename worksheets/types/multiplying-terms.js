@@ -1,19 +1,4 @@
-import { randInt } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
-
-// Format coefficient, handling 1 and -1 specially
-function formatCoeff(coeff, variable) {
-    if (coeff === 1) return variable;
-    if (coeff === -1) return `-${variable}`;
-    return `${coeff}${variable}`;
-}
+import { randInt, renderKatex, formatCoeff } from "./utils.js";
 
 export default {
     id: "multiplying-terms",

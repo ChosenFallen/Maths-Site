@@ -1,27 +1,4 @@
-import { randInt, gcd } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
-
-// Format a surd term like "3√2" or "√3"
-function formatSurdLatex(coeff, k) {
-    if (coeff === 1) {
-        return `\\sqrt{${k}}`;
-    }
-    return `${coeff}\\sqrt{${k}}`;
-}
-
-function formatSurdText(coeff, k) {
-    if (coeff === 1) {
-        return `√${k}`;
-    }
-    return `${coeff}√${k}`;
-}
+import { randInt, gcd, renderKatex, formatSurdLatex, formatSurdText } from "./utils.js";
 
 // Format fraction in LaTeX
 function formatFracLatex(num, den) {

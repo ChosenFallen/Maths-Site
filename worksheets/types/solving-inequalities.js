@@ -1,6 +1,4 @@
-import { randInt } from "./utils.js";
-
-const SIGNS = [">", "<", "≥", "≤"];
+import { randInt, INEQUALITY_SIGNS_ALL as SIGNS, formatSignValue } from "./utils.js";
 
 export default {
     id: "solving-inequalities",
@@ -55,8 +53,8 @@ function generateProblem(rand, difficulty) {
         const answerVal = randInt(rand, -2, 8);
         const b = a * answerVal + c;
 
-        const cSign = c >= 0 ? "+" : "−";
-        const question = `${a}x ${cSign} ${Math.abs(c)} ${sign} ${b}`;
+        const { sign: cSign, abs: cAbs } = formatSignValue(c);
+        const question = `${a}x ${cSign} ${cAbs} ${sign} ${b}`;
         const answer = `x ${sign} ${answerVal}`;
 
         return { question, answer };
@@ -70,11 +68,10 @@ function generateProblem(rand, difficulty) {
         const e = answerVal * diff + c;
 
         // Build question with proper signs
+        const { sign: eSign, abs: eAbs } = formatSignValue(e);
         let rightSide = `${d}x`;
-        if (e > 0) {
-            rightSide += ` + ${e}`;
-        } else if (e < 0) {
-            rightSide += ` − ${Math.abs(e)}`;
+        if (e !== 0) {
+            rightSide += ` ${eSign} ${eAbs}`;
         }
 
         const question = `${a}x + ${c} ${sign} ${rightSide}`;

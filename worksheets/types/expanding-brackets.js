@@ -1,19 +1,4 @@
-import { randInt } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
-
-// Helper function to format coefficient (omit 1, but keep -1 as -)
-function formatCoeff(coeff, variable) {
-    if (coeff === 1) return variable;
-    if (coeff === -1) return `-${variable}`;
-    return `${coeff}${variable}`;
-}
+import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
 
 export default {
     id: "expanding-brackets",
@@ -86,27 +71,29 @@ function generateProblem(rand, difficulty, bracketType) {
             // a(bx + c)
             const isNegativeC = randInt(rand, 0, 1) === 0;
             const actualC = isNegativeC ? -c : c;
-            const cSign = actualC >= 0 ? "+" : "−";
-            expression = `${a}(${formatCoeff(b, "x")} ${cSign} ${Math.abs(actualC)})`;
-            latex = `${a}(${formatCoeff(b, "x")} ${cSign === "−" ? "-" : "+"} ${Math.abs(actualC)})`;
+            const { sign: cSign, abs: cAbs } = formatSignValue(actualC);
+            const { sign: cSignLatex } = formatSignValue(actualC, false);
+            expression = `${a}(${formatCoeff(b, "x")} ${cSign} ${cAbs})`;
+            latex = `${a}(${formatCoeff(b, "x")} ${cSignLatex} ${cAbs})`;
 
             const answerXCoeff = a * b;
             const answerConst = a * actualC;
-            const answerSign = answerConst >= 0 ? "+" : "−";
-            answer = `${answerXCoeff}x ${answerSign} ${Math.abs(answerConst)}`;
+            const { sign: answerSign, abs: answerAbs } = formatSignValue(answerConst);
+            answer = `${answerXCoeff}x ${answerSign} ${answerAbs}`;
         } else {
             // a(bx + cy)
             const d = randInt(rand, 1, 5);
             const isNegativeD = randInt(rand, 0, 1) === 0;
             const actualD = isNegativeD ? -d : d;
-            const dSign = actualD >= 0 ? "+" : "−";
-            expression = `${a}(${formatCoeff(b, "x")} ${dSign} ${Math.abs(actualD)}y)`;
-            latex = `${a}(${formatCoeff(b, "x")} ${dSign === "−" ? "-" : "+"} ${Math.abs(actualD)}y)`;
+            const { sign: dSign, abs: dAbs } = formatSignValue(actualD);
+            const { sign: dSignLatex } = formatSignValue(actualD, false);
+            expression = `${a}(${formatCoeff(b, "x")} ${dSign} ${dAbs}y)`;
+            latex = `${a}(${formatCoeff(b, "x")} ${dSignLatex} ${dAbs}y)`;
 
             const answerXCoeff = a * b;
             const answerYCoeff = a * actualD;
-            const ySign = answerYCoeff >= 0 ? "+" : "−";
-            answer = `${answerXCoeff}x ${ySign} ${Math.abs(answerYCoeff)}y`;
+            const { sign: ySign, abs: yAbs } = formatSignValue(answerYCoeff);
+            answer = `${answerXCoeff}x ${ySign} ${yAbs}y`;
         }
     } else {
         // Hard: a(bx + cy + d) with larger coefficients
@@ -120,19 +107,21 @@ function generateProblem(rand, difficulty, bracketType) {
         const actualC = isNegativeC ? -c : c;
         const actualD = isNegativeD ? -d : d;
 
-        const cSign = actualC >= 0 ? "+" : "−";
-        const dSign = actualD >= 0 ? "+" : "−";
+        const { sign: cSign, abs: cAbs } = formatSignValue(actualC);
+        const { sign: cSignLatex } = formatSignValue(actualC, false);
+        const { sign: dSign, abs: dAbs } = formatSignValue(actualD);
+        const { sign: dSignLatex } = formatSignValue(actualD, false);
 
-        expression = `${a}(${formatCoeff(b, "x")} ${cSign} ${Math.abs(actualC)}y ${dSign} ${Math.abs(actualD)})`;
-        latex = `${a}(${formatCoeff(b, "x")} ${cSign === "−" ? "-" : "+"} ${Math.abs(actualC)}y ${dSign === "−" ? "-" : "+"} ${Math.abs(actualD)})`;
+        expression = `${a}(${formatCoeff(b, "x")} ${cSign} ${cAbs}y ${dSign} ${dAbs})`;
+        latex = `${a}(${formatCoeff(b, "x")} ${cSignLatex} ${cAbs}y ${dSignLatex} ${dAbs})`;
 
         const answerXCoeff = a * b;
         const answerYCoeff = a * actualC;
         const answerConst = a * actualD;
 
-        const ySign = answerYCoeff >= 0 ? "+" : "−";
-        const constSign = answerConst >= 0 ? "+" : "−";
-        answer = `${answerXCoeff}x ${ySign} ${Math.abs(answerYCoeff)}y ${constSign} ${Math.abs(answerConst)}`;
+        const { sign: ySign, abs: yAbs } = formatSignValue(answerYCoeff);
+        const { sign: constSign, abs: constAbs } = formatSignValue(answerConst);
+        answer = `${answerXCoeff}x ${ySign} ${yAbs}y ${constSign} ${constAbs}`;
     }
 
     // Render with KaTeX

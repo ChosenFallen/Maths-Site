@@ -1,47 +1,11 @@
-import { randInt } from "./utils.js";
-
-// Helper function to render KaTeX
-function renderKatex(latex) {
-    if (typeof katex !== 'undefined') {
-        return katex.renderToString(latex, { throwOnError: false });
-    }
-    return null;
-}
-
-// Format a surd term like "3√2" or "√3"
-function formatSurdLatex(coeff, k) {
-    if (coeff === 1) {
-        return `\\sqrt{${k}}`;
-    }
-    return `${coeff}\\sqrt{${k}}`;
-}
-
-function formatSurdText(coeff, k) {
-    if (coeff === 1) {
-        return `√${k}`;
-    }
-    return `${coeff}√${k}`;
-}
-
-// Format answer like "6 + 3√5" or just "3√5"
-function formatAnswerWithSurd(intPart, surdCoeff, k) {
-    const surdPart = formatSurdText(surdCoeff, k);
-    if (intPart === 0) {
-        return surdPart;
-    }
-    const sign = surdCoeff >= 0 ? "+" : "−";
-    const absSurdCoeff = Math.abs(surdCoeff);
-    return `${intPart} ${sign} ${formatSurdText(absSurdCoeff, k)}`;
-}
-
-function formatAnswerWithSurdLatex(intPart, surdCoeff, k) {
-    const surdPart = formatSurdLatex(Math.abs(surdCoeff), k);
-    if (intPart === 0) {
-        return surdPart;
-    }
-    const sign = surdCoeff >= 0 ? "+" : "−";
-    return `${intPart} ${sign} ${surdPart}`;
-}
+import {
+    randInt,
+    renderKatex,
+    formatSurdLatex,
+    formatSurdText,
+    formatAnswerWithSurd,
+    formatAnswerWithSurdLatex,
+} from "./utils.js";
 
 export default {
     id: "surds-expand",
