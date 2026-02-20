@@ -114,10 +114,10 @@ function generateProblem(rand, difficulty, variableMode) {
     }
 
     // Render with KaTeX
-    const katexHtml = renderKatex(latex + ` \\text{ when } x = ${x}`);
+    const katexHtml = renderKatex(latex + ` \\\\ \\text{when } x = ${x}`);
 
-    const questionHtml = katexHtml || `${expression} when x = ${x}`;
-    const question = `${expression} when x = ${x}`;
+    const questionHtml = katexHtml || `${expression}\nwhen x = ${x}`;
+    const question = `${expression}\nwhen x = ${x}`;
 
     return {
         questionHtml,
@@ -162,10 +162,10 @@ function generateTwoVariableProblem(rand, difficulty) {
         answer = a * x * x + b * y * y;
     }
 
-    const katexHtml = renderKatex(latex + ` \\text{ when } x = ${x}, y = ${y}`);
+    const katexHtml = renderKatex(latex + ` \\\\ \\text{when } x = ${x}, y = ${y}`);
 
-    const questionHtml = katexHtml || `${expression} when x = ${x}, y = ${y}`;
-    const question = `${expression} when x = ${x}, y = ${y}`;
+    const questionHtml = katexHtml || `${expression}\nwhen x = ${x}, y = ${y}`;
+    const question = `${expression}\nwhen x = ${x}, y = ${y}`;
 
     return {
         questionHtml,

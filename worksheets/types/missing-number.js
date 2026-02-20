@@ -45,37 +45,38 @@ export default {
 
 function generateProblem(rand, difficulty, op) {
     const [minVal, maxVal] = difficultyRange(difficulty);
+    const blank = "______";
 
     let a, b, result, answer, question, symbol;
 
     if (op === "addition") {
-        // □ + b = result  or  a + □ = result
+        // _____ + b = result  or  a + _____ = result
         b = randInt(rand, minVal, maxVal);
         result = randInt(rand, minVal + 1, maxVal + minVal);
         a = result - b;
         if (a < minVal) a = minVal + 1;
         answer = a;
         const blankLeft = randInt(rand, 0, 1) === 0;
-        question = blankLeft ? `□ + ${b} = ${result}` : `${a} + □ = ${result}`;
+        question = blankLeft ? `${blank} + ${b} = ${result}` : `${a} + ${blank} = ${result}`;
         symbol = "+";
     } else if (op === "subtraction") {
-        // □ - b = result  or  a - □ = result
+        // _____ - b = result  or  a - _____ = result
         a = randInt(rand, minVal + 1, Math.max(minVal + 2, maxVal));
         b = randInt(rand, minVal, Math.min(a - 1, maxVal));
         result = a - b;
         const blankLeft = randInt(rand, 0, 1) === 0;
         if (blankLeft) {
-            // □ - b = result  →  □ = result + b
+            // _____ - b = result  →  _____ = result + b
             answer = result + b;
-            question = `□ − ${b} = ${result}`;
+            question = `${blank} − ${b} = ${result}`;
         } else {
-            // a - □ = result  →  □ = a - result
+            // a - _____ = result  →  _____ = a - result
             answer = a - result;
-            question = `${a} − □ = ${result}`;
+            question = `${a} − ${blank} = ${result}`;
         }
         symbol = "−";
     } else if (op === "multiplication") {
-        // □ × b = result  or  a × □ = result
+        // _____ × b = result  or  a × _____ = result
         const multiplierRange = difficulty === "easy" ? [2, 5] : difficulty === "normal" ? [2, 12] : [2, 20];
         b = randInt(rand, multiplierRange[0], multiplierRange[1]);
         const maxResult = difficulty === "easy" ? 25 : difficulty === "normal" ? 144 : 400;
@@ -83,17 +84,17 @@ function generateProblem(rand, difficulty, op) {
         a = result / b;
         answer = a;
         const blankLeft = randInt(rand, 0, 1) === 0;
-        question = blankLeft ? `□ × ${b} = ${result}` : `${a} × □ = ${result}`;
+        question = blankLeft ? `${blank} × ${b} = ${result}` : `${a} × ${blank} = ${result}`;
         symbol = "×";
     } else {
-        // □ ÷ b = result  or  a ÷ □ = result
+        // _____ ÷ b = result  or  a ÷ _____ = result
         const divisorRange = difficulty === "easy" ? [2, 5] : difficulty === "normal" ? [2, 12] : [2, 20];
         b = randInt(rand, divisorRange[0], divisorRange[1]);
         result = randInt(rand, divisorRange[0], Math.min(50, 400 / b));
         a = result * b;
         answer = a;
         const blankLeft = randInt(rand, 0, 1) === 0;
-        question = blankLeft ? `□ ÷ ${b} = ${result}` : `${a} ÷ □ = ${result}`;
+        question = blankLeft ? `${blank} ÷ ${b} = ${result}` : `${a} ÷ ${blank} = ${result}`;
         symbol = "÷";
     }
 

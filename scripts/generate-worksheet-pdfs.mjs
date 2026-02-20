@@ -81,12 +81,26 @@ function createServer() {
     return server;
 }
 
-async function generatePDFs() {
+async function generatePDFs(worksheetId = null) {
     console.log("🚀 Starting PDF generation...\n");
 
     // Discover worksheets dynamically
-    const WORKSHEET_TYPES = await discoverWorksheets();
-    console.log(`📚 Discovered ${WORKSHEET_TYPES.length} worksheet types\n`);
+    let WORKSHEET_TYPES = await discoverWorksheets();
+
+    // Filter to specific worksheet if requested
+    if (worksheetId) {
+        const filtered = WORKSHEET_TYPES.filter(w => w.id === worksheetId);
+        if (filtered.length === 0) {
+            const available = WORKSHEET_TYPES.map(w => w.id).join(", ");
+            console.error(`❌ Worksheet "${worksheetId}" not found.`);
+            console.error(`\nAvailable worksheets:\n${available}`);
+            process.exit(1);
+        }
+        WORKSHEET_TYPES = filtered;
+        console.log(`📚 Generating single worksheet: ${worksheetId}\n`);
+    } else {
+        console.log(`📚 Discovered ${WORKSHEET_TYPES.length} worksheet types\n`);
+    }
 
     // Create examples directory if it doesn't exist
     const examplesDir = join(projectRoot, "examples");
@@ -192,7 +206,10 @@ async function generatePDFs() {
     console.log(`📂 Check the examples/ folder for all worksheet PDFs`);
 }
 
-generatePDFs().catch((error) => {
+// Get worksheet ID from command line arguments
+const worksheetId = process.argv[2] || null;
+
+generatePDFs(worksheetId).catch((error) => {
     console.error("Error generating PDFs:", error);
     process.exit(1);
 });
