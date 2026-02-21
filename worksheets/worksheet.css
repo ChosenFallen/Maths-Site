@@ -517,6 +517,12 @@
 
 /* Print layout: separate pages */
 @media print {
+    /* Remove background color for cleaner printing */
+    body {
+        background: white;
+        padding: 0;
+    }
+
     /* Hide the toggle button and generate button during printing */
     #worksheet-options button {
         display: none;
