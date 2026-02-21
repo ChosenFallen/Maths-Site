@@ -10,7 +10,7 @@
 - [x] Rounding to decimal places
 - [x] Rounding to significant figures
 - [ ] Estimation and sensible estimates
-- [ ] Negative number operations (all four operations)
+- [x] Negative number operations (all four operations)
 - [ ] Negative numbers ordering
 - [x] Order of operations (BIDMAS/BODMAS) - mixed operations
 - [x] Powers and roots (squares, cubes, square roots) - indices
@@ -21,9 +21,9 @@
 - [x] HCF and LCM problems
 - [ ] HCF and LCM using product of primes
 - [x] Index laws (multiplication and division)
-- [ ] Fractional indices
-- [ ] Negative indices
-- [ ] Cube numbers and cube roots
+- [x] Fractional indices
+- [x] Negative indices
+- [x] Cube numbers and cube roots
 - [ ] Square numbers and square roots
 - [ ] Triangular numbers
 - [ ] Factors and multiples

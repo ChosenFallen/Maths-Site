@@ -44,6 +44,9 @@ const MAX_BY_TYPE = {
     indices: 5000,
 };
 const DUPLICATE_TOLERANCE = {
+    "advanced-indices": 45,
+    "cube-numbers": 40,
+    "index-laws": 15,
     indices: 40,
     "simplify-fractions": 10,
     "fraction-add-sub": 10,
