@@ -78,6 +78,7 @@ import timesTablesMixedDrill from "./types/times-tables-mixed-drill.js";
 import timesTablesNegative from "./types/times-tables-negative.js";
 import systematicListing from "./types/systematic-listing.js";
 import areaRectangle from "./types/area-rectangle.js";
+import areaTriangle from "./types/area-triangle.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -160,6 +161,7 @@ const WORKSHEET_TYPES = [
     timesTablesNegative,
     systematicListing,
     areaRectangle,
+    areaTriangle,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -212,7 +214,7 @@ const WORKSHEET_GROUPS = [
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
-    { label: "Measurement & Geometry", types: ["area-rectangle"] },
+    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle"] },
 ];
 
 const generateBtn = document.getElementById("generate-btn");

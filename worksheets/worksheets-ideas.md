@@ -144,7 +144,7 @@
 
 - [ ] Perimeter (rectangles, compound shapes, semi-circles)
 - [ ] Perimeter on a grid
-- [ ] Area (rectangles/triangles)
+- [x] Area (rectangles/triangles)
 - [ ] Area of parallelograms and trapeziums
 - [ ] Area of compound shapes (L-shapes)
 - [ ] Area on a grid

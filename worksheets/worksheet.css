@@ -390,10 +390,18 @@
 
     .problem-number {
         grid-column: 1;
+        grid-row: 1;
+    }
+
+    .problem-question {
+        grid-column: 1;
+        grid-row: 2;
     }
 
     .problem-answer-box {
-        min-height: 40px;
+        grid-column: 1;
+        grid-row: 3;
+        min-height: 60px;
     }
 
     #worksheet-output table td {
