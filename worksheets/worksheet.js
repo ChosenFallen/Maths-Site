@@ -43,7 +43,11 @@ import equationsBothSides from "./types/equations-both-sides.js";
 import factorising from "./types/factorising.js";
 import factorisingQuadratics from "./types/factorising-quadratics.js";
 import reversePercentages from "./types/reverse-percentages.js";
+import percentagesAsPercentage from "./types/percentages-as-percentage.js";
+import percentagesMultipliers from "./types/percentages-multipliers.js";
+import percentagesRepeated from "./types/percentages-repeated.js";
 import equationsFractions from "./types/equations-fractions.js";
+import recurringDecimalsToFractions from "./types/recurring-decimals-to-fractions.js";
 import differenceOfTwoSquares from "./types/difference-of-two-squares.js";
 import simplifyAlgebraicFractions from "./types/simplify-algebraic-fractions.js";
 import simplifySurds from "./types/simplify-surds.js";
@@ -87,6 +91,7 @@ const WORKSHEET_TYPES = [
     fractionCompare,
     equations,
     recurringDecimals,
+    recurringDecimalsToFractions,
     ratioSimplify,
     hcfLcm,
     rounding,
@@ -102,6 +107,9 @@ const WORKSHEET_TYPES = [
     factorising,
     factorisingQuadratics,
     reversePercentages,
+    percentagesAsPercentage,
+    percentagesMultipliers,
+    percentagesRepeated,
     equationsFractions,
     differenceOfTwoSquares,
     simplifyAlgebraicFractions,
@@ -143,11 +151,11 @@ const WORKSHEET_GROUPS = [
     },
     {
         label: "Decimals",
-        types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare", "recurring-decimals"],
+        types: ["decimal-add-sub", "decimal-mul-div", "decimal-compare", "recurring-decimals", "recurring-decimals-to-fractions"],
     },
     {
         label: "Percentages",
-        types: ["percentage-of-amount", "percentage-change", "reverse-percentages"],
+        types: ["percentage-of-amount", "percentage-change", "reverse-percentages", "percentages-as-percentage", "percentages-multipliers", "percentages-repeated"],
     },
     {
         label: "FDP (Fractions/Decimals/Percentages)",

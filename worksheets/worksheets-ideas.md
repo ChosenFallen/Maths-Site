@@ -50,11 +50,11 @@
 - [x] Decimal addition and subtraction
 - [x] Percentages of amounts (calculator and non-calculator)
 - [x] Percentages: percentage change (increase/decrease)
-- [ ] Percentages: expressing as a percentage
-- [ ] Percentages: multipliers
+- [x] Percentages: expressing as a percentage
+- [x] Percentages: multipliers
 - [x] Percentages: reverse percentages
-- [ ] Percentages: repeated percentage change
-- [ ] Recurring decimals to fractions (reverse conversion)
+- [x] Percentages: repeated percentage change
+- [x] Recurring decimals to fractions (reverse conversion)
 
 ## Times Tables
 
