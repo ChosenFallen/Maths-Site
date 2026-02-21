@@ -3,6 +3,11 @@ import subtraction from "./types/subtraction.js";
 import multiplication from "./types/multiplication.js";
 import division from "./types/division.js";
 import mixed from "./types/mixed.js";
+import oddEvenNumbers from "./types/odd-even-numbers.js";
+import placeValue from "./types/place-value.js";
+import orderingNumbers from "./types/ordering-numbers.js";
+import triangularNumbers from "./types/triangular-numbers.js";
+import negativeNumbersOrdering from "./types/negative-numbers-ordering.js";
 import negativeNumbers from "./types/negative-numbers.js";
 import indices from "./types/indices.js";
 import cubeNumbers from "./types/cube-numbers.js";
@@ -30,6 +35,13 @@ import fractionOfAmount from "./types/fraction-of-amount.js";
 import recurringDecimals from "./types/recurring-decimals.js";
 import ratioSimplify from "./types/ratio-simplify.js";
 import hcfLcm from "./types/hcf-lcm.js";
+import hcfLcmPrimes from "./types/hcf-lcm-primes.js";
+import factorsMultiples from "./types/factors-multiples.js";
+import estimation from "./types/estimation.js";
+import standardFormOperations from "./types/standard-form-operations.js";
+import standardFormMultiplyDivide from "./types/standard-form-multiply-divide.js";
+import bestBuys from "./types/best-buys.js";
+import inverseOperations from "./types/inverse-operations.js";
 import rounding from "./types/rounding.js";
 import standardForm from "./types/standard-form.js";
 import primeFactorization from "./types/prime-factorization.js";
@@ -66,6 +78,11 @@ const WORKSHEET_TYPES = [
     multiplication,
     division,
     mixed,
+    oddEvenNumbers,
+    placeValue,
+    orderingNumbers,
+    triangularNumbers,
+    negativeNumbersOrdering,
     negativeNumbers,
     indices,
     cubeNumbers,
@@ -94,6 +111,13 @@ const WORKSHEET_TYPES = [
     recurringDecimalsToFractions,
     ratioSimplify,
     hcfLcm,
+    hcfLcmPrimes,
+    factorsMultiples,
+    estimation,
+    standardFormOperations,
+    standardFormMultiplyDivide,
+    bestBuys,
+    inverseOperations,
     rounding,
     standardForm,
     primeFactorization,

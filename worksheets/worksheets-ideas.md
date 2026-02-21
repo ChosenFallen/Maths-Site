@@ -9,29 +9,29 @@
 - [x] Rounding to whole numbers, 10, 100, 1000
 - [x] Rounding to decimal places
 - [x] Rounding to significant figures
-- [ ] Estimation and sensible estimates
+- [x] Estimation and sensible estimates
 - [x] Negative number operations (all four operations)
-- [ ] Negative numbers ordering
+- [x] Negative numbers ordering
 - [x] Order of operations (BIDMAS/BODMAS) - mixed operations
 - [x] Powers and roots (squares, cubes, square roots) - indices
 - [x] Standard form / scientific notation
-- [ ] Standard form addition/subtraction
-- [ ] Standard form multiplication/division
+- [x] Standard form addition/subtraction
+- [x] Standard form multiplication/division
 - [x] Prime factorization (product of primes)
 - [x] HCF and LCM problems
-- [ ] HCF and LCM using product of primes
+- [x] HCF and LCM using product of primes
 - [x] Index laws (multiplication and division)
 - [x] Fractional indices
 - [x] Negative indices
 - [x] Cube numbers and cube roots
 - [x] Square numbers and square roots
-- [ ] Triangular numbers
-- [ ] Factors and multiples
-- [ ] Ordering numbers
-- [ ] Place value
-- [ ] Odd and even numbers
-- [ ] Best buys and unit pricing
-- [ ] Using calculations (inverse operations)
+- [x] Triangular numbers
+- [x] Factors and multiples
+- [x] Ordering numbers
+- [x] Place value
+- [x] Odd and even numbers
+- [x] Best buys and unit pricing
+- [x] Using calculations (inverse operations)
 
 ## Fractions & Decimals
 

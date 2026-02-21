@@ -1,13 +1,13 @@
 import { randInt } from "./utils.js";
 
 export default {
-    id: "ordering-numbers",
-    label: "Ordering Numbers",
+    id: "negative-numbers-ordering",
+    label: "Ordering Negative Numbers",
     instruction() {
-        return "Order the numbers from smallest to largest.";
+        return "Order the numbers (including negative numbers) from smallest to largest.";
     },
     printTitle() {
-        return "Ordering Numbers";
+        return "Ordering Negative Numbers";
     },
     generate(rand, difficulty, count) {
         const problems = [];
@@ -18,40 +18,48 @@ export default {
     },
 };
 
+function formatNum(n) {
+    return n < 0 ? `−${Math.abs(n)}` : `${n}`;
+}
+
 function generateProblem(rand, difficulty) {
     let numbers = [];
-    let maxRange;
+    let count, maxRange;
 
     if (difficulty === "easy") {
-        maxRange = 100;
-        const count = 4;
+        count = 4;
+        maxRange = 30;
         for (let i = 0; i < count; i++) {
-            numbers.push(randInt(rand, 1, maxRange));
+            const num = randInt(rand, -maxRange, maxRange);
+            numbers.push(num);
         }
     } else if (difficulty === "normal") {
-        maxRange = 500;
-        const count = 5;
+        count = 5;
+        maxRange = 100;
         for (let i = 0; i < count; i++) {
-            numbers.push(randInt(rand, 1, maxRange));
+            const num = randInt(rand, -maxRange, maxRange);
+            numbers.push(num);
         }
     } else {
-        maxRange = 1000;
-        const count = 6;
+        count = 6;
+        maxRange = 200;
         for (let i = 0; i < count; i++) {
-            numbers.push(randInt(rand, 1, maxRange));
+            const num = randInt(rand, -maxRange, maxRange);
+            numbers.push(num);
         }
     }
 
     // Ensure no duplicates
     numbers = [...new Set(numbers)];
-    while (numbers.length < (difficulty === "easy" ? 4 : difficulty === "normal" ? 5 : 6)) {
-        numbers.push(randInt(rand, 1, maxRange));
+    while (numbers.length < count) {
+        const num = randInt(rand, -maxRange, maxRange);
+        numbers.push(num);
         numbers = [...new Set(numbers)];
     }
 
-    const originalOrder = numbers.join(", ");
+    const originalOrder = numbers.map(formatNum).join(", ");
     const sortedNumbers = [...numbers].sort((a, b) => a - b);
-    const sortedOrder = sortedNumbers.join(", ");
+    const sortedOrder = sortedNumbers.map(formatNum).join(", ");
 
     const question = `Order from smallest to largest: ${originalOrder}`;
     const answer = sortedOrder;
