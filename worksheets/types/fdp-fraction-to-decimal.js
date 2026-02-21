@@ -1,4 +1,4 @@
-import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator } from "./utils.js";
+import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator, formatDecimal, decimalPlaces } from "./utils.js";
 
 export default {
     id: "fdp-fraction-to-decimal",
@@ -23,11 +23,6 @@ export default {
     },
 };
 
-function decimalPlaces(difficulty) {
-    if (difficulty === "easy") return 1;
-    if (difficulty === "normal") return 2;
-    return 3;
-}
 
 function terminatingFraction(rand, dp) {
     const maxPow = Math.max(1, dp);
@@ -43,8 +38,3 @@ function terminatingFraction(rand, dp) {
     return ensureNonUnitDenominator(reduced.numerator, reduced.denominator);
 }
 
-function formatDecimal(value, dp) {
-    let s = value.toFixed(dp);
-    s = s.replace(/\.?0+$/, "");
-    return s;
-}

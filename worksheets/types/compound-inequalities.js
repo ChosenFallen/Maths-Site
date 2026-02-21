@@ -1,4 +1,4 @@
-import { randInt } from "./utils.js";
+import { randInt, formatCoeff, formatBound } from "./utils.js";
 
 const SIGNS = ["<", "≤"];
 
@@ -21,25 +21,12 @@ export default {
 };
 
 // Format coefficient with variable, handling 1 specially
-function formatCoeff(coeff) {
-    if (coeff === 1) return "x";
-    if (coeff === -1) return "−x";
-    if (coeff < 0) return `−${Math.abs(coeff)}x`;
-    return `${coeff}x`;
-}
-
 // Format expression: mx + k or mx or just x
 function formatExpr(m, k) {
     const xPart = formatCoeff(m);
     if (k === 0) return xPart;
     if (k > 0) return `${xPart} + ${k}`;
     return `${xPart} − ${Math.abs(k)}`;
-}
-
-// Format a signed bound (can be negative)
-function formatBound(n) {
-    if (n < 0) return `−${Math.abs(n)}`;
-    return `${n}`;
 }
 
 function generateProblem(rand, difficulty) {

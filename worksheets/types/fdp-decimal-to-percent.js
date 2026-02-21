@@ -1,4 +1,4 @@
-import { randInt } from "./utils.js";
+import { randInt, formatDecimal, decimalPlaces, formatPercent } from "./utils.js";
 
 export default {
     id: "fdp-decimal-to-percent",
@@ -23,26 +23,8 @@ export default {
     },
 };
 
-function decimalPlaces(difficulty) {
-    if (difficulty === "easy") return 1;
-    if (difficulty === "normal") return 2;
-    return 3;
-}
-
 function randomDecimal(rand, dp) {
     const max = Math.pow(10, dp) - 1;
     const n = randInt(rand, 1, Math.max(1, max));
     return n / Math.pow(10, dp);
-}
-
-function formatDecimal(value, dp) {
-    let s = value.toFixed(dp);
-    s = s.replace(/\.?0+$/, "");
-    return s;
-}
-
-function formatPercent(value, dp) {
-    let s = value.toFixed(dp);
-    s = s.replace(/\.?0+$/, "");
-    return `${s}%`;
 }

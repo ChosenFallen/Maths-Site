@@ -255,13 +255,14 @@ export function formatBound(n) {
 
 /**
  * Formats an algebraic coefficient with a variable.
- * Handles special cases: coefficient of 1 → just "x", coefficient of -1 → "−x".
- * Examples: formatCoeff(2, "x") → "2x", formatCoeff(-1, "y") → "−y"
+ * Handles special cases: coefficient of 0 → "0", coefficient of 1 → just "x", coefficient of -1 → "−x".
+ * Examples: formatCoeff(0, "x") → "0", formatCoeff(2, "x") → "2x", formatCoeff(-1, "y") → "−y"
  * @param {number} coeff - Coefficient value
  * @param {string} variable - Variable name (default "x")
  * @returns {string} Formatted coefficient with variable
  */
 export function formatCoeff(coeff, variable = "x") {
+    if (coeff === 0) return "0";
     if (coeff === 1) return variable;
     if (coeff === -1) return `−${variable}`;
     return `${coeff}${variable}`;
@@ -269,13 +270,16 @@ export function formatCoeff(coeff, variable = "x") {
 
 /**
  * Formats a surd (square root) expression in LaTeX notation.
- * Handles coefficient of 1 specially (omits the "1").
- * Examples: formatSurdLatex(1, 2) → "\sqrt{2}", formatSurdLatex(3, 5) → "3\sqrt{5}"
+ * Handles coefficient of 0 (returns "0") and coefficient of 1 specially (omits the "1").
+ * Examples: formatSurdLatex(0, 2) → "0", formatSurdLatex(1, 2) → "\sqrt{2}", formatSurdLatex(3, 5) → "3\sqrt{5}"
  * @param {number} coeff - Coefficient in front of the surd
  * @param {number} k - Number under the radical
  * @returns {string} LaTeX representation of the surd
  */
 export function formatSurdLatex(coeff, k) {
+    if (coeff === 0) {
+        return "0";
+    }
     if (coeff === 1) {
         return `\\sqrt{${k}}`;
     }
@@ -284,13 +288,16 @@ export function formatSurdLatex(coeff, k) {
 
 /**
  * Formats a surd (square root) expression in plain text with Unicode √ symbol.
- * Handles coefficient of 1 specially (omits the "1").
- * Examples: formatSurdText(1, 2) → "√2", formatSurdText(3, 5) → "3√5"
+ * Handles coefficient of 0 (returns "0") and coefficient of 1 specially (omits the "1").
+ * Examples: formatSurdText(0, 2) → "0", formatSurdText(1, 2) → "√2", formatSurdText(3, 5) → "3√5"
  * @param {number} coeff - Coefficient in front of the surd
  * @param {number} k - Number under the radical
  * @returns {string} Plain text representation of the surd
  */
 export function formatSurdText(coeff, k) {
+    if (coeff === 0) {
+        return "0";
+    }
     if (coeff === 1) {
         return `√${k}`;
     }
@@ -386,3 +393,67 @@ export function formatSignValue(value, useUnicode = true) {
  */
 export const INEQUALITY_SIGNS_STRICT = [">", "<"];
 export const INEQUALITY_SIGNS_ALL = [">", "<", "≥", "≤"];
+
+/**
+ * Formats a decimal number to a given number of decimal places, removing trailing zeros.
+ * Examples: formatDecimal(1.5, 2) → "1.5", formatDecimal(2.00, 2) → "2"
+ * @param {number} value - The decimal number to format
+ * @param {number} dp - Number of decimal places
+ * @returns {string} Formatted decimal string without trailing zeros
+ */
+export function formatDecimal(value, dp) {
+    let s = value.toFixed(dp);
+    s = s.replace(/\.?0+$/, "");
+    return s;
+}
+
+/**
+ * Returns the number of decimal places for a given difficulty level.
+ * Easy: 1 dp, Normal: 2 dp, Hard: 3 dp
+ * @param {string} difficulty - One of "easy", "normal", or "hard"
+ * @returns {number} Number of decimal places
+ */
+export function decimalPlaces(difficulty) {
+    if (difficulty === "easy") return 1;
+    if (difficulty === "normal") return 2;
+    return 3;
+}
+
+/**
+ * Formats a percentage value to a given number of decimal places, removing trailing zeros.
+ * Examples: formatPercent(50, 1) → "50%", formatPercent(33.3, 1) → "33.3%"
+ * @param {number} value - The percentage value (without % sign)
+ * @param {number} dp - Number of decimal places
+ * @returns {string} Formatted percentage string with % sign
+ */
+export function formatPercent(value, dp) {
+    let s = value.toFixed(dp);
+    s = s.replace(/\.?0+$/, "");
+    return `${s}%`;
+}
+
+/**
+ * Returns the number of decimal places for percentage difficulty levels.
+ * Easy: 0 dp, Normal: 1 dp, Hard: 2 dp
+ * @param {string} difficulty - One of "easy", "normal", or "hard"
+ * @returns {number} Number of decimal places
+ */
+export function percentPlaces(difficulty) {
+    if (difficulty === "easy") return 0;
+    if (difficulty === "normal") return 1;
+    return 2;
+}
+
+/**
+ * Converts an exponent (number) to superscript Unicode characters.
+ * Examples: exponentToSuperscript(2) → "²", exponentToSuperscript(12) → "¹²"
+ * @param {number} exp - The exponent value
+ * @returns {string} Superscript representation of the exponent
+ */
+export function exponentToSuperscript(exp) {
+    const superscriptDigits = {
+        '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
+        '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹'
+    };
+    return exp.toString().split('').map(char => superscriptDigits[char] || char).join('');
+}

@@ -1,4 +1,4 @@
-import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator } from "./utils.js";
+import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator, formatPercent, percentPlaces } from "./utils.js";
 
 export default {
     id: "fdp-percent-to-fraction",
@@ -25,11 +25,6 @@ export default {
     },
 };
 
-function percentPlaces(difficulty) {
-    if (difficulty === "easy") return 0;
-    if (difficulty === "normal") return 1;
-    return 2;
-}
 
 function randomPercent(rand, dp) {
     const max = 100 * Math.pow(10, dp);
@@ -48,8 +43,3 @@ function percentToFraction(percent, dp) {
     return { n: fixed.numerator, d: fixed.denominator };
 }
 
-function formatPercent(value, dp) {
-    let s = value.toFixed(dp);
-    s = s.replace(/\.?0+$/, "");
-    return `${s}%`;
-}

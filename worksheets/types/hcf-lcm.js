@@ -1,4 +1,4 @@
-import { randInt, gcd } from "./utils.js";
+import { randInt, gcd, lcm } from "./utils.js";
 
 export default {
     id: "hcf-lcm",
@@ -111,6 +111,3 @@ function calculateLCM(numbers) {
     }
 }
 
-function lcm(a, b) {
-    return Math.abs(a * b) / gcd(a, b);
-}

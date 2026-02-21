@@ -1,4 +1,4 @@
-import { formatFrac, formatFracOrWhole, randInt, gcd } from "./utils.js";
+import { formatFrac, formatFracOrWhole, randInt, gcd, formatDecimal, decimalPlaces } from "./utils.js";
 
 export default {
     id: "fdp-decimal-to-fraction",
@@ -25,12 +25,6 @@ export default {
     },
 };
 
-function decimalPlaces(difficulty) {
-    if (difficulty === "easy") return 1;
-    if (difficulty === "normal") return 2;
-    return 3;
-}
-
 function randomDecimal(rand, dp) {
     const max = Math.pow(10, dp) - 1;
     const n = randInt(rand, 1, Math.max(1, max));
@@ -43,10 +37,4 @@ function decimalToFraction(value, dp) {
     const d = scale;
     const g = gcd(n, d);
     return { n: n / g, d: d / g };
-}
-
-function formatDecimal(value, dp) {
-    let s = value.toFixed(dp);
-    s = s.replace(/\.?0+$/, "");
-    return s;
 }

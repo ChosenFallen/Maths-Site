@@ -1,4 +1,4 @@
-import { randInt } from "./utils.js";
+import { randInt, exponentToSuperscript } from "./utils.js";
 
 export default {
     id: "standard-form",
@@ -129,15 +129,6 @@ function generateNumber(rand, difficulty) {
     return { number: roundedNumber, standardForm };
 }
 
-function exponentToSuperscript(exp) {
-    const superscriptDigits = {
-        '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
-        '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
-        '-': '⁻'
-    };
-
-    return exp.toString().split('').map(char => superscriptDigits[char] || char).join('');
-}
 
 function standardFormToHtml(standardForm) {
     // Convert "3.5 × 10⁴" to HTML with proper superscript
