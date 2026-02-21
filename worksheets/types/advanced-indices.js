@@ -39,10 +39,22 @@ export default {
         },
     ],
     generate(rand, difficulty, count, options = {}) {
-        const problems = [];
         const type = options.indexType || "fractional";
         const basic = options.includeBasicLaws === true || options.includeBasicLaws === "true";
 
+        // Easy without basic laws: use pool-based shuffle for guaranteed ≥ 20 unique
+        if (difficulty === "easy" && !basic) {
+            const pool = buildEasyPool(type);
+            let all = [...pool];
+            while (all.length < count) all = all.concat([...pool]);
+            for (let i = all.length - 1; i > 0; i--) {
+                const j = Math.floor(rand() * (i + 1));
+                [all[i], all[j]] = [all[j], all[i]];
+            }
+            return all.slice(0, count);
+        }
+
+        const problems = [];
         for (let i = 0; i < count; i++) {
             // If includeBasicLaws is checked, 50% algebraic, 50% numerical
             if (basic && randInt(rand, 0, 1) === 0) {
@@ -60,6 +72,43 @@ function renderKatexLocal(latex) {
         return katex.renderToString(latex, { throwOnError: false });
     }
     return null;
+}
+
+// ============= EASY POOL (guaranteed ≥ 20 unique) =============
+
+function buildEasyPool(type) {
+    const pool = [];
+
+    if (type === "fractional" || type === "mixed") {
+        // base^(1/n) = k: n∈{2,3}, k∈[2,12] → 22 unique
+        for (let k = 2; k <= 12; k++) {
+            for (const n of [2, 3]) {
+                const base = Math.pow(k, n);
+                const latex = `${base}^{\\frac{1}{${n}}} =`;
+                const questionHtml = renderKatexLocal(latex) || `${base}^(1/${n}) =`;
+                const question = `${base}^(1/${n}) =`;
+                pool.push({ questionHtml, question, answer: `${k}` });
+            }
+        }
+    }
+
+    if (type === "negative" || type === "mixed") {
+        // a^(-n) = 1/a^n: n∈{1,2}, a∈[2,12] → 22 unique
+        for (let a = 2; a <= 12; a++) {
+            for (const n of [1, 2]) {
+                const denom = Math.pow(a, n);
+                const latex = `${a}^{-${n}} =`;
+                const questionHtml = renderKatexLocal(latex) || `${a}^(-${n}) =`;
+                const question = `${a}^(-${n}) =`;
+                const answerLatex = `\\frac{1}{${denom}}`;
+                const answerHtml = renderKatexLocal(answerLatex) || `1/${denom}`;
+                const answer = `1/${denom}`;
+                pool.push({ questionHtml, question, answer, answerHtml });
+            }
+        }
+    }
+
+    return pool;
 }
 
 // ============= NUMERICAL EVALUATION =============

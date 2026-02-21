@@ -10,6 +10,19 @@ export default {
         return "Difference of Two Squares";
     },
     generate(rand, difficulty, count) {
+        if (difficulty === "easy") {
+            // Pool-based shuffle: b from 2–21 = 20 unique problems
+            const pool = [];
+            for (let b = 2; b <= 21; b++) pool.push(b);
+            let all = [...pool];
+            while (all.length < count) all = all.concat([...pool]);
+            for (let i = all.length - 1; i > 0; i--) {
+                const j = Math.floor(rand() * (i + 1));
+                [all[i], all[j]] = [all[j], all[i]];
+            }
+            return all.slice(0, count).map(makeEasyProblem);
+        }
+
         const problems = [];
         for (let i = 0; i < count; i++) {
             problems.push(generateProblem(rand, difficulty));
@@ -18,13 +31,23 @@ export default {
     },
 };
 
+function makeEasyProblem(b) {
+    const bSq = b * b;
+    const question = `x² − ${bSq}`;
+    const latex = `x^2 - ${bSq}`;
+    const answer = `(x + ${b})(x − ${b})`;
+    const katexHtml = renderKatex(latex);
+    const questionHtml = katexHtml || question;
+    return { questionHtml, question, answer };
+}
+
 function generateProblem(rand, difficulty) {
     let question = "";
     let latex = "";
     let answer = "";
 
     if (difficulty === "easy") {
-        // x² - b² = (x + b)(x - b)
+        // x² - b² = (x + b)(x - b)  [only used for normal/hard path now]
         const b = randInt(rand, 2, 15);
         const bSq = b * b;
 

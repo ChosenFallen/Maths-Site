@@ -284,6 +284,26 @@ function checkType(type) {
         }
     });
 
+    // Test 5: Each difficulty has at least 20 distinct questions in its problem space.
+    // We sample 50 problems and require ≥ 20 unique — this checks the pool is large enough
+    // without requiring sequential uniqueness (which needs a shuffle approach).
+    const isFdp = type.id.startsWith("fdp-");
+    if (!isFdp) {
+        for (const difficulty of ["easy", "normal", "hard"]) {
+            const r = mulberry32(55555);
+            let p50;
+            try {
+                p50 = type.generate(r, difficulty, 50, {});
+            } catch {
+                continue; // already caught in Test 4
+            }
+            const unique = new Set(p50.map(p => p.questionHtml || p.question || JSON.stringify(p)));
+            if (unique.size < 20) {
+                errors.push(`${difficulty}: only ${unique.size} distinct questions in 50-sample (need ≥ 20).`);
+            }
+        }
+    }
+
     return errors;
 }
 
