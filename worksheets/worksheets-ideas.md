@@ -59,12 +59,11 @@
 ## Times Tables
 
 - [x] Speed tables by range (e.g., 2–6, 7–12)
-- [ ] Mixed‑table drill with set count per table
+- [x] Mixed‑table drill with set count per table
 - [x] Missing factor (e.g., ? × 8 = 56)
 - [x] Division facts (inverse of times tables)
-- [ ] Square numbers up to 15²
-- [ ] Times tables with negative numbers
-- [ ] Times tables in different bases (optional challenge)
+- [x] Square numbers up to 15²
+- [x] Times tables with negative numbers
 - [ ] Systematic listing (counting outcomes, combinations)
 
 ## Algebra
