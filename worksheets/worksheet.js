@@ -76,6 +76,8 @@ import timesTablesMissingFactor from "./types/times-tables-missing-factor.js";
 import timesTablesDivisionFacts from "./types/times-tables-division-facts.js";
 import timesTablesMixedDrill from "./types/times-tables-mixed-drill.js";
 import timesTablesNegative from "./types/times-tables-negative.js";
+import systematicListing from "./types/systematic-listing.js";
+import areaRectangle from "./types/area-rectangle.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -156,6 +158,8 @@ const WORKSHEET_TYPES = [
     timesTablesDivisionFacts,
     timesTablesMixedDrill,
     timesTablesNegative,
+    systematicListing,
+    areaRectangle,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -203,11 +207,12 @@ const WORKSHEET_GROUPS = [
         ],
     },
     { label: "Powers", types: ["indices", "cube-numbers", "square-numbers", "index-laws", "advanced-indices"] },
-    { label: "Times Tables", types: ["times-tables-speed", "times-tables-missing-factor", "times-tables-division-facts", "times-tables-mixed-drill", "times-tables-negative"] },
+    { label: "Times Tables", types: ["times-tables-speed", "times-tables-missing-factor", "times-tables-division-facts", "times-tables-mixed-drill", "times-tables-negative", "systematic-listing"] },
     { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "solving-inequalities", "rearranging-formulae", "quadratic-equations", "compound-inequalities", "quadratic-inequalities"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
+    { label: "Measurement & Geometry", types: ["area-rectangle"] },
 ];
 
 const generateBtn = document.getElementById("generate-btn");

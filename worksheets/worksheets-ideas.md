@@ -64,7 +64,7 @@
 - [x] Division facts (inverse of times tables)
 - [x] Square numbers up to 15²
 - [x] Times tables with negative numbers
-- [ ] Systematic listing (counting outcomes, combinations)
+- [x] Systematic listing (counting outcomes, combinations)
 
 ## Algebra
 

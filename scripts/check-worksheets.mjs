@@ -91,6 +91,8 @@ const DUPLICATE_TOLERANCE = {
     "times-tables-division-facts": 20,
     "times-tables-mixed-drill": 15,
     "times-tables-negative": 20,
+    "systematic-listing": 40,
+    "area-rectangle": 10,
 };
 
 function mulberry32(seed) {
