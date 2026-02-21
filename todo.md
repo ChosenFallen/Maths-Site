@@ -1,2 +1,0 @@
-- In the adding and subtracting surds worksheet, some of the answers are 0 and then square root a number. We need to decide if we are going to have 0 as an answer and if we are, it shouldn't have the surd after it.
-- Can we also make sure this type of thing doesn't happen in any other worksheets. For example, I don't want any 0x, 0y or 0z.
