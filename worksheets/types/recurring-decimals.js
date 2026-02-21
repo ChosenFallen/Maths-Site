@@ -65,6 +65,14 @@ function getFractionsForDifficulty(difficulty) {
             { n: 2, d: 27 }, // 0.074̇
             { n: 4, d: 27 }, // 0.148̇
             { n: 5, d: 27 }, // 0.185̇
+            { n: 7, d: 27 }, // 0.259̇
+            { n: 8, d: 27 }, // 0.296̇
+            { n: 10, d: 27 }, // 0.370̇
+            { n: 11, d: 27 }, // 0.407̇
+            { n: 13, d: 27 }, // 0.481̇
+            { n: 14, d: 27 }, // 0.518̇
+            { n: 16, d: 27 }, // 0.592̇
+            { n: 17, d: 27 }, // 0.629̇
         ];
     } else if (difficulty === "normal") {
         // Mixed terminating and recurring with non-repeating parts
@@ -78,12 +86,17 @@ function getFractionsForDifficulty(difficulty) {
             { n: 2, d: 15 }, // 0.13̇
             { n: 4, d: 15 }, // 0.26̇
             { n: 7, d: 15 }, // 0.46̇
-            { n: 8, d: 15 }, // 0.53̇ (from Corbett Maths)
+            { n: 8, d: 15 }, // 0.53̇
             { n: 11, d: 15 }, // 0.73̇
-            { n: 1, d: 30 }, // 0.03̇ (from Corbett Maths)
+            { n: 1, d: 30 }, // 0.03̇
             { n: 7, d: 30 }, // 0.23̇
             { n: 11, d: 30 }, // 0.36̇
             { n: 13, d: 30 }, // 0.43̇
+            { n: 1, d: 15 }, // 0.06̇
+            { n: 13, d: 15 }, // 0.86̇
+            { n: 14, d: 15 }, // 0.93̇
+            { n: 17, d: 30 }, // 0.56̇
+            { n: 23, d: 30 }, // 0.76̇
         ];
     } else {
         // Complex recurring patterns

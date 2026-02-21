@@ -4,103 +4,109 @@ export default {
     id: "recurring-decimals-to-fractions",
     label: "Recurring Decimals to Fractions",
     instruction() {
-        return "Convert each recurring decimal to a fraction in simplest form.";
+        return "Convert each recurring decimal to a fraction in its simplest form. Brackets show the repeating part, e.g. 0.(3) = 0.333…";
     },
     printTitle() {
         return "Recurring Decimals to Fractions";
     },
     generate(rand, difficulty, count) {
-        const problems = [];
-        for (let i = 0; i < count; i++) {
-            problems.push(generateProblem(rand, difficulty));
+        const pool = getPool(difficulty);
+
+        let all = [...pool];
+        while (all.length < count) all = all.concat([...pool]);
+        for (let i = all.length - 1; i > 0; i--) {
+            const j = Math.floor(rand() * (i + 1));
+            [all[i], all[j]] = [all[j], all[i]];
         }
-        return problems;
+
+        return all.slice(0, count).map(({ question, answer }) => ({ question, answer }));
     },
 };
 
-// GCD function for simplifying fractions
-function gcd(a, b) {
-    return b === 0 ? a : gcd(b, a % b);
-}
-
-function simplifyFraction(num, denom) {
-    const g = gcd(Math.abs(num), Math.abs(denom));
-    return { num: num / g, denom: denom / g };
-}
-
-function generateProblem(rand, difficulty) {
+function getPool(difficulty) {
     if (difficulty === "easy") {
-        return generateEasy(rand);
+        // /9 fractions (one-digit repeating, bracket notation) — 8 unique
+        // /11 fractions (two-digit repeating)                  — 10 unique
+        // /33 fractions (two-digit repeating, different start) — 2 unique
+        // Total: 20 unique
+        return [
+            { question: "0.(1) =", answer: "1/9" },
+            { question: "0.(2) =", answer: "2/9" },
+            { question: "0.(3) =", answer: "1/3" },
+            { question: "0.(4) =", answer: "4/9" },
+            { question: "0.(5) =", answer: "5/9" },
+            { question: "0.(6) =", answer: "2/3" },
+            { question: "0.(7) =", answer: "7/9" },
+            { question: "0.(8) =", answer: "8/9" },
+            { question: "0.(09) =", answer: "1/11" },
+            { question: "0.(18) =", answer: "2/11" },
+            { question: "0.(27) =", answer: "3/11" },
+            { question: "0.(36) =", answer: "4/11" },
+            { question: "0.(45) =", answer: "5/11" },
+            { question: "0.(54) =", answer: "6/11" },
+            { question: "0.(63) =", answer: "7/11" },
+            { question: "0.(72) =", answer: "8/11" },
+            { question: "0.(81) =", answer: "9/11" },
+            { question: "0.(90) =", answer: "10/11" },
+            { question: "0.(12) =", answer: "4/33" },
+            { question: "0.(21) =", answer: "7/33" },
+        ];
     } else if (difficulty === "normal") {
-        return generateNormal(rand);
-    } else {
-        return generateHard(rand);
-    }
-}
-
-function generateEasy(rand) {
-    // Easy recurring decimals: simple one-digit repeating
-    // Examples: 0.111... = 1/9, 0.222... = 2/9, 0.333... = 3/9 = 1/3, etc.
-    const numerators = [1, 2, 4, 5, 7, 8]; // exclude 3, 6 (simplify nicely)
-    const num = numerators[randInt(rand, 0, numerators.length - 1)];
-
-    const question = `0.${num}̄ =`;
-    const simplified = simplifyFraction(num, 9);
-    const answer = `${simplified.num}/${simplified.denom}`;
-
-    return { question, answer };
-}
-
-function generateNormal(rand) {
-    // Normal: mix of purely repeating and mixed
-    const type = randInt(rand, 0, 1);
-
-    if (type === 0) {
-        // Purely repeating with two digits
-        // Examples: 0.142857̄ = 1/7, 0.090909̄ = 1/11, etc.
-        const options = [
-            { decimal: "142857", num: 1, denom: 7 },
-            { decimal: "090909", num: 1, denom: 11 },
-            { decimal: "181818", num: 2, denom: 11 },
-            { decimal: "272727", num: 3, denom: 11 },
-            { decimal: "090909", num: 1, denom: 11 },
+        // /7 (6-digit repeating): 6 unique
+        // /6 and /12 (mixed):     6 unique
+        // /15 (mixed):            5 unique
+        // /30 (mixed):            5 unique
+        // Total: 22 unique
+        return [
+            { question: "0.(142857) =", answer: "1/7" },
+            { question: "0.(285714) =", answer: "2/7" },
+            { question: "0.(428571) =", answer: "3/7" },
+            { question: "0.(571428) =", answer: "4/7" },
+            { question: "0.(714285) =", answer: "5/7" },
+            { question: "0.(857142) =", answer: "6/7" },
+            { question: "0.1(6) =", answer: "1/6" },
+            { question: "0.8(3) =", answer: "5/6" },
+            { question: "0.08(3) =", answer: "1/12" },
+            { question: "0.41(6) =", answer: "5/12" },
+            { question: "0.58(3) =", answer: "7/12" },
+            { question: "0.91(6) =", answer: "11/12" },
+            { question: "0.1(3) =", answer: "2/15" },
+            { question: "0.2(6) =", answer: "4/15" },
+            { question: "0.4(6) =", answer: "7/15" },
+            { question: "0.5(3) =", answer: "8/15" },
+            { question: "0.7(3) =", answer: "11/15" },
+            { question: "0.0(3) =", answer: "1/30" },
+            { question: "0.2(3) =", answer: "7/30" },
+            { question: "0.3(6) =", answer: "11/30" },
+            { question: "0.4(3) =", answer: "13/30" },
+            { question: "0.5(6) =", answer: "17/30" },
         ];
-        const option = options[randInt(rand, 0, options.length - 1)];
-        const question = `0.${option.decimal}̄ =`;
-        const answer = `${option.num}/${option.denom}`;
-        return { question, answer };
     } else {
-        // Mixed repeating (non-repeating then repeating)
-        // Examples: 0.1̄6̄ = 1/6, 0.8̄3̄ = 5/6, etc.
-        const options = [
-            { decimal: "16̄", num: 1, denom: 6 },
-            { decimal: "83̄", num: 5, denom: 6 },
-            { decimal: "25̄", num: 23, denom: 90 },
-            { decimal: "75̄", num: 68, denom: 90 },
+        // Hard: mix of /7, /11, /12, /13, /14 and tricky mixed patterns
+        // Total: 22 unique
+        return [
+            { question: "0.(142857) =", answer: "1/7" },
+            { question: "0.(285714) =", answer: "2/7" },
+            { question: "0.(571428) =", answer: "4/7" },
+            { question: "0.(714285) =", answer: "5/7" },
+            { question: "0.(857142) =", answer: "6/7" },
+            { question: "0.(076923) =", answer: "1/13" },
+            { question: "0.(153846) =", answer: "2/13" },
+            { question: "0.(230769) =", answer: "3/13" },
+            { question: "0.(307692) =", answer: "4/13" },
+            { question: "0.(384615) =", answer: "5/13" },
+            { question: "0.(09) =", answer: "1/11" },
+            { question: "0.(18) =", answer: "2/11" },
+            { question: "0.(27) =", answer: "3/11" },
+            { question: "0.(45) =", answer: "5/11" },
+            { question: "0.(63) =", answer: "7/11" },
+            { question: "0.08(3) =", answer: "1/12" },
+            { question: "0.41(6) =", answer: "5/12" },
+            { question: "0.58(3) =", answer: "7/12" },
+            { question: "0.91(6) =", answer: "11/12" },
+            { question: "0.07(142857) =", answer: "1/14" },
+            { question: "0.2(142857) =", answer: "3/14" },
+            { question: "0.3(571428) =", answer: "5/14" },
         ];
-        const option = options[randInt(rand, 0, options.length - 1)];
-        const question = `0.${option.decimal} =`;
-        const answer = `${option.num}/${option.denom}`;
-        return { question, answer };
     }
-}
-
-function generateHard(rand) {
-    // Hard: mix of various recurring patterns
-    const options = [
-        { decimal: "142857̄", num: 1, denom: 7 },
-        { decimal: "142857̄", num: 2, denom: 14 }, // same as 1/7
-        { decimal: "090909̄", num: 1, denom: 11 },
-        { decimal: "272727̄", num: 3, denom: 11 },
-        { decimal: "363636̄", num: 4, denom: 11 },
-        { decimal: "454545̄", num: 5, denom: 11 },
-        { decimal: "16̄", num: 1, denom: 6 },
-        { decimal: "83̄", num: 5, denom: 6 },
-        { decimal: "3̄", num: 1, denom: 3 },
-        { decimal: "6̄", num: 2, denom: 3 },
-    ];
-    const option = options[randInt(rand, 0, options.length - 1)];
-    const question = `0.${option.decimal} =`;
-    const answer = `${option.num}/${option.denom}`;
-    return { question, answer };
 }

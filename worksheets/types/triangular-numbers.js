@@ -10,48 +10,67 @@ export default {
         return "Triangular Numbers";
     },
     generate(rand, difficulty, count) {
-        const problems = [];
-        for (let i = 0; i < count; i++) {
-            problems.push(generateProblem(rand, difficulty));
+        const pool = buildPool(difficulty);
+
+        let all = [...pool];
+        while (all.length < count) all = all.concat([...pool]);
+        for (let i = all.length - 1; i > 0; i--) {
+            const j = Math.floor(rand() * (i + 1));
+            [all[i], all[j]] = [all[j], all[i]];
         }
-        return problems;
+
+        return all.slice(0, count).map(p => makeProblem(p));
     },
 };
 
-// Calculate the nth triangular number
 function triangularNumber(n) {
     return (n * (n + 1)) / 2;
 }
 
-function generateProblem(rand, difficulty) {
+function buildPool(difficulty) {
+    const pool = [];
+
     if (difficulty === "easy") {
-        // Find the nth triangular number for small n
-        const n = randInt(rand, 1, 10);
-        const answer = triangularNumber(n);
-        const question = `What is the ${n}th triangular number?`;
-        return { question, answer: `${answer}` };
+        // "What is the nth triangular number?" for n = 1..20 → 20 unique
+        for (let n = 1; n <= 20; n++) {
+            pool.push({ type: "find", n });
+        }
     } else if (difficulty === "normal") {
-        // Find the nth triangular number for medium n
-        const n = randInt(rand, 1, 15);
-        const answer = triangularNumber(n);
-        const question = `Find the ${n}th triangular number.`;
-        return { question, answer: `${answer}` };
+        // Find nth for n = 1..25 → 25 unique
+        for (let n = 1; n <= 25; n++) {
+            pool.push({ type: "find", n });
+        }
     } else {
-        // Find the nth triangular number for larger n, or find position of a triangular number
-        const type = randInt(rand, 0, 1);
-        
-        if (type === 0) {
-            // Find the nth triangular number
-            const n = randInt(rand, 10, 20);
-            const answer = triangularNumber(n);
-            const question = `Calculate the ${n}th triangular number.`;
-            return { question, answer: `${answer}` };
-        } else {
-            // Find position of a given triangular number
-            const n = randInt(rand, 8, 15);
-            const number = triangularNumber(n);
-            const question = `What position is the triangular number ${number}?`;
-            return { question, answer: `${n}` };
+        // Hard: mix "find nth" (n = 10..30) and "find position" (n = 5..25)
+        for (let n = 10; n <= 30; n++) {
+            pool.push({ type: "find", n });
+        }
+        for (let n = 5; n <= 25; n++) {
+            pool.push({ type: "position", n });
         }
     }
+
+    return pool;
+}
+
+function makeProblem({ type, n }) {
+    if (type === "find") {
+        const answer = triangularNumber(n);
+        const ordinal = toOrdinal(n);
+        const question = n <= 10
+            ? `What is the ${ordinal} triangular number?`
+            : `Find the ${ordinal} triangular number.`;
+        return { question, answer: `${answer}` };
+    } else {
+        // type === "position"
+        const number = triangularNumber(n);
+        const question = `What position is the triangular number ${number}?`;
+        return { question, answer: `${n}` };
+    }
+}
+
+function toOrdinal(n) {
+    const s = ["th", "st", "nd", "rd"];
+    const v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }

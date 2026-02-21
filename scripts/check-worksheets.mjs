@@ -44,15 +44,19 @@ const MAX_BY_TYPE = {
     indices: 5000,
 };
 const DUPLICATE_TOLERANCE = {
-    "advanced-indices": 45,
-    "cube-numbers": 40,
+    // Advanced indices: normal pool ~21 unique → ~29 duplicates in 50
+    "advanced-indices": 35,
+    // Cube numbers: normal pool of 32, shuffle → exactly 18 duplicates in 50
+    "cube-numbers": 20,
     "index-laws": 15,
-    indices: 40,
+    // Indices: normal pool of 22, shuffle → exactly 28 duplicates in 50
+    indices: 30,
     "square-numbers": 40,
     "odd-even-numbers": 10,
     "place-value": 30,
     "ordering-numbers": 20,
-    "triangular-numbers": 40,
+    // Triangular numbers: normal pool of 25, shuffle → exactly 25 duplicates in 50
+    "triangular-numbers": 30,
     "negative-numbers-ordering": 15,
     "factors-multiples": 30,
     "estimation": 20,
@@ -64,12 +68,14 @@ const DUPLICATE_TOLERANCE = {
     "percentages-as-percentage": 25,
     "percentages-multipliers": 20,
     "percentages-repeated": 30,
-    "recurring-decimals-to-fractions": 45,
+    // Recurring decimals to fractions: normal pool of 22, shuffle → ~28 duplicates in 50
+    "recurring-decimals-to-fractions": 30,
     "simplify-fractions": 10,
     "fraction-add-sub": 10,
     "mixed-numbers": 15,
     "equivalent-fractions": 8,
-    "recurring-decimals": 40,
+    // Recurring decimals: normal pool of 20, shuffle → exactly 30 duplicates in 50
+    "recurring-decimals": 35,
     "fraction-compare": 10,
     "ratio-simplify": 10,
     "percentage-change": 15,
@@ -91,7 +97,8 @@ const DUPLICATE_TOLERANCE = {
     "times-tables-division-facts": 20,
     "times-tables-mixed-drill": 15,
     "times-tables-negative": 20,
-    "systematic-listing": 40,
+    // Systematic listing: normal pool ~25 unique → ~25 duplicates in 50
+    "systematic-listing": 30,
     "area-rectangle": 10,
     "area-triangle": 15,
 };

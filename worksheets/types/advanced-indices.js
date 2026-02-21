@@ -80,8 +80,8 @@ function generateNumerical(rand, difficulty, type) {
 // Fractional: k^n, ask for base^(1/n) = k, or base^(m/n) = k^m
 function generateFractionalNumerical(rand, difficulty) {
     if (difficulty === "easy") {
-        // base^(1/n) = k, where n ∈ {2, 3}
-        const k = randInt(rand, 2, 5);
+        // base^(1/n) = k, where n ∈ {2, 3}, k ∈ [2, 12] → 22 unique
+        const k = randInt(rand, 2, 12);
         const n = randInt(rand, 0, 1) === 0 ? 2 : 3;
         const base = Math.pow(k, n);
 
@@ -92,8 +92,8 @@ function generateFractionalNumerical(rand, difficulty) {
 
         return { questionHtml, question, answer };
     } else if (difficulty === "normal") {
-        // base^(m/n) = k^m, with m ≠ n
-        const k = randInt(rand, 2, 4);
+        // base^(m/n) = k^m, with m ≠ n, k ∈ [2, 12] → 22 unique
+        const k = randInt(rand, 2, 12);
         const n = randInt(rand, 0, 1) === 0 ? 2 : 3;
         let m = randInt(rand, 2, 3);
         while (m === n) m = m === 2 ? 3 : 2; // ensure m ≠ n
@@ -137,7 +137,8 @@ function generateFractionalNumerical(rand, difficulty) {
 // Negative: a^(-n) = 1/a^n
 function generateNegativeNumerical(rand, difficulty) {
     if (difficulty === "easy") {
-        const a = randInt(rand, 2, 5);
+        // a ∈ [2, 12], n ∈ {1, 2} → 22 unique
+        const a = randInt(rand, 2, 12);
         const n = randInt(rand, 1, 2);
         const denom = Math.pow(a, n);
 
@@ -151,7 +152,8 @@ function generateNegativeNumerical(rand, difficulty) {
 
         return { questionHtml, question, answer, answerHtml };
     } else if (difficulty === "normal") {
-        const a = randInt(rand, 2, 4);
+        // a ∈ [2, 8], n ∈ {1, 2, 3} → 21 unique
+        const a = randInt(rand, 2, 8);
         const n = randInt(rand, 1, 3);
         const denom = Math.pow(a, n);
 

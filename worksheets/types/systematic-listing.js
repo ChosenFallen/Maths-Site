@@ -10,6 +10,18 @@ export default {
         return "Systematic Listing: Counting Outcomes";
     },
     generate(rand, difficulty, count) {
+        if (difficulty === "easy") {
+            // Use pool-based shuffle to guarantee uniqueness
+            const pool = buildEasyPool();
+            let all = [...pool];
+            while (all.length < count) all = all.concat([...pool]);
+            for (let i = all.length - 1; i > 0; i--) {
+                const j = Math.floor(rand() * (i + 1));
+                [all[i], all[j]] = [all[j], all[i]];
+            }
+            return all.slice(0, count).map(makeEasyProblem);
+        }
+
         const problems = [];
         for (let i = 0; i < count; i++) {
             problems.push(generateProblem(rand, difficulty));
@@ -19,36 +31,63 @@ export default {
 };
 
 function generateProblem(rand, difficulty) {
-    const type = randInt(rand, 0, 2);
-
-    if (difficulty === "easy") {
-        return generateEasyProblem(rand, type);
-    } else if (difficulty === "normal") {
-        return generateNormalProblem(rand, type);
+    if (difficulty === "normal") {
+        return generateNormalProblem(rand, randInt(rand, 0, 2));
     } else {
-        return generateHardProblem(rand, type);
+        return generateHardProblem(rand, randInt(rand, 0, 2));
     }
 }
 
-function generateEasyProblem(rand, type) {
+function buildEasyPool() {
+    const pool = [];
+
+    // Type 0: 2-digit numbers from N different digits (no repeats), N from 3–8 → 6 unique
+    for (let digits = 3; digits <= 8; digits++) {
+        pool.push({ type: 0, digits });
+    }
+    // Type 1: arrange N items in a line (factorial), N from 2–6 → 5 unique
+    for (let items = 2; items <= 6; items++) {
+        pool.push({ type: 1, items });
+    }
+    // Type 2: coin flip outcomes (2^N), N from 1–6 → 6 unique
+    for (let coins = 1; coins <= 6; coins++) {
+        pool.push({ type: 2, coins });
+    }
+    // Type 3: restaurant meals (starters × mains), starters ∈ [2,4], mains ∈ [2,5] → 12 unique
+    for (let starters = 2; starters <= 4; starters++) {
+        for (let mains = 2; mains <= 5; mains++) {
+            pool.push({ type: 3, starters, mains });
+        }
+    }
+
+    return pool; // 6 + 5 + 6 + 12 = 29 unique
+}
+
+function makeEasyProblem({ type, digits, items, coins, starters, mains }) {
     if (type === 0) {
-        // 2-digit numbers from small digit set
-        const digits = randInt(rand, 3, 4);
-        const answer = digits * (digits - 1); // n × (n-1) for no repeats
-        const question = `How many 2-digit numbers can you make using ${digits} different digits (no repeats)?`;
-        return { question, answer: `${answer}` };
+        const answer = digits * (digits - 1);
+        return {
+            question: `How many 2-digit numbers can you make using ${digits} different digits (no repeats)?`,
+            answer: `${answer}`,
+        };
     } else if (type === 1) {
-        // Arrangements of items
-        const items = randInt(rand, 2, 4);
-        const factorial = [1, 1, 2, 6, 24][items]; // factorial lookup
-        const question = `In how many ways can you arrange ${items} different colored balls in a line?`;
-        return { question, answer: `${factorial}` };
-    } else {
-        // Simple coin/dice outcomes
-        const coins = randInt(rand, 1, 3);
+        const factorial = [1, 1, 2, 6, 24, 120, 720][items];
+        return {
+            question: `In how many ways can you arrange ${items} different items in a line?`,
+            answer: `${factorial}`,
+        };
+    } else if (type === 2) {
         const answer = Math.pow(2, coins);
-        const question = `How many different outcomes are there when flipping ${coins} coin${coins > 1 ? "s" : ""}?`;
-        return { question, answer: `${answer}` };
+        return {
+            question: `How many different outcomes are there when flipping ${coins} coin${coins > 1 ? "s" : ""}?`,
+            answer: `${answer}`,
+        };
+    } else {
+        const answer = starters * mains;
+        return {
+            question: `A restaurant offers ${starters} starters and ${mains} main dishes. How many different two-course meals can be chosen?`,
+            answer: `${answer}`,
+        };
     }
 }
 

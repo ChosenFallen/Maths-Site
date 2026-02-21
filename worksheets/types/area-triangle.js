@@ -18,6 +18,16 @@ export default {
     },
 };
 
+const UNITS = {
+    easy: ["cm", "m"],
+    normal: ["cm", "m", "mm"],
+    hard: ["cm", "m", "mm", "km"],
+};
+
+function fmt(n) {
+    return n % 1 === 0 ? String(n) : n.toFixed(1);
+}
+
 function generateProblem(rand, difficulty) {
     let base, height;
 
@@ -29,39 +39,42 @@ function generateProblem(rand, difficulty) {
             base = randInt(rand, 6, 12);
             height = randInt(rand, 4, 10);
         } else {
-            base = (randInt(rand, 8, 16) / 2).toFixed(1);
+            base = fmt(randInt(rand, 8, 16) / 2);
             height = randInt(rand, 4, 10);
         }
     } else {
         const type = randInt(rand, 0, 2);
         if (type === 0) {
-            base = (randInt(rand, 12, 20) / 2).toFixed(1);
-            height = (randInt(rand, 10, 16) / 2).toFixed(1);
+            base = fmt(randInt(rand, 12, 20) / 2);
+            height = fmt(randInt(rand, 10, 16) / 2);
         } else if (type === 1) {
             base = randInt(rand, 8, 14);
-            height = (randInt(rand, 10, 20) / 2).toFixed(1);
+            height = fmt(randInt(rand, 10, 20) / 2);
         } else {
-            base = (randInt(rand, 14, 24) / 2).toFixed(1);
+            base = fmt(randInt(rand, 14, 24) / 2);
             height = randInt(rand, 6, 12);
         }
     }
 
+    const unitList = UNITS[difficulty];
+    const unit = unitList[randInt(rand, 0, unitList.length - 1)];
+
     const area = (parseFloat(base) * parseFloat(height)) / 2;
     const areaStr = area % 1 === 0 ? `${area}` : area.toFixed(2);
+    const answer = `${areaStr} ${unit}²`;
 
-    const questionHtml = drawTriangle(base, height);
+    const questionHtml = drawTriangle(base, height, unit);
 
     return {
         questionHtml,
-        question: `Triangle: base ${base} cm, height ${height} cm. Area = ?`,
-        answer: areaStr,
-        answerHtml: areaStr,
+        question: `Triangle: base ${base} ${unit}, height ${height} ${unit}. Area = ?`,
+        answer,
+        answerHtml: answer,
     };
 }
 
-function drawTriangle(base, height) {
+function drawTriangle(base, height, unit) {
     const svgWidth = 280;
-    const svgHeight = 160;
 
     // Scale factor to fit in SVG
     const maxDim = Math.max(parseFloat(base), parseFloat(height));
@@ -71,7 +84,10 @@ function drawTriangle(base, height) {
     const heightPixels = parseFloat(height) * scale;
 
     const startX = (svgWidth - baseWidth) / 2;
-    const startY = svgHeight - 40;
+
+    // Dynamic height: top pad + triangle + arrow offset + label + bottom pad
+    const svgHeight = Math.ceil(6 + heightPixels + 38);
+    const startY = svgHeight - 30;
 
     // Triangle vertices: base at bottom, apex at top center
     const baseLeftX = startX;
@@ -81,12 +97,9 @@ function drawTriangle(base, height) {
     const apexY = startY - heightPixels;
 
     return `
-        <svg width="100%" height="160" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px;">
+        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px; display: block;">
             <defs>
-                <marker id="arrowhead-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto">
-                    <polygon points="10 0, 0 3, 10 6" fill="#666"/>
-                </marker>
-                <marker id="arrowhead-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
                 </marker>
             </defs>
@@ -107,8 +120,8 @@ function drawTriangle(base, height) {
                 y2="${baseY + 12}"
                 stroke="#666"
                 stroke-width="1"
-                marker-end="url(#arrowhead-end)"
-                marker-start="url(#arrowhead-start)"
+                marker-end="url(#arrowhead)"
+                marker-start="url(#arrowhead)"
             />
             <text
                 x="${apexX}"
@@ -118,10 +131,10 @@ function drawTriangle(base, height) {
                 font-weight="bold"
                 fill="#333"
             >
-                ${base} cm
+                ${base} ${unit}
             </text>
 
-            <!-- Height label (dashed line from apex perpendicular to base) -->
+            <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="${apexX}"
                 y1="${apexY}"
@@ -130,16 +143,8 @@ function drawTriangle(base, height) {
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
-            />
-            <line
-                x1="${apexX - 6}"
-                y1="${apexY + 12}"
-                x2="${apexX + 6}"
-                y2="${apexY + 12}"
-                stroke="#666"
-                stroke-width="1"
-                marker-end="url(#arrowhead-end)"
-                marker-start="url(#arrowhead-start)"
+                marker-end="url(#arrowhead)"
+                marker-start="url(#arrowhead)"
             />
             <text
                 x="${apexX + 28}"
@@ -150,11 +155,8 @@ function drawTriangle(base, height) {
                 font-weight="bold"
                 fill="#333"
             >
-                ${height} cm
+                ${height} ${unit}
             </text>
         </svg>
-        <div style="text-align: center; margin-top: 8px; font-size: 13px; color: #666;">
-            <strong>Find the area</strong>
-        </div>
     `;
 }

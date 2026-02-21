@@ -10,13 +10,50 @@ export default {
         return "Cube Numbers & Cube Roots";
     },
     generate(rand, difficulty, count) {
-        const problems = [];
-        for (let i = 0; i < count; i++) {
-            problems.push(generateProblem(rand, difficulty));
+        const pool = buildPool(difficulty);
+
+        // Fisher-Yates shuffle using seeded PRNG, repeating pool if needed
+        let all = [...pool];
+        while (all.length < count) all = all.concat([...pool]);
+        for (let i = all.length - 1; i > 0; i--) {
+            const j = Math.floor(rand() * (i + 1));
+            [all[i], all[j]] = [all[j], all[i]];
         }
-        return problems;
+
+        return all.slice(0, count).map(({ base, isNegative, isCube }) => {
+            const signedBase = isNegative ? -base : base;
+            return makeProblem(signedBase, isCube);
+        });
     },
 };
+
+function buildPool(difficulty) {
+    const pool = [];
+    if (difficulty === "easy") {
+        // bases 1–10, positive only, cube and cube-root → 20 unique
+        for (let base = 1; base <= 10; base++) {
+            pool.push({ base, isNegative: false, isCube: true });
+            pool.push({ base, isNegative: false, isCube: false });
+        }
+    } else if (difficulty === "normal") {
+        // bases 1–8, positive and negative → 32 unique
+        for (let base = 1; base <= 8; base++) {
+            for (const isNegative of [false, true]) {
+                pool.push({ base, isNegative, isCube: true });
+                pool.push({ base, isNegative, isCube: false });
+            }
+        }
+    } else {
+        // bases 1–12, positive and negative → 48 unique
+        for (let base = 1; base <= 12; base++) {
+            for (const isNegative of [false, true]) {
+                pool.push({ base, isNegative, isCube: true });
+                pool.push({ base, isNegative, isCube: false });
+            }
+        }
+    }
+    return pool;
+}
 
 function renderKatex(latex) {
     if (typeof katex !== 'undefined') {
@@ -29,40 +66,16 @@ function formatNum(n) {
     return n < 0 ? `−${Math.abs(n)}` : `${n}`;
 }
 
-function generateProblem(rand, difficulty) {
-    let maxBase = 5;
-    if (difficulty === "normal") maxBase = 8;
-    if (difficulty === "hard") maxBase = 12;
-
-    // Pick base and sign
-    const base = randInt(rand, 1, maxBase);
-    const isNegative = difficulty === "easy" ? false : randInt(rand, 0, 1) === 0;
-    const signedBase = isNegative ? -base : base;
-
-    // 50/50: cube or cube root
-    const isCube = randInt(rand, 0, 1) === 0;
-
+function makeProblem(signedBase, isCube) {
     if (isCube) {
-        // Type A: cube the number
         const answer = signedBase * signedBase * signedBase;
-
-        let latex;
-        if (signedBase < 0) {
-            latex = `(${signedBase})^3`;
-        } else {
-            latex = `${signedBase}^3`;
-        }
-
+        const latex = signedBase < 0 ? `(${signedBase})^3` : `${signedBase}^3`;
         const questionHtml = renderKatex(latex) || `${signedBase}³`;
         return { questionHtml, answer: formatNum(answer) };
     } else {
-        // Type B: cube root
         const radicand = signedBase * signedBase * signedBase;
-        const answer = signedBase;
-
         const latex = `\\sqrt[3]{${radicand}}`;
         const questionHtml = renderKatex(latex) || `∛(${radicand})`;
-
-        return { questionHtml, answer: formatNum(answer) };
+        return { questionHtml, answer: formatNum(signedBase) };
     }
 }

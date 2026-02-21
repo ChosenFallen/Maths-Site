@@ -18,6 +18,16 @@ export default {
     },
 };
 
+const UNITS = {
+    easy: ["cm", "m"],
+    normal: ["cm", "m", "mm"],
+    hard: ["cm", "m", "mm", "km"],
+};
+
+function fmt(n) {
+    return n % 1 === 0 ? String(n) : n.toFixed(1);
+}
+
 function generateProblem(rand, difficulty) {
     let width, height;
 
@@ -29,39 +39,42 @@ function generateProblem(rand, difficulty) {
             width = randInt(rand, 4, 12);
             height = randInt(rand, 4, 12);
         } else {
-            width = (randInt(rand, 5, 15) / 2).toFixed(1);
+            width = fmt(randInt(rand, 5, 15) / 2);
             height = randInt(rand, 4, 10);
         }
     } else {
         const type = randInt(rand, 0, 2);
         if (type === 0) {
-            width = (randInt(rand, 10, 25) / 2).toFixed(1);
-            height = (randInt(rand, 10, 20) / 2).toFixed(1);
+            width = fmt(randInt(rand, 10, 25) / 2);
+            height = fmt(randInt(rand, 10, 20) / 2);
         } else if (type === 1) {
             width = randInt(rand, 8, 15);
-            height = (randInt(rand, 10, 25) / 2).toFixed(1);
+            height = fmt(randInt(rand, 10, 25) / 2);
         } else {
-            width = (randInt(rand, 15, 30) / 2).toFixed(1);
+            width = fmt(randInt(rand, 15, 30) / 2);
             height = randInt(rand, 6, 12);
         }
     }
 
+    const unitList = UNITS[difficulty];
+    const unit = unitList[randInt(rand, 0, unitList.length - 1)];
+
     const area = parseFloat(width) * parseFloat(height);
     const areaStr = area % 1 === 0 ? `${area}` : area.toFixed(2);
+    const answer = `${areaStr} ${unit}²`;
 
-    const questionHtml = drawRectangle(width, height);
+    const questionHtml = drawRectangle(width, height, unit);
 
     return {
         questionHtml,
-        question: `Rectangle: ${width} × ${height}. Area = ?`,
-        answer: areaStr,
-        answerHtml: areaStr,
+        question: `Rectangle: ${width} ${unit} × ${height} ${unit}. Area = ?`,
+        answer,
+        answerHtml: answer,
     };
 }
 
-function drawRectangle(width, height) {
+function drawRectangle(width, height, unit) {
     const svgWidth = 280;
-    const svgHeight = 140;
 
     // Scale factor to fit in SVG
     const maxDim = Math.max(parseFloat(width), parseFloat(height));
@@ -71,15 +84,15 @@ function drawRectangle(width, height) {
     const rectHeight = parseFloat(height) * scale;
 
     const startX = (svgWidth - rectWidth) / 2;
-    const startY = 20;
+    const startY = 6;
+
+    // Dynamic height: top pad + rect + arrow offset + label + bottom pad
+    const svgHeight = Math.ceil(startY + rectHeight + 30);
 
     return `
-        <svg width="100%" height="140" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px;">
+        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px; display: block;">
             <defs>
-                <marker id="arrowhead-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto">
-                    <polygon points="10 0, 0 3, 10 6" fill="#666"/>
-                </marker>
-                <marker id="arrowhead-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
                 </marker>
             </defs>
@@ -102,8 +115,8 @@ function drawRectangle(width, height) {
                 y2="${startY + rectHeight + 12}"
                 stroke="#666"
                 stroke-width="1"
-                marker-end="url(#arrowhead-end)"
-                marker-start="url(#arrowhead-start)"
+                marker-end="url(#arrowhead)"
+                marker-start="url(#arrowhead)"
             />
             <text
                 x="${startX + rectWidth / 2}"
@@ -113,7 +126,7 @@ function drawRectangle(width, height) {
                 font-weight="bold"
                 fill="#333"
             >
-                ${width} cm
+                ${width} ${unit}
             </text>
 
             <!-- Height label (right) -->
@@ -124,8 +137,8 @@ function drawRectangle(width, height) {
                 y2="${startY + rectHeight}"
                 stroke="#666"
                 stroke-width="1"
-                marker-end="url(#arrowhead-end)"
-                marker-start="url(#arrowhead-start)"
+                marker-end="url(#arrowhead)"
+                marker-start="url(#arrowhead)"
             />
             <text
                 x="${startX + rectWidth + 28}"
@@ -136,11 +149,8 @@ function drawRectangle(width, height) {
                 font-weight="bold"
                 fill="#333"
             >
-                ${height} cm
+                ${height} ${unit}
             </text>
         </svg>
-        <div style="text-align: center; margin-top: 8px; font-size: 13px; color: #666;">
-            <strong>Find the area</strong>
-        </div>
     `;
 }
