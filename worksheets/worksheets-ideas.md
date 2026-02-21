@@ -24,7 +24,7 @@
 - [x] Fractional indices
 - [x] Negative indices
 - [x] Cube numbers and cube roots
-- [ ] Square numbers and square roots
+- [x] Square numbers and square roots
 - [ ] Triangular numbers
 - [ ] Factors and multiples
 - [ ] Ordering numbers

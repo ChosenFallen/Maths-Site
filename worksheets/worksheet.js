@@ -6,6 +6,7 @@ import mixed from "./types/mixed.js";
 import negativeNumbers from "./types/negative-numbers.js";
 import indices from "./types/indices.js";
 import cubeNumbers from "./types/cube-numbers.js";
+import squareNumbers from "./types/square-numbers.js";
 import indexLaws from "./types/index-laws.js";
 import advancedIndices from "./types/advanced-indices.js";
 import simplifyFractions from "./types/simplify-fractions.js";
@@ -64,6 +65,7 @@ const WORKSHEET_TYPES = [
     negativeNumbers,
     indices,
     cubeNumbers,
+    squareNumbers,
     indexLaws,
     advancedIndices,
     simplifyFractions,
@@ -158,7 +160,7 @@ const WORKSHEET_GROUPS = [
             "fdp-percent-to-decimal",
         ],
     },
-    { label: "Powers", types: ["indices", "cube-numbers", "index-laws", "advanced-indices"] },
+    { label: "Powers", types: ["indices", "cube-numbers", "square-numbers", "index-laws", "advanced-indices"] },
     { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "solving-inequalities", "rearranging-formulae", "quadratic-equations", "compound-inequalities", "quadratic-inequalities"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
