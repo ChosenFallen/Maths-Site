@@ -71,6 +71,9 @@ import rearrangingFormulae from "./types/rearranging-formulae.js";
 import quadraticEquations from "./types/quadratic-equations.js";
 import compoundInequalities from "./types/compound-inequalities.js";
 import quadraticInequalities from "./types/quadratic-inequalities.js";
+import timesTablesSpeed from "./types/times-tables-speed.js";
+import timesTablesMissingFactor from "./types/times-tables-missing-factor.js";
+import timesTablesDivisionFacts from "./types/times-tables-division-facts.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -146,6 +149,9 @@ const WORKSHEET_TYPES = [
     quadraticEquations,
     compoundInequalities,
     quadraticInequalities,
+    timesTablesSpeed,
+    timesTablesMissingFactor,
+    timesTablesDivisionFacts,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -193,6 +199,7 @@ const WORKSHEET_GROUPS = [
         ],
     },
     { label: "Powers", types: ["indices", "cube-numbers", "square-numbers", "index-laws", "advanced-indices"] },
+    { label: "Times Tables", types: ["times-tables-speed", "times-tables-missing-factor", "times-tables-division-facts"] },
     { label: "Algebra", types: ["equations", "equations-both-sides", "equations-fractions", "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms", "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "solving-inequalities", "rearranging-formulae", "quadratic-equations", "compound-inequalities", "quadratic-inequalities"] },
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
