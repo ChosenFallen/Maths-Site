@@ -74,8 +74,6 @@ function generateProblem(rand, difficulty) {
 }
 
 function drawRectangle(width, height, unit) {
-    const svgWidth = 280;
-
     // Scale factor to fit in SVG
     const maxDim = Math.max(parseFloat(width), parseFloat(height));
     const scale = 75 / maxDim;
@@ -83,14 +81,15 @@ function drawRectangle(width, height, unit) {
     const rectWidth = parseFloat(width) * scale;
     const rectHeight = parseFloat(height) * scale;
 
-    const startX = (svgWidth - rectWidth) / 2;
+    const startX = 10;  // small left margin
+    const svgWidth = startX + rectWidth + 90;  // 90 for height label on right
     const startY = 6;
 
     // Dynamic height: top pad + rect + arrow offset + label + bottom pad
     const svgHeight = Math.ceil(startY + rectHeight + 30);
 
     return `
-        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px; display: block;">
+        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: ${svgWidth}px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>

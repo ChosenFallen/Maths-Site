@@ -71,7 +71,6 @@ function genRectangle(rand, difficulty) {
 }
 
 function drawRectangle(width, height, unit) {
-    const svgWidth = 280;
     const wf = parseFloat(width);
     const hf = parseFloat(height);
     const maxDim = Math.max(wf, hf);
@@ -79,12 +78,13 @@ function drawRectangle(width, height, unit) {
     const rw = wf * scale;
     const rh = hf * scale;
 
-    const startX = (svgWidth - rw) / 2;
+    const startX = 10;  // small left margin
+    const svgWidth = startX + rw + 90;  // 90 for height label on right
     const startY = 8;
     const svgHeight = Math.ceil(startY + rh + 32);
 
     return `
-        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px; display: block;">
+        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: ${svgWidth}px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -131,14 +131,14 @@ function genTriangle(rand) {
 }
 
 function drawRightTriangle(a, b, c, unit) {
-    const svgWidth = 280;
     const maxDim = Math.max(a, b);
-    const scale = 75 / maxDim;
+    const scale = 100 / maxDim;
 
     const basePixels = a * scale;
     const heightPixels = b * scale;
 
-    const startX = (svgWidth - basePixels) / 2;
+    const startX = 75;  // left margin for height label (text-anchor:end at x-16, ~50px text)
+    const svgWidth = startX + basePixels + 20;
     const startY = 8;
     const svgHeight = Math.ceil(startY + heightPixels + 36);
 
@@ -153,7 +153,7 @@ function drawRightTriangle(a, b, c, unit) {
     const sqSize = 8;
 
     return `
-        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px; display: block;">
+        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: ${svgWidth}px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>

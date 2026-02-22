@@ -93,6 +93,10 @@ import sequencesTermToTerm from "./types/sequences-term-to-term.js";
 import sequencesPatterns from "./types/sequences-patterns.js";
 import meanMedianModeRange from "./types/mean-median-mode-range.js";
 import perimeter from "./types/perimeter.js";
+import speedDistanceTime from "./types/speed-distance-time.js";
+import simultaneousEquations from "./types/simultaneous-equations.js";
+import densityMassVolume from "./types/density-mass-volume.js";
+import pythagoras from "./types/pythagoras.js";
 
 export const WORKSHEET_TYPES = [
     addition,
@@ -190,6 +194,10 @@ export const WORKSHEET_TYPES = [
     sequencesPatterns,
     meanMedianModeRange,
     perimeter,
+    speedDistanceTime,
+    simultaneousEquations,
+    densityMassVolume,
+    pythagoras,
 ];
 
 export const WORKSHEET_GROUPS = [
@@ -253,15 +261,16 @@ export const WORKSHEET_GROUPS = [
             "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions",
             "solving-inequalities", "rearranging-formulae",
             "quadratic-equations", "compound-inequalities", "quadratic-inequalities",
+            "simultaneous-equations",
         ],
     },
-    { label: "Ratio & Proportion", types: ["ratio-simplify", "ratio-sharing", "direct-proportion", "inverse-proportion", "best-buys"] },
+    { label: "Ratio & Proportion", types: ["ratio-simplify", "ratio-sharing", "direct-proportion", "inverse-proportion", "best-buys", "speed-distance-time", "density-mass-volume"] },
     {
         label: "Number Theory",
         types: ["hcf-lcm", "hcf-lcm-primes", "factors-multiples", "triangular-numbers", "rounding", "standard-form", "standard-form-operations", "standard-form-multiply-divide", "prime-factorization"],
     },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
     { label: "Sequences", types: ["sequences-continue", "sequences-nth-term", "sequences-nth-term-fractions", "sequences-geometric", "sequences-quadratic", "sequences-missing-term", "sequences-fibonacci", "sequences-term-to-term", "sequences-patterns"] },
-    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter"] },
+    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras"] },
     { label: "Statistics", types: ["mean-median-mode-range"] },
 ];

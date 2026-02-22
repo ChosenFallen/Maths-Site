@@ -74,16 +74,16 @@ function generateProblem(rand, difficulty) {
 }
 
 function drawTriangle(base, height, unit) {
-    const svgWidth = 280;
-
     // Scale factor to fit in SVG
     const maxDim = Math.max(parseFloat(base), parseFloat(height));
-    const scale = 60 / maxDim;
+    const scale = 90 / maxDim;
 
     const baseWidth = parseFloat(base) * scale;
     const heightPixels = parseFloat(height) * scale;
 
-    const startX = (svgWidth - baseWidth) / 2;
+    // Height label sits right of centre (apexX + 28 + ~50px text)
+    const startX = 10;
+    const svgWidth = startX + Math.max(baseWidth + 10, baseWidth / 2 + 90);
 
     // Dynamic height: top pad + triangle + arrow offset + label + bottom pad
     const svgHeight = Math.ceil(6 + heightPixels + 38);
@@ -97,7 +97,7 @@ function drawTriangle(base, height, unit) {
     const apexY = startY - heightPixels;
 
     return `
-        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: 280px; display: block;">
+        <svg width="100%" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-width: ${svgWidth}px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>

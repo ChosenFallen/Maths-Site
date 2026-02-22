@@ -99,7 +99,7 @@
 - [ ] Quadratic equations (completing the square method)
 - [ ] Quadratic equations (solving graphically)
 - [ ] Forming and solving quadratics
-- [ ] Simultaneous equations (elimination/substitution)
+- [x] Simultaneous equations (elimination/substitution) (simultaneous-equations)
 - [ ] Simultaneous equations (graphical)
 - [ ] Simultaneous equations (advanced - one linear, one quadratic)
 - [ ] Simultaneous equations (3 unknowns)
@@ -143,7 +143,7 @@
 
 ## Measurement & Geometry
 
-- [ ] Perimeter (rectangles, compound shapes, semi-circles)
+- [x] Perimeter (rectangles, compound shapes, semi-circles) (perimeter: rectangles, right-angled triangles, L-shapes)
 - [ ] Perimeter on a grid
 - [x] Area (rectangles/triangles)
 - [ ] Area of parallelograms and trapeziums
@@ -176,7 +176,7 @@
 - [ ] Volume of cylinders, cones, pyramids
 - [ ] Volume of spheres and frustums
 - [ ] Surface area of 3D shapes (cuboids, prisms, cylinders, spheres, cones)
-- [ ] Pythagoras' theorem
+- [x] Pythagoras' theorem (pythagoras)
 - [ ] Pythagoras in 3D
 - [ ] Pythagoras with rectangles/isosceles triangles
 - [ ] Trigonometry (sin, cos, tan in right-angled triangles)
@@ -244,9 +244,9 @@
 - [ ] Map scales and distances
 - [ ] Recipe scaling (increase/decrease servings)
 - [ ] Mixture problems (concentrations, solutions)
-- [ ] Speed, distance, time calculations
+- [x] Speed, distance, time calculations (speed-distance-time)
 - [ ] Kinematics formulae
-- [ ] Density, mass, volume calculations
+- [x] Density, mass, volume calculations (density-mass-volume)
 - [ ] Pressure calculations
 - [ ] Population density
 - [ ] Currency conversions

@@ -84,6 +84,10 @@ const DUPLICATE_TOLERANCE = {
     "inverse-proportion": 20,
     "mean-median-mode-range": 5,
     "perimeter": 20,
+    "speed-distance-time": 15,
+    "simultaneous-equations": 10,
+    "density-mass-volume": 15,
+    "pythagoras": 20,
     "percentage-change": 15,
     "prime-factorization": 10,
     "multiplying-terms": 15,
@@ -204,6 +208,23 @@ function checkType(type) {
             { shape: "rectangle" },
             { shape: "triangle" },
             { shape: "l-shape" },
+        );
+    if (type.id === "speed-distance-time")
+        optionsList.push(
+            { find: "speed" },
+            { find: "distance" },
+            { find: "time" },
+        );
+    if (type.id === "density-mass-volume")
+        optionsList.push(
+            { find: "density" },
+            { find: "mass" },
+            { find: "volume" },
+        );
+    if (type.id === "pythagoras")
+        optionsList.push(
+            { find: "hypotenuse" },
+            { find: "leg" },
         );
 
     // Test 2: Check instruction function
@@ -442,6 +463,26 @@ function expectedPrintTitle(type, options) {
         if (s === "triangle")  return "Perimeter: Right-angled Triangles";
         if (s === "l-shape")   return "Perimeter: L-shapes";
         return "Perimeter";
+    }
+    if (typeId === "speed-distance-time") {
+        const f = options?.find || "mixed";
+        if (f === "speed")    return "Speed, Distance & Time: Find Speed";
+        if (f === "distance") return "Speed, Distance & Time: Find Distance";
+        if (f === "time")     return "Speed, Distance & Time: Find Time";
+        return "Speed, Distance & Time";
+    }
+    if (typeId === "density-mass-volume") {
+        const f = options?.find || "mixed";
+        if (f === "density") return "Density, Mass & Volume: Find Density";
+        if (f === "mass")    return "Density, Mass & Volume: Find Mass";
+        if (f === "volume")  return "Density, Mass & Volume: Find Volume";
+        return "Density, Mass & Volume";
+    }
+    if (typeId === "pythagoras") {
+        const f = options?.find || "mixed";
+        if (f === "hypotenuse") return "Pythagoras: Find the Hypotenuse";
+        if (f === "leg")        return "Pythagoras: Find a Shorter Side";
+        return "Pythagoras' Theorem";
     }
     if (typeId === "equations-both-sides") return "Equations: Letters on Both Sides";
     if (typeId === "equations-fractions") return "Equations with Fractions";
