@@ -86,15 +86,15 @@
 - [ ] Factorizing (splitting the middle)
 - [x] Factorizing difference of two squares
 - [ ] Factorizing with brackets
-- [ ] Expanding single and double brackets
+- [x] Expanding single and double brackets (expanding-brackets: bracketMode option)
 - [ ] Expanding triple brackets
 - [ ] Completing the square
-- [ ] Solving inequalities (one sign)
-- [ ] Solving inequalities (two signs)
+- [x] Solving inequalities (one sign) (solving-inequalities)
+- [x] Solving inequalities (two signs) (compound-inequalities)
 - [ ] Inequalities on a number line
-- [ ] Rearranging formulae (change the subject)
+- [x] Rearranging formulae (change the subject) (rearranging-formulae)
 - [ ] Rearranging formulae (advanced)
-- [ ] Quadratic equations (factorizing method)
+- [x] Quadratic equations (factorizing method) (quadratic-equations)
 - [ ] Quadratic equations (formula method)
 - [ ] Quadratic equations (completing the square method)
 - [ ] Quadratic equations (solving graphically)
@@ -105,7 +105,8 @@
 - [ ] Simultaneous equations (3 unknowns)
 - [ ] Simultaneous equations (both quadratic)
 - [ ] Non-linear simultaneous equations (mixed types)
-- [ ] Sequences (nth term, linear and quadratic)
+- [x] Sequences: continue arithmetic (sequences-continue)
+- [x] Sequences: nth term linear (sequences-nth-term)
 - [ ] Function notation and composite functions
 - [ ] Inverse functions
 - [ ] Function machines
@@ -211,15 +212,15 @@
 
 ## Patterns & Sequences
 
-- [ ] Find the next term
-- [ ] Find the missing term
-- [ ] Describing rules
+- [x] Find the next term (sequences-continue)
+- [x] Find the missing term (sequences-missing-term)
+- [x] Describing rules (sequences-term-to-term)
 - [ ] Identify the rule
-- [ ] Linear sequences (nth term)
-- [ ] Linear sequences (nth term for fractional sequences)
-- [ ] Quadratic sequences (nth term - multiple methods)
-- [ ] Geometric sequences
-- [ ] Fibonacci-type sequences
+- [x] Linear sequences (nth term) (sequences-nth-term)
+- [x] Linear sequences (nth term for fractional sequences) (sequences-nth-term-fractions)
+- [x] Quadratic sequences (nth term) (sequences-quadratic)
+- [x] Geometric sequences (sequences-geometric)
+- [x] Fibonacci-type sequences (sequences-fibonacci)
 - [ ] Pattern sequences (visual/number patterns)
 
 ## Ratio & Proportion
@@ -392,11 +393,11 @@
 - [ ] Congruence and similarity proofs
 - [ ] Quadratic graphs (completing the square method)
 - [ ] Quadratic graphs (sketching using key points)
-- [ ] Quadratic inequalities
+- [x] Quadratic inequalities (quadratic-inequalities)
 - [ ] Graphical inequalities (regions)
-- [ ] Arithmetic progressions
-- [ ] Geometric progressions
-- [ ] Sequences (quadratic nth term - multiple methods)
+- [x] Arithmetic progressions (sequences-continue, sequences-nth-term)
+- [x] Geometric progressions (sequences-geometric)
+- [x] Sequences (quadratic nth term) (sequences-quadratic)
 - [ ] Identities (equating coefficients)
 - [ ] Identities, formulae, equations (differences)
 - [ ] Intersecting chord theorem

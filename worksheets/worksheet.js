@@ -79,6 +79,14 @@ import timesTablesNegative from "./types/times-tables-negative.js";
 import systematicListing from "./types/systematic-listing.js";
 import areaRectangle from "./types/area-rectangle.js";
 import areaTriangle from "./types/area-triangle.js";
+import sequencesContinue from "./types/sequences-continue.js";
+import sequencesNthTerm from "./types/sequences-nth-term.js";
+import sequencesNthTermFractions from "./types/sequences-nth-term-fractions.js";
+import sequencesGeometric from "./types/sequences-geometric.js";
+import sequencesQuadratic from "./types/sequences-quadratic.js";
+import sequencesMissingTerm from "./types/sequences-missing-term.js";
+import sequencesFibonacci from "./types/sequences-fibonacci.js";
+import sequencesTermToTerm from "./types/sequences-term-to-term.js";
 
 const WORKSHEET_TYPES = [
     addition,
@@ -162,6 +170,14 @@ const WORKSHEET_TYPES = [
     systematicListing,
     areaRectangle,
     areaTriangle,
+    sequencesContinue,
+    sequencesNthTerm,
+    sequencesNthTermFractions,
+    sequencesGeometric,
+    sequencesQuadratic,
+    sequencesMissingTerm,
+    sequencesFibonacci,
+    sequencesTermToTerm,
 ];
 
 const WORKSHEET_GROUPS = [
@@ -214,6 +230,7 @@ const WORKSHEET_GROUPS = [
     { label: "Ratio & Proportion", types: ["ratio-simplify"] },
     { label: "Number Theory", types: ["hcf-lcm", "rounding", "standard-form", "prime-factorization"] },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
+    { label: "Sequences", types: ["sequences-continue", "sequences-nth-term", "sequences-nth-term-fractions", "sequences-geometric", "sequences-quadratic", "sequences-missing-term", "sequences-fibonacci", "sequences-term-to-term"] },
     { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle"] },
 ];
 

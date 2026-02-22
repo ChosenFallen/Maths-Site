@@ -101,6 +101,20 @@ const DUPLICATE_TOLERANCE = {
     "systematic-listing": 30,
     "area-rectangle": 10,
     "area-triangle": 15,
+    // Sequences: geometric pool of 24 (normal) → 26 duplicates in 50
+    "sequences-continue": 10,
+    "sequences-nth-term": 15,
+    // Fractional nth term: mixed direction pool ≥ 50 → 0 duplicates
+    "sequences-nth-term-fractions": 5,
+    "sequences-geometric": 30,
+    // Quadratic: normal pool ~378 unique → ~3 dupes; safe margin
+    "sequences-quadratic": 8,
+    // Missing term: geometric option at normal has 54 unique → ~25 dupes in 50
+    "sequences-missing-term": 25,
+    // Fibonacci: easy pool 25 unique → 25 dupes; normal pool 64 unique → ~25 dupes
+    "sequences-fibonacci": 25,
+    // Term-to-term: geometric pool at normal is 24 unique → 26 dupes in 50
+    "sequences-term-to-term": 28,
 };
 
 function mulberry32(seed) {
@@ -155,6 +169,21 @@ function checkType(type) {
         optionsList.push({ roundingMode: "dp" }, { roundingMode: "sf" }, { roundingMode: "place" });
     if (type.id === "reverse-percentages")
         optionsList.push({ changeType: "increase" }, { changeType: "decrease" });
+    if (type.id === "sequences-continue" || type.id === "sequences-nth-term")
+        optionsList.push(
+            { sequenceDirection: "increasing" },
+            { sequenceDirection: "decreasing" },
+        );
+    if (type.id === "sequences-missing-term")
+        optionsList.push(
+            { sequenceType: "arithmetic" },
+            { sequenceType: "geometric" },
+        );
+    if (type.id === "sequences-term-to-term")
+        optionsList.push(
+            { sequenceType: "arithmetic" },
+            { sequenceType: "geometric" },
+        );
 
     // Test 2: Check instruction function
     if (typeof type.instruction !== "function") {
