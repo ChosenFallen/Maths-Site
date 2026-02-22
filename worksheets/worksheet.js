@@ -139,7 +139,7 @@ function generateWorksheetInternal(forceNewId) {
     );
     if (result.truncated) {
         uniquenessNote.textContent =
-            "Note: Range too small to avoid all duplicates.";
+            `Note: Only ${result.problems.length} unique questions available for this difficulty and options.`;
     }
 
     setPrintTitle(worksheetType, options);
@@ -492,7 +492,6 @@ function generateUniqueProblems(type, rand, difficulty, count, options) {
     const seen = new Set();
     const maxAttempts = Math.max(50, count * 10);
     let attempts = 0;
-    let truncated = false;
 
     while (problems.length < count && attempts < maxAttempts) {
         attempts++;
@@ -504,19 +503,7 @@ function generateUniqueProblems(type, rand, difficulty, count, options) {
         problems.push(problem);
     }
 
-    // If uniqueness is hard (small ranges), fill remaining with whatever we can
-    if (problems.length < count) {
-        truncated = true;
-        const fallback = type.generate(
-            rand,
-            difficulty,
-            count - problems.length,
-            options,
-        );
-        fallback.forEach((p) => problems.push(p));
-    }
-
-    return { problems, truncated };
+    return { problems, truncated: problems.length < count };
 }
 
 function buildProblemKey(problem) {
