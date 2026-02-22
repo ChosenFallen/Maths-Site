@@ -4,7 +4,7 @@ export default {
     id: "area-rectangle",
     label: "Area of Rectangles",
     instruction() {
-        return "Calculate the area of each rectangle using Area = length × width.";
+        return "Calculate the area of each rectangle.";
     },
     printTitle() {
         return "Area of Rectangles";

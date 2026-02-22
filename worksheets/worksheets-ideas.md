@@ -254,7 +254,7 @@
 
 ## Data & Statistics
 
-- [ ] Mean, median, mode, range from lists
+- [x] Mean, median, mode, range from lists
 - [ ] Mean from frequency tables (and estimated mean)
 - [ ] Median from frequency tables
 - [ ] Mode from frequency tables

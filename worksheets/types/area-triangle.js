@@ -4,7 +4,7 @@ export default {
     id: "area-triangle",
     label: "Area of Triangles",
     instruction() {
-        return "Calculate the area of each triangle using Area = ½ × base × height.";
+        return "Calculate the area of each triangle.";
     },
     printTitle() {
         return "Area of Triangles";

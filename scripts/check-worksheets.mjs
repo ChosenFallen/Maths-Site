@@ -82,6 +82,7 @@ const DUPLICATE_TOLERANCE = {
     "ratio-sharing": 10,
     "direct-proportion": 10,
     "inverse-proportion": 20,
+    "mean-median-mode-range": 5,
     "percentage-change": 15,
     "prime-factorization": 10,
     "multiplying-terms": 15,
@@ -189,6 +190,13 @@ function checkType(type) {
         optionsList.push(
             { sequenceType: "arithmetic" },
             { sequenceType: "geometric" },
+        );
+    if (type.id === "mean-median-mode-range")
+        optionsList.push(
+            { measure: "mean" },
+            { measure: "median" },
+            { measure: "mode" },
+            { measure: "range" },
         );
 
     // Test 2: Check instruction function
@@ -412,6 +420,14 @@ function expectedPrintTitle(type, options) {
         if (mode === "increase") return "Reverse Percentages (Increase)";
         if (mode === "decrease") return "Reverse Percentages (Decrease)";
         return "Reverse Percentages";
+    }
+    if (typeId === "mean-median-mode-range") {
+        const m = options?.measure || "mixed";
+        if (m === "mean")   return "Mean";
+        if (m === "median") return "Median";
+        if (m === "mode")   return "Mode";
+        if (m === "range")  return "Range";
+        return "Mean, Median, Mode & Range";
     }
     if (typeId === "equations-both-sides") return "Equations: Letters on Both Sides";
     if (typeId === "equations-fractions") return "Equations with Fractions";
