@@ -34,6 +34,9 @@ import percentageOfAmount from "./types/percentage-of-amount.js";
 import fractionOfAmount from "./types/fraction-of-amount.js";
 import recurringDecimals from "./types/recurring-decimals.js";
 import ratioSimplify from "./types/ratio-simplify.js";
+import ratioSharing from "./types/ratio-sharing.js";
+import directProportion from "./types/direct-proportion.js";
+import inverseProportion from "./types/inverse-proportion.js";
 import hcfLcm from "./types/hcf-lcm.js";
 import hcfLcmPrimes from "./types/hcf-lcm-primes.js";
 import factorsMultiples from "./types/factors-multiples.js";
@@ -126,6 +129,9 @@ export const WORKSHEET_TYPES = [
     fractionOfAmount,
     recurringDecimals,
     ratioSimplify,
+    ratioSharing,
+    directProportion,
+    inverseProportion,
     hcfLcm,
     hcfLcmPrimes,
     factorsMultiples,
@@ -245,7 +251,7 @@ export const WORKSHEET_GROUPS = [
             "quadratic-equations", "compound-inequalities", "quadratic-inequalities",
         ],
     },
-    { label: "Ratio & Proportion", types: ["ratio-simplify", "best-buys"] },
+    { label: "Ratio & Proportion", types: ["ratio-simplify", "ratio-sharing", "direct-proportion", "inverse-proportion", "best-buys"] },
     {
         label: "Number Theory",
         types: ["hcf-lcm", "hcf-lcm-primes", "factors-multiples", "triangular-numbers", "rounding", "standard-form", "standard-form-operations", "standard-form-multiply-divide", "prime-factorization"],

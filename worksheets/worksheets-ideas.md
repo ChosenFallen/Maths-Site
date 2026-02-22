@@ -228,18 +228,18 @@
 - [x] Simplifying ratios
 - [ ] Expressing ratios as fractions or percentages
 - [ ] Expressing ratios as 1:n
-- [ ] Sharing amounts in given ratios (sharing the total)
+- [x] Sharing amounts in given ratios (sharing the total)
 - [ ] Ratio problems (given one value)
 - [ ] Ratio problems (given two ratios)
 - [ ] Ratio problems (difference between)
 - [ ] Ratio problems with multiple parts
 - [ ] Equations and ratios
-- [ ] Direct proportion
+- [x] Direct proportion
 - [ ] Direct proportion graphs
-- [ ] Inverse proportion
-- [ ] Unitary method
+- [x] Inverse proportion
+- [x] Unitary method
 - [ ] Proportion with time
-- [ ] Best buys and unit pricing
+- [x] Best buys and unit pricing
 - [ ] Scale factors and similar shapes
 - [ ] Map scales and distances
 - [ ] Recipe scaling (increase/decrease servings)
