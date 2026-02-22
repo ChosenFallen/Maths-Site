@@ -92,6 +92,7 @@ import sequencesFibonacci from "./types/sequences-fibonacci.js";
 import sequencesTermToTerm from "./types/sequences-term-to-term.js";
 import sequencesPatterns from "./types/sequences-patterns.js";
 import meanMedianModeRange from "./types/mean-median-mode-range.js";
+import perimeter from "./types/perimeter.js";
 
 export const WORKSHEET_TYPES = [
     addition,
@@ -188,6 +189,7 @@ export const WORKSHEET_TYPES = [
     sequencesTermToTerm,
     sequencesPatterns,
     meanMedianModeRange,
+    perimeter,
 ];
 
 export const WORKSHEET_GROUPS = [
@@ -260,6 +262,6 @@ export const WORKSHEET_GROUPS = [
     },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
     { label: "Sequences", types: ["sequences-continue", "sequences-nth-term", "sequences-nth-term-fractions", "sequences-geometric", "sequences-quadratic", "sequences-missing-term", "sequences-fibonacci", "sequences-term-to-term", "sequences-patterns"] },
-    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle"] },
+    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter"] },
     { label: "Statistics", types: ["mean-median-mode-range"] },
 ];

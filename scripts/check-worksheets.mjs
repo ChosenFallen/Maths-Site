@@ -83,6 +83,7 @@ const DUPLICATE_TOLERANCE = {
     "direct-proportion": 10,
     "inverse-proportion": 20,
     "mean-median-mode-range": 5,
+    "perimeter": 20,
     "percentage-change": 15,
     "prime-factorization": 10,
     "multiplying-terms": 15,
@@ -197,6 +198,12 @@ function checkType(type) {
             { measure: "median" },
             { measure: "mode" },
             { measure: "range" },
+        );
+    if (type.id === "perimeter")
+        optionsList.push(
+            { shape: "rectangle" },
+            { shape: "triangle" },
+            { shape: "l-shape" },
         );
 
     // Test 2: Check instruction function
@@ -428,6 +435,13 @@ function expectedPrintTitle(type, options) {
         if (m === "mode")   return "Mode";
         if (m === "range")  return "Range";
         return "Mean, Median, Mode & Range";
+    }
+    if (typeId === "perimeter") {
+        const s = options?.shape || "mixed";
+        if (s === "rectangle") return "Perimeter: Rectangles";
+        if (s === "triangle")  return "Perimeter: Right-angled Triangles";
+        if (s === "l-shape")   return "Perimeter: L-shapes";
+        return "Perimeter";
     }
     if (typeId === "equations-both-sides") return "Equations: Letters on Both Sides";
     if (typeId === "equations-fractions") return "Equations with Fractions";
