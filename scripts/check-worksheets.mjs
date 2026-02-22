@@ -1,6 +1,7 @@
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import fs from "fs";
+import { WORKSHEET_TYPES, WORKSHEET_GROUPS } from "../worksheets/groups.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -115,6 +116,8 @@ const DUPLICATE_TOLERANCE = {
     "sequences-fibonacci": 25,
     // Term-to-term: geometric pool at normal is 24 unique → 26 dupes in 50
     "sequences-term-to-term": 28,
+    // Pattern sequences: only 7 linear patterns at normal → ~43 dupes in 50 (by design)
+    "sequences-patterns": 45,
 };
 
 function mulberry32(seed) {
@@ -317,7 +320,9 @@ function checkType(type) {
     // We sample 50 problems and require ≥ 20 unique — this checks the pool is large enough
     // without requiring sequential uniqueness (which needs a shuffle approach).
     const isFdp = type.id.startsWith("fdp-");
-    if (!isFdp) {
+    // Visual pattern worksheets have a small fixed set of pattern types — exempt from Test 5
+    const isVisualPattern = type.id === "sequences-patterns";
+    if (!isFdp && !isVisualPattern) {
         for (const difficulty of ["easy", "normal", "hard"]) {
             const r = mulberry32(55555);
             let p50;
@@ -424,6 +429,41 @@ for (const type of TYPES) {
     } else {
         console.log(`✅ ${type.id}: OK`);
     }
+}
+
+// Test 6: Cross-check WORKSHEET_TYPES, WORKSHEET_GROUPS, and the types/ directory.
+console.log("\n── Registry coverage checks ──────────────────────────────");
+const groupIds      = new Set(WORKSHEET_GROUPS.flatMap(g => g.types));
+const registryIds   = new Set(WORKSHEET_TYPES.map(t => t.id));
+const discoveredIds = new Set(TYPES.map(t => t.id));
+
+// 6a: WORKSHEET_TYPES vs WORKSHEET_GROUPS (bidirectional)
+const typesNotInGroups  = [...registryIds].filter(id => !groupIds.has(id));
+const groupsNotInTypes  = [...groupIds].filter(id => !registryIds.has(id));
+
+if (typesNotInGroups.length === 0 && groupsNotInTypes.length === 0) {
+    console.log("✅ WORKSHEET_TYPES and WORKSHEET_GROUPS are in sync.");
+} else {
+    if (typesNotInGroups.length > 0) {
+        console.log("❌ In WORKSHEET_TYPES but missing from WORKSHEET_GROUPS (won't appear in dropdown):");
+        typesNotInGroups.forEach(id => console.log(`   - ${id}`));
+        totalErrors += typesNotInGroups.length;
+    }
+    if (groupsNotInTypes.length > 0) {
+        console.log("❌ In WORKSHEET_GROUPS but missing from WORKSHEET_TYPES (broken dropdown entry):");
+        groupsNotInTypes.forEach(id => console.log(`   - ${id}`));
+        totalErrors += groupsNotInTypes.length;
+    }
+}
+
+// 6b: Files in types/ directory vs WORKSHEET_TYPES (catches unregistered files)
+const filesNotInRegistry = [...discoveredIds].filter(id => !registryIds.has(id));
+if (filesNotInRegistry.length === 0) {
+    console.log("✅ All files in types/ are registered in WORKSHEET_TYPES.");
+} else {
+    console.log("❌ Files in types/ not registered in WORKSHEET_TYPES (will never run):");
+    filesNotInRegistry.forEach(id => console.log(`   - ${id}`));
+    totalErrors += filesNotInRegistry.length;
 }
 
 if (totalErrors > 0) {

@@ -215,13 +215,13 @@
 - [x] Find the next term (sequences-continue)
 - [x] Find the missing term (sequences-missing-term)
 - [x] Describing rules (sequences-term-to-term)
-- [ ] Identify the rule
+- [x] Identify the rule (sequences-term-to-term)
 - [x] Linear sequences (nth term) (sequences-nth-term)
 - [x] Linear sequences (nth term for fractional sequences) (sequences-nth-term-fractions)
 - [x] Quadratic sequences (nth term) (sequences-quadratic)
 - [x] Geometric sequences (sequences-geometric)
 - [x] Fibonacci-type sequences (sequences-fibonacci)
-- [ ] Pattern sequences (visual/number patterns)
+- [x] Pattern sequences (visual/number patterns) (sequences-patterns)
 
 ## Ratio & Proportion
 

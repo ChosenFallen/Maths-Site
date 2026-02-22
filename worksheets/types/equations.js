@@ -1,6 +1,35 @@
-import equation1 from "./equation1.js";
-import equation2 from "./equation2.js";
-import { randInt } from "./utils.js";
+import { randInt, difficultyRange } from "./utils.js";
+
+const X = "𝑥";
+
+function generateOneStep(rand, difficulty) {
+    const [min, max] = difficultyRange(difficulty);
+    const ops = ["+", "−", "×", "÷"];
+    const op = ops[randInt(rand, 0, ops.length - 1)];
+    let x = randInt(rand, min, max);
+    let a = randInt(rand, min, max);
+    let left, right;
+
+    switch (op) {
+        case "+": left = `${X} + ${a}`; right = x + a; break;
+        case "−": left = `${X} − ${a}`; right = x - a; break;
+        case "×": left = `${a}${X}`;    right = x * a; break;
+        case "÷": x = x * a; left = `${X} ÷ ${a}`; right = x / a; break;
+    }
+
+    return { question: `${left} = ${right}`, answer: x, answerPrefix: `${X} = ` };
+}
+
+function generateTwoStep(rand, difficulty) {
+    const [min, max] = difficultyRange(difficulty);
+    const a = randInt(rand, Math.max(2, min), Math.max(4, Math.min(12, max)));
+    const x = randInt(rand, min, max);
+    const b = randInt(rand, min, Math.min(20, max));
+    const useMinus = randInt(rand, 0, 1) === 1;
+    const c = useMinus ? a * x - b : a * x + b;
+    const question = useMinus ? `${a}${X} − ${b} = ${c}` : `${a}${X} + ${b} = ${c}`;
+    return { question, answer: x, answerPrefix: `${X} = ` };
+}
 
 export default {
     id: "equations",
@@ -25,30 +54,18 @@ export default {
             default: "mixed",
             values: [
                 { value: "mixed", label: "Mixed" },
-                { value: "one", label: "One step" },
-                { value: "two", label: "Two steps" },
+                { value: "one",   label: "One step" },
+                { value: "two",   label: "Two steps" },
             ],
         },
     ],
     generate(rand, difficulty, count, options = {}) {
-        const problems = [];
         const mode = options.equationMode || "mixed";
-
+        const problems = [];
         for (let i = 0; i < count; i++) {
-            const useTwoStep =
-                mode === "two"
-                    ? true
-                    : mode === "one"
-                      ? false
-                      : randInt(rand, 0, 1) === 0;
-
-            const [problem] = useTwoStep
-                ? equation2.generate(rand, difficulty, 1)
-                : equation1.generate(rand, difficulty, 1);
-
-            problems.push(problem);
+            const useTwoStep = mode === "two" ? true : mode === "one" ? false : randInt(rand, 0, 1) === 0;
+            problems.push(useTwoStep ? generateTwoStep(rand, difficulty) : generateOneStep(rand, difficulty));
         }
-
         return problems;
     },
 };
