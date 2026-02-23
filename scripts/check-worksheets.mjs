@@ -96,6 +96,8 @@ const DUPLICATE_TOLERANCE = {
     "difference-of-two-squares": 25,
     "simplify-algebraic-fractions": 20,
     "algebraic-fractions-add-sub": 20,
+    "algebraic-fractions-mul-div": 15,
+    "quadratic-formula": 15,
     "simplify-surds": 30,
     "surds-add-sub": 20,
     "surds-expand": 20,

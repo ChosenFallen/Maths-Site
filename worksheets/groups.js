@@ -66,7 +66,9 @@ import recurringDecimalsToFractions from "./types/recurring-decimals-to-fraction
 import differenceOfTwoSquares from "./types/difference-of-two-squares.js";
 import simplifyAlgebraicFractions from "./types/simplify-algebraic-fractions.js";
 import algebraicFractionsAddSub from "./types/algebraic-fractions-add-sub.js";
+import algebraicFractionsMulDiv from "./types/algebraic-fractions-mul-div.js";
 import completingTheSquare from "./types/completing-the-square.js";
+import quadraticFormula from "./types/quadratic-formula.js";
 import simplifySurds from "./types/simplify-surds.js";
 import surdsAddSub from "./types/surds-add-sub.js";
 import surdsExpand from "./types/surds-expand.js";
@@ -169,6 +171,7 @@ export const WORKSHEET_TYPES = [
     differenceOfTwoSquares,
     simplifyAlgebraicFractions,
     algebraicFractionsAddSub,
+    algebraicFractionsMulDiv,
     simplifySurds,
     surdsAddSub,
     surdsExpand,
@@ -177,6 +180,7 @@ export const WORKSHEET_TYPES = [
     rearrangingFormulae,
     quadraticEquations,
     completingTheSquare,
+    quadraticFormula,
     compoundInequalities,
     quadraticInequalities,
     timesTablesSpeed,
@@ -262,9 +266,9 @@ export const WORKSHEET_GROUPS = [
             "equations",
             "equations-both-sides", "equations-fractions",
             "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms",
-            "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "algebraic-fractions-add-sub",
+            "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "algebraic-fractions-add-sub", "algebraic-fractions-mul-div",
             "solving-inequalities", "rearranging-formulae",
-            "quadratic-equations", "completing-the-square", "compound-inequalities", "quadratic-inequalities",
+            "quadratic-equations", "quadratic-formula", "completing-the-square", "compound-inequalities", "quadratic-inequalities",
             "simultaneous-equations",
         ],
     },

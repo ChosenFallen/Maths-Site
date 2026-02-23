@@ -95,7 +95,7 @@
 - [x] Rearranging formulae (change the subject) (rearranging-formulae)
 - [ ] Rearranging formulae (advanced)
 - [x] Quadratic equations (factorizing method) (quadratic-equations)
-- [ ] Quadratic equations (formula method)
+- [x] Quadratic equations (formula method) (quadratic-formula)
 - [ ] Quadratic equations (completing the square method)
 - [ ] Quadratic equations (solving graphically)
 - [ ] Forming and solving quadratics
@@ -112,7 +112,7 @@
 - [ ] Function machines
 - [x] Algebraic fractions (simplifying)
 - [x] Algebraic fractions (addition/subtraction)
-- [ ] Algebraic fractions (multiplication/division)
+- [x] Algebraic fractions (multiplication/division) (algebraic-fractions-mul-div)
 - [ ] Algebraic fractions (equations)
 - [ ] Forming expressions
 - [ ] Think of a number problems
