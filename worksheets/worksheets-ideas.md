@@ -88,7 +88,7 @@
 - [ ] Factorizing with brackets
 - [x] Expanding single and double brackets (expanding-brackets: bracketMode option)
 - [ ] Expanding triple brackets
-- [ ] Completing the square
+- [x] Completing the square
 - [x] Solving inequalities (one sign) (solving-inequalities)
 - [x] Solving inequalities (two signs) (compound-inequalities)
 - [ ] Inequalities on a number line
@@ -111,7 +111,7 @@
 - [ ] Inverse functions
 - [ ] Function machines
 - [x] Algebraic fractions (simplifying)
-- [ ] Algebraic fractions (addition/subtraction)
+- [x] Algebraic fractions (addition/subtraction)
 - [ ] Algebraic fractions (multiplication/division)
 - [ ] Algebraic fractions (equations)
 - [ ] Forming expressions
