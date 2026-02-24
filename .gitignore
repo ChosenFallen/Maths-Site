@@ -39,3 +39,6 @@ build/
 
 # Test coverage
 coverage/
+
+# Past papers (external resources)
+real past papers/
