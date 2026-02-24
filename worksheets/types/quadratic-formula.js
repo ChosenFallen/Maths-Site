@@ -2,9 +2,10 @@ import { randInt, renderKatex, formatQuadraticLatex, formatQuadraticText } from 
 
 // LaTeX for one root "h ± d√k" (dSign = +1 or −1)
 function surdRootLatex(h, dSign, d, k) {
-    const sq = d === 1 ? `\\sqrt{${k}}` : `${d} \\sqrt{${k}}`;
-    if (h === 0) return dSign > 0 ? sq : `- ${sq}`;
-    return dSign > 0 ? `${h} + ${sq}` : `${h} - ${sq}`;
+    const sq = d === 1 ? `\\sqrt{${k}}` : `${d}\\sqrt{${k}}`;
+    if (h === 0) return dSign > 0 ? sq : `-\\sqrt{${k}}`;
+    const sign = dSign > 0 ? "+" : "-";
+    return `${h} ${sign} ${sq}`;
 }
 
 // Plain text for one root "h ± d√k"
@@ -20,10 +21,10 @@ function buildSurdAnswer(h, d, k) {
     const r2L = surdRootLatex(h, -1, d, k);
     const r1T = surdRootText(h,  1, d, k);
     const r2T = surdRootText(h, -1, d, k);
-    const fullLatex = `x = ${r1L} \\text{ or } x = ${r2L}`;
-    const answerHtml = renderKatex(fullLatex) || `x = ${r1T} or x = ${r2T}`;
+    const r1Html = renderKatex(`x = ${r1L}`) || `x = ${r1T}`;
+    const r2Html = renderKatex(`x = ${r2L}`) || `x = ${r2T}`;
     return {
-        answerHtml,
+        answerHtml: r1Html + ` or ` + r2Html,
         answer: `x = ${r1T} or x = ${r2T}`,
     };
 }
