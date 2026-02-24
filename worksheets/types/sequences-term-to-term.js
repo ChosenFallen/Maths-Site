@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "sequences-term-to-term",
     label: "Term-to-Term Rules",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const type = options.sequenceType || "mixed";
         if (type === "arithmetic") return "State the term-to-term rule for each arithmetic sequence.";

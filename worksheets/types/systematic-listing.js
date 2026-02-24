@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "systematic-listing",
     label: "Systematic Listing: Counting Outcomes",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Count the total number of possible outcomes by systematic listing.";
     },

@@ -3,6 +3,7 @@ import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator, 
 export default {
     id: "fdp-fraction-to-decimal",
     label: "Fraction → Decimal",
+    grades: [4, 5, 5],  // [easy, normal, hard]
     instruction() {
         return "Convert each fraction to a decimal.";
     },

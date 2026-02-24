@@ -3,6 +3,7 @@ import { randInt, renderKatex, formatCoeff } from "./utils.js";
 export default {
     id: "multiplying-terms",
     label: "Multiplying and Dividing Terms",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.multiplyingTermsMode || "mixed";
         if (mode === "multiply") return "Simplify by multiplying the terms.";

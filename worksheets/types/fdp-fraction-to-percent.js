@@ -3,6 +3,7 @@ import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator, 
 export default {
     id: "fdp-fraction-to-percent",
     label: "Fraction → Percentage",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Convert each fraction to a percentage.";
     },

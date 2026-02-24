@@ -3,6 +3,7 @@ import { randInt, formatDecimal, decimalPlaces } from "./utils.js";
 export default {
     id: "decimal-add-sub",
     label: "Add/Subtract Decimals",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction() {
         return "Add or subtract the decimals.";
     },

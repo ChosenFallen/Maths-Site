@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "times-tables-speed",
     label: "Times Tables: Speed Drill",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Multiply the numbers to find the answer.";
     },

@@ -24,8 +24,8 @@ function buildSurdAnswer(h, d, k) {
     const r1Html = renderKatex(`x = ${r1L}`) || `x = ${r1T}`;
     const r2Html = renderKatex(`x = ${r2L}`) || `x = ${r2T}`;
     return {
-        answerHtml: r1Html + ` or ` + r2Html,
-        answer: `x = ${r1T} or x = ${r2T}`,
+        answerHtml: r1Html + `<br>or<br>` + r2Html,
+        answer: `x = ${r1T}\nor x = ${r2T}`,
     };
 }
 
@@ -55,14 +55,14 @@ function genEasy(rand) {
         { val: r1,      latex: `${r1}`,               text: r1 < 0 ? `\u2212${Math.abs(r1)}` : `${r1}` },
     ].sort((x, y) => x.val - y.val);
 
-    const fullLatex = `x = ${sorted[0].latex} \\text{ or } x = ${sorted[1].latex}`;
-    const answerHtml = renderKatex(fullLatex) || `x = ${sorted[0].text} or x = ${sorted[1].text}`;
+    const r1Html = renderKatex(`x = ${sorted[0].latex}`) || `x = ${sorted[0].text}`;
+    const r2Html = renderKatex(`x = ${sorted[1].latex}`) || `x = ${sorted[1].text}`;
 
     return {
         questionHtml: renderKatex(formatQuadraticLatex(a, b, c)) || formatQuadraticText(a, b, c),
         question:     formatQuadraticText(a, b, c),
-        answer:       `x = ${sorted[0].text} or x = ${sorted[1].text}`,
-        answerHtml,
+        answer:       `x = ${sorted[0].text}\nor x = ${sorted[1].text}`,
+        answerHtml:   r1Html + `<br>or<br>` + r2Html,
     };
 }
 

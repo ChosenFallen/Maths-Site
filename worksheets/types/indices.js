@@ -3,6 +3,7 @@ import { randInt, formatPower } from "./utils.js";
 export default {
     id: "indices",
     label: "Indices (Powers)",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Evaluate the powers.";
     },

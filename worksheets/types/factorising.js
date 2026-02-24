@@ -3,6 +3,7 @@ import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
 export default {
     id: "factorising",
     label: "Factorising Expressions",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Factorise each expression fully.";
     },

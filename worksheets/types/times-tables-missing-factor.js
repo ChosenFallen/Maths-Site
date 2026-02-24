@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "times-tables-missing-factor",
     label: "Times Tables: Missing Factor",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Find the missing number in the multiplication.";
     },

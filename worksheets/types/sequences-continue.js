@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "sequences-continue",
     label: "Continue Arithmetic Sequences",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const dir = options.sequenceDirection || "mixed";
         const dirText = dir === "increasing" ? "increasing " : dir === "decreasing" ? "decreasing " : "";

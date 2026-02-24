@@ -3,6 +3,7 @@ import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
 export default {
     id: "factorising-quadratics",
     label: "Factorising Quadratics",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Factorise each quadratic expression.";
     },

@@ -9,6 +9,7 @@ import {
 export default {
     id: "mixed",
     label: "Mixed Operations",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Solve the following.";
     },

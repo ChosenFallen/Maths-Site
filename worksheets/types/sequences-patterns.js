@@ -7,6 +7,7 @@ import { renderKatex } from "./utils.js";
 const PATTERNS = {
     "double-row": {
         label: "squares",
+    grades: [4, 5, 6],  // [easy, normal, hard]
         nth: n => 2 * n,
         bounds: n => ({ cols: n, rows: 2 }),
         cells: n => {
@@ -146,6 +147,7 @@ const BY_DIFF = {
 export default {
     id: "sequences-patterns",
     label: "Pattern Sequences",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.questionMode || "nth-term";
         if (mode === "count") return "Study each pattern. Find the number of squares in the next pattern.";

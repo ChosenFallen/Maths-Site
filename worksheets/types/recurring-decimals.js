@@ -3,6 +3,7 @@ import { formatFrac, formatFracOrWhole, gcd, renderKatex } from "./utils.js";
 export default {
     id: "recurring-decimals",
     label: "Recurring Decimals",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Convert each fraction to a recurring decimal. Use a dot above the first and last repeating digit.";
     },

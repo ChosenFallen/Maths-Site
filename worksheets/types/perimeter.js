@@ -325,6 +325,7 @@ const SHAPE_LABELS = {
 export default {
     id: "perimeter",
     label: "Perimeter",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     options: [
         {
             id: "shape",

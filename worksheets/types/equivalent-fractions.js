@@ -3,6 +3,7 @@ import { randInt, gcd } from "./utils.js";
 export default {
     id: "equivalent-fractions",
     label: "Equivalent Fractions",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction() {
         return "Fill in the missing value to make the fractions equivalent.";
     },

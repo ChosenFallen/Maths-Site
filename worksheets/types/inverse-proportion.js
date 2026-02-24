@@ -31,6 +31,7 @@ function workersDays(rand, w2Range, d2Range, maxWorkers = 20) {
 export default {
     id: "inverse-proportion",
     label: "Inverse Proportion",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Use inverse proportion to solve each problem.";
     },

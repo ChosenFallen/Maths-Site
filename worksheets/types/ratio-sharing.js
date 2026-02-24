@@ -45,6 +45,7 @@ function makeProblem(parts, total, shares, fmt) {
 export default {
     id: "ratio-sharing",
     label: "Sharing in a Ratio",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Share each amount in the given ratio.";
     },

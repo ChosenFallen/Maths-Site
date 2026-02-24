@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "percentage-of-amount",
     label: "Percentage of an Amount",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Find the percentage of each amount.";
     },

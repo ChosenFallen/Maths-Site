@@ -3,6 +3,7 @@ import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
 export default {
     id: "expanding-brackets",
     label: "Expanding Brackets",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.bracketMode || "single";
         if (mode === "single") return "Expand the brackets and simplify.";

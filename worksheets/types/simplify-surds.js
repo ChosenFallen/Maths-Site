@@ -8,6 +8,7 @@ const SQUARE_FREE_HARD = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22];
 export default {
     id: "simplify-surds",
     label: "Simplifying Surds",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Write each surd in its simplest form.";
     },

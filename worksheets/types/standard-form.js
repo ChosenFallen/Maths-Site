@@ -3,6 +3,7 @@ import { randInt, exponentToSuperscript } from "./utils.js";
 export default {
     id: "standard-form",
     label: "Standard Form",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.standardFormMode || "mixed";
         if (mode === "to") return "Write each number in standard form (e.g., 3000 = 3 × 10³).";

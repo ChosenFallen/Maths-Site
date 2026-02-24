@@ -3,6 +3,7 @@ import { randInt, formatPercent, percentPlaces } from "./utils.js";
 export default {
     id: "fdp-percent-to-decimal",
     label: "Percentage → Decimal",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Convert each percentage to a decimal.";
     },

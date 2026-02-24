@@ -40,10 +40,11 @@ function generateProblem(rand, difficulty) {
         const [root1, root2] = [r1, r2].sort((a, b) => a - b);
         const root1Str = root1 < 0 ? `−${Math.abs(root1)}` : root1.toString();
         const root2Str = root2 < 0 ? `−${Math.abs(root2)}` : root2.toString();
-        const answer = `x = ${root1Str} or x = ${root2Str}`;
+        const answer = `x = ${root1Str}\nor x = ${root2Str}`;
 
-        const answerLatex = `x = ${root1} \\text{ or } x = ${root2}`;
-        const answerHtml = renderKatex(answerLatex) || answer;
+        const r1Html = renderKatex(`x = ${root1}`) || `x = ${root1Str}`;
+        const r2Html = renderKatex(`x = ${root2}`) || `x = ${root2Str}`;
+        const answerHtml = r1Html + `<br>or<br>` + r2Html;
 
         const questionHtml = renderKatex(questionLatex) || questionText;
 
@@ -71,10 +72,11 @@ function generateProblem(rand, difficulty) {
         const [root1, root2] = [r1, r2].sort((a, b) => a - b);
         const root1Str = root1 < 0 ? `−${Math.abs(root1)}` : root1.toString();
         const root2Str = root2 < 0 ? `−${Math.abs(root2)}` : root2.toString();
-        const answer = `x = ${root1Str} or x = ${root2Str}`;
+        const answer = `x = ${root1Str}\nor x = ${root2Str}`;
 
-        const answerLatex = `x = ${root1} \\text{ or } x = ${root2}`;
-        const answerHtml = renderKatex(answerLatex) || answer;
+        const r1Html = renderKatex(`x = ${root1}`) || `x = ${root1Str}`;
+        const r2Html = renderKatex(`x = ${root2}`) || `x = ${root2Str}`;
+        const answerHtml = r1Html + `<br>or<br>` + r2Html;
 
         const questionHtml = renderKatex(questionLatex) || questionText;
 
@@ -142,12 +144,13 @@ function generateProblem(rand, difficulty) {
 
         const root1Str = formatRoot(roots[0]);
         const root2Str = formatRoot(roots[1]);
-        const answer = `x = ${root1Str} or x = ${root2Str}`;
+        const answer = `x = ${root1Str}\nor x = ${root2Str}`;
 
         const root1Latex = formatRootLatex(roots[0]);
         const root2Latex = formatRootLatex(roots[1]);
-        const answerLatex = `x = ${root1Latex} \\text{ or } x = ${root2Latex}`;
-        const answerHtml = renderKatex(answerLatex) || answer;
+        const r1Html = renderKatex(`x = ${root1Latex}`) || `x = ${root1Str}`;
+        const r2Html = renderKatex(`x = ${root2Latex}`) || `x = ${root2Str}`;
+        const answerHtml = r1Html + `<br>or<br>` + r2Html;
 
         const questionHtml = renderKatex(questionLatex) || questionText;
 

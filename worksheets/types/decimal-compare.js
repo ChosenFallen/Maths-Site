@@ -3,6 +3,7 @@ import { randInt, formatDecimal, decimalPlaces } from "./utils.js";
 export default {
     id: "decimal-compare",
     label: "Compare Decimals",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.decimalCompareMode || "mixed";
         if (mode === "no-equals") return "Compare the decimals using > or <.";

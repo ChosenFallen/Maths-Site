@@ -3,6 +3,7 @@ import { randInt, INEQUALITY_SIGNS_ALL as SIGNS, formatSignValue } from "./utils
 export default {
     id: "solving-inequalities",
     label: "Solving Inequalities",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Solve each inequality.";
     },

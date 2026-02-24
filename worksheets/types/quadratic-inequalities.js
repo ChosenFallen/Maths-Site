@@ -27,6 +27,7 @@ function buildAnswer(r1, r2, a, sign) {
 export default {
     id: "quadratic-inequalities",
     label: "Quadratic Inequalities",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Solve each quadratic inequality.";
     },

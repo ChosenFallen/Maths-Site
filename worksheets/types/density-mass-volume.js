@@ -125,6 +125,7 @@ const FIND_LABELS = {
 export default {
     id: "density-mass-volume",
     label: "Density, Mass & Volume",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     options: [
         {
             id: "find",

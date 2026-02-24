@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "rounding",
     label: "Rounding",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.roundingMode || "mixed";
         if (mode === "dp") return "Round each number to the specified number of decimal places.";

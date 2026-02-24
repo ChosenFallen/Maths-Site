@@ -3,6 +3,7 @@ import { randInt, gcd, formatFrac, formatFracOrWhole } from "./utils.js";
 export default {
     id: "simplify-fractions",
     label: "Simplify Fractions",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction() {
         return "Simplify each fraction.";
     },

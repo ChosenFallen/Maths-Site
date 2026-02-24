@@ -3,6 +3,7 @@ import { randInt, renderKatex } from "./utils.js";
 export default {
     id: "substitution",
     label: "Substitution",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.variableMode || "one";
         if (mode === "one") return "Evaluate the expression for the given value.";

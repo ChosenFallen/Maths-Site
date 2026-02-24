@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "square-numbers",
     label: "Square Numbers & Square Roots",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Calculate the square or square root of each number.";
     },

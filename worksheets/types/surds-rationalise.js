@@ -8,6 +8,7 @@ function formatFracLatex(num, den) {
 export default {
     id: "surds-rationalise",
     label: "Rationalising Denominators",
+    grades: [8, 9, 9],  // [easy, normal, hard]
     instruction() {
         return "Rationalise the denominator of each expression.";
     },

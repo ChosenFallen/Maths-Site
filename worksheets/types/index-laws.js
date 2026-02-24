@@ -3,6 +3,7 @@ import { randInt, exponentToSuperscript } from "./utils.js";
 export default {
     id: "index-laws",
     label: "Index Laws",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction(options = {}) {
         const rule = options.indexLaw || "mixed";
         if (rule === "product") return "Simplify each expression using the product rule: aᵐ × aⁿ = aᵐ⁺ⁿ.";

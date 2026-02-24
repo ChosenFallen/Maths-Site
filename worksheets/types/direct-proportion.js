@@ -61,6 +61,7 @@ function shoppingReverse(rand, unitPrices, qty1Range, budgetMultiplierRange) {
 export default {
     id: "direct-proportion",
     label: "Direct Proportion",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Use the unitary method to solve each proportion problem.";
     },

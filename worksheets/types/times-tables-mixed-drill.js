@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "times-tables-mixed-drill",
     label: "Times Tables: Mixed Drill",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Multiply the numbers from any times table.";
     },

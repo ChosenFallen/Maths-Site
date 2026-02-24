@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "area-triangle",
     label: "Area of Triangles",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Calculate the area of each triangle.";
     },

@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "factors-multiples",
     label: "Factors and Multiples",
+    grades: [4, 5, 5],  // [easy, normal, hard]
     instruction() {
         return "Find all factors of a number, or find multiples of a number.";
     },

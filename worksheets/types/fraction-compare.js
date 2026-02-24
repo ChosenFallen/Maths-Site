@@ -3,6 +3,7 @@ import { formatFrac, formatFracOrWhole, randInt, gcd, lcm } from "./utils.js";
 export default {
     id: "fraction-compare",
     label: "Compare Fractions",
+    grades: [4, 5, 5],  // [easy, normal, hard]
     instruction() {
         return "Compare the fractions using >, <, or =.";
     },

@@ -3,6 +3,7 @@ import { randInt, difficultyRange } from "./utils.js";
 export default {
     id: "missing-number",
     label: "Missing Number",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.operation || "mixed";
         if (mode === "mixed") return "Find the missing number in each equation.";

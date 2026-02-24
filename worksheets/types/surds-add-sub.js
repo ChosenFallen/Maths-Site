@@ -3,6 +3,7 @@ import { randInt, renderKatex, formatSurdLatex, formatSurdText } from "./utils.j
 export default {
     id: "surds-add-sub",
     label: "Surd Addition & Subtraction",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Simplify each expression.";
     },

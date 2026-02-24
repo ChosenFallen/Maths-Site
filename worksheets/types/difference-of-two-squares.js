@@ -3,6 +3,7 @@ import { randInt, renderKatex } from "./utils.js";
 export default {
     id: "difference-of-two-squares",
     label: "Difference of Two Squares",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Factorise each expression.";
     },

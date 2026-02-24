@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "sequences-fibonacci",
     label: "Fibonacci-type Sequences",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Each term is the sum of the two previous terms. Find the next two terms.";
     },

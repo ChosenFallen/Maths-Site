@@ -235,6 +235,7 @@ function genHard(rand) {
 export default {
     id: "algebraic-fractions-mul-div",
     label: "Algebraic Fractions: Multiply & Divide",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Multiply or divide the algebraic fractions. Simplify your answer fully.";
     },

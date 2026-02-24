@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "percentages-as-percentage",
     label: "Percentages: Expressing as a Percentage",
+    grades: [5, 6, 6],  // [easy, normal, hard]
     instruction() {
         return "Express each amount as a percentage of the total.";
     },

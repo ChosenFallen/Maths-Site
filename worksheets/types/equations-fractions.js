@@ -3,6 +3,7 @@ import { randInt, lcm } from "./utils.js";
 export default {
     id: "equations-fractions",
     label: "Equations with Fractions",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Solve each equation.";
     },

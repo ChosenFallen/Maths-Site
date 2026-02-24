@@ -17,6 +17,7 @@ const C_HARD   = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
 export default {
     id: "sequences-nth-term-fractions",
     label: "Sequences: Fractional nth Term",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction(options = {}) {
         const dir = options.sequenceDirection || "mixed";
         const dirText = dir === "increasing" ? "increasing " : dir === "decreasing" ? "decreasing " : "";

@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "negative-numbers-ordering",
     label: "Ordering Negative Numbers",
+    grades: [3, 4, 4],  // [easy, normal, hard]
     instruction() {
         return "Order the numbers (including negative numbers) from smallest to largest.";
     },

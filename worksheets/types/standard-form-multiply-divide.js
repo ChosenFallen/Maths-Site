@@ -3,6 +3,7 @@ import { randInt, exponentToSuperscript, renderKatex } from "./utils.js";
 export default {
     id: "standard-form-multiply-divide",
     label: "Standard Form: Multiplication and Division",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Multiply or divide numbers in standard form.";
     },

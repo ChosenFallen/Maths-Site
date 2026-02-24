@@ -3,6 +3,7 @@ import { randInt, gcd } from "./utils.js";
 export default {
     id: "ratio-simplify",
     label: "Simplifying Ratios",
+    grades: [5, 6, 7],  // [easy, normal, hard]
 
     instruction() {
         return "Simplify each ratio to its simplest form.";

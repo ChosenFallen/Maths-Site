@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "place-value",
     label: "Place Value",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Identify the place value or the value of a digit in a number.";
     },

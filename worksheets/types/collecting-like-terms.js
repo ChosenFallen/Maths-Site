@@ -3,6 +3,7 @@ import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
 export default {
     id: "collecting-like-terms",
     label: "Collecting Like Terms",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Simplify each expression by collecting like terms.";
     },

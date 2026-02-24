@@ -3,6 +3,7 @@ import { formatMixedNum, formatFrac, formatFracOrWhole, randInt, gcd } from "./u
 export default {
     id: "mixed-numbers",
     label: "Mixed Numbers/Improper Fractions",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.mixedNumberMode || "mixed";
         if (mode === "to-improper") return "Convert to improper fractions.";

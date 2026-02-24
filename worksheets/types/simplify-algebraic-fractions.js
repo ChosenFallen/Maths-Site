@@ -36,6 +36,7 @@ function formatQuadraticLatex(b, c) {
 export default {
     id: "simplify-algebraic-fractions",
     label: "Simplify Algebraic Fractions",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Simplify each algebraic fraction.";
     },

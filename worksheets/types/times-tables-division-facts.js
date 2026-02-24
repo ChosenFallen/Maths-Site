@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "times-tables-division-facts",
     label: "Times Tables: Division Facts",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Divide the numbers using division facts (inverse of times tables).";
     },

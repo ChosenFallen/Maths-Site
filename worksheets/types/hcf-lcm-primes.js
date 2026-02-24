@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "hcf-lcm-primes",
     label: "HCF and LCM using Product of Primes",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Find the HCF or LCM using prime factorization.";
     },

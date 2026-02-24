@@ -127,6 +127,7 @@ const FIND_LABELS = {
 export default {
     id: "speed-distance-time",
     label: "Speed, Distance & Time",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     options: [
         {
             id: "find",

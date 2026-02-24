@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "cube-numbers",
     label: "Cube Numbers & Cube Roots",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Calculate the cube or cube root of each number.";
     },

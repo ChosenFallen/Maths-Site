@@ -11,7 +11,6 @@ const output = document.getElementById("worksheet-output");
 let answerDivGlobal; // store reference to answer key for toggling
 
 const worksheetIdInput = document.getElementById("worksheet-id");
-const generatedIdText = document.getElementById("generated-id-text");
 const copyStatus = document.getElementById("copy-status");
 const problemTypeSelect = document.getElementById("problem-type");
 const difficultySelect = document.getElementById("difficulty");
@@ -121,7 +120,6 @@ function generateWorksheetInternal(forceNewId) {
     }
 
     worksheetIdInput.value = id;
-    generatedIdText.textContent = `Worksheet ID: ${id}`;
     copyStatus.textContent = "";
     uniquenessNote.textContent = "";
     setActionButtonsEnabled(true);
@@ -229,15 +227,27 @@ copyIdBtn.addEventListener("click", async () => {
 
     try {
         await navigator.clipboard.writeText(id);
-        copyStatus.textContent = "Copied!";
+        const originalText = copyIdBtn.textContent;
+        copyIdBtn.textContent = "✓ Copied!";
+        copyIdBtn.style.backgroundColor = "#28a745";
+
+        setTimeout(() => {
+            copyIdBtn.textContent = originalText;
+            copyIdBtn.style.backgroundColor = "";
+        }, 2000);
     } catch {
-        copyStatus.textContent = "Copy failed. Select and copy manually.";
+        copyIdBtn.textContent = "✗ Failed";
+        copyIdBtn.style.backgroundColor = "#dc3545";
+
+        setTimeout(() => {
+            copyIdBtn.textContent = "Copy ID";
+            copyIdBtn.style.backgroundColor = "";
+        }, 2000);
     }
 });
 
 function clearIdOnSettingsChange() {
     worksheetIdInput.value = "";
-    generatedIdText.textContent = "";
     copyStatus.textContent = "";
     // Keep print/toggle enabled if a worksheet is already rendered
     const hasWorksheet = output.hasChildNodes();

@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "odd-even-numbers",
     label: "Odd and Even Numbers",
+    grades: [2, 3, 3],  // [easy, normal, hard]
     instruction() {
         return "Determine if each number is odd or even.";
     },

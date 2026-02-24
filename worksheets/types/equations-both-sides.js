@@ -3,6 +3,7 @@ import { randInt, formatSignValue } from "./utils.js";
 export default {
     id: "equations-both-sides",
     label: "Equations: Letters on Both Sides",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Solve each equation, where letters appear on both sides.";
     },

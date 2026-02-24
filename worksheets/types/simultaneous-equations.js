@@ -104,6 +104,7 @@ function genHard(rand) {
 export default {
     id: "simultaneous-equations",
     label: "Simultaneous Equations",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Solve each pair of simultaneous equations.";
     },

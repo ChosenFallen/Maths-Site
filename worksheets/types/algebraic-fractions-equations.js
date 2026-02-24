@@ -85,6 +85,7 @@ function genHard(rand) {
 export default {
     id: "algebraic-fractions-equations",
     label: "Algebraic Fractions: Equations",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Solve each equation involving algebraic fractions.";
     },

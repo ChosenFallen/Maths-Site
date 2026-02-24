@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "times-tables-negative",
     label: "Times Tables: With Negative Numbers",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction() {
         return "Multiply numbers that may be positive or negative.";
     },

@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "sequences-nth-term",
     label: "Arithmetic Sequences: nth Term",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction(options = {}) {
         const dir = options.sequenceDirection || "mixed";
         const dirText = dir === "increasing" ? "increasing " : dir === "decreasing" ? "decreasing " : "";

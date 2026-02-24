@@ -3,6 +3,7 @@ import { randInt, gcd, lcm } from "./utils.js";
 export default {
     id: "hcf-lcm",
     label: "HCF & LCM",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.hcfLcmMode || "mixed";
         if (mode === "hcf") return "Find the Highest Common Factor (HCF) of each pair of numbers.";

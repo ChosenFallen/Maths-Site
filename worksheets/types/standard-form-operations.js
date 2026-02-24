@@ -3,6 +3,7 @@ import { randInt, exponentToSuperscript, renderKatex } from "./utils.js";
 export default {
     id: "standard-form-operations",
     label: "Standard Form: Addition and Subtraction",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Add or subtract numbers in standard form.";
     },

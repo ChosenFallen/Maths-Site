@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "sequences-geometric",
     label: "Geometric Sequences",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Find the next two terms of each geometric sequence.";
     },

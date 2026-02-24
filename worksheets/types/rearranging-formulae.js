@@ -31,6 +31,7 @@ const HARD_FORMULAS = [
 export default {
     id: "rearranging-formulae",
     label: "Rearranging Formulae",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Rearrange each formula to make the indicated variable the subject.";
     },

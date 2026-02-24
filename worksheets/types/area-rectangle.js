@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "area-rectangle",
     label: "Area of Rectangles",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Calculate the area of each rectangle.";
     },

@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "inverse-operations",
     label: "Using Calculations (Inverse Operations)",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Use inverse operations to find the missing value.";
     },

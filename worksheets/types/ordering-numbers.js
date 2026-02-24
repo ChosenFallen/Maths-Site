@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "ordering-numbers",
     label: "Ordering Numbers",
+    grades: [2, 3, 4],  // [easy, normal, hard]
     instruction() {
         return "Order the numbers from smallest to largest.";
     },

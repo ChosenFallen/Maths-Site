@@ -3,6 +3,7 @@ import { randInt, difficultyRange } from "./utils.js";
 export default {
     id: "subtraction",
     label: "Subtraction",
+    grades: [1, 2, 2],  // [easy, normal, hard]
     instruction() {
         return "Solve the following.";
     },

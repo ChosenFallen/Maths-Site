@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "negative-numbers",
     label: "Negative Number Operations",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction() {
         return "Calculate each answer. Remember negative results are possible.";
     },

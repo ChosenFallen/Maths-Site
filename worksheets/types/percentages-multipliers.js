@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "percentages-multipliers",
     label: "Percentages: Multipliers",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Use multipliers to calculate the new amount after a percentage change.";
     },

@@ -128,6 +128,7 @@ function genHard(rand) {
 export default {
     id: "algebraic-fractions-add-sub",
     label: "Algebraic Fractions: Add & Subtract",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Add or subtract the algebraic fractions. Give your answer as a single fraction.";
     },

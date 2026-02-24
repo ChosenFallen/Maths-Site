@@ -3,6 +3,7 @@ import { randInt, gcd } from "./utils.js";
 export default {
     id: "reverse-percentages",
     label: "Reverse Percentages",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.changeType || "mixed";
         if (mode === "increase") return "Find the original value before the percentage increase.";

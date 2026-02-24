@@ -10,6 +10,7 @@ import {
 export default {
     id: "surds-expand",
     label: "Surd Expansion",
+    grades: [8, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Expand and simplify each expression.";
     },

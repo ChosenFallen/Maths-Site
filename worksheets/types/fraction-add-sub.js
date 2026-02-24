@@ -3,6 +3,7 @@ import { randInt, gcd, lcm, formatFrac, formatFracOrWhole } from "./utils.js";
 export default {
     id: "fraction-add-sub",
     label: "Add/Subtract Fractions",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.denominatorMode || "mixed";
         if (mode === "like")

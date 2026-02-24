@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "best-buys",
     label: "Best Buys and Unit Pricing",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Calculate unit price or cost per item to find the best value.";
     },

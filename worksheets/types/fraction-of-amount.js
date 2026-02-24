@@ -3,6 +3,7 @@ import { formatFrac, formatFracOrWhole, randInt, gcd } from "./utils.js";
 export default {
     id: "fraction-of-amount",
     label: "Fraction of an Amount",
+    grades: [5, 6, 6],  // [easy, normal, hard]
     instruction() {
         return "Find the fraction of each amount.";
     },

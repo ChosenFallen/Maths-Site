@@ -134,6 +134,7 @@ function genHard(rand) {
 export default {
     id: "completing-the-square",
     label: "Completing the Square",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Write each expression in the form (x + p)² + q.";
     },

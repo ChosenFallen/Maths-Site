@@ -3,6 +3,7 @@ import { randInt, renderKatex, exponentToSuperscript } from "./utils.js";
 export default {
     id: "advanced-indices",
     label: "Advanced Indices (Fractional & Negative)",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction(options = {}) {
         const type = options.indexType || "fractional";
         const basic = options.includeBasicLaws === true || options.includeBasicLaws === "true";

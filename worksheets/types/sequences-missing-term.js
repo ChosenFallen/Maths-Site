@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "sequences-missing-term",
     label: "Missing Terms in Sequences",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction(options = {}) {
         const type = options.sequenceType || "mixed";
         if (type === "arithmetic") return "Find the missing term in each arithmetic sequence.";

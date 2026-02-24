@@ -3,6 +3,7 @@ import { randInt, gcd } from "./utils.js";
 export default {
     id: "percentage-change",
     label: "Percentage Change",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.changeType || "mixed";
         if (mode === "mixed") return "Calculate the percentage change from the original to the new value.";

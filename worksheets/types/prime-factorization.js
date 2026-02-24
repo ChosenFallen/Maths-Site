@@ -3,6 +3,7 @@ import { randInt, exponentToSuperscript } from "./utils.js";
 export default {
     id: "prime-factorization",
     label: "Prime Factorization",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.primeFactorMode || "index";
         if (mode === "full") return "Write each number as a product of prime factors (e.g., 12 = 2 × 2 × 3).";

@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "percentages-repeated",
     label: "Percentages: Repeated Percentage Change",
+    grades: [5, 6, 7],  // [easy, normal, hard]
     instruction() {
         return "Calculate the final amount after applying multiple percentage changes.";
     },

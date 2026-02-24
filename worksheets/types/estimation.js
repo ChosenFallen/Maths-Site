@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "estimation",
     label: "Estimation and Sensible Estimates",
+    grades: [3, 4, 5],  // [easy, normal, hard]
     instruction() {
         return "Round the numbers and estimate the result.";
     },

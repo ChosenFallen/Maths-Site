@@ -3,6 +3,7 @@ import { randInt, formatDecimal, decimalPlaces } from "./utils.js";
 export default {
     id: "decimal-mul-div",
     label: "Multiply/Divide Decimals",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.decimalMulDivMode || "mixed";
         if (mode === "multiply") return "Multiply the decimals.";

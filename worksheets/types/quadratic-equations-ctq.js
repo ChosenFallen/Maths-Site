@@ -109,6 +109,7 @@ function genHard(rand) {
 export default {
     id: "quadratic-equations-ctq",
     label: "Quadratic Equations: Completing the Square",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Solve each equation by completing the square. Give exact answers.";
     },

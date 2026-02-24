@@ -3,6 +3,7 @@ import { randInt, gcd, formatFrac, formatFracOrWhole } from "./utils.js";
 export default {
     id: "fraction-mul-div",
     label: "Multiply/Divide Fractions",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.fractionMulDivMode || "mixed";
         if (mode === "multiply")

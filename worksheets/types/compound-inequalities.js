@@ -5,6 +5,7 @@ const SIGNS = ["<", "≤"];
 export default {
     id: "compound-inequalities",
     label: "Compound Inequalities",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Solve each compound inequality.";
     },

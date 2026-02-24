@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "recurring-decimals-to-fractions",
     label: "Recurring Decimals to Fractions",
+    grades: [6, 7, 8],  // [easy, normal, hard]
     instruction() {
         return "Convert each recurring decimal to a fraction in its simplest form. Brackets show the repeating part, e.g. 0.(3) = 0.333…";
     },

@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "triangular-numbers",
     label: "Triangular Numbers",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction() {
         return "Find triangular numbers or identify properties of triangular number sequences.";
     },

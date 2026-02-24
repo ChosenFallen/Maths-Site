@@ -3,6 +3,7 @@ import { randInt } from "./utils.js";
 export default {
     id: "sequences-quadratic",
     label: "Quadratic Sequences",
+    grades: [7, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Find an expression for the nth term of each quadratic sequence.";
     },

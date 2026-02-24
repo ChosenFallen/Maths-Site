@@ -150,6 +150,7 @@ const LABELS   = { mean: "Mean", median: "Median", mode: "Mode", range: "Range" 
 export default {
     id: "mean-median-mode-range",
     label: "Mean, Median, Mode & Range",
+    grades: [4, 5, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const m = options.measure || "mixed";
         if (m === "mean")   return "Find the mean of each set of numbers.";
