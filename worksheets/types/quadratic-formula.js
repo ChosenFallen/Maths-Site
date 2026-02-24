@@ -2,8 +2,8 @@ import { randInt, renderKatex, formatQuadraticLatex, formatQuadraticText } from 
 
 // LaTeX for one root "h ± d√k" (dSign = +1 or −1)
 function surdRootLatex(h, dSign, d, k) {
-    const sq = d === 1 ? `\\sqrt{${k}}` : `${d}\\sqrt{${k}}`;
-    if (h === 0) return dSign > 0 ? sq : `-${sq}`;
+    const sq = d === 1 ? `\\sqrt{${k}}` : `${d} \\sqrt{${k}}`;
+    if (h === 0) return dSign > 0 ? sq : `- ${sq}`;
     return dSign > 0 ? `${h} + ${sq}` : `${h} - ${sq}`;
 }
 
@@ -20,10 +20,10 @@ function buildSurdAnswer(h, d, k) {
     const r2L = surdRootLatex(h, -1, d, k);
     const r1T = surdRootText(h,  1, d, k);
     const r2T = surdRootText(h, -1, d, k);
-    const r1Html = renderKatex(`x = ${r1L}`) || `x = ${r1T}`;
-    const r2Html = renderKatex(`x = ${r2L}`) || `x = ${r2T}`;
+    const fullLatex = `x = ${r1L} \\text{ or } x = ${r2L}`;
+    const answerHtml = renderKatex(fullLatex) || `x = ${r1T} or x = ${r2T}`;
     return {
-        answerHtml: `${r1Html} or ${r2Html}`,
+        answerHtml,
         answer: `x = ${r1T} or x = ${r2T}`,
     };
 }
@@ -54,14 +54,14 @@ function genEasy(rand) {
         { val: r1,      latex: `${r1}`,               text: r1 < 0 ? `\u2212${Math.abs(r1)}` : `${r1}` },
     ].sort((x, y) => x.val - y.val);
 
-    const r1Html = renderKatex(`x = ${sorted[0].latex}`) || `x = ${sorted[0].text}`;
-    const r2Html = renderKatex(`x = ${sorted[1].latex}`) || `x = ${sorted[1].text}`;
+    const fullLatex = `x = ${sorted[0].latex} \\text{ or } x = ${sorted[1].latex}`;
+    const answerHtml = renderKatex(fullLatex) || `x = ${sorted[0].text} or x = ${sorted[1].text}`;
 
     return {
         questionHtml: renderKatex(formatQuadraticLatex(a, b, c)) || formatQuadraticText(a, b, c),
         question:     formatQuadraticText(a, b, c),
         answer:       `x = ${sorted[0].text} or x = ${sorted[1].text}`,
-        answerHtml:   `${r1Html} or ${r2Html}`,
+        answerHtml,
     };
 }
 
@@ -106,6 +106,7 @@ function genHard(rand) {
 export default {
     id: "quadratic-formula",
     label: "Quadratic Formula",
+    grades: [8, 9, 9],  // [easy, normal, hard]
     instruction() {
         return "Solve each equation using the quadratic formula. Give exact answers.";
     },

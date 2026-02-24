@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Questions - Random Selection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 12px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #0052a3;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-generate {
+            background: #0066cc;
+            color: white;
+        }
+
+        .btn-generate:hover {
+            background: #0052a3;
+        }
+
+        .btn-print {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: #218838;
+        }
+
+        .output {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .question-item {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #0066cc;
+            page-break-inside: avoid;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .question-topic {
+            font-weight: 600;
+            color: #0066cc;
+        }
+
+        .question-grade {
+            background: #e8f0fe;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .question-number {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .question-content {
+            margin: 10px 0;
+        }
+
+        .question-content svg {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+
+        .answer-box {
+            margin-top: 15px;
+            padding: 10px;
+            background: white;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .btn-view {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid #0066cc;
+            border-radius: 4px;
+            background: #0066cc;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-view:hover {
+            background: #0052a3;
+        }
+
+        .btn-view.active {
+            background: white;
+            color: #0066cc;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+            min-height: 260px;
+        }
+
+        .flip-card.instruction-card {
+            cursor: default;
+            background: #fffacd;
+        }
+
+        .flip-card.instruction-card .flip-card-front {
+            background: #fffacd;
+            border-top: 4px solid #ffd700;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 260px;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            border-top: 4px solid #0066cc;
+        }
+
+        .flip-card-front {
+            background: white;
+        }
+
+        .flip-card-back {
+            background: #e8f4e8;
+            border-top: 4px solid #28a745;
+            transform: rotateY(180deg);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .flip-card.flipped .flip-card-front {
+            pointer-events: none;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .card-instruction {
+            font-size: 12px;
+            color: #0066cc;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .card-question {
+            flex: 1;
+            font-size: 14px;
+            overflow: visible;
+            word-wrap: break-word;
+        }
+
+        .card-question svg {
+            max-width: 100%;
+            max-height: 120px;
+            margin: 8px 0;
+        }
+
+        .answer-label {
+            font-size: 12px;
+            color: #28a745;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .card-answer {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            word-wrap: break-word;
+            overflow: hidden;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            line-height: 1.2;
+        }
+
+        .card-answer svg {
+            max-width: 100%;
+            max-height: 140px;
+            margin: 8px auto;
+        }
+
+        .card-answer .katex {
+            font-size: 20px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .controls {
+                display: none;
+            }
+
+            .view-toggle {
+                display: none !important;
+            }
+
+            .question-grid {
+                display: block;
+                padding: 0;
+                gap: 0;
+            }
+
+            .flip-card {
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+                perspective: none;
+            }
+
+            .flip-card-inner {
+                transform: rotateY(0deg) !important;
+            }
+
+            .flip-card-back {
+                display: none;
+            }
+
+            .flip-card-front {
+                position: static;
+                box-shadow: none;
+                border: none;
+                padding: 15px;
+                background: #f9f9f9;
+                border-left: 4px solid #0066cc;
+            }
+
+            .question-item {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: none;
+            }
+
+            .answer-box {
+                min-height: 60px;
+            }
+
+            button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-link">← Back to Home</a>
+            <h1>Teacher Questions - Random Selection</h1>
+            <p class="subtitle">Generate random mixed-topic questions for a specific grade range</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="minGrade">Minimum Grade:</label>
+                <select id="minGrade">
+                    <option value="1">Grade 1</option>
+                    <option value="2">Grade 2</option>
+                    <option value="3">Grade 3</option>
+                    <option value="4">Grade 4</option>
+                    <option value="5" selected>Grade 5</option>
+                    <option value="6">Grade 6</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="maxGrade">Maximum Grade:</label>
+                <select id="maxGrade">
+                    <option value="1">Grade 1</option>
+                    <option value="2">Grade 2</option>
+                    <option value="3">Grade 3</option>
+                    <option value="4">Grade 4</option>
+                    <option value="5">Grade 5</option>
+                    <option value="6">Grade 6</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9" selected>Grade 9</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="quantity">Number of Questions:</label>
+                <input type="number" id="quantity" min="1" max="100" value="9">
+            </div>
+
+            <div class="button-row">
+                <button class="btn-generate" onclick="generateQuestions()">Generate Questions</button>
+                <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+            </div>
+
+            <div class="view-toggle" id="viewToggle" style="display:none;">
+                <button class="btn-view active" id="btnGridView" onclick="switchView('grid')">Grid View</button>
+                <button class="btn-view" id="btnListView" onclick="switchView('list')">List View</button>
+            </div>
+        </div>
+
+        <div class="output" id="output"></div>
+    </div>
+
+    <script type="module">
+        import { WORKSHEET_TYPES } from "./groups.js";
+
+        let currentQuestions = [];
+        let currentView = 'list';
+
+        function mulberry32(seed) {
+            return function () {
+                let t = (seed += 0x6d2b79f5);
+                t = Math.imul(t ^ (t >>> 15), t | 1);
+                t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+                return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+        }
+
+        /**
+         * Get grade for a worksheet at a specific difficulty
+         * @param {Object} worksheet - Worksheet object with grades property
+         * @param {string} difficulty - "easy", "normal", or "hard"
+         * @returns {number} Grade 1-9, or null if not defined
+         */
+        function getGrade(worksheet, difficulty = "normal") {
+            if (!worksheet.grades) return null;
+            const index = difficulty === "easy" ? 0 : difficulty === "hard" ? 2 : 1;
+            return worksheet.grades[index] || null;
+        }
+
+        /**
+         * Check if a worksheet has content in a grade range
+         */
+        function isInGradeRange(worksheet, minGrade, maxGrade) {
+            if (!worksheet.grades) return false;
+            return worksheet.grades.some(g => g >= minGrade && g <= maxGrade);
+        }
+
+        function renderListView() {
+            const output = document.getElementById("output");
+            let html = '';
+            currentQuestions.forEach((q, i) => {
+                html += `
+                    <div class="question-item">
+                        <div class="question-header">
+                            <span class="question-number">Question ${i + 1}</span>
+                            <span class="question-topic">${q.topic}</span>
+                            <span class="question-grade">${q.grade ? 'Grade ' + q.grade : 'Grade TBD'}</span>
+                        </div>
+                        <div class="question-content">
+                            ${q.problem.questionHtml || q.problem.question}
+                        </div>
+                        <div class="answer-box">
+                            Answer: ___________________
+                        </div>
+                    </div>
+                `;
+            });
+            output.innerHTML = html;
+        }
+
+        function renderGridView() {
+            const output = document.getElementById("output");
+            let html = '<div class="question-grid">';
+
+            currentQuestions.forEach((q, i) => {
+                const questionContent = q.problem.questionHtml || q.problem.question;
+                const answerContent = q.problem.answerHtml || q.problem.answer;
+                html += `
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-instruction">${q.instruction}</div>
+                                <div class="card-question">${questionContent}</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="question-topic">${q.topic}</div>
+                                <div class="card-answer">${answerContent}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            output.innerHTML = html;
+        }
+
+        window.switchView = function(mode) {
+            currentView = mode;
+            document.getElementById('btnListView').classList.toggle('active', mode === 'list');
+            document.getElementById('btnGridView').classList.toggle('active', mode === 'grid');
+            if (mode === 'list') renderListView();
+            else renderGridView();
+        };
+
+        window.generateQuestions = function() {
+            const minGrade = parseInt(document.getElementById("minGrade").value);
+            const maxGrade = parseInt(document.getElementById("maxGrade").value);
+            const quantity = parseInt(document.getElementById("quantity").value);
+            const output = document.getElementById("output");
+
+            if (minGrade > maxGrade) {
+                output.innerHTML = '<div class="error">Min grade must be ≤ Max grade</div>';
+                return;
+            }
+
+            if (quantity < 1 || quantity > 100) {
+                output.innerHTML = '<div class="error">Quantity must be between 1 and 100</div>';
+                return;
+            }
+
+            output.innerHTML = '<div class="loading">Generating questions...</div>';
+
+            // Find worksheets in grade range
+            const eligibleWorksheets = WORKSHEET_TYPES.filter(w => isInGradeRange(w, minGrade, maxGrade));
+
+            if (eligibleWorksheets.length === 0) {
+                output.innerHTML = '<div class="error">No worksheets found in the selected grade range. Make sure worksheets have grades defined.</div>';
+                return;
+            }
+
+            // Generate questions
+            currentQuestions = [];
+            for (let i = 0; i < quantity; i++) {
+                const worksheet = eligibleWorksheets[Math.floor(Math.random() * eligibleWorksheets.length)];
+
+                // Determine difficulty based on grade range
+                let difficulty = "normal";
+                if (minGrade === maxGrade) {
+                    difficulty = "normal";  // default
+                } else if (minGrade >= 8) {
+                    difficulty = "hard";
+                } else if (minGrade <= 3) {
+                    difficulty = "easy";
+                } else {
+                    difficulty = ["easy", "normal", "hard"][Math.floor(Math.random() * 3)];
+                }
+
+                const rand = mulberry32(Math.random() * 1000000 | 0);
+                const problem = worksheet.generate(rand, difficulty, 1)[0];
+                const grade = getGrade(worksheet, difficulty);
+
+                currentQuestions.push({
+                    topic: worksheet.label,
+                    difficulty,
+                    grade,
+                    instruction: worksheet.instruction({}),
+                    problem
+                });
+            }
+
+            // Show view toggle and render initial view
+            document.getElementById("viewToggle").style.display = "flex";
+            currentView = 'grid';  // Default to grid view
+            document.getElementById('btnListView').classList.remove('active');
+            document.getElementById('btnGridView').classList.add('active');
+            renderGridView();
+        };
+    </script>
+</body>
+</html>

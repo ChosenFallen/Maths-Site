@@ -512,7 +512,42 @@ for (const type of TYPES) {
     }
 }
 
-// Test 6: Cross-check WORKSHEET_TYPES, WORKSHEET_GROUPS, and the types/ directory.
+// Test 6: Ensure all worksheets have grades property for teacher questions page
+console.log("\n── Grades validation ──────────────────────────────────");
+const worksheetsWithoutGrades = [];
+const worksheetsWithInvalidGrades = [];
+
+for (const type of TYPES) {
+    if (!type.grades) {
+        worksheetsWithoutGrades.push(type.id);
+        totalErrors++;
+    } else if (!Array.isArray(type.grades) || type.grades.length !== 3) {
+        worksheetsWithInvalidGrades.push(`${type.id}: grades must be an array of 3 elements, got ${JSON.stringify(type.grades)}`);
+        totalErrors++;
+    } else {
+        const [easy, normal, hard] = type.grades;
+        const valid = [easy, normal, hard].every(g => typeof g === "number" && g >= 1 && g <= 9);
+        if (!valid) {
+            worksheetsWithInvalidGrades.push(`${type.id}: grades must be numbers 1-9, got [${easy}, ${normal}, ${hard}]`);
+            totalErrors++;
+        }
+    }
+}
+
+if (worksheetsWithoutGrades.length === 0 && worksheetsWithInvalidGrades.length === 0) {
+    console.log("✅ All worksheets have valid grades property.");
+} else {
+    if (worksheetsWithoutGrades.length > 0) {
+        console.log(`❌ ${worksheetsWithoutGrades.length} worksheet(s) missing grades property:`);
+        worksheetsWithoutGrades.forEach(id => console.log(`   - ${id}`));
+    }
+    if (worksheetsWithInvalidGrades.length > 0) {
+        console.log(`❌ ${worksheetsWithInvalidGrades.length} worksheet(s) have invalid grades:`);
+        worksheetsWithInvalidGrades.forEach(msg => console.log(`   - ${msg}`));
+    }
+}
+
+// Test 7: Cross-check WORKSHEET_TYPES, WORKSHEET_GROUPS, and the types/ directory.
 console.log("\n── Registry coverage checks ──────────────────────────────");
 const groupIds      = new Set(WORKSHEET_GROUPS.flatMap(g => g.types));
 const registryIds   = new Set(WORKSHEET_TYPES.map(t => t.id));

@@ -189,6 +189,7 @@ function genHard(rand) {
 export default {
     id: "trigonometry",
     label: "Trigonometry (sin, cos, tan)",
+    grades: [8, 9, 9],  // [easy, normal, hard]
     instruction() {
         return "Use trigonometry (sin, cos, tan) to find missing sides and angles in right-angled triangles.";
     },

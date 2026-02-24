@@ -34,6 +34,7 @@ function generateTwoStep(rand, difficulty) {
 export default {
     id: "equations",
     label: "Solving Equations",
+    grades: [5, 6, 6],  // [easy, normal, hard]
     instruction(options = {}) {
         const mode = options.equationMode || "mixed";
         if (mode === "one") return "Solve the one-step equations.";

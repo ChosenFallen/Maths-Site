@@ -3,6 +3,7 @@ import { randInt, renderKatex, formatQuadraticLatex, formatQuadraticText } from 
 export default {
     id: "quadratic-equations",
     label: "Quadratic Equations",
+    grades: [8, 8, 9],  // [easy, normal, hard]
     instruction() {
         return "Solve each quadratic equation.";
     },
@@ -41,11 +42,15 @@ function generateProblem(rand, difficulty) {
         const root2Str = root2 < 0 ? `−${Math.abs(root2)}` : root2.toString();
         const answer = `x = ${root1Str} or x = ${root2Str}`;
 
+        const answerLatex = `x = ${root1} \\text{ or } x = ${root2}`;
+        const answerHtml = renderKatex(answerLatex) || answer;
+
         const questionHtml = renderKatex(questionLatex) || questionText;
 
         return {
             questionHtml,
             question: questionText,
+            answerHtml,
             answer,
         };
     } else if (difficulty === "normal") {
@@ -68,11 +73,15 @@ function generateProblem(rand, difficulty) {
         const root2Str = root2 < 0 ? `−${Math.abs(root2)}` : root2.toString();
         const answer = `x = ${root1Str} or x = ${root2Str}`;
 
+        const answerLatex = `x = ${root1} \\text{ or } x = ${root2}`;
+        const answerHtml = renderKatex(answerLatex) || answer;
+
         const questionHtml = renderKatex(questionLatex) || questionText;
 
         return {
             questionHtml,
             question: questionText,
+            answerHtml,
             answer,
         };
     } else {
@@ -121,15 +130,31 @@ function generateProblem(rand, difficulty) {
             }
         }
 
+        // Format roots for LaTeX
+        function formatRootLatex(root) {
+            if (root === integerRoot) {
+                return integerRoot.toString();
+            } else {
+                // Fractional root: -p/a
+                return `\\frac{${-p}}{${a}}`;
+            }
+        }
+
         const root1Str = formatRoot(roots[0]);
         const root2Str = formatRoot(roots[1]);
         const answer = `x = ${root1Str} or x = ${root2Str}`;
+
+        const root1Latex = formatRootLatex(roots[0]);
+        const root2Latex = formatRootLatex(roots[1]);
+        const answerLatex = `x = ${root1Latex} \\text{ or } x = ${root2Latex}`;
+        const answerHtml = renderKatex(answerLatex) || answer;
 
         const questionHtml = renderKatex(questionLatex) || questionText;
 
         return {
             questionHtml,
             question: questionText,
+            answerHtml,
             answer,
         };
     }

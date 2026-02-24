@@ -151,6 +151,7 @@ function generateProblem(rand, difficulty, find) {
 export default {
     id: "pythagoras",
     label: "Pythagoras' Theorem",
+    grades: [8, 8, 9],  // [easy, normal, hard]
     options: [
         {
             id: "find",
