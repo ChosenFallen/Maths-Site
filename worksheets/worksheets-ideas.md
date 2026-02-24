@@ -96,7 +96,7 @@
 - [ ] Rearranging formulae (advanced)
 - [x] Quadratic equations (factorizing method) (quadratic-equations)
 - [x] Quadratic equations (formula method) (quadratic-formula)
-- [ ] Quadratic equations (completing the square method)
+- [x] Quadratic equations (completing the square method) (quadratic-equations-ctq)
 - [ ] Quadratic equations (solving graphically)
 - [ ] Forming and solving quadratics
 - [x] Simultaneous equations (elimination/substitution) (simultaneous-equations)
@@ -113,7 +113,7 @@
 - [x] Algebraic fractions (simplifying)
 - [x] Algebraic fractions (addition/subtraction)
 - [x] Algebraic fractions (multiplication/division) (algebraic-fractions-mul-div)
-- [ ] Algebraic fractions (equations)
+- [x] Algebraic fractions (equations) (algebraic-fractions-equations)
 - [ ] Forming expressions
 - [ ] Think of a number problems
 - [ ] Trial and improvement (iterative methods)

@@ -67,8 +67,10 @@ import differenceOfTwoSquares from "./types/difference-of-two-squares.js";
 import simplifyAlgebraicFractions from "./types/simplify-algebraic-fractions.js";
 import algebraicFractionsAddSub from "./types/algebraic-fractions-add-sub.js";
 import algebraicFractionsMulDiv from "./types/algebraic-fractions-mul-div.js";
+import algebraicFractionsEquations from "./types/algebraic-fractions-equations.js";
 import completingTheSquare from "./types/completing-the-square.js";
 import quadraticFormula from "./types/quadratic-formula.js";
+import quadraticEquationsCtq from "./types/quadratic-equations-ctq.js";
 import simplifySurds from "./types/simplify-surds.js";
 import surdsAddSub from "./types/surds-add-sub.js";
 import surdsExpand from "./types/surds-expand.js";
@@ -172,6 +174,8 @@ export const WORKSHEET_TYPES = [
     simplifyAlgebraicFractions,
     algebraicFractionsAddSub,
     algebraicFractionsMulDiv,
+    algebraicFractionsEquations,
+    quadraticEquationsCtq,
     simplifySurds,
     surdsAddSub,
     surdsExpand,
@@ -266,9 +270,9 @@ export const WORKSHEET_GROUPS = [
             "equations",
             "equations-both-sides", "equations-fractions",
             "substitution", "collecting-like-terms", "expanding-brackets", "multiplying-terms",
-            "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "algebraic-fractions-add-sub", "algebraic-fractions-mul-div",
+            "factorising", "factorising-quadratics", "difference-of-two-squares", "simplify-algebraic-fractions", "algebraic-fractions-add-sub", "algebraic-fractions-mul-div", "algebraic-fractions-equations",
             "solving-inequalities", "rearranging-formulae",
-            "quadratic-equations", "quadratic-formula", "completing-the-square", "compound-inequalities", "quadratic-inequalities",
+            "quadratic-equations", "quadratic-formula", "completing-the-square", "quadratic-equations-ctq", "compound-inequalities", "quadratic-inequalities",
             "simultaneous-equations",
         ],
     },
