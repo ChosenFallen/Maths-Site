@@ -71,6 +71,7 @@ import algebraicFractionsEquations from "./types/algebraic-fractions-equations.j
 import completingTheSquare from "./types/completing-the-square.js";
 import quadraticFormula from "./types/quadratic-formula.js";
 import quadraticEquationsCtq from "./types/quadratic-equations-ctq.js";
+import trigonometry from "./types/trigonometry.js";
 import simplifySurds from "./types/simplify-surds.js";
 import surdsAddSub from "./types/surds-add-sub.js";
 import surdsExpand from "./types/surds-expand.js";
@@ -176,6 +177,7 @@ export const WORKSHEET_TYPES = [
     algebraicFractionsMulDiv,
     algebraicFractionsEquations,
     quadraticEquationsCtq,
+    trigonometry,
     simplifySurds,
     surdsAddSub,
     surdsExpand,
@@ -283,6 +285,6 @@ export const WORKSHEET_GROUPS = [
     },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
     { label: "Sequences", types: ["sequences-continue", "sequences-nth-term", "sequences-nth-term-fractions", "sequences-geometric", "sequences-quadratic", "sequences-missing-term", "sequences-fibonacci", "sequences-term-to-term", "sequences-patterns"] },
-    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras"] },
+    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras", "trigonometry"] },
     { label: "Statistics", types: ["mean-median-mode-range"] },
 ];

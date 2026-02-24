@@ -179,7 +179,7 @@
 - [x] Pythagoras' theorem (pythagoras)
 - [ ] Pythagoras in 3D
 - [ ] Pythagoras with rectangles/isosceles triangles
-- [ ] Trigonometry (sin, cos, tan in right-angled triangles)
+- [x] Trigonometry (sin, cos, tan in right-angled triangles) (trigonometry)
 - [ ] Trigonometry in 3D
 - [ ] Sine rule and cosine rule
 - [ ] Area of triangle using trigonometry

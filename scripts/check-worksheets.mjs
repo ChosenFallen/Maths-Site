@@ -100,6 +100,7 @@ const DUPLICATE_TOLERANCE = {
     "algebraic-fractions-equations": 15,
     "quadratic-formula": 15,
     "quadratic-equations-ctq": 15,
+    "trigonometry": 20,
     "simplify-surds": 30,
     "surds-add-sub": 20,
     "surds-expand": 20,
