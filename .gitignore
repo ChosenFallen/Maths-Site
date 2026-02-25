@@ -42,3 +42,6 @@ coverage/
 
 # Past papers (external resources)
 real past papers/
+
+# Past paper analysis outputs
+past-paper-analysis/
