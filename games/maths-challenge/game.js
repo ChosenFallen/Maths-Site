@@ -176,14 +176,13 @@ function generateAnswerButtons(correctAnswer) {
         }
     }
 
-    // If we couldn't generate 4 unique answers, add sequential numbers
-    while (answers.size < 4) {
-        let candidate = Math.max(0, correctAnswer - (4 - answers.size));
-        while (answers.size < 4) {
-            if (!answers.has(candidate)) {
-                answers.add(candidate);
-            }
-            candidate++;
+    // If we couldn't generate 4 unique answers, add nearby numbers
+    for (let offset = 1; offset <= 20 && answers.size < 4; offset++) {
+        if (correctAnswer - offset >= 0 && !answers.has(correctAnswer - offset)) {
+            answers.add(correctAnswer - offset);
+        }
+        if (answers.size < 4 && !answers.has(correctAnswer + offset)) {
+            answers.add(correctAnswer + offset);
         }
     }
 
