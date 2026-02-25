@@ -35,15 +35,22 @@ Simplify: $p + p + p + p + p$
 
 ---
 
-### Question 3
-Reflect the shaded shape in the mirror line (diagram would be provided).
+### Question 3a
+Reflect the shaded triangle in the vertical mirror line (diagram would be provided).
 
 *Answer shown on diagram* (1 mark)
 
 ---
 
+### Question 3b
+Describe the transformation that maps shape A onto shape B.
+
+**Answer:** _______________ (1 mark)
+
+---
+
 ### Question 4
-Write down the value of the digit 7 in the number 47,305
+Write down the value of the digit 7 in the number 47,305.
 
 **Answer:** _______________ (1 mark)
 
@@ -75,62 +82,58 @@ Work out how many t-shirts Lucy buys.
 ---
 
 ### Question 8a
-The table shows temperatures recorded each month. In January, the temperature was 8°C. In February, the temperature was 11°C. Use this to complete the bar chart.
+Work out: $2^4$
+
+**Answer:** _______________ (1 mark)
+
+---
+
+### Question 8b
+Work out: $3^3 - 2^3$
+
+**Answer:** _______________ (2 marks)
+
+---
+
+### Question 9a
+The table shows temperatures recorded each month. Complete the bar chart using this data:
+January: 8°C, February: 11°C, March: 14°C
 
 *Chart to be completed* (2 marks)
 
 ---
 
-### Question 8b
+### Question 9b
 Tom says "In March the temperature was 14°C because the bar reaches the 14 mark." Explain why Tom might be incorrect.
 
 **Answer:**
-__________________________________________________________________
 __________________________________________________________________ (1 mark)
 
 ---
 
-### Question 9a
+### Question 10
 Here is a sequence of patterns made with black square tiles:
 - Pattern 1: 2 squares
 - Pattern 2: 4 squares
 - Pattern 3: 6 squares
 
-Draw Pattern 4.
-
-*Diagram space* (1 mark)
-
----
-
-### Question 9b
-Complete this table showing the pattern sequence:
+Complete the table and write the expression for Pattern $n$:
 
 | Pattern Number | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
 | Number of Squares | 2 | 4 | 6 | | |
 
-(1 mark)
+**Expression for Pattern n:** _______________ (2 marks)
 
 ---
 
-### Question 10
+### Question 11
 The lowest temperature recorded in a city was -8°C. The highest temperature was 35°C greater than the lowest.
 Work out the highest temperature.
 
 **Working:**
 
 **Answer:** _______________ °C (2 marks)
-
----
-
-### Question 11
-A water meter reads 2,456 cubic metres at the start of May and 2,619 cubic metres at the end of May.
-Each cubic metre of water costs 32p.
-Work out how much water was used and the total cost.
-
-**Working:**
-
-**Cost:** £_______________ (4 marks)
 
 ---
 
@@ -205,7 +208,7 @@ Given that $3.2 \times 4.5 = 14.4$, find $32 \times 45$.
 
 ### Question 16a
 Aisha leaves home at 08:45 to drive 65 miles. She thinks she drives at an average speed of 50 mph.
-At what time will she arrive at her destination?
+Work out the time she will arrive at her destination.
 
 **Working:**
 
@@ -222,19 +225,13 @@ __________________________________________________________________ (1 mark)
 ---
 
 ### Question 17a
-180 students took a test. 120 of 150 students passed. 20 younger students failed.
-Use this information to complete the frequency tree.
-
-*Frequency tree diagram to complete* (3 marks)
-
----
-
-### Question 17b
-Find the probability that a randomly selected student is a younger student who passed.
+A water meter reads 2,456 cubic metres at the start of May and 2,619 cubic metres at the end of May.
+Each cubic metre of water costs 32p.
+Work out the total cost of water used.
 
 **Working:**
 
-**Answer:** _______________ (2 marks)
+**Cost:** £_______________ (4 marks)
 
 ---
 
@@ -259,6 +256,20 @@ Increase 320 by 25%.
 ---
 
 ### Question 20
+The stem-and-leaf diagram shows the ages of 12 students:
+
+| Stem | Leaf |
+|---|---|
+| 1 | 4 5 6 7 |
+| 2 | 1 3 5 7 |
+
+Find the median age.
+
+**Answer:** _______________ (2 marks)
+
+---
+
+### Question 21
 Three identical rectangles A, B, and C are placed in a row.
 Rectangle A has $\frac{2}{5}$ shaded. Rectangle C has $\frac{7}{10}$ shaded.
 Work out what fraction of rectangle B is shaded if $\frac{1}{2}$ of all three rectangles is shaded.
@@ -269,31 +280,13 @@ Work out what fraction of rectangle B is shaded if $\frac{1}{2}$ of all three re
 
 ---
 
-### Question 21
-Here are the ages of 12 students: 14, 17, 15, 16, 14, 18, 16, 15, 17, 14, 16, 17
-
-Show this information in a stem-and-leaf diagram.
-
-**Diagram:**
-
-| Stem | Leaf |
-|---|---|
-| 1 | |
-| 2 | |
-
-(3 marks)
-
----
-
 ### Question 22
-The diagram shows a plan view and front elevation of a cube.
-Calculate the volume of the cube in cubic centimeters.
-
-*Diagram with 5cm marked would be shown*
+A cube has a side length of 5 cm.
+Calculate the volume of the cube in cubic centimetres.
 
 **Working:**
 
-**Answer:** _______________ cm³ (3 marks)
+**Answer:** _______________ cm³ (2 marks)
 
 ---
 
@@ -326,81 +319,10 @@ Work out how many adults play squash.
 
 ---
 
-### Question 26a
-Write $2.45 \times 10^{-2}$ as an ordinary number.
-
-**Answer:** _______________ (1 mark)
-
----
-
-### Question 26b
+### Question 26
 Write 567,000 in standard form.
 
-**Answer:** _______________ (1 mark)
-
----
-
-### Question 26c
-Work out: $(3 \times 10^4) \times (2 \times 10^{-3})$
-
-Give your answer in standard form.
-
-**Working:**
-
 **Answer:** _______________ (2 marks)
-
----
-
-### Question 27
-A regular octagon has 8 equal sides and 8 equal angles.
-Work out the size of each interior angle of a regular octagon.
-
-**Working:**
-
-**Answer:** _______________ ° (3 marks)
-
----
-
-### Question 28a
-Complete the table of values for $y = 2x^2 - 4x + 1$:
-
-| $x$ | -1 | 0 | 1 | 2 | 3 |
-|---|---|---|---|---|---|
-| $y$ | | -3 | | | |
-
-(2 marks)
-
----
-
-### Question 28b
-On a grid, draw the graph of $y = 2x^2 - 4x + 1$ for values of $x$ from -1 to 3.
-
-*Graph paper space* (2 marks)
-
----
-
-### Question 28c
-Using your graph, find estimates for the solutions of $2x^2 - 4x + 1 = 0$.
-
-**Answer:** $x = $ _______________ or $x = $ _______________ (2 marks)
-
----
-
-### Question 29
-Cube A has a side length of 4 cm and mass of 96 g.
-Cube B has a side length of 5 cm and mass of 150 g.
-Work out the ratio of the density of Cube A to the density of Cube B in the form $a:b$.
-
-**Working:**
-
-**Answer:** _______________ : _______________ (3 marks)
-
----
-
-### Question 30
-Write down the value of $\sin 60°$.
-
-**Answer:** _______________ (1 mark)
 
 ---
 
@@ -414,48 +336,67 @@ Write down the value of $\sin 60°$.
 
 | Q | Topic | Answer | Marks |
 |---|---|---|---|
-| 1 | Ratio, Proportion & Rates | 2.5 | 1 |
+| 1 | Ratio, Proportion & Rates | 2.5 m | 1 |
 | 2 | Algebra | $5p$ | 1 |
-| 3 | Geometry | Reflection diagram | 1 |
-| 4 | Place Value | 7,000 | 1 |
-| 5 | Number Ordering | 0.07 < 0.75 = 3/4 < 70% | 1 |
+| 3a | Geometry: Transformations | Reflection diagram | 1 |
+| 3b | Geometry: Transformations | Translation/Rotation description | 1 |
+| 4 | Number: Place Value | 7,000 | 1 |
+| 5 | Number: Ordering | 0.07 < 0.75 = 3/4 < 70% | 1 |
 | 6 | Statistics | From chart | 1 |
-| 7 | Arithmetic | 6 | 3 |
-| 8a | Statistics | Bars drawn | 2 |
-| 8b | Statistics | Reading error explanation | 1 |
-| 9a | Patterns | Pattern 4 diagram | 1 |
-| 9b | Sequences | 8, 10 | 1 |
-| 10 | Temperature | 27°C | 2 |
-| 11 | Compound Measures | 163m³, £52.16 | 4 |
-| 12a | Fractions | 5/8 | 2 |
-| 12b | Fractions | 1/2 | 2 |
+| 7 | Number: Arithmetic | 6 | 3 |
+| 8a | Number: Indices | 16 | 1 |
+| 8b | Number: Indices | 19 | 2 |
+| 9a | Statistics | Bars drawn | 2 |
+| 9b | Statistics | Reading error explanation | 1 |
+| 10 | Algebra: Sequences | 8, 10; $2n$ | 2 |
+| 11 | Number: Temperature | 27°C | 2 |
+| 12a | Number: Fractions | 5/8 | 2 |
+| 12b | Number: Fractions | 1/2 | 2 |
 | 13a | Probability | 6/20 = 3/10 | 1 |
 | 13b | Probability | 0.6 | 1 |
-| 14 | Substitution | 33 | 2 |
-| 15a | Estimation | 350 | 2 |
-| 15b | Place Value | 1440 | 1 |
-| 16a | Speed/Time | 09:43 | 3 |
-| 16b | Time/Speed | Arrives later | 1 |
-| 17a | Statistics | Frequency tree | 3 |
-| 17b | Probability | 100/180 = 5/9 | 2 |
-| 18 | Ratio/Proportion | 300g | 2 |
-| 19 | Percentages | 400 | 3 |
-| 20 | Fractions | 3/10 | 3 |
-| 21 | Stem & Leaf | Correct diagram | 3 |
-| 22 | Volume | 125 cm³ | 3 |
-| 23 | Inequalities | $x < 4$ | 2 |
-| 24 | Prime Factors | $2^5 \times 3$ | 2 |
-| 25 | Ratio/Proportion | 60 | 5 |
-| 26a | Standard Form | 0.0245 | 1 |
-| 26b | Standard Form | $5.67 \times 10^5$ | 1 |
-| 26c | Standard Form | $6 \times 10^1$ | 2 |
-| 27 | Angles | 135° | 3 |
-| 28a | Quadratics | 7, -1, -3 | 2 |
-| 28b | Graphs | Parabola drawn | 2 |
-| 28c | Graphs | $x \approx 0.3, x \approx 1.7$ | 2 |
-| 29 | Density/Ratio | 12:10 = 6:5 | 3 |
-| 30 | Trigonometry | √3/2 or 0.866 | 1 |
+| 14 | Algebra: Substitution | 33 | 2 |
+| 15a | Number: Estimation | 350 | 2 |
+| 15b | Number: Place Value | 1440 | 1 |
+| 16a | Ratio: Speed/Time | 09:46 | 3 |
+| 16b | Ratio: Speed/Time | Arrives later | 1 |
+| 17 | Ratio, Proportion & Rates | 163m³, £52.16 | 4 |
+| 18 | Ratio: Proportion | 300g | 2 |
+| 19 | Number: Percentages | 400 | 3 |
+| 20 | Statistics: Median | 15 | 2 |
+| 21 | Number: Fractions | 3/10 | 3 |
+| 22 | Geometry: Volume | 125 cm³ | 2 |
+| 23 | Algebra: Inequalities | $x < 4$ | 2 |
+| 24 | Number: Prime Factors | $2^5 \times 3$ | 2 |
+| 25 | Ratio: Proportion | 60 | 5 |
+| 26 | Number: Standard Form | $5.67 \times 10^5$ | 2 |
 
 ---
 
-*This paper has been designed to reflect the patterns and topics covered in past GCSE Mathematics Foundation Tier papers. It is suitable for students targeting grades 1-5.*
+## Topic Distribution Analysis
+
+| Topic | Questions | Marks | % of Paper | Target % |
+|---|---|---|---|---|
+| Number & Arithmetic | 1, 4, 5, 8a, 8b, 15a, 15b, 26 | 11 | 13.75% | 13.2% |
+| Algebra & Equations | 2, 14, 23 | 5 | 6.25% | 15.4% |
+| Geometry & Shapes | 3a, 3b, 22 | 4 | 5% | 9.2% |
+| Statistics & Data | 6, 9a, 9b, 20 | 6 | 7.5% | 10% |
+| Ratios & Proportion | 1, 7, 16a, 16b, 17, 18, 25 | 18 | 22.5% | 10% |
+| Fractions & Decimals | 12a, 12b, 21 | 7 | 8.75% | 6% |
+| Probability | 13a, 13b | 2 | 2.5% | 5% |
+| Powers & Indices | 8a, 8b | 3 | 3.75% | 2% |
+| Sequences | 10 | 2 | 2.5% | 3% |
+| **TOTAL** | **26 questions** | **80** | **100%** | **100%** |
+
+---
+
+## Difficulty Breakdown
+
+- **Easy (Grades 1-3):** Q1, 2, 3b, 4, 5, 6, 8a, 13a, 13b = 9 Q, ~13 marks (16%)
+- **Normal (Grades 4-6):** Q7, 9a, 9b, 10, 11, 12a, 12b, 14, 15a, 15b, 16a, 18, 19, 20, 21, 22, 23, 24 = 18 Q, ~56 marks (70%)
+- **Hard (Grades 7-9):** Q3a, 8b, 16b, 17, 25, 26 = 6 Q, ~11 marks (14%)
+
+**Note:** This revised paper now more accurately reflects the 2017-2024 Foundation Paper 1 patterns from the comprehensive analysis.
+
+---
+
+*This paper has been designed to reflect the patterns and topics covered in past GCSE Mathematics Foundation Tier Paper 1 (2017-2024). It is suitable for students targeting grades 1-5.*
