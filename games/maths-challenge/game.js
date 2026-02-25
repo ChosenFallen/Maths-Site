@@ -165,11 +165,25 @@ function generateAnswerButtons(correctAnswer) {
 
     const range = selectedDifficulty === "easy" ? 5 : 10;
 
-    while (answers.size < 4) {
+    let attempts = 0;
+    const maxAttempts = 100;
+    while (answers.size < 4 && attempts < maxAttempts) {
+        attempts++;
         const offset = Math.floor(Math.random() * range) - Math.floor(range / 2);
         const candidate = correctAnswer + offset;
         if (candidate >= 0 && candidate !== correctAnswer) {
             answers.add(candidate);
+        }
+    }
+
+    // If we couldn't generate 4 unique answers, add sequential numbers
+    while (answers.size < 4) {
+        let candidate = Math.max(0, correctAnswer - (4 - answers.size));
+        while (answers.size < 4) {
+            if (!answers.has(candidate)) {
+                answers.add(candidate);
+            }
+            candidate++;
         }
     }
 
