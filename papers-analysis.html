@@ -2595,10 +2595,16 @@
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Mark first tab as active
+            // Mark first tab and content as active
             const firstButton = document.querySelector('.tab-button');
             if (firstButton) {
                 firstButton.classList.add('active');
+            }
+
+            // Show first tab content
+            const firstContent = document.querySelector('.tab-content');
+            if (firstContent) {
+                firstContent.classList.add('active');
             }
         });
     </script>
