@@ -1,8 +1,13 @@
 # Dependencies
 node_modules/
 
-# Generated example PDFs
-examples/
+# Generated outputs (but not exam-papers source or documentation)
+output/pdfs/
+output/exam-papers/**/*.pdf
+output/papers-analysis.html
+
+# Past paper analysis (large volume, not version controlled)
+docs/analysis/
 
 # Puppeteer cache
 .cache/
@@ -40,8 +45,5 @@ build/
 # Test coverage
 coverage/
 
-# Past papers (external resources)
-real past papers/
-
-# Past paper analysis outputs
-past-paper-analysis/
+# Archive folder (historical materials)
+archive/
