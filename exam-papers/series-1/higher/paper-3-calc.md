@@ -214,26 +214,31 @@ $x = $ _______________, $y = $ _______________ (4 marks)
 ---
 
 ### Question 17
-The speed of a car over 10 seconds is shown by: $v = 4t + 2$
-where v is velocity (m/s) and t is time (s).
+Two events have probabilities:
+- Event A: P(A) = 0.6
+- Event B: P(B) = 0.4
+- Events A and B are independent
 
-Find the displacement over the 10 seconds.
+Find P(A and B).
 
 **Working:**
 
-**Answer:** _______________ meters (3 marks)
+**Answer:** _______________ (3 marks)
 
 ---
 
 ### Question 18
-A cylinder is inscribed in a cone with height 12cm and radius 5cm.
-If the cylinder has height h and radius r, and r = 5(1 - h/12):
+A matrix $M = \begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ represents a transformation.
 
-Find the height h that maximizes the cylinder's volume.
+a) Calculate the determinant of M.
+
+b) Calculate $M^{-1}$ (the inverse of M).
 
 **Working:**
 
-**Answer:** $h = $ _______________ cm (4 marks)
+a) det(M) = _______________
+
+b) $M^{-1} = \begin{pmatrix} \text{---} & \text{---} \\ \text{---} & \text{---} \end{pmatrix}$ (4 marks)
 
 ---
 
@@ -291,8 +296,8 @@ What is the area of the transformed triangle if original area is 0.5cm²?
 | 14 | Geometry: Segment | 16(π/4 - 0.5) ≈ 10.27 cm² | 3 |
 | 15 | Trigonometry: Angles | 4.42 m | 2 |
 | 16 | Algebra: Simultaneous | x=1, y=0 and x=4, y=6 | 4 |
-| 17 | Calculus: Displacement | ∫(4t+2)dt from 0 to 10 = 220m | 3 |
-| 18 | Optimization: Calculus | h = 6 cm | 4 |
+| 17 | Probability: Independent Events | P(A and B) = 0.6 × 0.4 = 0.24 | 3 |
+| 18 | Matrices: Determinant & Inverse | a) det(M) = 8 - 3 = 5  b) $M^{-1} = \frac{1}{5}\begin{pmatrix} 4 & -3 \\ -1 & 2 \end{pmatrix}$ | 4 |
 | 19 | Probability: Expected Value | 2.7 | 2 |
 | 20 | Matrices: Transformations | 3 cm² (area multiplied by determinant 6) | 2 |
 
@@ -306,11 +311,11 @@ What is the area of the transformed triangle if original area is 0.5cm²?
 | Statistics | 2, 4, 8, 13, 19 | 11 | 13.75% |
 | Algebra & Functions | 7, 16 | 7 | 8.75% |
 | Geometry & Trigonometry | 3, 6, 9, 12, 14, 15 | 16 | 20% |
-| Calculus/Growth | 5, 17, 18 | 10 | 12.5% |
+| Exponential Growth | 5 | 3 | 3.75% |
 | Indices & Exponentials | 11 | 2 | 2.5% |
 | Graphs & Lines | 7 | 3 | 3.75% |
-| Probability | 19 | 2 | 2.5% |
-| Matrices | 20 | 2 | 2.5% |
+| Probability | 17, 19 | 5 | 6.25% |
+| Matrices | 18, 20 | 6 | 7.5% |
 | Complex Problems | Various | 13 | 16.25% |
 | **TOTAL** | **20 questions** | **80** | **100%** |
 

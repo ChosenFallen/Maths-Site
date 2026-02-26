@@ -278,7 +278,7 @@ The area of a sector with radius 6cm and angle 120° is:
 | 2 | Statistics: Regression | Line drawn, estimate from graph | 3 |
 | 3 | Geometry: Volume | 288 cm³ | 3 |
 | 4 | Algebra: Quadratics | x = 3.62, x = 0.38 | 3 |
-| 5 | Calculus: Motion | a) 20m b) 5 seconds | 4 |
+| 5 | Algebra: Quadratic Equations | a) h = 25(2) - 5(2)² = 30m  b) 25t - 5t² = 0, t = 5 seconds | 4 |
 | 6 | Statistics: Histogram | Appropriate estimate | 3 |
 | 7 | Circles | a) (3, -2) b) 4 | 2 |
 | 8 | Trigonometry: Sine Rule | 9.16 cm | 3 |
@@ -308,7 +308,7 @@ The area of a sector with radius 6cm and angle 120° is:
 | Trigonometry | 8, 17 | 6 | 7.5% |
 | Simultaneous Equations | 9, 13 | 7 | 8.75% |
 | Transformations & Bearings | 11, 15 | 4 | 5% |
-| Calculus/Motion | 5 | 4 | 5% |
+| Algebra & Equations | 5 | 4 | 5% |
 | Growth & Optimization | 14, 18 | 6 | 7.5% |
 | Graphs | 2, 16 | 7 | 8.75% |
 | Miscellaneous | Various | 5 | 6.25% |

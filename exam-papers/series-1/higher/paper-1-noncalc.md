@@ -214,12 +214,14 @@ Prove algebraically that the sum of three consecutive even numbers is always div
 ---
 
 ### Question 20
-A particle moves with velocity defined by $v = 3t + 2$ where $t$ is in seconds.
-Find the displacement between $t = 1$ and $t = 4$.
+The points $A$, $B$, and $C$ lie on a circle with centre $O$.
+Angle $AOB = 120°$
+The radius of the circle is 8 cm.
+Calculate the area of the minor sector $AOB$.
 
 **Working:**
 
-**Answer:** _______________ units (3 marks)
+**Answer:** _______________ cm² (3 marks)
 
 ---
 
@@ -253,7 +255,7 @@ Find the displacement between $t = 1$ and $t = 4$.
 | 17 | Algebra: Quadratic Formula | x = 3, x = 0.5 | 2 |
 | 18 | Circles: Tangents | $y = -\frac{3}{4}x + \frac{25}{4}$ | 3 |
 | 19 | Proof: Divisibility | Full proof shown | 3 |
-| 20 | Calculus: Displacement | ∫(3t+2)dt from 1 to 4 = 36 units | 3 |
+| 20 | Geometry: Sectors | Area = $\frac{120}{360} \times \pi \times 8^2 = \frac{16\pi}{3}$ cm² ≈ 16.76 cm² | 3 |
 
 ---
 
@@ -266,10 +268,10 @@ Find the displacement between $t = 1$ and $t = 4$.
 | Surds & Indices | 2, 15 | 5 | 6.25% |
 | Functions & Graphs | 5, 8, 14, 16 | 11 | 13.75% |
 | Trigonometry | 7, 10, 12 | 7 | 8.75% |
-| Circles & Geometry | 6, 18 | 4 | 5% |
+| Circles & Geometry | 6, 18, 20 | 7 | 8.75% |
 | Vectors | 11 | 2 | 2.5% |
 | Sequences | 14 | 3 | 3.75% |
-| Number Properties | 20 | 3 | 3.75% |
+| Number Properties | — | — | — |
 | Inequalities | 9a, 9b | 2 | 2.5% |
 | Other Algebra | 13 | 2 | 2.5% |
 | Miscellaneous | Various | 25 | 31.25% |
