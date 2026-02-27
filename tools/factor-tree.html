@@ -454,6 +454,24 @@
                 const svg = document.getElementById('tree');
                 svg.innerHTML = '';
                 svg.setAttribute('viewBox', `0 0 ${treeWidth} 600`);
+                svg.onclick = (e) => {
+                    // Auto-confirm if clicking on background (not on a circle/text/button)
+                    if (e.target === svg && selectedNodeId !== null && inputBuffer) {
+                        const value = parseInt(inputBuffer);
+                        if (!isNaN(value) && value >= 2 && value <= 1000) {
+                            const parentId = nodes[selectedNodeId].parentId;
+                            if (parentId === null || value <= nodes[parentId].value) {
+                                nodes[selectedNodeId].value = value;
+                                nodes[selectedNodeId].status = 'filled';
+                                selectedNodeId = null;
+                                inputBuffer = '';
+                                clearError();
+                                checkCompletion();
+                                drawTree();
+                            }
+                        }
+                    }
+                };
 
                 // Draw edges first (behind nodes)
                 for (const nodeId in nodes) {
