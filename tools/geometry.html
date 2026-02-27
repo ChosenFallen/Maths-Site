@@ -418,7 +418,7 @@
 
                 const arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 const largeArc = angle > 180 ? 1 : 0;
-                arc.setAttribute('d', `M ${cx + 50} ${cy} A 50 50 0 ${largeArc} 1 ${cx + 50 * Math.cos(rad)} ${cy - 50 * Math.sin(rad)}`);
+                arc.setAttribute('d', `M ${cx + 50} ${cy} A 50 50 0 ${largeArc} 0 ${cx + 50 * Math.cos(rad)} ${cy - 50 * Math.sin(rad)}`);
                 arc.setAttribute('fill', 'none');
                 arc.setAttribute('stroke', '#2196F3');
                 arc.setAttribute('stroke-width', '3');
