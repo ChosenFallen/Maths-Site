@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Fractions & Percentages</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #f5f5f5;
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .back-link {
+                display: inline-block;
+                color: #2196F3;
+                text-decoration: none;
+                font-size: 18px;
+                margin-bottom: 20px;
+                transition: color 0.2s;
+            }
+
+            .back-link:hover {
+                color: #1976D2;
+            }
+
+            header {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.2em;
+                color: #2196F3;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+                color: #666;
+            }
+
+            .controls {
+                background: white;
+                padding: 25px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .control-group {
+                margin-bottom: 20px;
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            label {
+                font-weight: 600;
+                font-size: 1.2em;
+                color: #333;
+                min-width: 120px;
+            }
+
+            input[type="number"] {
+                padding: 10px 15px;
+                font-size: 1.2em;
+                border: 2px solid #ddd;
+                border-radius: 4px;
+                width: 100px;
+                text-align: center;
+            }
+
+            input[type="number"]:focus {
+                outline: none;
+                border-color: #2196F3;
+                box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+            }
+
+            .fraction-display {
+                font-size: 2.5em;
+                font-weight: bold;
+                color: #2196F3;
+            }
+
+            .divider {
+                color: #999;
+                margin: 0 5px;
+            }
+
+            button {
+                padding: 12px 24px;
+                font-size: 1.1em;
+                background: #2196F3;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background 0.2s;
+                font-weight: 600;
+            }
+
+            button:hover,
+            button:active {
+                background: #1976D2;
+            }
+
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+
+            .output {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .visualization-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+
+            .visualization-item {
+                text-align: center;
+            }
+
+            .vis-label {
+                font-weight: 600;
+                font-size: 1.2em;
+                color: #333;
+                margin-bottom: 15px;
+            }
+
+            /* Fraction bar */
+            .fraction-bar {
+                display: flex;
+                height: 40px;
+                border: 2px solid #333;
+                border-radius: 4px;
+                margin-bottom: 15px;
+                overflow: hidden;
+            }
+
+            .bar-part {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8em;
+                font-weight: bold;
+                color: white;
+                background: #2196F3;
+                border-right: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .bar-part:last-child {
+                border-right: none;
+            }
+
+            .bar-part.empty {
+                background: #f0f0f0;
+                color: #999;
+            }
+
+            /* Pie chart */
+            svg {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+            }
+
+            /* Values display */
+            .value-display {
+                font-size: 2.5em;
+                font-weight: bold;
+                color: #2196F3;
+                margin: 15px 0;
+            }
+
+            .decimal-value {
+                font-family: 'Courier New', monospace;
+            }
+
+            /* Equivalent fractions */
+            .equivalents {
+                background: #f9f9f9;
+                padding: 20px;
+                border-radius: 4px;
+                border-left: 4px solid #2196F3;
+            }
+
+            .equiv-label {
+                font-weight: 600;
+                font-size: 1.1em;
+                color: #333;
+                margin-bottom: 15px;
+            }
+
+            .equiv-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                font-size: 1.3em;
+                font-weight: 600;
+                color: #2196F3;
+            }
+
+            .equiv-item {
+                display: flex;
+                align-items: center;
+            }
+
+            .equiv-arrow {
+                margin: 0 8px;
+                color: #999;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 1.8em;
+                }
+
+                .visualization-row {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+
+                .control-group {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                label {
+                    width: 100%;
+                }
+
+                .value-display {
+                    font-size: 2em;
+                }
+
+                .fraction-bar {
+                    height: 30px;
+                }
+
+                input[type="number"] {
+                    width: 80px;
+                }
+            }
+
+            /* Whiteboard (1920x1080) */
+            @media (min-width: 1400px) {
+                h1 {
+                    font-size: 3em;
+                }
+
+                .subtitle {
+                    font-size: 1.4em;
+                }
+
+                .vis-label {
+                    font-size: 1.6em;
+                }
+
+                .value-display {
+                    font-size: 3.5em;
+                }
+
+                .equiv-list {
+                    font-size: 1.6em;
+                }
+
+                button {
+                    font-size: 1.4em;
+                    padding: 15px 30px;
+                }
+
+                input[type="number"] {
+                    font-size: 1.4em;
+                    padding: 12px 18px;
+                }
+
+                label {
+                    font-size: 1.5em;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to Tools</a>
+
+            <header>
+                <h1>🍰 Fractions, Decimals & Percentages</h1>
+                <p class="subtitle">Visualize the relationships between fractions, decimals, and percentages</p>
+            </header>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label>Numerator:</label>
+                    <input type="number" id="numerator" value="3" min="1" max="99" />
+                    <span class="divider">/</span>
+                    <label>Denominator:</label>
+                    <input type="number" id="denominator" value="4" min="2" max="99" />
+                </div>
+                <div class="control-group">
+                    <button onclick="update()">Update</button>
+                    <button onclick="resetValues()">Reset</button>
+                </div>
+            </div>
+
+            <div class="output" id="output"></div>
+        </div>
+
+        <script>
+            function gcd(a, b) {
+                return b === 0 ? a : gcd(b, a % b);
+            }
+
+            function createPieChart(numerator, denominator) {
+                const radius = 80;
+                const cx = 100;
+                const cy = 100;
+                const percentage = (numerator / denominator) * 100;
+                const angle = (percentage / 100) * 360;
+
+                const startAngle = -90;
+                const endAngle = startAngle + angle;
+
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = (endAngle * Math.PI) / 180;
+
+                const x1 = cx + radius * Math.cos(startRad);
+                const y1 = cy + radius * Math.sin(startRad);
+                const x2 = cx + radius * Math.cos(endRad);
+                const y2 = cy + radius * Math.sin(endRad);
+
+                const largeArc = angle > 180 ? 1 : 0;
+
+                const pathData = `
+                    M ${cx} ${cy}
+                    L ${x1} ${y1}
+                    A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}
+                    Z
+                `;
+
+                return `
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Background circle -->
+                        <circle cx="100" cy="100" r="80" fill="#e0e0e0" stroke="#333" stroke-width="2"/>
+                        <!-- Pie slice -->
+                        <path d="${pathData}" fill="#2196F3" stroke="#333" stroke-width="2"/>
+                    </svg>
+                `;
+            }
+
+            function createFractionBar(numerator, denominator) {
+                let html = '<div class="fraction-bar">';
+                for (let i = 0; i < denominator; i++) {
+                    const isShaded = i < numerator;
+                    html += `<div class="bar-part ${isShaded ? '' : 'empty'}">${isShaded ? '✓' : ''}</div>`;
+                }
+                html += '</div>';
+                return html;
+            }
+
+            function getEquivalentFractions(numerator, denominator) {
+                const equiv = [];
+                for (let i = 2; i <= 6; i++) {
+                    equiv.push({
+                        num: numerator * i,
+                        den: denominator * i
+                    });
+                }
+                return equiv;
+            }
+
+            function simplifyFraction(numerator, denominator) {
+                const g = gcd(numerator, denominator);
+                return {
+                    num: numerator / g,
+                    den: denominator / g
+                };
+            }
+
+            function update() {
+                const num = parseInt(document.getElementById('numerator').value) || 1;
+                const den = parseInt(document.getElementById('denominator').value) || 2;
+
+                if (num < 1 || den < 2 || num > 99 || den > 99) {
+                    alert('Please enter valid values: numerator 1-99, denominator 2-99');
+                    return;
+                }
+
+                const decimal = (num / den).toFixed(4);
+                const percentage = ((num / den) * 100).toFixed(1);
+                const simplified = simplifyFraction(num, den);
+                const equivalents = getEquivalentFractions(num, den);
+
+                let html = `
+                    <div class="visualization-row">
+                        <div class="visualization-item">
+                            <div class="vis-label">Fraction Bar</div>
+                            ${createFractionBar(num, den)}
+                            <div class="fraction-display">${num}/${den}</div>
+                        </div>
+                        <div class="visualization-item">
+                            <div class="vis-label">Pie Chart</div>
+                            ${createPieChart(num, den)}
+                        </div>
+                    </div>
+
+                    <div class="visualization-row">
+                        <div class="visualization-item">
+                            <div class="vis-label">Decimal</div>
+                            <div class="value-display decimal-value">${decimal}</div>
+                        </div>
+                        <div class="visualization-item">
+                            <div class="vis-label">Percentage</div>
+                            <div class="value-display">${percentage}%</div>
+                        </div>
+                    </div>
+
+                    <div class="equivalents">
+                        <div class="equiv-label">Equivalent Fractions</div>
+                        <div class="equiv-list">
+                            <div class="equiv-item"><strong>${simplified.num}/${simplified.den}</strong></div>
+                            ${equivalents.map(e => `
+                                <div class="equiv-item">
+                                    <span class="equiv-arrow">=</span>
+                                    <strong>${e.num}/${e.den}</strong>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('output').innerHTML = html;
+            }
+
+            function resetValues() {
+                document.getElementById('numerator').value = '3';
+                document.getElementById('denominator').value = '4';
+                update();
+            }
+
+            // Initial load
+            update();
+
+            // Update on input change
+            document.getElementById('numerator').addEventListener('change', update);
+            document.getElementById('denominator').addEventListener('change', update);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Geometry Visualizer</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #f5f5f5;
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .back-link {
+                display: inline-block;
+                color: #2196F3;
+                text-decoration: none;
+                font-size: 18px;
+                margin-bottom: 20px;
+                transition: color 0.2s;
+            }
+
+            .back-link:hover {
+                color: #1976D2;
+            }
+
+            header {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.2em;
+                color: #2196F3;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+                color: #666;
+            }
+
+            .tab-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
+            }
+
+            .tab-btn {
+                flex: 1;
+                min-width: 150px;
+                padding: 12px 20px;
+                font-size: 1.1em;
+                background: white;
+                color: #2196F3;
+                border: 2px solid #2196F3;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-weight: 600;
+            }
+
+            .tab-btn.active {
+                background: #2196F3;
+                color: white;
+            }
+
+            .tab-btn:hover {
+                background: #f0f0f0;
+            }
+
+            .tab-btn.active:hover {
+                background: #1976D2;
+            }
+
+            .controls {
+                background: white;
+                padding: 25px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .control-group {
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                font-weight: 600;
+                font-size: 1.1em;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            input[type="range"] {
+                width: 100%;
+                height: 6px;
+                cursor: pointer;
+            }
+
+            input[type="number"] {
+                padding: 10px 15px;
+                font-size: 1.1em;
+                border: 2px solid #ddd;
+                border-radius: 4px;
+                width: 150px;
+            }
+
+            input[type="number"]:focus {
+                outline: none;
+                border-color: #2196F3;
+                box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+            }
+
+            .value-display {
+                font-size: 1.5em;
+                font-weight: bold;
+                color: #2196F3;
+                margin-top: 5px;
+            }
+
+            .output {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            svg {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .info-box {
+                background: #f9f9f9;
+                padding: 20px;
+                border-radius: 4px;
+                border-left: 4px solid #2196F3;
+                margin-top: 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .info-label {
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 8px;
+            }
+
+            .info-value {
+                font-size: 1.4em;
+                color: #2196F3;
+                font-weight: bold;
+            }
+
+            .angle-type {
+                font-size: 1.3em;
+                font-weight: 600;
+                color: #666;
+                margin-top: 10px;
+            }
+
+            .buttons-group {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            button {
+                padding: 10px 15px;
+                font-size: 1em;
+                background: #2196F3;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background 0.2s;
+            }
+
+            button:hover,
+            button:active {
+                background: #1976D2;
+            }
+
+            .tab-content {
+                display: none;
+            }
+
+            .tab-content.active {
+                display: block;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 1.8em;
+                }
+
+                .tab-btn {
+                    min-width: 120px;
+                    padding: 10px 15px;
+                    font-size: 1em;
+                }
+
+                input[type="number"] {
+                    width: 120px;
+                }
+            }
+
+            /* Whiteboard (1920x1080) */
+            @media (min-width: 1400px) {
+                h1 {
+                    font-size: 3em;
+                }
+
+                .subtitle {
+                    font-size: 1.4em;
+                }
+
+                .tab-btn {
+                    font-size: 1.4em;
+                    padding: 15px 25px;
+                }
+
+                label {
+                    font-size: 1.4em;
+                }
+
+                .value-display {
+                    font-size: 2em;
+                }
+
+                .info-value {
+                    font-size: 2em;
+                }
+
+                button {
+                    font-size: 1.3em;
+                    padding: 12px 20px;
+                }
+
+                input[type="number"] {
+                    font-size: 1.3em;
+                    padding: 12px 18px;
+                    width: 180px;
+                }
+
+                .controls,
+                .output {
+                    padding: 40px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to Tools</a>
+
+            <header>
+                <h1>📐 Geometry Visualizer</h1>
+                <p class="subtitle">Explore angles, circles, and triangles interactively</p>
+            </header>
+
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('angles')">Angles</button>
+                <button class="tab-btn" onclick="switchTab('circles')">Circles</button>
+                <button class="tab-btn" onclick="switchTab('triangles')">Triangles</button>
+            </div>
+
+            <!-- ANGLES TAB -->
+            <div id="angles" class="tab-content active">
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Angle: <span class="value-display" id="angleValue">45°</span></label>
+                        <input type="range" id="angleSlider" min="0" max="360" value="45" step="1" oninput="updateAngle()" />
+                    </div>
+                    <div class="buttons-group">
+                        <button onclick="setAngle(30)">30°</button>
+                        <button onclick="setAngle(45)">45°</button>
+                        <button onclick="setAngle(60)">60°</button>
+                        <button onclick="setAngle(90)">90°</button>
+                        <button onclick="setAngle(120)">120°</button>
+                        <button onclick="setAngle(180)">180°</button>
+                    </div>
+                </div>
+                <div class="output">
+                    <svg id="anglesSvg" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+                    <div class="info-box">
+                        <div class="info-label">Angle Type:</div>
+                        <div class="angle-type" id="angleType">Acute</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CIRCLES TAB -->
+            <div id="circles" class="tab-content">
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Radius: <span class="value-display" id="radiusValue">5</span> cm</label>
+                        <input type="range" id="radiusSlider" min="1" max="20" value="5" step="1" oninput="updateCircle()" />
+                    </div>
+                </div>
+                <div class="output">
+                    <svg id="circlesSvg" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+                    <div class="info-box">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div class="info-label">Diameter (d):</div>
+                                <div class="info-value" id="diameterValue">10 cm</div>
+                            </div>
+                            <div>
+                                <div class="info-label">Circumference:</div>
+                                <div class="info-value" id="circumferenceValue">31.4 cm</div>
+                            </div>
+                            <div>
+                                <div class="info-label">Area:</div>
+                                <div class="info-value" id="areaValue">78.5 cm²</div>
+                            </div>
+                            <div>
+                                <div class="info-label">Formula:</div>
+                                <div class="info-value">A = πr²</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIANGLES TAB -->
+            <div id="triangles" class="tab-content">
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Angle A: <span class="value-display" id="angleAValue">60°</span></label>
+                        <input type="range" id="angleASlider" min="10" max="170" value="60" step="1" oninput="updateTriangle()" />
+                    </div>
+                    <div class="control-group">
+                        <label>Angle B: <span class="value-display" id="angleBValue">60°</span></label>
+                        <input type="range" id="angleBSlider" min="10" max="170" value="60" step="1" oninput="updateTriangle()" />
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">Angle C (automatically calculated):</div>
+                        <div class="info-value" id="angleCValue">60°</div>
+                    </div>
+                </div>
+                <div class="output">
+                    <svg id="trianglesSvg" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+                    <div class="info-box">
+                        <div class="info-label">Triangle Type:</div>
+                        <div class="info-value" id="triangleType">Equilateral</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function updateAngle() {
+                const angle = parseInt(document.getElementById('angleSlider').value);
+                document.getElementById('angleValue').textContent = angle + '°';
+
+                let type = 'Acute';
+                if (angle === 90) type = 'Right';
+                else if (angle > 90 && angle < 180) type = 'Obtuse';
+                else if (angle === 180) type = 'Straight';
+                else if (angle > 180) type = 'Reflex';
+
+                document.getElementById('angleType').textContent = type;
+                drawAngle(angle);
+            }
+
+            function setAngle(angle) {
+                document.getElementById('angleSlider').value = angle;
+                updateAngle();
+            }
+
+            function drawAngle(angle) {
+                const svg = document.getElementById('anglesSvg');
+                svg.innerHTML = '';
+
+                const cx = 150;
+                const cy = 150;
+                const radius = 80;
+
+                // Draw angle arm (static)
+                const line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line1.setAttribute('x1', cx);
+                line1.setAttribute('y1', cy);
+                line1.setAttribute('x2', cx + radius);
+                line1.setAttribute('y2', cy);
+                line1.setAttribute('stroke', '#333');
+                line1.setAttribute('stroke-width', '2');
+                svg.appendChild(line1);
+
+                // Draw angle arc
+                const rad = (angle * Math.PI) / 180;
+                const x2 = cx + radius * Math.cos(rad);
+                const y2 = cy - radius * Math.sin(rad);
+
+                const arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const largeArc = angle > 180 ? 1 : 0;
+                arc.setAttribute('d', `M ${cx + 50} ${cy} A 50 50 0 ${largeArc} 1 ${cx + 50 * Math.cos(rad)} ${cy - 50 * Math.sin(rad)}`);
+                arc.setAttribute('fill', 'none');
+                arc.setAttribute('stroke', '#2196F3');
+                arc.setAttribute('stroke-width', '3');
+                svg.appendChild(arc);
+
+                // Draw rotating arm
+                const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line2.setAttribute('x1', cx);
+                line2.setAttribute('y1', cy);
+                line2.setAttribute('x2', x2);
+                line2.setAttribute('y2', y2);
+                line2.setAttribute('stroke', '#2196F3');
+                line2.setAttribute('stroke-width', '2');
+                svg.appendChild(line2);
+
+                // Label angle
+                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                label.setAttribute('x', cx + 70 * Math.cos(rad / 2));
+                label.setAttribute('y', cy - 70 * Math.sin(rad / 2));
+                label.setAttribute('text-anchor', 'middle');
+                label.setAttribute('font-size', '18');
+                label.setAttribute('font-weight', 'bold');
+                label.setAttribute('fill', '#2196F3');
+                label.textContent = angle + '°';
+                svg.appendChild(label);
+            }
+
+            function updateCircle() {
+                const r = parseInt(document.getElementById('radiusSlider').value);
+                document.getElementById('radiusValue').textContent = r;
+
+                const d = 2 * r;
+                const c = (2 * Math.PI * r).toFixed(1);
+                const a = (Math.PI * r * r).toFixed(1);
+
+                document.getElementById('diameterValue').textContent = d + ' cm';
+                document.getElementById('circumferenceValue').textContent = c + ' cm';
+                document.getElementById('areaValue').textContent = a + ' cm²';
+
+                drawCircle(r);
+            }
+
+            function drawCircle(r) {
+                const svg = document.getElementById('circlesSvg');
+                svg.innerHTML = '';
+
+                const cx = 150;
+                const cy = 150;
+                const scale = Math.min(80 / r, 10);
+                const circleR = r * scale;
+
+                // Circle
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', cx);
+                circle.setAttribute('cy', cy);
+                circle.setAttribute('r', circleR);
+                circle.setAttribute('fill', 'none');
+                circle.setAttribute('stroke', '#2196F3');
+                circle.setAttribute('stroke-width', '2');
+                svg.appendChild(circle);
+
+                // Radius line
+                const radiusLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                radiusLine.setAttribute('x1', cx);
+                radiusLine.setAttribute('y1', cy);
+                radiusLine.setAttribute('x2', cx + circleR);
+                radiusLine.setAttribute('y2', cy);
+                radiusLine.setAttribute('stroke', '#f44336');
+                radiusLine.setAttribute('stroke-width', '2');
+                svg.appendChild(radiusLine);
+
+                // Diameter line
+                const diamLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                diamLine.setAttribute('x1', cx - circleR);
+                diamLine.setAttribute('y1', cy);
+                diamLine.setAttribute('x2', cx + circleR);
+                diamLine.setAttribute('y2', cy);
+                diamLine.setAttribute('stroke', '#4caf50');
+                diamLine.setAttribute('stroke-width', '1');
+                diamLine.setAttribute('stroke-dasharray', '5,5');
+                svg.appendChild(diamLine);
+
+                // Labels
+                const rLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                rLabel.setAttribute('x', cx + circleR / 2 + 5);
+                rLabel.setAttribute('y', cy - 5);
+                rLabel.setAttribute('font-size', '14');
+                rLabel.setAttribute('fill', '#f44336');
+                rLabel.setAttribute('font-weight', 'bold');
+                rLabel.textContent = 'r=' + r;
+                svg.appendChild(rLabel);
+            }
+
+            function updateTriangle() {
+                const a = parseInt(document.getElementById('angleASlider').value);
+                const b = parseInt(document.getElementById('angleBSlider').value);
+                const c = 180 - a - b;
+
+                if (c < 10 || c > 170) {
+                    document.getElementById('angleASlider').value = Math.max(10, Math.min(170, a));
+                    return;
+                }
+
+                document.getElementById('angleAValue').textContent = a + '°';
+                document.getElementById('angleBValue').textContent = b + '°';
+                document.getElementById('angleCValue').textContent = c + '°';
+
+                let type = 'Scalene';
+                if (a === b && b === c) type = 'Equilateral';
+                else if (a === b || b === c || a === c) type = 'Isosceles';
+                if (c === 90 || a === 90 || b === 90) type = 'Right-angled';
+
+                document.getElementById('triangleType').textContent = type;
+                drawTriangle(a, b, c);
+            }
+
+            function drawTriangle(a, b, c) {
+                const svg = document.getElementById('trianglesSvg');
+                svg.innerHTML = '';
+
+                const width = 200;
+                const height = 150;
+                const x1 = 50;
+                const y1 = 200;
+                const x2 = x1 + width;
+                const y2 = y1;
+
+                // Calculate third point using angles
+                const aRad = (a * Math.PI) / 180;
+                const x3 = x1 + height * Math.cos(aRad);
+                const y3 = y1 - height * Math.sin(aRad);
+
+                // Triangle
+                const triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                triangle.setAttribute('points', `${x1},${y1} ${x2},${y2} ${x3},${y3}`);
+                triangle.setAttribute('fill', '#e3f2fd');
+                triangle.setAttribute('stroke', '#2196F3');
+                triangle.setAttribute('stroke-width', '2');
+                svg.appendChild(triangle);
+
+                // Angle labels
+                const labels = [
+                    { x: x1 + 20, y: y1 - 10, text: a + '°' },
+                    { x: x2 - 20, y: y2 - 10, text: b + '°' },
+                    { x: x3, y: y3 + 20, text: c + '°' }
+                ];
+
+                labels.forEach((label) => {
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', label.x);
+                    text.setAttribute('y', label.y);
+                    text.setAttribute('font-size', '14');
+                    text.setAttribute('fill', '#2196F3');
+                    text.setAttribute('font-weight', 'bold');
+                    text.textContent = label.text;
+                    svg.appendChild(text);
+                });
+            }
+
+            function switchTab(tab) {
+                // Hide all tabs
+                document.querySelectorAll('.tab-content').forEach((el) => el.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach((el) => el.classList.remove('active'));
+
+                // Show selected tab
+                document.getElementById(tab).classList.add('active');
+                event.target.classList.add('active');
+
+                // Trigger initial draw
+                if (tab === 'angles') updateAngle();
+                else if (tab === 'circles') updateCircle();
+                else if (tab === 'triangles') updateTriangle();
+            }
+
+            // Initial draw
+            updateAngle();
+        </script>
+    </body>
+</html>

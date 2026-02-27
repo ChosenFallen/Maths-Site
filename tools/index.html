@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Interactive Tools</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #f5f5f5;
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .back-link {
+                display: inline-block;
+                color: #2196F3;
+                text-decoration: none;
+                font-size: 18px;
+                margin-bottom: 30px;
+                transition: color 0.2s;
+            }
+
+            .back-link:hover {
+                color: #1976D2;
+            }
+
+            header {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.5em;
+                color: #2196F3;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+                color: #666;
+            }
+
+            .tools-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 25px;
+            }
+
+            .tool-card {
+                background: white;
+                border-radius: 12px;
+                padding: 30px;
+                text-decoration: none;
+                color: #333;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 250px;
+                border-left: 5px solid #2196F3;
+            }
+
+            .tool-card:hover,
+            .tool-card:active {
+                transform: translateY(-8px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            }
+
+            .tool-icon {
+                font-size: 4em;
+                margin-bottom: 15px;
+            }
+
+            .tool-title {
+                font-size: 1.8em;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #2196F3;
+            }
+
+            .tool-description {
+                font-size: 1em;
+                color: #666;
+                text-align: center;
+                line-height: 1.5;
+            }
+
+            /* Responsive design */
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 2em;
+                }
+
+                .subtitle {
+                    font-size: 1em;
+                }
+
+                .tool-card {
+                    padding: 20px;
+                    min-height: 200px;
+                }
+
+                .tool-icon {
+                    font-size: 3em;
+                }
+
+                .tool-title {
+                    font-size: 1.3em;
+                }
+
+                .tool-description {
+                    font-size: 0.9em;
+                }
+            }
+
+            /* Whiteboard size (1920x1080) */
+            @media (min-width: 1400px) {
+                h1 {
+                    font-size: 3.5em;
+                }
+
+                .subtitle {
+                    font-size: 1.5em;
+                }
+
+                .tool-card {
+                    padding: 40px;
+                    min-height: 320px;
+                }
+
+                .tool-icon {
+                    font-size: 5em;
+                }
+
+                .tool-title {
+                    font-size: 2em;
+                }
+
+                .tool-description {
+                    font-size: 1.2em;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to Home</a>
+
+            <header>
+                <h1>🔧 Interactive Tools</h1>
+                <p class="subtitle">Visual tools for explaining concepts on the whiteboard</p>
+            </header>
+
+            <div class="tools-grid">
+                <a href="graph-plotter.html" class="tool-card">
+                    <div class="tool-icon">📈</div>
+                    <div class="tool-title">Graph Plotter</div>
+                    <div class="tool-description">Plot functions like y = 2x + 1, x², and more in real time</div>
+                </a>
+
+                <a href="geometry.html" class="tool-card">
+                    <div class="tool-icon">📐</div>
+                    <div class="tool-title">Geometry Visualizer</div>
+                    <div class="tool-description">Explore angles, circles, and triangles interactively</div>
+                </a>
+
+                <a href="fractions.html" class="tool-card">
+                    <div class="tool-icon">🍰</div>
+                    <div class="tool-title">Fractions & Percentages</div>
+                    <div class="tool-description">Visualize fractions, decimals, and percentages together</div>
+                </a>
+
+                <a href="probability.html" class="tool-card">
+                    <div class="tool-icon">🎲</div>
+                    <div class="tool-title">Probability Simulator</div>
+                    <div class="tool-description">Spin spinners, roll dice, and flip coins to explore probability</div>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
