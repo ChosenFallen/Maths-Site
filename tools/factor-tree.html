@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Factor Tree</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #f5f5f5;
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            .back-link {
+                display: inline-block;
+                color: #2196F3;
+                text-decoration: none;
+                font-size: 18px;
+                margin-bottom: 20px;
+                transition: color 0.2s;
+            }
+
+            .back-link:hover {
+                color: #1976D2;
+            }
+
+            header {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.2em;
+                color: #2196F3;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+                color: #666;
+            }
+
+            .main-content {
+                display: grid;
+                grid-template-columns: 320px 1fr;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+
+            .controls {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                height: fit-content;
+                position: sticky;
+                top: 20px;
+            }
+
+            .control-group {
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                font-weight: 600;
+                font-size: 0.95em;
+                color: #333;
+                margin-bottom: 8px;
+            }
+
+            input[type="number"] {
+                width: 100%;
+                padding: 8px 12px;
+                font-size: 0.95em;
+                border: 2px solid #ddd;
+                border-radius: 4px;
+            }
+
+            input[type="number"]:focus {
+                outline: none;
+                border-color: #2196F3;
+                box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+            }
+
+            button {
+                width: 100%;
+                padding: 10px;
+                font-size: 1em;
+                background: #2196F3;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background 0.2s;
+                font-weight: 600;
+                margin-bottom: 8px;
+            }
+
+            button:hover {
+                background: #1976D2;
+            }
+
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+
+            .numpad {
+                background: #f9f9f9;
+                padding: 12px;
+                border-radius: 4px;
+                margin-top: 15px;
+                border: 1px solid #ddd;
+            }
+
+            .numpad-title {
+                font-size: 0.85em;
+                font-weight: 600;
+                color: #666;
+                margin-bottom: 8px;
+            }
+
+            .numpad-row {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 4px;
+                margin-bottom: 4px;
+            }
+
+            .numpad-btn {
+                padding: 8px 4px !important;
+                font-size: 0.9em !important;
+                margin: 0 !important;
+                background: white !important;
+                color: #333 !important;
+                border: 1px solid #ddd !important;
+                font-weight: 600;
+            }
+
+            .numpad-btn:hover {
+                background: #e3f2fd !important;
+                border-color: #2196F3 !important;
+            }
+
+            .numpad-confirm {
+                grid-column: span 5;
+            }
+
+            .error-message {
+                background: #ffebee;
+                color: #c62828;
+                padding: 10px;
+                border-radius: 4px;
+                font-size: 0.9em;
+                margin-bottom: 10px;
+                display: none;
+            }
+
+            .error-message.show {
+                display: block;
+            }
+
+            .graph-container {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                min-height: 500px;
+                overflow-y: auto;
+            }
+
+            svg {
+                width: 100%;
+                height: auto;
+            }
+
+            .completion-banner {
+                background: #e8f5e9;
+                border: 2px solid #4caf50;
+                color: #2e7d32;
+                padding: 15px;
+                border-radius: 4px;
+                text-align: center;
+                font-weight: 600;
+                margin-bottom: 15px;
+                display: none;
+            }
+
+            .completion-banner.show {
+                display: block;
+            }
+
+            /* Responsive */
+            @media (max-width: 1024px) {
+                .main-content {
+                    grid-template-columns: 1fr;
+                }
+
+                .controls {
+                    position: relative;
+                    top: 0;
+                }
+            }
+
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 1.8em;
+                }
+
+                .controls {
+                    padding: 15px;
+                }
+
+                .graph-container {
+                    min-height: 400px;
+                }
+
+                .numpad-row {
+                    grid-template-columns: repeat(4, 1fr);
+                }
+
+                .numpad-confirm {
+                    grid-column: span 4;
+                }
+            }
+
+            /* Whiteboard (1920x1080) */
+            @media (min-width: 1400px) {
+                h1 {
+                    font-size: 3em;
+                }
+
+                .subtitle {
+                    font-size: 1.4em;
+                }
+
+                .controls {
+                    padding: 30px;
+                }
+
+                label {
+                    font-size: 1.3em;
+                }
+
+                button {
+                    font-size: 1.3em;
+                    padding: 12px 15px;
+                }
+
+                input[type="number"] {
+                    font-size: 1.3em;
+                    padding: 12px 18px;
+                }
+
+                .graph-container {
+                    min-height: 700px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="index.html" class="back-link">← Back to Tools</a>
+
+            <header>
+                <h1>🌳 Factor Tree</h1>
+                <p class="subtitle">Build factor trees step by step to find prime factors</p>
+            </header>
+
+            <div class="main-content">
+                <div class="controls">
+                    <div class="control-group">
+                        <button onclick="newNumber()">New Number</button>
+                        <button onclick="resetTree()">Reset</button>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Enter Number:</label>
+                        <input type="number" id="customInput" min="4" max="1000" placeholder="e.g. 24" />
+                        <button onclick="customNumber()" style="margin-top: 8px;">Set Number</button>
+                    </div>
+
+                    <div class="error-message" id="errorMessage"></div>
+
+                    <div class="numpad">
+                        <div class="numpad-title">Enter factors:</div>
+                        <div class="numpad-row">
+                            <button class="numpad-btn" onclick="numpadClick(1)">1</button>
+                            <button class="numpad-btn" onclick="numpadClick(2)">2</button>
+                            <button class="numpad-btn" onclick="numpadClick(3)">3</button>
+                            <button class="numpad-btn" onclick="numpadClick(4)">4</button>
+                            <button class="numpad-btn" onclick="numpadClick(5)">5</button>
+                        </div>
+                        <div class="numpad-row">
+                            <button class="numpad-btn" onclick="numpadClick(6)">6</button>
+                            <button class="numpad-btn" onclick="numpadClick(7)">7</button>
+                            <button class="numpad-btn" onclick="numpadClick(8)">8</button>
+                            <button class="numpad-btn" onclick="numpadClick(9)">9</button>
+                            <button class="numpad-btn" onclick="numpadClick(0)">0</button>
+                        </div>
+                        <div class="numpad-row">
+                            <button class="numpad-btn" onclick="numpadBackspace()" style="grid-column: span 2;">⌫ Delete</button>
+                            <button class="numpad-btn numpad-confirm" onclick="numpadConfirm()" style="background: #4caf50 !important; font-size: 1.2em !important;">✓ Confirm</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="graph-container">
+                    <div style="width: 100%;">
+                        <div class="completion-banner" id="completionBanner"></div>
+                        <svg id="tree" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" style="min-width: 400px;"></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ─── STATE ───────────────────────────────────────────────
+            let nodes = {};
+            let nodeIdCounter = 0;
+            let rootId = null;
+            let selectedNodeId = null;
+            let inputBuffer = '';
+            let treeWidth = 600;
+
+            // ─── UTILITY FUNCTIONS ───────────────────────────────────
+
+            function isPrime(n) {
+                if (n < 2) return false;
+                if (n === 2) return true;
+                if (n % 2 === 0) return false;
+                for (let i = 3; i * i <= n; i += 2) {
+                    if (n % i === 0) return false;
+                }
+                return true;
+            }
+
+            function randomComposite(min = 20, max = 150) {
+                let n;
+                do {
+                    n = Math.floor(Math.random() * (max - min + 1)) + min;
+                } while (isPrime(n));
+                return n;
+            }
+
+            function createNode(value = null, parentId = null) {
+                const id = nodeIdCounter++;
+                nodes[id] = {
+                    id,
+                    value,
+                    parentId,
+                    childIds: [],
+                    status: value === null ? 'empty' : 'filled',
+                    x: 0,
+                    y: 0
+                };
+                return id;
+            }
+
+            function getLevel(nodeId) {
+                let level = 0;
+                let current = nodes[nodeId];
+                while (current.parentId !== null) {
+                    level++;
+                    current = nodes[current.parentId];
+                }
+                return level;
+            }
+
+            // ─── TREE LAYOUT ─────────────────────────────────────────
+
+            function computeTreeLayout() {
+                // Collect all nodes in DFS order
+                const dfsOrder = [];
+                function dfs(nodeId) {
+                    dfsOrder.push(nodeId);
+                    for (const childId of nodes[nodeId].childIds) {
+                        dfs(childId);
+                    }
+                }
+                dfs(rootId);
+
+                // Find leaf indices
+                const leafIndices = {};
+                let leafSlot = 0;
+                for (const nodeId of dfsOrder) {
+                    if (nodes[nodeId].childIds.length === 0) {
+                        leafIndices[nodeId] = leafSlot++;
+                    }
+                }
+
+                // Assign X positions
+                const totalLeaves = leafSlot || 1;
+                const nodeSpacing = Math.max(90, treeWidth / (totalLeaves + 1));
+
+                function assignX(nodeId) {
+                    const node = nodes[nodeId];
+                    if (node.childIds.length === 0) {
+                        // Leaf
+                        node.x = 150 + leafIndices[nodeId] * nodeSpacing;
+                    } else {
+                        // Internal: midpoint of children
+                        for (const childId of node.childIds) {
+                            assignX(childId);
+                        }
+                        const childXs = node.childIds.map(id => nodes[id].x);
+                        node.x = (Math.min(...childXs) + Math.max(...childXs)) / 2;
+                    }
+                }
+                assignX(rootId);
+
+                // Assign Y positions based on level
+                for (const nodeId in nodes) {
+                    nodes[nodeId].y = 80 + getLevel(nodeId) * 110;
+                }
+
+                // Compute tree bounds to set viewBox
+                let minX = Infinity, maxX = -Infinity;
+                for (const nodeId in nodes) {
+                    minX = Math.min(minX, nodes[nodeId].x);
+                    maxX = Math.max(maxX, nodes[nodeId].x);
+                }
+                treeWidth = Math.max(600, (maxX - minX) * 1.3 + 200);
+            }
+
+            // ─── RENDERING ───────────────────────────────────────────
+
+            function drawTree() {
+                computeTreeLayout();
+                const svg = document.getElementById('tree');
+                svg.innerHTML = '';
+                svg.setAttribute('viewBox', `0 0 ${treeWidth} 600`);
+
+                // Draw edges first (behind nodes)
+                for (const nodeId in nodes) {
+                    const node = nodes[nodeId];
+                    for (const childId of node.childIds) {
+                        const child = nodes[childId];
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', node.x);
+                        line.setAttribute('y1', node.y + 22);
+                        line.setAttribute('x2', child.x);
+                        line.setAttribute('y2', child.y - 22);
+                        line.setAttribute('stroke', '#bbb');
+                        line.setAttribute('stroke-width', '2');
+                        svg.appendChild(line);
+                    }
+                }
+
+                // Draw nodes
+                for (const nodeId in nodes) {
+                    const node = nodes[nodeId];
+                    drawNode(svg, node);
+                }
+            }
+
+            function drawNode(svg, node) {
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', node.x);
+                circle.setAttribute('cy', node.y);
+                circle.setAttribute('r', '22');
+                circle.setAttribute('cursor', 'pointer');
+
+                let fill, stroke, strokeWidth;
+                if (node.status === 'empty') {
+                    fill = selectedNodeId === node.id ? '#e3f2fd' : 'white';
+                    stroke = selectedNodeId === node.id ? '#2196F3' : '#ccc';
+                    strokeWidth = selectedNodeId === node.id ? '2' : '2';
+                } else if (node.status === 'filled') {
+                    fill = 'white';
+                    stroke = '#2196F3';
+                    strokeWidth = '2';
+                } else if (node.status === 'prime') {
+                    fill = '#e8f5e9';
+                    stroke = '#4caf50';
+                    strokeWidth = '2';
+                } else if (node.status === 'composite') {
+                    fill = '#fff3e0';
+                    stroke = '#ff9800';
+                    strokeWidth = '2';
+                }
+
+                circle.setAttribute('fill', fill);
+                circle.setAttribute('stroke', stroke);
+                circle.setAttribute('stroke-width', strokeWidth);
+                circle.onclick = () => selectNode(node.id);
+                svg.appendChild(circle);
+
+                // Value text
+                if (node.value !== null) {
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', node.x);
+                    text.setAttribute('y', node.y);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('dominant-baseline', 'middle');
+                    text.setAttribute('font-size', '16');
+                    text.setAttribute('font-weight', 'bold');
+                    text.setAttribute('fill', '#333');
+                    text.setAttribute('cursor', 'pointer');
+                    text.textContent = node.value;
+                    text.onclick = () => selectNode(node.id);
+                    svg.appendChild(text);
+                }
+
+                // Buttons for filled nodes (if awaiting prime decision)
+                if (node.status === 'filled' && node.childIds.length === 0) {
+                    const btnY = node.y + 45;
+                    const btnSpacing = 55;
+
+                    // Prime button
+                    const primeBg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    primeBg.setAttribute('x', node.x - 45);
+                    primeBg.setAttribute('y', btnY - 10);
+                    primeBg.setAttribute('width', '40');
+                    primeBg.setAttribute('height', '20');
+                    primeBg.setAttribute('rx', '3');
+                    primeBg.setAttribute('fill', '#4caf50');
+                    primeBg.setAttribute('cursor', 'pointer');
+                    primeBg.onclick = () => markPrime(node.id);
+                    svg.appendChild(primeBg);
+
+                    const primeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    primeText.setAttribute('x', node.x - 25);
+                    primeText.setAttribute('y', btnY);
+                    primeText.setAttribute('text-anchor', 'middle');
+                    primeText.setAttribute('dominant-baseline', 'middle');
+                    primeText.setAttribute('font-size', '11');
+                    primeText.setAttribute('font-weight', 'bold');
+                    primeText.setAttribute('fill', 'white');
+                    primeText.setAttribute('cursor', 'pointer');
+                    primeText.textContent = 'Prime';
+                    primeText.onclick = () => markPrime(node.id);
+                    svg.appendChild(primeText);
+
+                    // Not Prime button
+                    const notPrimeBg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    notPrimeBg.setAttribute('x', node.x + 5);
+                    notPrimeBg.setAttribute('y', btnY - 10);
+                    notPrimeBg.setAttribute('width', '40');
+                    notPrimeBg.setAttribute('height', '20');
+                    notPrimeBg.setAttribute('rx', '3');
+                    notPrimeBg.setAttribute('fill', '#ff9800');
+                    notPrimeBg.setAttribute('cursor', 'pointer');
+                    notPrimeBg.onclick = () => markNotPrime(node.id);
+                    svg.appendChild(notPrimeBg);
+
+                    const notPrimeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    notPrimeText.setAttribute('x', node.x + 25);
+                    notPrimeText.setAttribute('y', btnY);
+                    notPrimeText.setAttribute('text-anchor', 'middle');
+                    notPrimeText.setAttribute('dominant-baseline', 'middle');
+                    notPrimeText.setAttribute('font-size', '10');
+                    notPrimeText.setAttribute('font-weight', 'bold');
+                    notPrimeText.setAttribute('fill', 'white');
+                    notPrimeText.setAttribute('cursor', 'pointer');
+                    notPrimeText.textContent = 'Not Prime';
+                    notPrimeText.onclick = () => markNotPrime(node.id);
+                    svg.appendChild(notPrimeText);
+                }
+            }
+
+            // ─── INTERACTIONS ─────────────────────────────────────────
+
+            function selectNode(nodeId) {
+                if (nodes[nodeId].status !== 'empty') return;
+                selectedNodeId = nodeId;
+                inputBuffer = '';
+                clearError();
+                drawTree();
+            }
+
+            function numpadClick(digit) {
+                if (selectedNodeId === null) return;
+                inputBuffer += digit;
+            }
+
+            function numpadBackspace() {
+                inputBuffer = inputBuffer.slice(0, -1);
+            }
+
+            function numpadConfirm() {
+                if (selectedNodeId === null) return;
+                const value = parseInt(inputBuffer);
+                if (isNaN(value) || value < 2 || value > 1000) {
+                    showError('Please enter a number between 2 and 1000');
+                    return;
+                }
+
+                const parentId = nodes[selectedNodeId].parentId;
+                if (parentId !== null && value > nodes[parentId].value) {
+                    showError('Factor cannot be larger than ' + nodes[parentId].value);
+                    return;
+                }
+
+                nodes[selectedNodeId].value = value;
+                nodes[selectedNodeId].status = 'filled';
+                selectedNodeId = null;
+                inputBuffer = '';
+                clearError();
+                checkCompletion();
+                drawTree();
+            }
+
+            function markPrime(nodeId) {
+                nodes[nodeId].status = 'prime';
+                selectedNodeId = null;
+                inputBuffer = '';
+                checkCompletion();
+                drawTree();
+            }
+
+            function markNotPrime(nodeId) {
+                nodes[nodeId].status = 'composite';
+                const leftId = createNode(null, nodeId);
+                const rightId = createNode(null, nodeId);
+                nodes[nodeId].childIds = [leftId, rightId];
+                selectedNodeId = null;
+                inputBuffer = '';
+                checkCompletion();
+                drawTree();
+            }
+
+            // ─── VALIDATION ───────────────────────────────────────────
+
+            function validateNode(nodeId) {
+                const node = nodes[nodeId];
+                if (node.childIds.length !== 2) return true;
+
+                const left = nodes[node.childIds[0]];
+                const right = nodes[node.childIds[1]];
+
+                if (left.status !== 'filled' || right.status !== 'filled') return true;
+
+                const product = left.value * right.value;
+                if (product !== node.value) {
+                    showError(`${left.value} × ${right.value} = ${product}, not ${node.value}. Try again!`);
+                    left.status = 'empty';
+                    left.value = null;
+                    right.status = 'empty';
+                    right.value = null;
+                    return false;
+                }
+                return true;
+            }
+
+            function checkCompletion() {
+                const filledNodes = Object.values(nodes).filter(n => n.status === 'filled' || n.status === 'composite' || n.status === 'prime');
+                if (filledNodes.length === 0) {
+                    document.getElementById('completionBanner').classList.remove('show');
+                    return;
+                }
+
+                // Check if all non-root nodes are either prime leaves or have been validated
+                let allPrime = true;
+                for (const nodeId in nodes) {
+                    const node = nodes[nodeId];
+                    if (node.parentId === null) continue; // skip root
+                    if (node.status === 'filled') {
+                        // Still awaiting decision
+                        allPrime = false;
+                        break;
+                    }
+                    if (node.status === 'composite' && node.childIds.length < 2) {
+                        // Composite but children not filled yet
+                        allPrime = false;
+                        break;
+                    }
+                    if (node.status === 'composite') {
+                        // Check children are filled
+                        const left = nodes[node.childIds[0]];
+                        const right = nodes[node.childIds[1]];
+                        if (left.status === 'empty' || right.status === 'empty') {
+                            allPrime = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (allPrime && filledNodes.length > 0) {
+                    // Collect all primes
+                    const primes = [];
+                    function collectPrimes(nodeId) {
+                        const node = nodes[nodeId];
+                        if (node.status === 'prime') {
+                            primes.push(node.value);
+                        } else if (node.status === 'composite' || (node.status === 'filled' && node.childIds.length > 0)) {
+                            for (const childId of node.childIds) {
+                                collectPrimes(childId);
+                            }
+                        }
+                    }
+                    collectPrimes(rootId);
+
+                    if (primes.length > 0) {
+                        primes.sort((a, b) => a - b);
+                        const banner = document.getElementById('completionBanner');
+                        banner.textContent = `🎉 Complete! ${nodes[rootId].value} = ${primes.join(' × ')}`;
+                        banner.classList.add('show');
+                    }
+                }
+            }
+
+            // ─── TREE OPERATIONS ──────────────────────────────────────
+
+            function newNumber() {
+                const num = randomComposite();
+                initializeTree(num);
+            }
+
+            function customNumber() {
+                const input = document.getElementById('customInput');
+                const num = parseInt(input.value);
+                if (isNaN(num) || num < 4) {
+                    showError('Please enter a number at least 4');
+                    return;
+                }
+                if (isPrime(num)) {
+                    showError(num + ' is prime. Please choose a composite number.');
+                    return;
+                }
+                initializeTree(num);
+                input.value = '';
+            }
+
+            function initializeTree(num) {
+                nodes = {};
+                nodeIdCounter = 0;
+                selectedNodeId = null;
+                inputBuffer = '';
+                clearError();
+                document.getElementById('completionBanner').classList.remove('show');
+
+                rootId = createNode(num, null);
+                const leftId = createNode(null, rootId);
+                const rightId = createNode(null, rootId);
+                nodes[rootId].childIds = [leftId, rightId];
+                drawTree();
+            }
+
+            function resetTree() {
+                if (rootId === null) return;
+                const rootValue = nodes[rootId].value;
+                initializeTree(rootValue);
+            }
+
+            // ─── ERROR HANDLING ───────────────────────────────────────
+
+            function showError(message) {
+                const el = document.getElementById('errorMessage');
+                el.textContent = message;
+                el.classList.add('show');
+            }
+
+            function clearError() {
+                const el = document.getElementById('errorMessage');
+                el.classList.remove('show');
+            }
+
+            // ─── INIT ─────────────────────────────────────────────────
+
+            newNumber();
+        </script>
+    </body>
+</html>
