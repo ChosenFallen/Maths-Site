@@ -573,11 +573,11 @@
                     primeText.setAttribute('y', btnY);
                     primeText.setAttribute('text-anchor', 'middle');
                     primeText.setAttribute('dominant-baseline', 'middle');
-                    primeText.setAttribute('font-size', '11');
+                    primeText.setAttribute('font-size', '14');
                     primeText.setAttribute('font-weight', 'bold');
                     primeText.setAttribute('fill', 'white');
                     primeText.setAttribute('cursor', 'pointer');
-                    primeText.textContent = 'Prime';
+                    primeText.textContent = 'P';
                     primeText.onclick = () => markPrime(node.id);
                     svg.appendChild(primeText);
 
@@ -598,13 +598,25 @@
                     notPrimeText.setAttribute('y', btnY);
                     notPrimeText.setAttribute('text-anchor', 'middle');
                     notPrimeText.setAttribute('dominant-baseline', 'middle');
-                    notPrimeText.setAttribute('font-size', '10');
+                    notPrimeText.setAttribute('font-size', '14');
                     notPrimeText.setAttribute('font-weight', 'bold');
                     notPrimeText.setAttribute('fill', 'white');
                     notPrimeText.setAttribute('cursor', 'pointer');
-                    notPrimeText.textContent = 'Not Prime';
+                    notPrimeText.textContent = 'P';
                     notPrimeText.onclick = () => markNotPrime(node.id);
                     svg.appendChild(notPrimeText);
+
+                    // Line through P for "not prime"
+                    const strikeLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    strikeLine.setAttribute('x1', node.x + 15);
+                    strikeLine.setAttribute('y1', btnY - 2);
+                    strikeLine.setAttribute('x2', node.x + 35);
+                    strikeLine.setAttribute('y2', btnY + 2);
+                    strikeLine.setAttribute('stroke', 'white');
+                    strikeLine.setAttribute('stroke-width', '2');
+                    strikeLine.setAttribute('cursor', 'pointer');
+                    strikeLine.onclick = () => markNotPrime(node.id);
+                    svg.appendChild(strikeLine);
                 }
             }
 
