@@ -48,7 +48,7 @@ function drawTrigTriangle(opposite, adjacent, angle, findWhat, unit) {
             <text x="${x1 - 12}" y="${(y1 + y3) / 2}" text-anchor="end" dominant-baseline="middle" font-size="13" font-weight="bold" fill="${oppCol}">${oppLabel}</text>
 
             <!-- Angle at bottom-right -->
-            <path d="M ${x2 - 16},${y2} A 16,16 0 0,0 ${x2 - 13},${y2 - 8}" fill="none" stroke="#666" stroke-width="1.5"/>
+            <path d="M ${x2 - 16},${y2} A 16,16 0 0,1 ${x2 - 13},${y2 - 8}" fill="none" stroke="#666" stroke-width="1.5"/>
             <text x="${x2 - 22}" y="${y2 - 12}" text-anchor="middle" font-size="12" fill="#666">${angle}°</text>
         </svg>
     `;
