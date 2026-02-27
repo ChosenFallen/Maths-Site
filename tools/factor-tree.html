@@ -395,6 +395,15 @@
                 return n;
             }
 
+            function deleteSubtree(nodeId) {
+                // Recursively delete a node and all its descendants
+                const node = nodes[nodeId];
+                for (const childId of node.childIds) {
+                    deleteSubtree(childId);
+                }
+                delete nodes[nodeId];
+            }
+
             function createNode(value = null, parentId = null) {
                 const id = nodeIdCounter++;
                 nodes[id] = {
@@ -579,8 +588,8 @@
                     svg.appendChild(text);
                 }
 
-                // Buttons for filled nodes (if awaiting prime decision)
-                if (node.status === 'filled' && node.childIds.length === 0) {
+                // Buttons for nodes awaiting or needing prime decision (only when selected)
+                if (node.value !== null && (node.status === 'filled' || node.status === 'prime' || node.status === 'composite') && selectedNodeId === node.id) {
                     const btnY = node.y + 45;
                     const btnSpacing = 55;
 
@@ -651,20 +660,27 @@
             // ─── INTERACTIONS ─────────────────────────────────────────
 
             function selectNode(nodeId) {
+                let autoConfirmedNodeId = null;
+
                 // Auto-confirm previous input if switching nodes
                 if (selectedNodeId !== null && selectedNodeId !== nodeId && inputBuffer) {
+                    autoConfirmedNodeId = selectedNodeId;
                     const value = parseInt(inputBuffer);
                     if (!isNaN(value) && value >= 2 && value <= 1000) {
-                        const parentId = nodes[selectedNodeId].parentId;
+                        const parentId = nodes[autoConfirmedNodeId].parentId;
                         if (parentId === null || value <= nodes[parentId].value) {
-                            nodes[selectedNodeId].value = value;
-                            nodes[selectedNodeId].status = 'filled';
+                            nodes[autoConfirmedNodeId].value = value;
+                            nodes[autoConfirmedNodeId].status = 'filled';
                         }
                     }
                 }
 
-                if (nodes[nodeId].status !== 'empty') return;
-                selectedNodeId = nodeId;
+                // Keep just-confirmed node selected to show buttons, otherwise select the clicked node
+                if (autoConfirmedNodeId !== null) {
+                    selectedNodeId = autoConfirmedNodeId;
+                } else {
+                    selectedNodeId = nodeId;
+                }
                 inputBuffer = '';
                 clearError();
                 drawTree();
@@ -717,6 +733,12 @@
                     }
                 }
 
+                // Delete any existing children (allows revising composite → prime)
+                const node = nodes[nodeId];
+                while (node.childIds.length > 0) {
+                    deleteSubtree(node.childIds.pop());
+                }
+
                 nodes[nodeId].status = 'prime';
                 selectedNodeId = null;
                 inputBuffer = '';
@@ -735,6 +757,12 @@
                             nodes[selectedNodeId].status = 'filled';
                         }
                     }
+                }
+
+                // Delete any existing children (allows revising prime → composite)
+                const node = nodes[nodeId];
+                while (node.childIds.length > 0) {
+                    deleteSubtree(node.childIds.pop());
                 }
 
                 nodes[nodeId].status = 'composite';
@@ -821,7 +849,22 @@
                     if (primes.length > 0) {
                         primes.sort((a, b) => a - b);
                         const banner = document.getElementById('completionBanner');
-                        banner.textContent = `🎉 Complete! ${nodes[rootId].value} = ${primes.join(' × ')}`;
+
+                        // Validate: product of primes should equal root value
+                        const product = primes.reduce((a, b) => a * b, 1);
+                        const rootValue = nodes[rootId].value;
+
+                        if (product === rootValue) {
+                            banner.textContent = `✓ Correct! ${rootValue} = ${primes.join(' × ')}`;
+                            banner.style.backgroundColor = '#e8f5e9';
+                            banner.style.color = '#2e7d32';
+                            banner.style.borderColor = '#4caf50';
+                        } else {
+                            banner.textContent = `⚠ Error: ${primes.join(' × ')} ≠ ${rootValue}. This shouldn't happen!`;
+                            banner.style.backgroundColor = '#ffebee';
+                            banner.style.color = '#c62828';
+                            banner.style.borderColor = '#f44336';
+                        }
                         banner.classList.add('show');
                     }
                 }
