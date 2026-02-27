@@ -104,6 +104,7 @@ import speedDistanceTime from "./types/speed-distance-time.js";
 import simultaneousEquations from "./types/simultaneous-equations.js";
 import densityMassVolume from "./types/density-mass-volume.js";
 import pythagoras from "./types/pythagoras.js";
+import basicProbability from "./types/basic-probability.js";
 
 export const WORKSHEET_TYPES = [
     addition,
@@ -212,6 +213,7 @@ export const WORKSHEET_TYPES = [
     simultaneousEquations,
     densityMassVolume,
     pythagoras,
+    basicProbability,
 ];
 
 export const WORKSHEET_GROUPS = [
@@ -326,4 +328,5 @@ export const WORKSHEET_GROUPS = [
     { label: "Sequences", types: ["sequences-continue", "sequences-nth-term", "sequences-nth-term-fractions", "sequences-geometric", "sequences-quadratic", "sequences-missing-term", "sequences-fibonacci", "sequences-term-to-term", "sequences-patterns"] },
     { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras", "trigonometry"] },
     { label: "Statistics", types: ["mean-median-mode-range"] },
+    { label: "Probability", types: ["basic-probability"] },
 ];

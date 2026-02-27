@@ -102,11 +102,11 @@ async function generatePDFs(worksheetId = null) {
         console.log(`📚 Discovered ${WORKSHEET_TYPES.length} worksheet types\n`);
     }
 
-    // Create examples directory if it doesn't exist
-    const examplesDir = join(projectRoot, "examples");
+    // Create output/pdfs/examples directory if it doesn't exist
+    const examplesDir = join(projectRoot, "output", "pdfs", "examples");
     if (!existsSync(examplesDir)) {
-        mkdirSync(examplesDir);
-        console.log("📁 Created examples directory\n");
+        mkdirSync(examplesDir, { recursive: true });
+        console.log("📁 Created output/pdfs/examples directory\n");
     }
 
     // Start local HTTP server
@@ -194,7 +194,7 @@ async function generatePDFs(worksheetId = null) {
                 },
             });
 
-            console.log(`   ✅ Saved to examples/${worksheet.id}.pdf`);
+            console.log(`   ✅ Saved to output/pdfs/examples/${worksheet.id}.pdf`);
         } catch (error) {
             console.log(`   ❌ Failed: ${error.message}`);
         }
@@ -203,7 +203,7 @@ async function generatePDFs(worksheetId = null) {
     await browser.close();
     server.close();
     console.log("\n✨ All PDFs generated successfully!");
-    console.log(`📂 Check the examples/ folder for all worksheet PDFs`);
+    console.log(`📂 Check the output/pdfs/examples/ folder for all worksheet PDFs`);
 }
 
 // Get worksheet ID from command line arguments

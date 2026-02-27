@@ -64,6 +64,7 @@ const DUPLICATE_TOLERANCE = {
     "hcf-lcm-primes": 25,
     "standard-form-operations": 25,
     "standard-form-multiply-divide": 25,
+    "basic-probability": 10,
     "best-buys": 20,
     "inverse-operations": 15,
     "percentages-as-percentage": 25,
