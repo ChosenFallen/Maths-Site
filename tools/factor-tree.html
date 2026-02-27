@@ -589,6 +589,18 @@
             // ─── INTERACTIONS ─────────────────────────────────────────
 
             function selectNode(nodeId) {
+                // Auto-confirm previous input if switching nodes
+                if (selectedNodeId !== null && selectedNodeId !== nodeId && inputBuffer) {
+                    const value = parseInt(inputBuffer);
+                    if (!isNaN(value) && value >= 2 && value <= 1000) {
+                        const parentId = nodes[selectedNodeId].parentId;
+                        if (parentId === null || value <= nodes[parentId].value) {
+                            nodes[selectedNodeId].value = value;
+                            nodes[selectedNodeId].status = 'filled';
+                        }
+                    }
+                }
+
                 if (nodes[nodeId].status !== 'empty') return;
                 selectedNodeId = nodeId;
                 inputBuffer = '';
