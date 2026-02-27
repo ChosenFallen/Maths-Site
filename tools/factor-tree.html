@@ -359,11 +359,39 @@
                 return true;
             }
 
+            function countPrimeFactors(n) {
+                let count = 0;
+                // Count factor of 2
+                while (n % 2 === 0) {
+                    count++;
+                    n = n / 2;
+                }
+                // Count odd factors
+                for (let i = 3; i * i <= n; i += 2) {
+                    while (n % i === 0) {
+                        count++;
+                        n = n / i;
+                    }
+                }
+                // If n is still > 1, it's a prime factor
+                if (n > 1) count++;
+                return count;
+            }
+
             function randomComposite(min = 20, max = 150) {
                 let n;
+                let attempts = 0;
                 do {
                     n = Math.floor(Math.random() * (max - min + 1)) + min;
-                } while (isPrime(n));
+                    attempts++;
+                    // Give up after 100 attempts and return any composite
+                    if (attempts > 100) {
+                        while (isPrime(n)) {
+                            n = Math.floor(Math.random() * (max - min + 1)) + min;
+                        }
+                        return n;
+                    }
+                } while (isPrime(n) || countPrimeFactors(n) < 4 || countPrimeFactors(n) > 8);
                 return n;
             }
 
