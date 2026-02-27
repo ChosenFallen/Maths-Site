@@ -506,8 +506,15 @@
                 circle.onclick = () => selectNode(node.id);
                 svg.appendChild(circle);
 
-                // Value text
+                // Value text or input buffer
+                let displayText = '';
                 if (node.value !== null) {
+                    displayText = node.value.toString();
+                } else if (selectedNodeId === node.id && inputBuffer) {
+                    displayText = inputBuffer;
+                }
+
+                if (displayText) {
                     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     text.setAttribute('x', node.x);
                     text.setAttribute('y', node.y);
@@ -515,9 +522,9 @@
                     text.setAttribute('dominant-baseline', 'middle');
                     text.setAttribute('font-size', '16');
                     text.setAttribute('font-weight', 'bold');
-                    text.setAttribute('fill', '#333');
+                    text.setAttribute('fill', selectedNodeId === node.id && !node.value ? '#666' : '#333');
                     text.setAttribute('cursor', 'pointer');
-                    text.textContent = node.value;
+                    text.textContent = displayText;
                     text.onclick = () => selectNode(node.id);
                     svg.appendChild(text);
                 }
@@ -592,10 +599,12 @@
             function numpadClick(digit) {
                 if (selectedNodeId === null) return;
                 inputBuffer += digit;
+                drawTree();
             }
 
             function numpadBackspace() {
                 inputBuffer = inputBuffer.slice(0, -1);
+                drawTree();
             }
 
             function numpadConfirm() {
