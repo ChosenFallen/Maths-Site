@@ -677,6 +677,18 @@
             }
 
             function markPrime(nodeId) {
+                // Auto-confirm pending input before marking
+                if (selectedNodeId !== null && selectedNodeId !== nodeId && inputBuffer) {
+                    const value = parseInt(inputBuffer);
+                    if (!isNaN(value) && value >= 2 && value <= 1000) {
+                        const parentId = nodes[selectedNodeId].parentId;
+                        if (parentId === null || value <= nodes[parentId].value) {
+                            nodes[selectedNodeId].value = value;
+                            nodes[selectedNodeId].status = 'filled';
+                        }
+                    }
+                }
+
                 nodes[nodeId].status = 'prime';
                 selectedNodeId = null;
                 inputBuffer = '';
@@ -685,6 +697,18 @@
             }
 
             function markNotPrime(nodeId) {
+                // Auto-confirm pending input before marking
+                if (selectedNodeId !== null && selectedNodeId !== nodeId && inputBuffer) {
+                    const value = parseInt(inputBuffer);
+                    if (!isNaN(value) && value >= 2 && value <= 1000) {
+                        const parentId = nodes[selectedNodeId].parentId;
+                        if (parentId === null || value <= nodes[parentId].value) {
+                            nodes[selectedNodeId].value = value;
+                            nodes[selectedNodeId].status = 'filled';
+                        }
+                    }
+                }
+
                 nodes[nodeId].status = 'composite';
                 const leftId = createNode(null, nodeId);
                 const rightId = createNode(null, nodeId);
