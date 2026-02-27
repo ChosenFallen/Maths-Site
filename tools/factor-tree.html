@@ -831,6 +831,28 @@
                 el.classList.remove('show');
             }
 
+            // ─── KEYBOARD SUPPORT ─────────────────────────────────────
+
+            document.addEventListener('keydown', (e) => {
+                if (selectedNodeId === null) return;
+
+                // Number keys 0-9
+                if (e.key >= '0' && e.key <= '9') {
+                    e.preventDefault();
+                    numpadClick(parseInt(e.key));
+                }
+                // Backspace
+                else if (e.key === 'Backspace') {
+                    e.preventDefault();
+                    numpadBackspace();
+                }
+                // Enter to confirm
+                else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    numpadConfirm();
+                }
+            });
+
             // ─── INIT ─────────────────────────────────────────────────
 
             newNumber();
