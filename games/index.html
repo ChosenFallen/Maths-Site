@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Maths Games</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #f5f5f5;
+                padding: 20px;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .back-link {
+                display: inline-block;
+                color: #667eea;
+                text-decoration: none;
+                font-size: 18px;
+                margin-bottom: 30px;
+                transition: color 0.2s;
+            }
+
+            .back-link:hover {
+                color: #5568d3;
+            }
+
+            header {
+                background: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.5em;
+                color: #667eea;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+                color: #666;
+            }
+
+            .games-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 25px;
+            }
+
+            .game-card {
+                background: white;
+                border-radius: 12px;
+                padding: 30px;
+                text-decoration: none;
+                color: #333;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 250px;
+                border-left: 5px solid #667eea;
+            }
+
+            .game-card:hover,
+            .game-card:active {
+                transform: translateY(-8px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            }
+
+            .game-icon {
+                font-size: 4em;
+                margin-bottom: 15px;
+            }
+
+            .game-title {
+                font-size: 1.8em;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #667eea;
+            }
+
+            .game-description {
+                font-size: 1em;
+                color: #666;
+                text-align: center;
+                line-height: 1.5;
+            }
+
+            /* Responsive design */
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 2em;
+                }
+
+                .subtitle {
+                    font-size: 1em;
+                }
+
+                .game-card {
+                    padding: 20px;
+                    min-height: 200px;
+                }
+
+                .game-icon {
+                    font-size: 3em;
+                }
+
+                .game-title {
+                    font-size: 1.3em;
+                }
+
+                .game-description {
+                    font-size: 0.9em;
+                }
+            }
+
+            /* Whiteboard size (1920x1080) */
+            @media (min-width: 1400px) {
+                h1 {
+                    font-size: 3.5em;
+                }
+
+                .subtitle {
+                    font-size: 1.5em;
+                }
+
+                .game-card {
+                    padding: 40px;
+                    min-height: 320px;
+                }
+
+                .game-icon {
+                    font-size: 5em;
+                }
+
+                .game-title {
+                    font-size: 2em;
+                }
+
+                .game-description {
+                    font-size: 1.2em;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index.html" class="back-link">← Back to Home</a>
+
+            <header>
+                <h1>🎮 Maths Games</h1>
+                <p class="subtitle">Fun maths games for class or solo play</p>
+            </header>
+
+            <div class="games-grid">
+                <a href="./maths-challenge/" class="game-card">
+                    <div class="game-icon">🧮</div>
+                    <div class="game-title">Maths Challenge</div>
+                    <div class="game-description">Test your calculation skills with timed questions</div>
+                </a>
+
+                <a href="./simon/" class="game-card">
+                    <div class="game-icon">🎮</div>
+                    <div class="game-title">Simon Says</div>
+                    <div class="game-description">Memory pattern game — follow the sequence</div>
+                </a>
+
+                <a href="./target-number/" class="game-card">
+                    <div class="game-icon">🎯</div>
+                    <div class="game-title">Target Number</div>
+                    <div class="game-description">Countdown-style puzzle with four numbers</div>
+                </a>
+
+                <a href="./buzz-quiz/" class="game-card">
+                    <div class="game-icon">🔴🔵</div>
+                    <div class="game-title">Buzz Quiz</div>
+                    <div class="game-description">Multiplayer quiz with buzzers</div>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
