@@ -49,6 +49,7 @@ const DUPLICATE_TOLERANCE = {
     "advanced-indices": 35,
     // Cube numbers: normal pool of 32, shuffle → exactly 18 duplicates in 50
     "cube-numbers": 20,
+    "circles": 35,
     "index-laws": 15,
     // Indices: normal pool of 22, shuffle → exactly 28 duplicates in 50
     indices: 30,
@@ -83,6 +84,7 @@ const DUPLICATE_TOLERANCE = {
     "ratio-sharing": 10,
     "direct-proportion": 10,
     "inverse-proportion": 20,
+    "linear-graphs": 15,
     "mean-median-mode-range": 5,
     "perimeter": 20,
     "speed-distance-time": 15,

@@ -105,6 +105,8 @@ import simultaneousEquations from "./types/simultaneous-equations.js";
 import densityMassVolume from "./types/density-mass-volume.js";
 import pythagoras from "./types/pythagoras.js";
 import basicProbability from "./types/basic-probability.js";
+import linearGraphs from "./types/linear-graphs.js";
+import circles from "./types/circles.js";
 
 export const WORKSHEET_TYPES = [
     addition,
@@ -214,6 +216,8 @@ export const WORKSHEET_TYPES = [
     densityMassVolume,
     pythagoras,
     basicProbability,
+    linearGraphs,
+    circles,
 ];
 
 export const WORKSHEET_GROUPS = [
@@ -326,7 +330,8 @@ export const WORKSHEET_GROUPS = [
     },
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
     { label: "Sequences", types: ["sequences-continue", "sequences-nth-term", "sequences-nth-term-fractions", "sequences-geometric", "sequences-quadratic", "sequences-missing-term", "sequences-fibonacci", "sequences-term-to-term", "sequences-patterns"] },
-    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras", "trigonometry"] },
+    { label: "Graphs & Functions", types: ["linear-graphs"] },
+    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras", "trigonometry", "circles"] },
     { label: "Statistics", types: ["mean-median-mode-range"] },
     { label: "Probability", types: ["basic-probability"] },
 ];
