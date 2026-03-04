@@ -1,4 +1,4 @@
-import { randInt, lcm } from "./utils.js";
+import { randInt, lcm, renderKatex } from "./utils.js";
 
 export default {
     id: "equations-fractions",
@@ -21,7 +21,9 @@ export default {
 
 function generateProblem(rand, difficulty) {
     let question = "";
+    let latex = "";
     let answer = "";
+    let answerLatex = "";
 
     if (difficulty === "easy") {
         // x/a = N form
@@ -31,7 +33,9 @@ function generateProblem(rand, difficulty) {
         const x = a * N;
 
         question = `x/${a} = ${N}`;
+        latex = `\\frac{x}{${a}} = ${N}`;
         answer = `x = ${x}`;
+        answerLatex = `x = ${x}`;
     } else if (difficulty === "normal") {
         // (x + b)/a = c form
         // Pick a, c, b, set x = a*c - b
@@ -41,7 +45,9 @@ function generateProblem(rand, difficulty) {
         const x = a * c - b;
 
         question = `(x + ${b})/${a} = ${c}`;
+        latex = `\\frac{x + ${b}}{${a}} = ${c}`;
         answer = `x = ${x}`;
+        answerLatex = `x = ${x}`;
     } else {
         // x/a + x/b = c form
         // Pick a, b (a != b), then x = lcm(a,b) * k, c = x/a + x/b
@@ -56,14 +62,13 @@ function generateProblem(rand, difficulty) {
             const c = Math.round(xVal / a + xVal / alt);
 
             question = `x/${a} + x/${alt} = ${c}`;
+            latex = `\\frac{x}{${a}} + \\frac{x}{${alt}} = ${c}`;
             answer = `x = ${xVal}`;
+            answerLatex = `x = ${xVal}`;
 
-            return {
-                question,
-                questionHtml: question,
-                answer,
-                answerHtml: answer,
-            };
+            const questionHtml = renderKatex(latex) || question;
+            const answerHtml = renderKatex(answerLatex) || answer;
+            return { question, questionHtml, answer, answerHtml };
         }
 
         const k = randInt(rand, 1, 4);
@@ -72,13 +77,13 @@ function generateProblem(rand, difficulty) {
         const c = Math.round(x / a + x / b);
 
         question = `x/${a} + x/${b} = ${c}`;
+        latex = `\\frac{x}{${a}} + \\frac{x}{${b}} = ${c}`;
         answer = `x = ${x}`;
+        answerLatex = `x = ${x}`;
     }
 
-    return {
-        question,
-        questionHtml: question,
-        answer,
-        answerHtml: answer,
-    };
+    const questionHtml = renderKatex(latex) || question;
+    const answerHtml = renderKatex(answerLatex) || answer;
+
+    return { question, questionHtml, answer, answerHtml };
 }

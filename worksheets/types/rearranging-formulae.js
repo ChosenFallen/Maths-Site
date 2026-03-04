@@ -1,4 +1,4 @@
-import { randInt } from "./utils.js";
+import { randInt, renderKatex } from "./utils.js";
 
 const HARD_FORMULAS = [
     { q: "v = u + at, make u the subject", a: "u = v − at" },
@@ -55,27 +55,51 @@ function generateProblem(rand, difficulty) {
 
         if (type === 0) {
             // y = x + a, make x the subject
+            const question = `y = x + ${a}, make x the subject`;
+            const questionLatex = `y = x + ${a}`;
+            const answer = `x = y − ${a}`;
+            const answerLatex = `x = y - ${a}`;
             return {
-                question: `y = x + ${a}, make x the subject`,
-                answer: `x = y − ${a}`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         } else if (type === 1) {
             // y = x − a, make x the subject
+            const question = `y = x − ${a}, make x the subject`;
+            const questionLatex = `y = x - ${a}`;
+            const answer = `x = y + ${a}`;
+            const answerLatex = `x = y + ${a}`;
             return {
-                question: `y = x − ${a}, make x the subject`,
-                answer: `x = y + ${a}`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         } else if (type === 2) {
             // y = ax, make x the subject
+            const question = `y = ${a}x, make x the subject`;
+            const questionLatex = `y = ${a}x`;
+            const answer = `x = y / ${a}`;
+            const answerLatex = `x = \\frac{y}{${a}}`;
             return {
-                question: `y = ${a}x, make x the subject`,
-                answer: `x = y / ${a}`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         } else {
             // y = x / a, make x the subject
+            const question = `y = x / ${a}, make x the subject`;
+            const questionLatex = `y = \\frac{x}{${a}}`;
+            const answer = `x = ${a}y`;
+            const answerLatex = `x = ${a}y`;
             return {
-                question: `y = x / ${a}, make x the subject`,
-                answer: `x = ${a}y`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         }
     } else if (difficulty === "normal") {
@@ -86,36 +110,64 @@ function generateProblem(rand, difficulty) {
 
         if (type === 0) {
             // y = ax + b, make x the subject
+            const question = `y = ${a}x + ${b}, make x the subject`;
+            const questionLatex = `y = ${a}x + ${b}`;
+            const answer = `x = (y − ${b}) / ${a}`;
+            const answerLatex = `x = \\frac{y - ${b}}{${a}}`;
             return {
-                question: `y = ${a}x + ${b}, make x the subject`,
-                answer: `x = (y − ${b}) / ${a}`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         } else if (type === 1) {
             // y = ax − b, make x the subject
+            const question = `y = ${a}x − ${b}, make x the subject`;
+            const questionLatex = `y = ${a}x - ${b}`;
+            const answer = `x = (y + ${b}) / ${a}`;
+            const answerLatex = `x = \\frac{y + ${b}}{${a}}`;
             return {
-                question: `y = ${a}x − ${b}, make x the subject`,
-                answer: `x = (y + ${b}) / ${a}`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         } else if (type === 2) {
             // y = a(x + b), make x the subject
+            const question = `y = ${a}(x + ${b}), make x the subject`;
+            const questionLatex = `y = ${a}(x + ${b})`;
+            const answer = `x = y / ${a} − ${b}`;
+            const answerLatex = `x = \\frac{y}{${a}} - ${b}`;
             return {
-                question: `y = ${a}(x + ${b}), make x the subject`,
-                answer: `x = y / ${a} − ${b}`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         } else {
             // y = a(x − b), make x the subject
+            const question = `y = ${a}(x − ${b}), make x the subject`;
+            const questionLatex = `y = ${a}(x - ${b})`;
+            const answer = `x = y / ${a} + ${b}`;
+            const answerLatex = `x = \\frac{y}{${a}} + ${b}`;
             return {
-                question: `y = ${a}(x − ${b}), make x the subject`,
-                answer: `x = y / ${a} + ${b}`,
+                question,
+                questionHtml: renderKatex(questionLatex) || question,
+                answer,
+                answerHtml: renderKatex(answerLatex) || answer,
             };
         }
     } else {
         // Hard: pick from named formula list
         const idx = randInt(rand, 0, HARD_FORMULAS.length - 1);
         const formula = HARD_FORMULAS[idx];
+        const questionHtml = renderKatex(formula.q.split(", make")[0]) || formula.q;
+        const answerHtml = renderKatex(formula.a.split(" = ")[1]) || formula.a;
         return {
             question: formula.q,
+            questionHtml: formula.q,
             answer: formula.a,
+            answerHtml: formula.a,
         };
     }
 }

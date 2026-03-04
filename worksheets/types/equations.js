@@ -1,6 +1,4 @@
-import { randInt, difficultyRange } from "./utils.js";
-
-const X = "𝑥";
+import { randInt, difficultyRange, renderKatex } from "./utils.js";
 
 function generateOneStep(rand, difficulty) {
     const [min, max] = difficultyRange(difficulty);
@@ -8,16 +6,21 @@ function generateOneStep(rand, difficulty) {
     const op = ops[randInt(rand, 0, ops.length - 1)];
     let x = randInt(rand, min, max);
     let a = randInt(rand, min, max);
-    let left, right;
+    let left, right, latex;
 
     switch (op) {
-        case "+": left = `${X} + ${a}`; right = x + a; break;
-        case "−": left = `${X} − ${a}`; right = x - a; break;
-        case "×": left = `${a}${X}`;    right = x * a; break;
-        case "÷": x = x * a; left = `${X} ÷ ${a}`; right = x / a; break;
+        case "+": left = `x + ${a}`; latex = `x + ${a}`; right = x + a; break;
+        case "−": left = `x − ${a}`; latex = `x - ${a}`; right = x - a; break;
+        case "×": left = `${a}x`; latex = `${a}x`; right = x * a; break;
+        case "÷": x = x * a; left = `x ÷ ${a}`; latex = `x / ${a}`; right = x / a; break;
     }
 
-    return { question: `${left} = ${right}`, answer: x, answerPrefix: `${X} = ` };
+    const question = `${left} = ${right}`;
+    const questionLatex = `${latex} = ${right}`;
+    const questionHtml = renderKatex(questionLatex) || question;
+    const answerHtml = renderKatex("x") || "x";
+
+    return { question, questionHtml, answer: x, answerHtml };
 }
 
 function generateTwoStep(rand, difficulty) {
@@ -27,8 +30,11 @@ function generateTwoStep(rand, difficulty) {
     const b = randInt(rand, min, Math.min(20, max));
     const useMinus = randInt(rand, 0, 1) === 1;
     const c = useMinus ? a * x - b : a * x + b;
-    const question = useMinus ? `${a}${X} − ${b} = ${c}` : `${a}${X} + ${b} = ${c}`;
-    return { question, answer: x, answerPrefix: `${X} = ` };
+    const question = useMinus ? `${a}x − ${b} = ${c}` : `${a}x + ${b} = ${c}`;
+    const latex = useMinus ? `${a}x - ${b} = ${c}` : `${a}x + ${b} = ${c}`;
+    const questionHtml = renderKatex(latex) || question;
+    const answerHtml = renderKatex("x") || "x";
+    return { question, questionHtml, answer: x, answerHtml };
 }
 
 export default {

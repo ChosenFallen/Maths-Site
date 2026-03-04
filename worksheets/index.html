@@ -32,21 +32,27 @@
 
             <div id="dynamic-options"></div>
 
-            <label>Difficulty:</label>
-            <select id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="normal">Normal</option>
-                <option value="hard">Hard</option>
-            </select>
+            <div class="options-row">
+                <div class="options-column">
+                    <label>Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="normal">Normal</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
 
-            <label>Number of problems:</label>
-            <input
-                type="number"
-                id="num-problems"
-                value="20"
-                min="1"
-                max="100"
-            />
+                <div class="options-column">
+                    <label>Number of problems:</label>
+                    <input
+                        type="number"
+                        id="num-problems"
+                        value="20"
+                        min="1"
+                        max="100"
+                    />
+                </div>
+            </div>
 
             <label>Worksheet ID (optional):</label>
             <div class="id-actions" data-layout="inline">

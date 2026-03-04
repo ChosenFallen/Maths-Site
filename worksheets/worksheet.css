@@ -146,6 +146,34 @@
     margin-top: 10px;
 }
 
+.options-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.options-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.options-column label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.options-column select,
+.options-column input[type="number"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
 .action-row {
     display: flex;
     flex-wrap: wrap;
@@ -231,6 +259,30 @@
 
 .mixed .whole {
     font-weight: 600;
+}
+
+/* Hide text cursor globally, except in form fields */
+body {
+    user-select: none;
+    cursor: default;
+}
+
+/* Re-enable text cursor and selection for text inputs */
+.worksheet-options input[type="text"] {
+    user-select: text;
+    cursor: text;
+}
+
+/* Re-enable selection for number inputs, let browser manage cursor */
+.worksheet-options input[type="number"] {
+    user-select: text;
+    cursor: auto;
+}
+
+/* Re-enable pointer cursor for select dropdowns */
+.worksheet-options select {
+    user-select: text;
+    cursor: pointer;
 }
 
 .worksheet-output {
@@ -366,6 +418,11 @@
 }
 
 @media (max-width: 600px) {
+    .options-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
     .id-actions {
         grid-template-columns: 1fr;
     }
