@@ -7,6 +7,7 @@ const displayBtn = document.getElementById("display-btn");
 const printBtn = document.getElementById("print-btn");
 const toggleAnswersBtn = document.getElementById("toggle-answers-btn");
 const copyIdBtn = document.getElementById("copy-id-btn");
+const copyUrlBtn = document.getElementById("copy-url-btn");
 const output = document.getElementById("worksheet-output");
 
 let answerDivGlobal; // store reference to answer key for toggling
@@ -26,6 +27,7 @@ function setActionButtonsEnabled(enabled) {
     printBtn.disabled = !enabled;
     toggleAnswersBtn.disabled = !enabled;
     copyIdBtn.disabled = !enabled;
+    copyUrlBtn.disabled = !enabled;
 }
 
 setActionButtonsEnabled(false);
@@ -257,6 +259,32 @@ copyIdBtn.addEventListener("click", async () => {
     }
 });
 
+copyUrlBtn.addEventListener("click", async () => {
+    const id = worksheetIdInput.value.trim();
+    if (!id) return;
+
+    try {
+        const url = `${window.location.origin}${window.location.pathname}?code=${encodeURIComponent(id)}`;
+        await navigator.clipboard.writeText(url);
+        const originalText = copyUrlBtn.textContent;
+        copyUrlBtn.textContent = "✓ Copied!";
+        copyUrlBtn.style.backgroundColor = "#28a745";
+
+        setTimeout(() => {
+            copyUrlBtn.textContent = originalText;
+            copyUrlBtn.style.backgroundColor = "";
+        }, 2000);
+    } catch {
+        copyUrlBtn.textContent = "✗ Failed";
+        copyUrlBtn.style.backgroundColor = "#dc3545";
+
+        setTimeout(() => {
+            copyUrlBtn.textContent = "Copy URL";
+            copyUrlBtn.style.backgroundColor = "";
+        }, 2000);
+    }
+});
+
 function clearIdOnSettingsChange() {
     worksheetIdInput.value = "";
     copyStatus.textContent = "";
@@ -265,6 +293,7 @@ function clearIdOnSettingsChange() {
     printBtn.disabled = !hasWorksheet;
     toggleAnswersBtn.disabled = !hasWorksheet;
     copyIdBtn.disabled = true;
+    copyUrlBtn.disabled = true;
 }
 
 problemTypeSelect.addEventListener("change", clearIdOnSettingsChange);
