@@ -536,3 +536,13 @@ function buildProblemKey(problem) {
     }
     return JSON.stringify(problem);
 }
+
+// Load worksheet from query parameter if provided
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    if (code) {
+        worksheetIdInput.value = code.trim();
+        generateWorksheet();
+    }
+});

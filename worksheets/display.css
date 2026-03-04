@@ -1,0 +1,229 @@
+/* Display mode optimizations for classroom projection */
+:root {
+    --bg-color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    user-select: none;
+    cursor: default;
+}
+
+#worksheet-code {
+    user-select: text;
+    cursor: text;
+}
+
+body:fullscreen {
+    background: white;
+}
+
+body:-webkit-full-screen {
+    background: white;
+}
+
+.problem-answer-box::before {
+    top: 0px;
+    background: var(--bg-color);
+}
+
+#menu-container,
+h1.print-title,
+#worksheet-options,
+#worksheet-instruction,
+a {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h1.print-title,
+#worksheet-options,
+#worksheet-instruction {
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
+}
+
+h1.worksheet-title {
+    display: none;
+}
+
+h1.print-title {
+    text-align: center;
+    font-size: 40px;
+    margin: 10px 0 20px 0;
+    color: #333;
+}
+
+#worksheet-options {
+    background: #f0f0f0;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.code-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+#worksheet-code {
+    flex: 1;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 12px;
+    border: 2px solid #999;
+    border-radius: 4px;
+}
+
+#load-worksheet-btn {
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#load-worksheet-btn:hover {
+    background: #0056b3;
+}
+
+.display-info {
+    font-size: 11px;
+    color: #666;
+    margin: 8px 0 0 0;
+}
+
+#worksheet-instruction {
+    font-size: 28px;
+    margin: 15px 0 10px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #222;
+}
+
+#worksheet-output {
+    padding: 0 10px 10px 10px;
+    margin: 0 !important;
+    width: 100%;
+    max-width: none !important;
+    box-sizing: border-box;
+}
+
+/* Optimize problems grid for display */
+.problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.problem-item {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.problem-number {
+    font-weight: bold;
+    font-size: 15px;
+    color: #fff;
+    /* margin-bottom: 10px; */
+}
+
+.problem-question {
+    flex-grow: 0;
+    font-size: 24px;
+    font-weight: 500;
+    /* margin-bottom: 12px; */
+    color: #111;
+    line-height: 1.5;
+    word-spacing: 0.05em;
+}
+
+.problem-question svg {
+    max-width: 100%;
+    max-height: 180px;
+    margin: 8px 0;
+}
+
+.problem-answer-box {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Hide answer key on screen */
+.answers {
+    display: none !important;
+}
+
+/* Responsive for different screen sizes */
+@media (max-width: 1200px) {
+    .problems-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 12px;
+    }
+    .problem-item {
+        padding: 14px;
+        min-height: 200px;
+    }
+    .problem-question {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .problems-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 10px;
+    }
+    .problem-item {
+        padding: 12px;
+        min-height: 200px;
+    }
+    .problem-question {
+        font-size: 18px;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1600px) {
+    .problem-question {
+        font-size: 28px;
+    }
+    .problems-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+a {
+    font-size: 12px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+@media print {
+    #worksheet-options,
+    a {
+        display: none;
+    }
+}
