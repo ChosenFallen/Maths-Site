@@ -8,7 +8,13 @@ const worksheetInstruction = document.getElementById("worksheet-instruction");
 const revealAllBtn = document.getElementById("reveal-all-btn");
 const fullscreenBtn = document.getElementById("fullscreen-btn");
 const colorButtons = document.getElementById("color-buttons");
+const sizeControls = document.getElementById("size-controls");
+const textSmallerBtn = document.getElementById("text-smaller-btn");
+const textLargerBtn = document.getElementById("text-larger-btn");
+const textSizeDisplay = document.getElementById("text-size-display");
 const worksheetOptions = document.getElementById("worksheet-options");
+
+let textScale = 1;
 
 let allAnswerBoxes = [];
 let isFullscreen = false;
@@ -150,28 +156,36 @@ function renderWorksheet(problems) {
         const answerBox = document.createElement("div");
         answerBox.className = "problem-answer-box";
         answerBox.style.display = "none";
-        answerBox.style.flexDirection = "column";
+        answerBox.style.flexDirection = "row";
         answerBox.style.alignItems = "center";
-        answerBox.style.justifyContent = "center";
-        answerBox.style.fontSize = "24px";
+        answerBox.style.justifyContent = "flex-start";
+        answerBox.style.gap = "0";
+        answerBox.style.fontSize = "calc(24px * var(--text-scale))";
         answerBox.style.fontWeight = "bold";
         answerBox.style.color = "#0066cc";
 
+        // Add "Answer:" label
+        const labelSpan = document.createElement("span");
+        labelSpan.style.color = "#666";
+        labelSpan.style.fontWeight = "600";
+        labelSpan.style.flexShrink = 0;
+        labelSpan.style.marginRight = "8px";
+        labelSpan.textContent = "Answer:";
+        answerBox.appendChild(labelSpan);
+
+        // Add answer content in a container
+        const contentSpan = document.createElement("span");
+        contentSpan.style.flexShrink = 0;
         const prefix = p.answerPrefix || "";
         if (p.answerKeyHtml) {
-            answerBox.innerHTML = prefix ? `<div>${prefix}</div><div>${p.answerKeyHtml}</div>` : `<div>${p.answerKeyHtml}</div>`;
+            contentSpan.innerHTML = p.answerKeyHtml;
         } else if (p.answerHtml) {
-            answerBox.innerHTML = prefix ? `<div>${prefix}</div><div>${p.answerHtml}</div>` : `<div>${p.answerHtml}</div>`;
+            contentSpan.innerHTML = p.answerHtml;
         } else {
-            const answerDiv = document.createElement("div");
-            answerDiv.textContent = p.answer;
-            answerBox.appendChild(answerDiv);
-            if (prefix) {
-                const prefixDiv = document.createElement("div");
-                prefixDiv.textContent = prefix;
-                answerBox.insertBefore(prefixDiv, answerDiv);
-            }
+            contentSpan.textContent = p.answer;
         }
+        answerBox.appendChild(contentSpan);
+
         item.appendChild(answerBox);
         allAnswerBoxes.push(answerBox);
 
@@ -191,6 +205,7 @@ function renderWorksheet(problems) {
     revealAllBtn.style.display = "block";
     fullscreenBtn.style.display = "block";
     colorButtons.style.display = "flex";
+    sizeControls.style.display = "flex";
 }
 
 function loadWorksheet() {
@@ -301,6 +316,22 @@ document.addEventListener("webkitfullscreenchange", () => {
     }
 });
 
+// Text size controls
+function updateTextScale(scale) {
+    textScale = Math.max(0.6, Math.min(1.8, scale));
+    document.documentElement.style.setProperty("--text-scale", textScale);
+    textSizeDisplay.textContent = `${Math.round(textScale * 100)}%`;
+    localStorage.setItem("display-text-scale", textScale);
+}
+
+textSmallerBtn.addEventListener("click", () => {
+    updateTextScale(textScale - 0.1);
+});
+
+textLargerBtn.addEventListener("click", () => {
+    updateTextScale(textScale + 0.1);
+});
+
 // Color preset buttons
 document.querySelectorAll(".color-preset").forEach((button) => {
     button.addEventListener("click", () => {
@@ -314,8 +345,14 @@ document.querySelectorAll(".color-preset").forEach((button) => {
     });
 });
 
-// Check if code is in URL query parameter
+// Check if code is in URL query parameter and restore text scale
 window.addEventListener("load", () => {
+    // Restore saved text scale
+    const savedScale = localStorage.getItem("display-text-scale");
+    if (savedScale) {
+        updateTextScale(parseFloat(savedScale));
+    }
+
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
     if (code) {
