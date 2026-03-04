@@ -457,3 +457,46 @@ export function exponentToSuperscript(exp) {
     };
     return exp.toString().split('').map(char => superscriptDigits[char] || char).join('');
 }
+
+/**
+ * Formats an algebraic coefficient with a variable in LaTeX notation.
+ * Handles special cases: coefficient of 0 → "0", coefficient of 1 → just variable, coefficient of -1 → "-variable".
+ * Examples: formatCoeffLatex(0, "x") → "0", formatCoeffLatex(2, "x") → "2x", formatCoeffLatex(-1, "y") → "-y"
+ * @param {number} coeff - Coefficient value
+ * @param {string} variable - Variable name (default "x")
+ * @returns {string} LaTeX-formatted coefficient with variable
+ */
+export function formatCoeffLatex(coeff, variable = "x") {
+    if (coeff === 0) return "0";
+    if (coeff === 1) return variable;
+    if (coeff === -1) return `-${variable}`;
+    return `${coeff}${variable}`;
+}
+
+/**
+ * Formats a coefficient with a power in plain text.
+ * Handles coefficient of 1: formatCoeffWithPower(1, "²", "x") → "x²", formatCoeffWithPower(2, "²", "x") → "2x²"
+ * @param {number} coeff - Coefficient value
+ * @param {string} power - Power notation (e.g., "²", "³", or "^2")
+ * @param {string} variable - Variable name (default "x")
+ * @returns {string} Formatted coefficient with variable and power
+ */
+export function formatCoeffWithPower(coeff, power = "", variable = "x") {
+    if (coeff === 1) return `${variable}${power}`;
+    if (coeff === -1) return `−${variable}${power}`;
+    return `${coeff}${variable}${power}`;
+}
+
+/**
+ * Formats a coefficient with a power in LaTeX notation.
+ * Handles coefficient of 1: formatCoeffWithPowerLatex(1, "2", "x") → "x^{2}", formatCoeffWithPowerLatex(2, "2", "x") → "2x^{2}"
+ * @param {number} coeff - Coefficient value
+ * @param {string} power - Power as exponent (e.g., "2", "3", or "{n}")
+ * @param {string} variable - Variable name (default "x")
+ * @returns {string} LaTeX-formatted coefficient with variable and power
+ */
+export function formatCoeffWithPowerLatex(coeff, power = "", variable = "x") {
+    if (coeff === 1) return `${variable}^{${power}}`;
+    if (coeff === -1) return `-${variable}^{${power}}`;
+    return `${coeff}${variable}^{${power}}`;
+}

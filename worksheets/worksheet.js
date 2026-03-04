@@ -3,6 +3,7 @@ import { WORKSHEET_TYPES, WORKSHEET_GROUPS } from "./groups.js";
 
 const generateBtn = document.getElementById("generate-btn");
 const newRandomBtn = document.getElementById("new-random-btn");
+const displayBtn = document.getElementById("display-btn");
 const printBtn = document.getElementById("print-btn");
 const toggleAnswersBtn = document.getElementById("toggle-answers-btn");
 const copyIdBtn = document.getElementById("copy-id-btn");
@@ -21,6 +22,7 @@ const printTitle = document.getElementById("print-title");
 const worksheetInstruction = document.getElementById("worksheet-instruction");
 
 function setActionButtonsEnabled(enabled) {
+    displayBtn.disabled = !enabled;
     printBtn.disabled = !enabled;
     toggleAnswersBtn.disabled = !enabled;
     copyIdBtn.disabled = !enabled;
@@ -212,6 +214,15 @@ function renderWorksheet(problems) {
 // Event listeners
 generateBtn.addEventListener("click", generateWorksheet);
 newRandomBtn.addEventListener("click", generateNewRandomWorksheet);
+displayBtn.addEventListener("click", () => {
+    const id = worksheetIdInput.value.trim();
+    if (!id) {
+        alert("Generate a worksheet first");
+        return;
+    }
+    const url = `display.html?code=${encodeURIComponent(id)}`;
+    window.open(url, "display");
+});
 printBtn.addEventListener("click", () => window.print());
 
 toggleAnswersBtn.addEventListener("click", () => {

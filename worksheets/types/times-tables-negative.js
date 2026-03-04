@@ -37,8 +37,13 @@ function generateProblem(rand, difficulty) {
     }
 
     // Pick answer first - the product
-    const a = randInt(rand, minTable, maxTable);
-    const bAbs = randInt(rand, 1, maxFactor);
+    let a = randInt(rand, minTable, maxTable);
+    let bAbs = randInt(rand, 1, maxFactor);
+
+    // Ensure a >= b to avoid duplicates (e.g., -2×5 and 5×-2 have the same answer)
+    if (a < bAbs) {
+        [a, bAbs] = [bAbs, a];
+    }
 
     // Randomly decide if one or both factors should be negative
     const negationType = randInt(rand, 0, 2);
@@ -58,7 +63,6 @@ function generateProblem(rand, difficulty) {
     }
 
     const answer = aFinal * bFinal;
-
     const question = `${aFinal} × ${bFinal} =`;
     const answer_str = `${answer}`;
 

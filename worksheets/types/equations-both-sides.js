@@ -1,4 +1,4 @@
-import { randInt, formatSignValue } from "./utils.js";
+import { randInt, formatSignValue, formatCoeff } from "./utils.js";
 
 export default {
     id: "equations-both-sides",
@@ -33,7 +33,7 @@ function generateProblem(rand, difficulty) {
 
         const { sign: cSign, abs: cAbs } = formatSignValue(c);
 
-        question = `${a}x = ${b}x ${cSign} ${cAbs}`;
+        question = `${formatCoeff(a)} = ${formatCoeff(b)} ${cSign} ${cAbs}`;
         answer = `x = ${x}`;
     } else if (difficulty === "normal") {
         // ax + b = cx + d
@@ -47,7 +47,7 @@ function generateProblem(rand, difficulty) {
         const { sign: bSign, abs: bAbs } = formatSignValue(b);
         const { sign: dSign, abs: dAbs } = formatSignValue(d);
 
-        question = `${a}x ${bSign} ${bAbs} = ${c}x ${dSign} ${dAbs}`;
+        question = `${formatCoeff(a)} ${bSign} ${bAbs} = ${formatCoeff(c)} ${dSign} ${dAbs}`;
         answer = `x = ${x}`;
     } else {
         // Hard: a(bx + c) = dx + e
@@ -65,7 +65,7 @@ function generateProblem(rand, difficulty) {
         const { sign: cSign, abs: cAbs } = formatSignValue(c);
         const { sign: eSign, abs: eAbs } = formatSignValue(e);
 
-        question = `${a}(${b}x ${cSign} ${cAbs}) = ${d}x ${eSign} ${eAbs}`;
+        question = `${a}(${formatCoeff(b)} ${cSign} ${cAbs}) = ${formatCoeff(d)} ${eSign} ${eAbs}`;
         answer = `x = ${x}`;
     }
 

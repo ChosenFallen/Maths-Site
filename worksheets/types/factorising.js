@@ -1,4 +1,4 @@
-import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
+import { randInt, renderKatex, formatCoeff, formatSignValue, formatCoeffWithPower, formatCoeffWithPowerLatex } from "./utils.js";
 
 export default {
     id: "factorising",
@@ -70,9 +70,9 @@ function generateProblem(rand, difficulty) {
             const { sign: aSign, abs: aAbs } = formatSignValue(actualA);
             const { sign: aSignLatex } = formatSignValue(actualA, false);
 
-            question = `${b}x² ${aSign} ${aAbs}x`;
-            latex = `${b}x^2 ${aSignLatex} ${aAbs}x`;
-            answer = `x(${b}x ${aSign} ${aAbs})`;
+            question = `${formatCoeffWithPower(b, "²")} ${aSign} ${aAbs}x`;
+            latex = `${formatCoeffWithPowerLatex(b, "2")} ${aSignLatex} ${aAbs}x`;
+            answer = `x(${formatCoeff(b)} ${aSign} ${aAbs})`;
         }
     } else {
         // Hard: factor fx from (fa)x² + (fb)x

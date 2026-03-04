@@ -33,10 +33,16 @@ function generateProblem(rand, difficulty) {
         maxTable = 12;
     }
 
-    const a = randInt(rand, minTable, maxTable);
-    const b = randInt(rand, 1, 12);
-    const answer = a * b;
+    // Generate a and b, ensuring a >= b to avoid duplicates (e.g., 2×5 and 5×2 are the same)
+    let a = randInt(rand, minTable, maxTable);
+    let b = randInt(rand, 1, 12);
 
+    // Swap if needed so a >= b (ensures 5×2 format, not 2×5)
+    if (a < b) {
+        [a, b] = [b, a];
+    }
+
+    const answer = a * b;
     const question = `${a} × ${b} =`;
     const answer_str = `${answer}`;
 

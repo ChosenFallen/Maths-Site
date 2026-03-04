@@ -1,4 +1,4 @@
-import { randInt, INEQUALITY_SIGNS_ALL as SIGNS, formatSignValue } from "./utils.js";
+import { randInt, INEQUALITY_SIGNS_ALL as SIGNS, formatSignValue, formatCoeff } from "./utils.js";
 
 export default {
     id: "solving-inequalities",
@@ -70,12 +70,12 @@ function generateProblem(rand, difficulty) {
 
         // Build question with proper signs
         const { sign: eSign, abs: eAbs } = formatSignValue(e);
-        let rightSide = `${d}x`;
+        let rightSide = formatCoeff(d);
         if (e !== 0) {
             rightSide += ` ${eSign} ${eAbs}`;
         }
 
-        const question = `${a}x + ${c} ${sign} ${rightSide}`;
+        const question = `${formatCoeff(a)} + ${c} ${sign} ${rightSide}`;
         const answer = `x ${sign} ${answerVal}`;
 
         return { question, answer };

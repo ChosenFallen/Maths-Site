@@ -34,19 +34,20 @@ function generateProblem(rand, difficulty) {
     }
 
     // Pick answer first: the missing factor
-    const missingFactor = randInt(rand, 1, maxFactor);
-    const table = randInt(rand, 2, maxTable);
+    let missingFactor = randInt(rand, 1, maxFactor);
+    let table = randInt(rand, 2, maxTable);
+
+    // Swap if needed so the first number is always larger to avoid duplicate variations
+    // (e.g., "? × 5 = 20" and "5 × ? = 20" would both have the same answer 4)
+    if (missingFactor > table) {
+        [missingFactor, table] = [table, missingFactor];
+    }
+
     const product = table * missingFactor;
 
-    // Randomly choose which position the missing number is in
-    const position = randInt(rand, 0, 1);
-    let question;
-
-    if (position === 0) {
-        question = `? × ${table} = ${product}`;
-    } else {
-        question = `${table} × ? = ${product}`;
-    }
+    // Always show the larger number first, missing factor second
+    // This ensures "5 × ? = 20" not "? × 5 = 20"
+    const question = `${table} × ? = ${product}`;
 
     return { question, answer: `${missingFactor}` };
 }
