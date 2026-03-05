@@ -415,3 +415,192 @@
 - [ ] Calculator and non-calculator practice
 - [ ] Problem-solving challenges
 - [ ] Cross-curricular contexts (science, geography, etc.)
+
+---
+
+## Curriculum Priority (Based on Mr Barton Essential Skills)
+
+### CRITICAL (High priority from Year 7-GCSE)
+These are fundamental skills that appear across multiple year groups in the Mr Barton curriculum:
+
+**Algebra**
+- [ ] Notation (algebraic) - needed for Year 7+
+- [ ] Equations using angles and perimeter - Year 7 geometry applications
+- [ ] Forming equations - essential throughout KS3-GCSE
+- [ ] Inequalities on a number line - reading/interpreting (Year 9+)
+
+**Geometry & Measurement**
+- [ ] Area and circumference of circles - Year 8+ essential
+- [ ] Area of parallelograms and trapeziums - Year 8+ essential
+- [ ] Area of sectors and segments - GCSE Foundation+
+- [ ] Area of semi-circles and quarter-circles - Year 8+
+- [ ] Unit conversions (metric/imperial) - Year 7+ (appears in multiple year groups)
+- [ ] Angles in parallel lines - appears throughout curriculum
+- [ ] Sine rule and cosine rule - GCSE Higher essential
+
+**Graphs**
+- [ ] Drawing linear graphs (using xy table) - Year 8+
+- [ ] Drawing linear graphs (using y=mx+c) - Year 8+
+- [ ] Gradient of a line - Year 8+
+- [ ] Understanding y=mx+c - Year 8+ essential
+- [ ] Finding equation of a line - Year 8+
+- [ ] Equation of line through two points - Year 9+
+- [ ] Parallel lines (gradients) - Year 8+
+- [ ] Perpendicular lines (gradients) - Year 9+
+- [ ] Distance-time graphs - Year 8+ and GCSE
+
+**Transformations**
+- [ ] Rotations (drawing and describing) - Year 7+
+- [ ] Translations using vectors - Year 8+
+- [ ] Enlargements (centre of enlargement, scale factors) - Year 9+
+- [ ] Invariant points - GCSE Higher
+
+**Data & Probability**
+- [ ] Mean from frequency tables (and estimated mean) - GCSE Foundation+
+- [ ] Cumulative frequency graphs - GCSE Higher
+- [ ] Histograms (with unequal class widths) - GCSE Foundation+
+- [ ] Probability (combined events, tree diagrams) - Year 8+
+- [ ] Probability (conditional) - GCSE Foundation+
+- [ ] Probability (independent events) - GCSE Higher
+- [ ] Relative frequency and expected outcomes - GCSE Foundation+
+
+**Advanced Topics**
+- [ ] Bounds and error intervals - GCSE Higher
+- [ ] Iteration and iterative processes - GCSE Higher
+- [ ] Circle theorems (all theorems) - GCSE Higher essential
+- [ ] Trigonometric graphs (sin, cos, tan) - GCSE Higher
+- [ ] Exact trigonometric values - GCSE Higher 1-Mark Wonders
+- [ ] 3D Pythagoras and trigonometry - GCSE Higher
+- [ ] Algebraic proof - GCSE Higher
+- [ ] Geometric proof - GCSE Higher
+
+### IMPORTANT (Medium priority, specific year groups)
+- [ ] Area of parallelograms and trapeziums - Year 8 area focus
+- [ ] Ratio problems (given one value, two ratios, multiple parts) - Year 8+
+- [ ] Expressing ratios as 1:n - Year 8+
+- [ ] Ratio problems (difference between) - Year 9+
+- [ ] Direct proportion graphs - Year 8+
+- [ ] Proportion with time - Year 8+
+- [ ] Map scales and distances - Year 8+
+- [ ] Recipe scaling - Year 8+
+- [ ] Mixture problems - GCSE
+- [ ] Similar shapes (finding sides, area, volume) - Year 8+
+- [ ] Simultaneous equations (graphical) - GCSE Higher
+- [ ] Simultaneous equations (one linear, one quadratic) - GCSE Higher
+- [ ] Non-linear simultaneous equations - GCSE Higher
+- [ ] Function notation and composite functions - GCSE Higher
+- [ ] Inverse functions - GCSE Higher
+- [ ] Graphical inequalities (regions) - GCSE Higher
+- [ ] Combined mean - GCSE Foundation
+
+### SUPPORTING (Lower priority, specialized topics)
+- [ ] Bearings and back bearings - Year 8+ navigation
+- [ ] Compass directions - Year 8
+- [ ] Loci and constructions - Year 8+
+- [ ] Congruent shapes and triangles - Year 7+
+- [ ] Tessellations - Year 7 extension
+- [ ] Symmetry (line and rotational) - Year 7
+- [ ] Constructions (various) - Year 8+
+- [ ] Views (elevation and plan) - Year 8+
+- [ ] Equations with x² - Year 8 algebra progression
+- [ ] Quadratic graphs (graphical solving) - Year 9+
+- [ ] Forming and solving quadratics - Year 9+
+- [ ] Pressure calculations - GCSE extension
+- [ ] Population density - GCSE extension
+- [ ] Currency conversions - Real-life applications
+- [ ] Trial and improvement - Year 8-9 extension
+- [ ] Function machines - Year 7-8
+- [ ] Flow charts - Data representation
+- [ ] Kinematics formulae - Physics/advanced GCSE
+
+### Notes
+- Items marked with [ ] are not yet created
+- Items marked with [x] are already available
+- Priority based on frequency of appearance in Mr Barton's Year 7-GCSE Essential Skills curriculum
+- CRITICAL items appear across multiple year groups or are essential exam topics
+- Consider implementing CRITICAL items first, then IMPORTANT, then SUPPORTING
+
+---
+
+## Question Structures Reference (from QUESTION_TYPES files)
+
+Based on MathsBox question type extraction, the following detailed question structures are available:
+
+### Secondary Level (QUESTION_TYPES.md)
+**Number Topics**
+- Order of Operations: 43+ structures (positive, directed, decimals)
+- Decimals: 56+ structures (place value, all operations, mixed)
+- Directed Numbers: 26+ structures (temperatures, calculations)
+- Equivalence: 24+ structures (decimals, fractions, percentages, ratios)
+- Estimation: 98+ structures (rounding, d.p., s.f., truncating, bounds, calculations)
+- Factors, Multiples, Primes: 31+ structures (types, factors, multiples, primes, squares, cubes)
+- Money and Finance: 35+ structures (money, problems, interest, VAT, tax)
+- Fractions: 80+ structures (equivalence, counting, mixed numbers, operations, word problems)
+- Percentages: 55+ structures (of amount, increase, decrease, reverse, multipliers, compound)
+- Ratio and Proportion: 48+ structures (simplify, share, problems, direct, inverse)
+- Indices and Powers: 32+ structures (multiplication, division, negative, fractional, algebraic)
+- Roots: 18+ structures (square, cube, surds, simplifying, rationalising)
+
+**Algebra Topics**
+- Collecting Like Terms: 36+ structures (varying complexity)
+- Algebraic Expressions: 90+ structures (substitution, simplifying, expanding, factorising)
+- Equations: 156+ structures (one-step, two-step, with brackets, fractions, both sides, quadratic)
+- Inequalities: 48+ structures (one sign, compound, quadratic, graphical)
+- Sequences: 140+ structures (continue, nth term, linear, quadratic, geometric, Fibonacci)
+- Straight Line Graphs: 78+ structures (y=mx+c, gradient, equations, parallel, perpendicular)
+- Quadratics: 96+ structures (factorising, formula, completing square, graphs)
+- Simultaneous Equations: 54+ structures (elimination, substitution, graphical, one quadratic)
+
+**Geometry & Measures**
+- Angle Properties: 52+ structures (types, sums, parallel lines, in shapes)
+- 2D and 3D Shapes: 68+ structures (naming, properties, area, perimeter, volume, surface area)
+- Trigonometry: 66+ structures (SOHCAHTOA, Pythagoras, rules, exact values, 3D)
+- Transformations: 54+ structures (rotation, reflection, translation, enlargement)
+- Vectors: 28+ structures (basic operations, geometry applications)
+
+**Data & Probability**
+- Averages: 42+ structures (mean, median, mode, range, frequency tables, combined)
+- Data Representation: 58+ structures (bar charts, pie charts, line graphs, histograms, cumulative frequency)
+- Probability: 88+ structures (single events, combined, tree diagrams, conditional, Venn diagrams)
+
+### Primary Level (QUESTION_TYPES_PRIMARY.md)
+**Number and Place Value**
+- Charts and Number Lines: 16 structures
+- Partitioning: 13 structures
+- Place Value: 13 structures
+- Comparing and Ordering: 12 structures
+- More or Less: 27 structures
+- Roman Numerals: 6 structures
+- Rounding: 17 structures
+- Negative Numbers: 11 structures
+
+**Calculations**
+- Addition: 47 structures
+- Subtraction: 43 structures
+- Addition and Subtraction (Mixed): 11 structures
+- Times Tables: 21 structures
+- Multiplication - Column and Grid: 13 structures
+- Multiplication: 35+ structures
+- Division: 49+ structures
+- Multiplication and Division (Mixed): 24+ structures
+
+**Other Topics (Primary)**
+- Fractions, Decimals, Percentages, Geometry, Measurements, Sequences, Data Handling, Money, Time
+
+### Integration with Worksheet Creation
+These question type structures can be used as templates for worksheet generators:
+- Each question type represents a specific problem structure that can be generated with different numbers
+- Use the "structures" as the basis for worksheet template designs
+- Create generators that produce multiple instances of each structure type
+- Map structures to the unchecked items in the Curriculum Priority section above
+
+### Example Mappings
+- "Order of Operations" worksheet → Use 43+ structures from QUESTION_TYPES.md
+- "Fractions Operations" worksheet → Use 80+ fraction structures
+- "Percentages" worksheet → Use 55+ percentage structures
+- "Sequences nth term" worksheet → Use nth term structures from sequences section
+- "Trigonometry" worksheet → Use 66+ trigonometry structures (SOHCAHTOA, rules, exact values)
+- "Simultaneous Equations" worksheet → Use 54+ simultaneous equations structures
+- "Probability" worksheet → Use 88+ probability structures (tree diagrams, conditional, etc.)
+
+These detailed question structures provide the foundation for creating comprehensive, varied worksheets with multiple difficulty levels and question types.
