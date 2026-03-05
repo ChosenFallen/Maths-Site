@@ -12,13 +12,21 @@ function generateOneStep(rand, difficulty) {
         case "+": left = `x + ${a}`; latex = `x + ${a}`; right = x + a; break;
         case "−": left = `x − ${a}`; latex = `x - ${a}`; right = x - a; break;
         case "×": left = `${a}x`; latex = `${a}x`; right = x * a; break;
-        case "÷": x = x * a; left = `x ÷ ${a}`; latex = `x / ${a}`; right = x / a; break;
+        case "÷":
+            // Ensure divisor is never 1
+            a = Math.max(2, a);
+            x = x * a;
+            left = `x ÷ ${a}`;
+            latex = `\\dfrac{x}{${a}}`;
+            right = x / a;
+            break;
     }
 
     const question = `${left} = ${right}`;
     const questionLatex = `${latex} = ${right}`;
     const questionHtml = renderKatex(questionLatex) || question;
-    const answerHtml = renderKatex("x") || "x";
+    const answerText = `x = ${x}`;
+    const answerHtml = renderKatex(answerText) || answerText;
 
     return { question, questionHtml, answer: x, answerHtml };
 }
@@ -33,7 +41,8 @@ function generateTwoStep(rand, difficulty) {
     const question = useMinus ? `${a}x − ${b} = ${c}` : `${a}x + ${b} = ${c}`;
     const latex = useMinus ? `${a}x - ${b} = ${c}` : `${a}x + ${b} = ${c}`;
     const questionHtml = renderKatex(latex) || question;
-    const answerHtml = renderKatex("x") || "x";
+    const answerText = `x = ${x}`;
+    const answerHtml = renderKatex(answerText) || answerText;
     return { question, questionHtml, answer: x, answerHtml };
 }
 

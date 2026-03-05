@@ -1,4 +1,4 @@
-import { randInt, renderKatex } from "./utils.js";
+import { randInt, renderKatex, convertSlashesToFracs } from "./utils.js";
 
 const HARD_FORMULAS = [
     { q: "v = u + at, make u the subject", a: "u = v − at" },
@@ -161,13 +161,18 @@ function generateProblem(rand, difficulty) {
         // Hard: pick from named formula list
         const idx = randInt(rand, 0, HARD_FORMULAS.length - 1);
         const formula = HARD_FORMULAS[idx];
-        const questionHtml = renderKatex(formula.q.split(", make")[0]) || formula.q;
-        const answerHtml = renderKatex(formula.a.split(" = ")[1]) || formula.a;
+        // Convert / to \frac for proper LaTeX rendering
+        const questionPart = formula.q.split(", make")[0];
+        const answerPart = formula.a.split(" = ")[1];
+        const questionLatex = convertSlashesToFracs(questionPart);
+        const answerLatex = convertSlashesToFracs(answerPart);
+        const questionHtml = renderKatex(questionLatex) || formula.q;
+        const answerHtml = renderKatex(answerLatex) || formula.a;
         return {
             question: formula.q,
-            questionHtml: formula.q,
+            questionHtml: questionHtml,
             answer: formula.a,
-            answerHtml: formula.a,
+            answerHtml: answerHtml,
         };
     }
 }

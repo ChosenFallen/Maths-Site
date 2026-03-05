@@ -500,3 +500,109 @@ export function formatCoeffWithPowerLatex(coeff, power = "", variable = "x") {
     if (coeff === -1) return `-${variable}^{${power}}`;
     return `${coeff}${variable}^{${power}}`;
 }
+
+/**
+ * Converts a/b notation to LaTeX \dfrac{a}{b} for proper rendering.
+ * Used by formula-related worksheets to convert division notation.
+ * Examples: "F / a" → "\dfrac{F}{a}", "C / (2π)" → "\dfrac{C}{(2π)}"
+ * @param {string} expr - Expression containing division notation
+ * @returns {string} Expression with fractions in LaTeX format
+ */
+export function convertSlashesToFracs(expr) {
+    return expr.replace(/([a-zA-Z0-9π)}\-]+)\s*\/\s*([a-zA-Z0-9π({+\-]+)/g, '\\dfrac{$1}{$2}');
+}
+
+/**
+ * Draws an SVG circle with labeled radius or diameter.
+ * Used by the circles worksheet to visualize circle geometry.
+ * @param {number} r - Radius value (or half-diameter for diameter mode)
+ * @param {string} labelType - Either "radius" or "diameter"
+ * @param {string} unit - Unit of measurement (e.g., "cm", "m", "mm")
+ * @returns {string} SVG HTML string
+ */
+export function drawCircle(r, labelType, unit) {
+    const rNum = parseFloat(r);
+    const maxDim = labelType === "radius" ? rNum : rNum;
+    const scale = 50 / maxDim;
+
+    const cx = 80;
+    const cy = 70;
+    const rPx = rNum * scale;
+
+    let svg = `
+        <svg width="160" height="140" viewBox="0 0 160 140" style="max-width: 160px; display: block;">
+            <defs>
+                <marker id="arrowhead-c" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
+                    <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+                </marker>
+            </defs>
+
+            <!-- Circle -->
+            <circle
+                cx="${cx}"
+                cy="${cy}"
+                r="${rPx}"
+                fill="none"
+                stroke="#0066cc"
+                stroke-width="2.5"
+            />
+
+            <!-- Center point -->
+            <circle cx="${cx}" cy="${cy}" r="2" fill="#0066cc" />
+    `;
+
+    if (labelType === "radius") {
+        // Draw radius line from center to right edge
+        svg += `
+            <!-- Radius line -->
+            <line
+                x1="${cx}"
+                y1="${cy}"
+                x2="${cx + rPx}"
+                y2="${cy}"
+                stroke="#666"
+                stroke-width="1"
+                marker-end="url(#arrowhead-c)"
+                marker-start="url(#arrowhead-c)"
+            />
+            <text
+                x="${cx + rPx / 2}"
+                y="${cy - 10}"
+                text-anchor="middle"
+                font-size="14"
+                font-weight="bold"
+                fill="#333"
+            >
+                r = ${r} ${unit}
+            </text>
+        `;
+    } else {
+        // Draw diameter line from left to right
+        svg += `
+            <!-- Diameter line -->
+            <line
+                x1="${cx - rPx}"
+                y1="${cy}"
+                x2="${cx + rPx}"
+                y2="${cy}"
+                stroke="#666"
+                stroke-width="1"
+                marker-end="url(#arrowhead-c)"
+                marker-start="url(#arrowhead-c)"
+            />
+            <text
+                x="${cx}"
+                y="${cy - 10}"
+                text-anchor="middle"
+                font-size="14"
+                font-weight="bold"
+                fill="#333"
+            >
+                d = ${r} ${unit}
+            </text>
+        `;
+    }
+
+    svg += `</svg>`;
+    return svg;
+}
