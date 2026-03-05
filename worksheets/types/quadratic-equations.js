@@ -138,7 +138,7 @@ function generateProblem(rand, difficulty) {
                 return integerRoot.toString();
             } else {
                 // Fractional root: -p/a
-                return `\\frac{${-p}}{${a}}`;
+                return `\\dfrac{${-p}}{${a}}`;
             }
         }
 

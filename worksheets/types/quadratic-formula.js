@@ -51,7 +51,7 @@ function genEasy(rand) {
     // Roots: p/a (positive fraction) and r1 (integer) — sort ascending for display
     const fracVal = p / a;
     const sorted = [
-        { val: fracVal, latex: `\\frac{${p}}{${a}}`, text: `${p}/${a}` },
+        { val: fracVal, latex: `\\dfrac{${p}}{${a}}`, text: `${p}/${a}` },
         { val: r1,      latex: `${r1}`,               text: r1 < 0 ? `\u2212${Math.abs(r1)}` : `${r1}` },
     ].sort((x, y) => x.val - y.val);
 

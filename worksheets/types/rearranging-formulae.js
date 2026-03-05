@@ -82,7 +82,7 @@ function generateProblem(rand, difficulty) {
             const question = `y = ${a}x, make x the subject`;
             const questionLatex = `y = ${a}x`;
             const answer = `x = y / ${a}`;
-            const answerLatex = `x = \\frac{y}{${a}}`;
+            const answerLatex = `x = \\dfrac{y}{${a}}`;
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
@@ -92,7 +92,7 @@ function generateProblem(rand, difficulty) {
         } else {
             // y = x / a, make x the subject
             const question = `y = x / ${a}, make x the subject`;
-            const questionLatex = `y = \\frac{x}{${a}}`;
+            const questionLatex = `y = \\dfrac{x}{${a}}`;
             const answer = `x = ${a}y`;
             const answerLatex = `x = ${a}y`;
             return {
@@ -113,7 +113,7 @@ function generateProblem(rand, difficulty) {
             const question = `y = ${a}x + ${b}, make x the subject`;
             const questionLatex = `y = ${a}x + ${b}`;
             const answer = `x = (y − ${b}) / ${a}`;
-            const answerLatex = `x = \\frac{y - ${b}}{${a}}`;
+            const answerLatex = `x = \\dfrac{y - ${b}}{${a}}`;
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
@@ -125,7 +125,7 @@ function generateProblem(rand, difficulty) {
             const question = `y = ${a}x − ${b}, make x the subject`;
             const questionLatex = `y = ${a}x - ${b}`;
             const answer = `x = (y + ${b}) / ${a}`;
-            const answerLatex = `x = \\frac{y + ${b}}{${a}}`;
+            const answerLatex = `x = \\dfrac{y + ${b}}{${a}}`;
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
@@ -137,7 +137,7 @@ function generateProblem(rand, difficulty) {
             const question = `y = ${a}(x + ${b}), make x the subject`;
             const questionLatex = `y = ${a}(x + ${b})`;
             const answer = `x = y / ${a} − ${b}`;
-            const answerLatex = `x = \\frac{y}{${a}} - ${b}`;
+            const answerLatex = `x = \\dfrac{y}{${a}} - ${b}`;
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
@@ -149,7 +149,7 @@ function generateProblem(rand, difficulty) {
             const question = `y = ${a}(x − ${b}), make x the subject`;
             const questionLatex = `y = ${a}(x - ${b})`;
             const answer = `x = y / ${a} + ${b}`;
-            const answerLatex = `x = \\frac{y}{${a}} + ${b}`;
+            const answerLatex = `x = \\dfrac{y}{${a}} + ${b}`;
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,

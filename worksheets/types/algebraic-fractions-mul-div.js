@@ -19,7 +19,7 @@ function monoT(A, exp) {
 
 // LaTeX for a fraction: \frac{numL}{denL}
 function fracL(numL, denL) {
-    return `\\frac{${numL}}{${denL}}`;
+    return `\\dfrac{${numL}}{${denL}}`;
 }
 
 // LaTeX for "A(x + p)" — linear factor with coefficient

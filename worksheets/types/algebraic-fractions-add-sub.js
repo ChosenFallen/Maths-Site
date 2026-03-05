@@ -41,8 +41,8 @@ function genEasy(rand) {
     const sn = numCoeff / g;
     const sd = denom / g;
 
-    const qLatex = `\\frac{x}{${a}} ${op} \\frac{x}{${b}}`;
-    const aLatex = sd === 1 ? `${sn}x` : sn === 1 ? `\\frac{x}{${sd}}` : `\\frac{${sn}x}{${sd}}`;
+    const qLatex = `\\dfrac{x}{${a}} ${op} \\dfrac{x}{${b}}`;
+    const aLatex = sd === 1 ? `${sn}x` : sn === 1 ? `\\dfrac{x}{${sd}}` : `\\dfrac{${sn}x}{${sd}}`;
     const qText  = `x/${a} ${op} x/${b}`;
     const aText  = sd === 1 ? `${sn}x` : `${sn}x/${sd}`;
 
@@ -72,8 +72,8 @@ function genNormal(rand) {
 
     const n1Latex = fmtL(1, p);
     const n2Latex = fmtL(1, q);
-    const qLatex  = `\\frac{${n1Latex}}{${a}} ${op} \\frac{${n2Latex}}{${b}}`;
-    const aLatex  = `\\frac{${fmtL(xCoeff, constPart)}}{${denom}}`;
+    const qLatex  = `\\dfrac{${n1Latex}}{${a}} ${op} \\dfrac{${n2Latex}}{${b}}`;
+    const aLatex  = `\\dfrac{${fmtL(xCoeff, constPart)}}{${denom}}`;
 
     const n1Text = `x + ${p}`;
     const n2Text = `x + ${q}`;
@@ -109,8 +109,8 @@ function genHard(rand) {
     const d1T = formatLinearText(p);
     const d2T = formatLinearText(q);
 
-    const qLatex = `\\frac{${A}}{${d1L}} ${op} \\frac{${B}}{${d2L}}`;
-    const aLatex = `\\frac{${fmtL(xCoeff, constPart)}}{(${d1L})(${d2L})}`;
+    const qLatex = `\\dfrac{${A}}{${d1L}} ${op} \\dfrac{${B}}{${d2L}}`;
+    const aLatex = `\\dfrac{${fmtL(xCoeff, constPart)}}{(${d1L})(${d2L})}`;
 
     const qText = `${A}/(${d1T}) ${op} ${B}/(${d2T})`;
     const aText = `(${fmtT(xCoeff, constPart)})/((${d1T})(${d2T}))`;

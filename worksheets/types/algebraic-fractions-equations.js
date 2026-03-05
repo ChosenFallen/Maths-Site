@@ -14,7 +14,7 @@ function genEasy(rand) {
     const A  = n * rp;
     const r  = rp - p;
 
-    const qLatex = `\\frac{${A}}{${formatLinearLatex(p)}} = ${n}`;
+    const qLatex = `\\dfrac{${A}}{${formatLinearLatex(p)}} = ${n}`;
     const qText  = `${A}/(${formatLinearText(p)}) = ${n}`;
 
     return {
@@ -42,7 +42,7 @@ function genNormal(rand) {
     const p      = k * A - r;
     const q      = k * B - r;
 
-    const qLatex = `\\frac{${A}}{${formatLinearLatex(p)}} = \\frac{${B}}{${formatLinearLatex(q)}}`;
+    const qLatex = `\\dfrac{${A}}{${formatLinearLatex(p)}} = \\dfrac{${B}}{${formatLinearLatex(q)}}`;
     const qText  = `${A}/(${formatLinearText(p)}) = ${B}/(${formatLinearText(q)})`;
 
     return {
@@ -68,7 +68,7 @@ function genHard(rand) {
     const A = (r1 + p) * (r2 + p);
     const B = r1 + r2 + p;
 
-    const qLatex = `x + \\frac{${A}}{${formatLinearLatex(p)}} = ${B}`;
+    const qLatex = `x + \\dfrac{${A}}{${formatLinearLatex(p)}} = ${B}`;
     const qText  = `x + ${A}/(${formatLinearText(p)}) = ${B}`;
     const ansStr = `x = ${r1} or x = ${r2}`;
 

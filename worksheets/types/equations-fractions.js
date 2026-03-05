@@ -33,7 +33,7 @@ function generateProblem(rand, difficulty) {
         const x = a * N;
 
         question = `x/${a} = ${N}`;
-        latex = `\\frac{x}{${a}} = ${N}`;
+        latex = `\\dfrac{x}{${a}} = ${N}`;
         answer = `x = ${x}`;
         answerLatex = `x = ${x}`;
     } else if (difficulty === "normal") {
@@ -45,7 +45,7 @@ function generateProblem(rand, difficulty) {
         const x = a * c - b;
 
         question = `(x + ${b})/${a} = ${c}`;
-        latex = `\\frac{x + ${b}}{${a}} = ${c}`;
+        latex = `\\dfrac{x + ${b}}{${a}} = ${c}`;
         answer = `x = ${x}`;
         answerLatex = `x = ${x}`;
     } else {
@@ -62,7 +62,7 @@ function generateProblem(rand, difficulty) {
             const c = Math.round(xVal / a + xVal / alt);
 
             question = `x/${a} + x/${alt} = ${c}`;
-            latex = `\\frac{x}{${a}} + \\frac{x}{${alt}} = ${c}`;
+            latex = `\\dfrac{x}{${a}} + \\dfrac{x}{${alt}} = ${c}`;
             answer = `x = ${xVal}`;
             answerLatex = `x = ${xVal}`;
 
@@ -77,7 +77,7 @@ function generateProblem(rand, difficulty) {
         const c = Math.round(x / a + x / b);
 
         question = `x/${a} + x/${b} = ${c}`;
-        latex = `\\frac{x}{${a}} + \\frac{x}{${b}} = ${c}`;
+        latex = `\\dfrac{x}{${a}} + \\dfrac{x}{${b}} = ${c}`;
         answer = `x = ${x}`;
         answerLatex = `x = ${x}`;
     }

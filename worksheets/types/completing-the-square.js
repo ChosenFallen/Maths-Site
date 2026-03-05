@@ -45,11 +45,11 @@ function fmtAnswerText(h, k) {
 // Format "(x ± p/2)² + k_num/4" as LaTeX where p is a signed odd integer
 function fmtAnswerLatexHalf(p, c) {
     const pAbs = Math.abs(p);
-    const bracket = p > 0 ? `x + \\frac{${pAbs}}{2}` : `x - \\frac{${pAbs}}{2}`;
+    const bracket = p > 0 ? `x + \\dfrac{${pAbs}}{2}` : `x - \\dfrac{${pAbs}}{2}`;
     const kNum = 4 * c - p * p;  // always non-zero for odd p
     let s = `\\left(${bracket}\\right)^2`;
-    if (kNum > 0)      s += ` + \\frac{${kNum}}{4}`;
-    else if (kNum < 0) s += ` - \\frac{${Math.abs(kNum)}}{4}`;
+    if (kNum > 0)      s += ` + \\dfrac{${kNum}}{4}`;
+    else if (kNum < 0) s += ` - \\dfrac{${Math.abs(kNum)}}{4}`;
     return s;
 }
 

@@ -83,7 +83,7 @@ function generateEasy(rand) {
     // Question: (numCoeff * k)x^(r+s) / (denCoeff * k)x^s
     const numLatex = formatMonomial(numCoeff, numPow);
     const denLatex = formatMonomial(denCoeff, denPow);
-    const questionLatex = `\\frac{${numLatex}}{${denLatex}}`;
+    const questionLatex = `\\dfrac{${numLatex}}{${denLatex}}`;
 
     // Answer: c*x^r / q
     let answerLatex, answer;
@@ -92,7 +92,7 @@ function generateEasy(rand) {
         answer = `${c}x${r === 1 ? "" : "^" + r}`;
     } else {
         const answerNumLatex = formatMonomial(c, r);
-        answerLatex = `\\frac{${answerNumLatex}}{${q}}`;
+        answerLatex = `\\dfrac{${answerNumLatex}}{${q}}`;
         answer = `${c}x${r === 1 ? "" : "^" + r}/${q}`;
     }
 
@@ -115,7 +115,7 @@ function generateNormal(rand) {
         // Type A: (x^2 + ax) / x = x + a
         const a = randInt(rand, 1, 15);
 
-        const questionLatex = `\\frac{x^2 + ${a}x}{x}`;
+        const questionLatex = `\\dfrac{x^2 + ${a}x}{x}`;
         const answer = `x + ${a}`;
 
         const questionHtml = renderKatex(questionLatex) || `(x^2 + ${a}x)/x`;
@@ -133,7 +133,7 @@ function generateNormal(rand) {
         const a = randInt(rand, 0, 1) === 0 ? aMag : -aMag;
         const ca = c * a;
 
-        const questionLatex = `\\frac{${c}x ${ca >= 0 ? '+' : '-'} ${Math.abs(ca)}}{${formatLinearLatex(a)}}`;
+        const questionLatex = `\\dfrac{${c}x ${ca >= 0 ? '+' : '-'} ${Math.abs(ca)}}{${formatLinearLatex(a)}}`;
         const answer = `${c}`;
 
         const questionHtml = renderKatex(questionLatex) || `(${c}x ${ca >= 0 ? '+' : '−'} ${Math.abs(ca)})/(${formatLinearText(a)})`;
@@ -166,7 +166,7 @@ function generateHard(rand) {
         const bCoeff = p + q;
         const cCoeff = p * q;
 
-        const questionLatex = `\\frac{${formatQuadraticLatex(bCoeff, cCoeff)}}{${formatLinearLatex(p)}}`;
+        const questionLatex = `\\dfrac{${formatQuadraticLatex(bCoeff, cCoeff)}}{${formatLinearLatex(p)}}`;
         const answerLatex = formatLinearLatex(q);
         const answer = formatLinearText(q);
 
@@ -205,8 +205,8 @@ function generateHard(rand) {
         const denBCoeff = p + r;
         const denCCoeff = p * r;
 
-        const questionLatex = `\\frac{${formatQuadraticLatex(numBCoeff, numCCoeff)}}{${formatQuadraticLatex(denBCoeff, denCCoeff)}}`;
-        const answerLatex = `\\frac{${formatLinearLatex(q)}}{${formatLinearLatex(r)}}`;
+        const questionLatex = `\\dfrac{${formatQuadraticLatex(numBCoeff, numCCoeff)}}{${formatQuadraticLatex(denBCoeff, denCCoeff)}}`;
+        const answerLatex = `\\dfrac{${formatLinearLatex(q)}}{${formatLinearLatex(r)}}`;
         const answer = `(${formatLinearText(q)})/(${formatLinearText(r)})`;
 
         const questionHtml = renderKatex(questionLatex) || `(x^2 + ${numBCoeff}x + ${numCCoeff})/(x^2 + ${denBCoeff}x + ${denCCoeff})`;

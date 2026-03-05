@@ -2,7 +2,7 @@ import { randInt, gcd, renderKatex, formatSurdLatex, formatSurdText } from "./ut
 
 // Format fraction in LaTeX
 function formatFracLatex(num, den) {
-    return `\\frac{${num}}{${den}}`;
+    return `\\dfrac{${num}}{${den}}`;
 }
 
 export default {
@@ -37,7 +37,7 @@ function generateProblem(rand, difficulty) {
         const denVal = k / g;
 
         // Question: a / √k
-        const questionLatex = `\\frac{${a}}{\\sqrt{${k}}}`;
+        const questionLatex = `\\dfrac{${a}}{\\sqrt{${k}}}`;
         const questionHtml = renderKatex(questionLatex) || `${a}/√${k}`;
 
         // Answer: numCoeff√k / denVal or just numCoeff√k if denVal === 1
@@ -46,7 +46,7 @@ function generateProblem(rand, difficulty) {
             answerLatex = formatSurdLatex(numCoeff, k);
             answerText = formatSurdText(numCoeff, k);
         } else {
-            answerLatex = `\\frac{${formatSurdLatex(numCoeff, k)}}{${denVal}}`;
+            answerLatex = `\\dfrac{${formatSurdLatex(numCoeff, k)}}{${denVal}}`;
             answerText = `${formatSurdText(numCoeff, k)}/${denVal}`;
         }
 
@@ -75,7 +75,7 @@ function generateProblem(rand, difficulty) {
         const denVal = mk / g;
 
         // Question: n / (m√k)
-        const questionLatex = `\\frac{${n}}{${m}\\sqrt{${k}}}`;
+        const questionLatex = `\\dfrac{${n}}{${m}\\sqrt{${k}}}`;
         const questionHtml = renderKatex(questionLatex) || `${n}/(${m}√${k})`;
 
         // Answer: numCoeff√k / denVal
@@ -84,7 +84,7 @@ function generateProblem(rand, difficulty) {
             answerLatex = formatSurdLatex(numCoeff, k);
             answerText = formatSurdText(numCoeff, k);
         } else {
-            answerLatex = `\\frac{${formatSurdLatex(numCoeff, k)}}{${denVal}}`;
+            answerLatex = `\\dfrac{${formatSurdLatex(numCoeff, k)}}{${denVal}}`;
             answerText = `${formatSurdText(numCoeff, k)}/${denVal}`;
         }
 
@@ -148,14 +148,14 @@ function generateProblem(rand, difficulty) {
             // Fraction form
             const fracNum = `${ansIntPart} ${ansSurdCoeff === 0 ? "" : "−"} ${ansSurdCoeff > 0 ? formatSurdLatex(ansSurdCoeff, k) : ""}`;
             // Simpler: just show the factored form: aSimp(b - √k) / dSimp
-            answerLatex = `\\frac{${aSimp}(${b} - \\sqrt{${k}})}{${dSimp}}`;
+            answerLatex = `\\dfrac{${aSimp}(${b} - \\sqrt{${k}})}{${dSimp}}`;
             answerText = `${aSimp}(${b} - √${k})/${dSimp}`;
         }
 
         const answerHtml = renderKatex(answerLatex) || answerText;
 
         // Question: a / (b + √k)
-        const questionLatex = `\\frac{${a}}{${b} + \\sqrt{${k}}}`;
+        const questionLatex = `\\dfrac{${a}}{${b} + \\sqrt{${k}}}`;
         const questionHtml = renderKatex(questionLatex) || `${a}/(${b} + √${k})`;
 
         return {

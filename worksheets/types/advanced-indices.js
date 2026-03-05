@@ -85,7 +85,7 @@ function buildEasyPool(type) {
         for (let k = 2; k <= 12; k++) {
             for (const n of [2, 3]) {
                 const base = Math.pow(k, n);
-                const latex = `${base}^{\\frac{1}{${n}}} =`;
+                const latex = `${base}^{\\dfrac{1}{${n}}} =`;
                 const questionHtml = renderKatexLocal(latex) || `${base}^(1/${n}) =`;
                 const question = `${base}^(1/${n}) =`;
                 pool.push({ questionHtml, question, answer: `${k}` });
@@ -101,7 +101,7 @@ function buildEasyPool(type) {
                 const latex = `${a}^{-${n}} =`;
                 const questionHtml = renderKatexLocal(latex) || `${a}^(-${n}) =`;
                 const question = `${a}^(-${n}) =`;
-                const answerLatex = `\\frac{1}{${denom}}`;
+                const answerLatex = `\\dfrac{1}{${denom}}`;
                 const answerHtml = renderKatexLocal(answerLatex) || `1/${denom}`;
                 const answer = `1/${denom}`;
                 pool.push({ questionHtml, question, answer, answerHtml });
@@ -135,7 +135,7 @@ function generateFractionalNumerical(rand, difficulty) {
         const n = randInt(rand, 0, 1) === 0 ? 2 : 3;
         const base = Math.pow(k, n);
 
-        const latex = `${base}^{\\frac{1}{${n}}} =`;
+        const latex = `${base}^{\\dfrac{1}{${n}}} =`;
         const questionHtml = renderKatexLocal(latex) || `${base}^(1/${n}) =`;
         const question = `${base}^(1/${n}) =`;
         const answer = `${k}`;
@@ -151,7 +151,7 @@ function generateFractionalNumerical(rand, difficulty) {
         const base = Math.pow(k, n);
         const answerValue = Math.pow(k, m);
 
-        const latex = `${base}^{\\frac{${m}}{${n}}} =`;
+        const latex = `${base}^{\\dfrac{${m}}{${n}}} =`;
         const questionHtml = renderKatexLocal(latex) || `${base}^(${m}/${n}) =`;
         const question = `${base}^(${m}/${n}) =`;
         const answer = `${answerValue}`;
@@ -175,7 +175,7 @@ function generateFractionalNumerical(rand, difficulty) {
         const base = Math.pow(k, n);
         const answerValue = Math.pow(k, m);
 
-        const latex = `${base}^{\\frac{${m}}{${n}}} =`;
+        const latex = `${base}^{\\dfrac{${m}}{${n}}} =`;
         const questionHtml = renderKatexLocal(latex) || `${base}^(${m}/${n}) =`;
         const question = `${base}^(${m}/${n}) =`;
         const answer = `${answerValue}`;
@@ -196,7 +196,7 @@ function generateNegativeNumerical(rand, difficulty) {
         const questionHtml = renderKatexLocal(latex) || `${a}^(-${n}) =`;
         const question = `${a}^(-${n}) =`;
 
-        const answerLatex = `\\frac{1}{${denom}}`;
+        const answerLatex = `\\dfrac{1}{${denom}}`;
         const answerHtml = renderKatexLocal(answerLatex) || `1/${denom}`;
         const answer = `1/${denom}`;
 
@@ -211,7 +211,7 @@ function generateNegativeNumerical(rand, difficulty) {
         const questionHtml = renderKatexLocal(latex) || `${a}^(-${n}) =`;
         const question = `${a}^(-${n}) =`;
 
-        const answerLatex = `\\frac{1}{${denom}}`;
+        const answerLatex = `\\dfrac{1}{${denom}}`;
         const answerHtml = renderKatexLocal(answerLatex) || `1/${denom}`;
         const answer = `1/${denom}`;
 
@@ -225,11 +225,11 @@ function generateNegativeNumerical(rand, difficulty) {
         const base = Math.pow(k, n);
         const answerDenom = Math.pow(k, m);
 
-        const latex = `${base}^{-\\frac{${m}}{${n}}} =`;
+        const latex = `${base}^{-\\dfrac{${m}}{${n}}} =`;
         const questionHtml = renderKatexLocal(latex) || `${base}^(-${m}/${n}) =`;
         const question = `${base}^(-${m}/${n}) =`;
 
-        const answerLatex = `\\frac{1}{${answerDenom}}`;
+        const answerLatex = `\\dfrac{1}{${answerDenom}}`;
         const answerHtml = renderKatexLocal(answerLatex) || `1/${answerDenom}`;
         const answer = `1/${answerDenom}`;
 
@@ -263,7 +263,7 @@ function generateAlgebraicFractional(rand, difficulty, lawType) {
         const p = 1;
         const q = n - 1;
 
-        const latex = `x^{\\frac{${p}}{${n}}} \\times x^{\\frac{${q}}{${n}}} =`;
+        const latex = `x^{\\dfrac{${p}}{${n}}} \\times x^{\\dfrac{${q}}{${n}}} =`;
         const questionHtml = renderKatexLocal(latex) || `x^(${p}/${n}) × x^(${q}/${n}) =`;
         const question = `x^(${p}/${n}) × x^(${q}/${n}) =`;
         const answer = "x";
@@ -276,7 +276,7 @@ function generateAlgebraicFractional(rand, difficulty, lawType) {
         const m = n * randInt(rand, 1, 3); // m divisible by n
         const resultNum = m / n;
 
-        const latex = `(x^{${m}})^{\\frac{1}{${n}}} =`;
+        const latex = `(x^{${m}})^{\\dfrac{1}{${n}}} =`;
         const questionHtml = renderKatexLocal(latex) || `(x^${exponentToSuperscript(m)})^(1/${n}) =`;
         const question = `(x^${exponentToSuperscript(m)})^(1/${n}) =`;
 
@@ -293,24 +293,24 @@ function generateAlgebraicFractional(rand, difficulty, lawType) {
         if (p >= q) {
             // x^(p/n) ÷ x^(q/n) = x^((p-q)/n)
             const resultNum = p - q;
-            const latex = `x^{\\frac{${p}}{${n}}} \\div x^{\\frac{${q}}{${n}}} =`;
+            const latex = `x^{\\dfrac{${p}}{${n}}} \\div x^{\\dfrac{${q}}{${n}}} =`;
             const questionHtml = renderKatexLocal(latex) || `x^(${p}/${n}) ÷ x^(${q}/${n}) =`;
             const question = `x^(${p}/${n}) ÷ x^(${q}/${n}) =`;
 
             const answer = `x${resultNum === 1 ? "" : `^(${resultNum}/${n})`}`;
-            const answerLatex = resultNum === 1 ? "x" : `x^{\\frac{${resultNum}}{${n}}}`;
+            const answerLatex = resultNum === 1 ? "x" : `x^{\\dfrac{${resultNum}}{${n}}}`;
             const answerHtml = renderKatexLocal(answerLatex) || answer;
 
             return { questionHtml, question, answer, answerHtml };
         } else {
             // x^(q/n) ÷ x^(p/n) = x^((q-p)/n), then simplify if possible
             const resultNum = q - p;
-            const latex = `x^{\\frac{${q}}{${n}}} \\div x^{\\frac{${p}}{${n}}} =`;
+            const latex = `x^{\\dfrac{${q}}{${n}}} \\div x^{\\dfrac{${p}}{${n}}} =`;
             const questionHtml = renderKatexLocal(latex) || `x^(${q}/${n}) ÷ x^(${p}/${n}) =`;
             const question = `x^(${q}/${n}) ÷ x^(${p}/${n}) =`;
 
             const answer = `x${resultNum === 1 ? "" : `^(${resultNum}/${n})`}`;
-            const answerLatex = resultNum === 1 ? "x" : `x^{\\frac{${resultNum}}{${n}}}`;
+            const answerLatex = resultNum === 1 ? "x" : `x^{\\dfrac{${resultNum}}{${n}}}`;
             const answerHtml = renderKatexLocal(answerLatex) || answer;
 
             return { questionHtml, question, answer, answerHtml };
@@ -340,7 +340,7 @@ function generateAlgebraicNegative(rand, difficulty, lawType) {
         } else {
             const absResult = Math.abs(result);
             const answer = `1/x${exponentToSuperscript(absResult)}`;
-            const answerLatex = `\\frac{1}{x^{${absResult}}}`;
+            const answerLatex = `\\dfrac{1}{x^{${absResult}}}`;
             const answerHtml = renderKatexLocal(answerLatex) || answer;
             return { questionHtml, question, answer, answerHtml };
         }
@@ -355,7 +355,7 @@ function generateAlgebraicNegative(rand, difficulty, lawType) {
         const question = `(x^${exponentToSuperscript(m)})^(${-n}) =`;
 
         const answer = `1/x${exponentToSuperscript(result)}`;
-        const answerLatex = `\\frac{1}{x^{${result}}}`;
+        const answerLatex = `\\dfrac{1}{x^{${result}}}`;
         const answerHtml = renderKatexLocal(answerLatex) || answer;
 
         return { questionHtml, question, answer, answerHtml };

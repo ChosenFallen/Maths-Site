@@ -118,8 +118,8 @@ function formatNthTermLatex(dp, q, c) {
     let coeff;
     if (absDp === 1 && q === 1) coeff = `${sign}n`;
     else if (q === 1)           coeff = `${sign}${absDp}n`;
-    else if (absDp === 1)       coeff = `${sign}\\frac{n}{${q}}`;
-    else                        coeff = `${sign}\\frac{${absDp}}{${q}}n`;
+    else if (absDp === 1)       coeff = `${sign}\\dfrac{n}{${q}}`;
+    else                        coeff = `${sign}\\dfrac{${absDp}}{${q}}n`;
 
     if (c === 0) return coeff;
     if (c > 0)   return `${coeff} + ${c}`;
