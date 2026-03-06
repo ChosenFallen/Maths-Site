@@ -59,7 +59,7 @@ function generateProblem(rand, difficulty, options = {}) {
         const c = x * (a - finalB);
 
         const { sign: cSign, abs: cAbs } = formatSignValue(c);
-        const cSignLatex = cSign === "-" ? "-" : "+";
+        const cSignLatex = (cSign === "-" || cSign === "−") ? "-" : "+";
 
         question = `${formatCoeff(a, "x")} = ${formatCoeff(finalB, "x")} ${cSign} ${cAbs}`;
         latex = `${formatCoeff(a, "x")} = ${formatCoeff(finalB, "x")} ${cSignLatex} ${cAbs}`;
@@ -89,8 +89,8 @@ function generateProblem(rand, difficulty, options = {}) {
 
         const { sign: bSign, abs: bAbs } = formatSignValue(b);
         const { sign: dSign, abs: dAbs } = formatSignValue(d);
-        const bSignLatex = bSign === "-" ? "-" : "+";
-        const dSignLatex = dSign === "-" ? "-" : "+";
+        const bSignLatex = (bSign === "-" || bSign === "−") ? "-" : "+";
+        const dSignLatex = (dSign === "-" || dSign === "−") ? "-" : "+";
 
         question = `${formatCoeff(a, "x")} ${bSign} ${bAbs} = ${formatCoeff(finalC, "x")} ${dSign} ${dAbs}`;
         latex = `${formatCoeff(a, "x")} ${bSignLatex} ${bAbs} = ${formatCoeff(finalC, "x")} ${dSignLatex} ${dAbs}`;
@@ -125,8 +125,8 @@ function generateProblem(rand, difficulty, options = {}) {
 
         const { sign: cSign, abs: cAbs } = formatSignValue(c);
         const { sign: eSign, abs: eAbs } = formatSignValue(e);
-        const cSignLatex = cSign === "-" ? "-" : "+";
-        const eSignLatex = eSign === "-" ? "-" : "+";
+        const cSignLatex = (cSign === "-" || cSign === "−") ? "-" : "+";
+        const eSignLatex = (eSign === "-" || eSign === "−") ? "-" : "+";
 
         question = `${a}(${formatCoeff(b, "x")} ${cSign} ${cAbs}) = ${formatCoeff(finalD, "x")} ${eSign} ${eAbs}`;
         latex = `${a}(${formatCoeff(b, "x")} ${cSignLatex} ${cAbs}) = ${formatCoeff(finalD, "x")} ${eSignLatex} ${eAbs}`;
