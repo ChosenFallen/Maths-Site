@@ -101,7 +101,7 @@ h1.print-title {
 }
 
 #worksheet-instruction {
-    font-size: calc(28px * var(--text-scale));
+    font-size: calc(20px * var(--text-scale));
     margin: 15px 0 10px 0;
     text-align: center;
     font-weight: bold;
@@ -148,7 +148,7 @@ h1.print-title {
 
 .problem-question {
     flex-grow: 0;
-    font-size: calc(28px * var(--text-scale));
+    font-size: calc(20px * var(--text-scale));
     font-weight: 500;
     margin-bottom: calc(8px * var(--text-scale));
     color: #111;
@@ -195,7 +195,7 @@ h1.print-title {
         min-height: auto;
     }
     .problem-question {
-        font-size: calc(24px * var(--text-scale));
+        font-size: calc(18px * var(--text-scale));
     }
 }
 
@@ -209,14 +209,14 @@ h1.print-title {
         min-height: auto;
     }
     .problem-question {
-        font-size: calc(22px * var(--text-scale));
+        font-size: calc(16px * var(--text-scale));
     }
 }
 
 /* Extra large screens */
 @media (min-width: 1600px) {
     .problem-question {
-        font-size: calc(32px * var(--text-scale));
+        font-size: calc(24px * var(--text-scale));
     }
     .problems-grid {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
