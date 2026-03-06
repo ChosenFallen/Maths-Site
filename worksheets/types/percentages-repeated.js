@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "percentages-repeated",
@@ -56,7 +59,7 @@ function generateEasy(rand) {
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, the new amount is?`;
     const answer = `${finalResult}`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }
 
 function generateNormal(rand) {
@@ -86,7 +89,7 @@ function generateNormal(rand) {
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, the new amount is?`;
     const answer = `${finalResult}`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }
 
 function generateHard(rand) {
@@ -121,5 +124,5 @@ function generateHard(rand) {
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, then a ${change3} change, the new amount is?`;
     const answer = `${finalResult}`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }

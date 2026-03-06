@@ -1,4 +1,7 @@
-import { randInt, difficultyRange } from "./utils.js";
+import {
+    randInt, difficultyRange,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "missing-number",
@@ -99,5 +102,5 @@ function generateProblem(rand, difficulty, op) {
         symbol = "÷";
     }
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }

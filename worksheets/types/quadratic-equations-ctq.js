@@ -1,4 +1,7 @@
-import { randInt, renderKatex, formatQuadraticLatex, formatQuadraticText } from "./utils.js";
+import {
+    randInt, renderKatex, formatQuadraticLatex, formatQuadraticText,
+    generateNumericDistracters
+} from "./utils.js";
 
 // LaTeX for "(x + h)² = k"
 function fmtCtqLatex(h, k) {

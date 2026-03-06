@@ -668,7 +668,70 @@ if (worksheetsWithoutGrades.length === 0 && worksheetsWithInvalidGrades.length =
     }
 }
 
-// Test 7: Cross-check WORKSHEET_TYPES, WORKSHEET_GROUPS, and the types/ directory.
+// Test 7: Multiple choice answers validation (for worksheets that have been updated)
+console.log("\n── Multiple choice answers validation ─────────────────────");
+const multipleChoiceIssues = [];
+const worksheetsWithMC = [];
+const worksheetsWithoutMC = [];
+
+for (const type of TYPES) {
+    const r = mulberry32(12345);
+    let problems;
+    try {
+        problems = type.generate(r, "easy", 3);
+    } catch (e) {
+        continue;
+    }
+
+    // Check if this worksheet has wrongAnswers
+    const hasWrongAnswers = problems.length > 0 && problems[0].wrongAnswers !== undefined;
+
+    if (!hasWrongAnswers) {
+        worksheetsWithoutMC.push(type.id);
+        continue;
+    }
+
+    worksheetsWithMC.push(type.id);
+
+    // Validate the multiple choice structure for worksheets that have it
+    for (let i = 0; i < problems.length; i++) {
+        const p = problems[i];
+
+        // Check if wrongAnswers is an array with 3 elements
+        if (!Array.isArray(p.wrongAnswers) || p.wrongAnswers.length !== 3) {
+            multipleChoiceIssues.push(`${type.id}: problem ${i + 1} has ${p.wrongAnswers?.length || 0} wrong answers (need 3)`);
+            totalErrors++;
+            continue;
+        }
+
+        // Check if all 4 answers (1 right + 3 wrong) are different
+        const allAnswers = [p.answer, ...p.wrongAnswers];
+        const uniqueAnswers = new Set(allAnswers.map(a => JSON.stringify(a)));
+
+        if (uniqueAnswers.size !== 4) {
+            multipleChoiceIssues.push(`${type.id}: problem ${i + 1} has duplicate answers`);
+            totalErrors++;
+        }
+    }
+}
+
+if (worksheetsWithMC.length > 0) {
+    console.log(`✅ ${worksheetsWithMC.length} worksheet(s) have valid multiple choice answers (4 unique answers per question).`);
+}
+
+if (worksheetsWithoutMC.length > 0) {
+    console.log(`⏳ ${worksheetsWithoutMC.length} worksheet(s) not yet updated with wrongAnswers field.`);
+}
+
+if (multipleChoiceIssues.length > 0) {
+    console.log(`❌ Found ${multipleChoiceIssues.length} multiple choice issue(s):`);
+    multipleChoiceIssues.slice(0, 10).forEach(msg => console.log(`   - ${msg}`));
+    if (multipleChoiceIssues.length > 10) {
+        console.log(`   ... and ${multipleChoiceIssues.length - 10} more issues.`);
+    }
+}
+
+// Test 8: Cross-check WORKSHEET_TYPES, WORKSHEET_GROUPS, and the types/ directory.
 console.log("\n── Registry coverage checks ──────────────────────────────");
 const groupIds      = new Set(WORKSHEET_GROUPS.flatMap(g => g.types));
 const registryIds   = new Set(WORKSHEET_TYPES.map(t => t.id));

@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "times-tables-division-facts",
@@ -44,5 +47,5 @@ function generateProblem(rand, difficulty) {
     const question = `${dividend} ÷ ${divisor} =`;
     const answer = `${quotient}`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }

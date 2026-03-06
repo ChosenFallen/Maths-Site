@@ -1,4 +1,7 @@
-import { randInt, exponentToSuperscript, renderKatex } from "./utils.js";
+import {
+    randInt, exponentToSuperscript, renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "standard-form-multiply-divide",

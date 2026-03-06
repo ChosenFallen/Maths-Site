@@ -1,4 +1,7 @@
-import { randInt, formatSignValue, formatCoeff, renderKatex } from "./utils.js";
+import {
+    randInt, formatSignValue, formatCoeff, renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "equations-both-sides",

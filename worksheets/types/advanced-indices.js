@@ -1,4 +1,7 @@
-import { randInt, renderKatex, exponentToSuperscript } from "./utils.js";
+import {
+    randInt, renderKatex, exponentToSuperscript,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "advanced-indices",

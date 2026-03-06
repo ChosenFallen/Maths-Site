@@ -1,4 +1,7 @@
-import { formatFrac, formatFracOrWhole, gcd, renderKatex } from "./utils.js";
+import {
+    formatFrac, formatFracOrWhole, gcd, renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "recurring-decimals",

@@ -1,4 +1,8 @@
-import { randInt, difficultyRange } from "./utils.js";
+import {
+    randInt,
+    difficultyRange,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "subtraction",
@@ -21,9 +25,11 @@ export default {
                 a = b;
                 b = temp;
             }
+            const answer = a - b;
             problems.push({
                 question: `${a} − ${b} =`,
-                answer: a - b,
+                answer,
+                wrongAnswers: generateNumericDistracters(answer, rand),
             });
         }
         return problems;

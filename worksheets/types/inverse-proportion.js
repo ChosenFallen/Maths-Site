@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 // Find all values w in [minW, maxW] such that:
 //   - w divides k exactly

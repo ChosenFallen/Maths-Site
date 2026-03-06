@@ -1,4 +1,7 @@
-import { randInt, formatPower } from "./utils.js";
+import {
+    randInt, formatPower,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "indices",

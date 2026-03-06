@@ -1,4 +1,7 @@
-import { randInt, lcm, renderKatex } from "./utils.js";
+import {
+    randInt, lcm, renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "equations-fractions",

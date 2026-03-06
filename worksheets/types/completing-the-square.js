@@ -1,4 +1,7 @@
-import { randInt, renderKatex } from "./utils.js";
+import {
+    randInt, renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 // Format "x² + bx + c" as LaTeX (the question expression)
 function fmtQuestionLatex(b, c) {

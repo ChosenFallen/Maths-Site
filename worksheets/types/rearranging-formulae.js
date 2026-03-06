@@ -1,4 +1,7 @@
-import { randInt, renderKatex, convertSlashesToFracs } from "./utils.js";
+import {
+    randInt, renderKatex, convertSlashesToFracs,
+    generateNumericDistracters
+} from "./utils.js";
 
 const HARD_FORMULAS = [
     { q: "v = u + at, make u the subject", a: "u = v − at" },

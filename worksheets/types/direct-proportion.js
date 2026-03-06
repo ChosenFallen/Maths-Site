@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 const ITEMS = ["books", "pens", "apples", "oranges", "bottles", "tickets", "bags", "cans", "jars", "boxes"];
 const INGREDIENTS = ["flour", "sugar", "butter", "rice", "oats", "cheese"];

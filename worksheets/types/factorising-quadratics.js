@@ -1,4 +1,7 @@
-import { randInt, renderKatex, formatCoeff, formatSignValue } from "./utils.js";
+import {
+    randInt, renderKatex, formatCoeff, formatSignValue,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "factorising-quadratics",

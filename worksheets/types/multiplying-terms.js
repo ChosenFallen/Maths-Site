@@ -1,4 +1,7 @@
-import { randInt, renderKatex, formatCoeff } from "./utils.js";
+import {
+    randInt, renderKatex, formatCoeff,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "multiplying-terms",

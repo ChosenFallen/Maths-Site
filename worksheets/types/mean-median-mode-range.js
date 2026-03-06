@@ -1,4 +1,7 @@
-import { randInt, shuffle } from "./utils.js";
+import {
+    randInt, shuffle,
+    generateNumericDistracters
+} from "./utils.js";
 
 // Generate n integers in [min, max] that sum exactly to `total`.
 // Bounds each pick so the final value is always valid.

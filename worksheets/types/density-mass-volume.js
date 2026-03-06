@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 // Formula: density = mass / volume  →  mass = density × volume  →  volume = mass / density
 

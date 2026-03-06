@@ -1,4 +1,7 @@
-import { randInt, renderKatex } from "./utils.js";
+import {
+    randInt, renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "substitution",

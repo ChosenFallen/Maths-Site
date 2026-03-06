@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "percentages-multipliers",
@@ -51,7 +54,7 @@ function generateEasy(rand) {
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }
 
 function generateNormal(rand) {
@@ -76,7 +79,7 @@ function generateNormal(rand) {
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }
 
 function generateHard(rand) {
@@ -101,5 +104,5 @@ function generateHard(rand) {
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }

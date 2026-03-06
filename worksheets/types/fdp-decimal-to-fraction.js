@@ -1,4 +1,7 @@
-import { formatFrac, formatFracOrWhole, randInt, gcd, formatDecimal, decimalPlaces } from "./utils.js";
+import {
+    formatFrac, formatFracOrWhole, randInt, gcd, formatDecimal, decimalPlaces,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "fdp-decimal-to-fraction",

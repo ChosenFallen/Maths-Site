@@ -1,4 +1,7 @@
-import { randInt, exponentToSuperscript } from "./utils.js";
+import {
+    randInt, exponentToSuperscript,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "standard-form",

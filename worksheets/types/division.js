@@ -1,4 +1,8 @@
-import { randInt, difficultyRange } from "./utils.js";
+import {
+    randInt,
+    difficultyRange,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "division",
@@ -18,9 +22,11 @@ export default {
             b = Math.max(1, b);
             let a = randInt(rand, min, max);
             a = a * b;
+            const answer = a / b;
             problems.push({
                 question: `${a} ÷ ${b} =`,
-                answer: a / b,
+                answer,
+                wrongAnswers: generateNumericDistracters(answer, rand),
             });
         }
         return problems;

@@ -1,4 +1,7 @@
-import { randInt, drawCircle } from "./utils.js";
+import {
+    randInt, drawCircle,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "circles",

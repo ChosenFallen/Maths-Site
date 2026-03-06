@@ -1,4 +1,7 @@
-import { randInt, renderKatex } from "./utils.js";
+import {
+    randInt, renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 // Format a coefficient×variable term for LaTeX
 // coeff=1→"x", coeff=-1→"-x", coeff=2→"2x"

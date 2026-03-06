@@ -1,4 +1,7 @@
-import { formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator, formatPercent, percentPlaces } from "./utils.js";
+import {
+    formatFrac, formatFracOrWhole, randInt, gcd, ensureNonUnitDenominator, formatPercent, percentPlaces,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "fdp-percent-to-fraction",

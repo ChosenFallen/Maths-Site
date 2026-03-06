@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "percentages-as-percentage",
@@ -43,7 +46,7 @@ function generateEasy(rand) {
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }
 
 function generateNormal(rand) {
@@ -60,7 +63,7 @@ function generateNormal(rand) {
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }
 
 function generateHard(rand) {
@@ -77,5 +80,5 @@ function generateHard(rand) {
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }

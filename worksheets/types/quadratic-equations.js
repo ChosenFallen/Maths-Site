@@ -1,4 +1,7 @@
-import { randInt, renderKatex, formatQuadraticLatex, formatQuadraticText } from "./utils.js";
+import {
+    randInt, renderKatex, formatQuadraticLatex, formatQuadraticText,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "quadratic-equations",

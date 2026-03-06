@@ -1,4 +1,7 @@
-import { renderKatex } from "./utils.js";
+import {
+    renderKatex,
+    generateNumericDistracters
+} from "./utils.js";
 
 // ── Pattern definitions ──────────────────────────────────────────────────────
 // Each pattern: id, nth(n) → count, bounds(n) → {cols, rows}, cells(n) → [[col,row],...]

@@ -1,4 +1,7 @@
-import { randInt, gcd } from "./utils.js";
+import {
+    randInt, gcd,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "reverse-percentages",

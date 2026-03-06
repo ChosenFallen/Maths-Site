@@ -1,4 +1,7 @@
-import { renderKatex, formatFrac } from "./utils.js";
+import {
+    renderKatex, formatFrac,
+    generateNumericDistracters
+} from "./utils.js";
 
 function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
 

@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 // Pythagorean triples [a, b, c] — aspect ratios kept ≤ 3.5 for clean SVG display
 const TRIPLES = [

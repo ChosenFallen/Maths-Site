@@ -6,6 +6,7 @@ import {
     formatBound,
     INEQUALITY_SIGNS_STRICT,
     INEQUALITY_SIGNS_ALL,
+    generateNumericDistracters
 } from "./utils.js";
 
 // Determine the answer region based on roots, coefficient, and sign

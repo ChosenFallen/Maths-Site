@@ -1,4 +1,7 @@
-import { randInt, gcd, lcm } from "./utils.js";
+import {
+    randInt, gcd, lcm,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "hcf-lcm",

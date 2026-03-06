@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 // Pythagorean triples (a, b, c) where c is the hypotenuse — all distinct primitives + common multiples
 const PYTH_TRIPLES = [

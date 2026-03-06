@@ -606,3 +606,73 @@ export function drawCircle(r, labelType, unit) {
     svg += `</svg>`;
     return svg;
 }
+
+/**
+ * Generates 3 plausible wrong numeric answers for multiple choice questions.
+ * Uses strategies like off-by-1, doubling, halving, percentage variation, and sign flip.
+ * @param {number} answer - The correct numeric answer
+ * @param {function} rand - Seeded random number generator (optional, for future randomization)
+ * @returns {array} Array of 3 wrong answers
+ */
+export function generateNumericDistracters(answer, rand) {
+    const wrong = [];
+    const seen = new Set([answer]);
+
+    const absAnswer = Math.abs(answer);
+
+    // Helper function to add unique wrong answer
+    function addWrong(value) {
+        if (!seen.has(value) && value !== answer) {
+            wrong.push(value);
+            seen.add(value);
+            return true;
+        }
+        return false;
+    }
+
+    // Strategy 1: Off-by-one (±1)
+    if (answer >= 0) {
+        addWrong(answer + 1);
+        if (answer > 0) addWrong(Math.max(0, answer - 1));
+    } else {
+        addWrong(answer - 1);
+        addWrong(answer + 1);
+    }
+
+    // Strategy 2: Doubled value
+    addWrong(answer * 2);
+
+    // Strategy 3: Halved value
+    if (absAnswer >= 2) {
+        addWrong(Math.round(answer / 2));
+    }
+
+    // Strategy 4: ±10% variation
+    if (absAnswer > 1) {
+        addWrong(Math.round(answer * 0.9));
+        addWrong(Math.round(answer * 1.1));
+    }
+
+    // Strategy 5: Sign flip
+    addWrong(-answer);
+
+    // Strategy 6: Answer ± 2
+    addWrong(answer + 2);
+    addWrong(answer - 2);
+
+    // Strategy 7: If answer is small, try multiples
+    if (absAnswer > 0 && absAnswer < 20) {
+        addWrong(Math.round(answer * 3));
+    }
+
+    // Ensure we always have exactly 3
+    while (wrong.length < 3) {
+        // Add more variations
+        const variation = Math.floor(absAnswer / 2) || 1;
+        addWrong(answer + variation);
+        addWrong(answer - variation);
+        addWrong(answer + variation * 2);
+    }
+
+    return wrong.slice(0, 3);
+}

@@ -1,4 +1,7 @@
-import { randInt } from "./utils.js";
+import {
+    randInt,
+    generateNumericDistracters
+} from "./utils.js";
 
 // ── SVG Triangle with angle ───────────────────────────────────────────────────
 

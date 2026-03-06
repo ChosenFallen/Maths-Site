@@ -1,4 +1,7 @@
-import { randInt, formatCoeff, formatSignValue } from "./utils.js";
+import {
+    randInt, formatCoeff, formatSignValue,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "linear-graphs",

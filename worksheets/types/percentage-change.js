@@ -1,4 +1,7 @@
-import { randInt, gcd } from "./utils.js";
+import {
+    randInt, gcd,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "percentage-change",
@@ -80,5 +83,5 @@ function generateProblem(rand, difficulty, changeType) {
         ? `${percentStr}% increase`
         : `${percentStr}% decrease`;
 
-    return { question, answer };
+    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
 }

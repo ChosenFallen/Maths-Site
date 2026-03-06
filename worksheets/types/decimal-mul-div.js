@@ -1,4 +1,7 @@
-import { randInt, formatDecimal, decimalPlaces } from "./utils.js";
+import {
+    randInt, formatDecimal, decimalPlaces,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "decimal-mul-div",

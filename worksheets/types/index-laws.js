@@ -1,4 +1,7 @@
-import { randInt, exponentToSuperscript } from "./utils.js";
+import {
+    randInt, exponentToSuperscript,
+    generateNumericDistracters
+} from "./utils.js";
 
 export default {
     id: "index-laws",
@@ -100,7 +103,7 @@ function generateProduct(rand, difficulty) {
         const question = `x${exponentToSuperscript(m)} × x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(1, "x", answerPower);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     } else if (difficulty === "normal") {
         const mx = randInt(rand, 1, 5);
         const nx = randInt(rand, 1, 5);
@@ -112,7 +115,7 @@ function generateProduct(rand, difficulty) {
         const question = `${formatBiTermText(mx, my)} × ${formatBiTermText(nx, ny)} =`;
         const answer = formatBiTermText(mx + nx, my + ny);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     } else {
         // Hard: coefficients
         const k1 = randInt(rand, 2, 4);
@@ -126,7 +129,7 @@ function generateProduct(rand, difficulty) {
         const question = `${k1}x${exponentToSuperscript(m)} × ${k2}x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(kProduct, "x", m + n);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     }
 }
 
@@ -142,7 +145,7 @@ function generateQuotient(rand, difficulty) {
         const question = `x${exponentToSuperscript(m)} ÷ x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(1, "x", diff);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     } else if (difficulty === "normal") {
         const diffX = randInt(rand, 1, 4);
         const diffY = randInt(rand, 1, 4);
@@ -156,7 +159,7 @@ function generateQuotient(rand, difficulty) {
         const question = `${formatBiTermText(mx, my)} ÷ ${formatBiTermText(nx, ny)} =`;
         const answer = formatBiTermText(diffX, diffY);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     } else {
         // Hard: coefficients, ensure clean division
         const k2 = randInt(rand, 2, 4);
@@ -171,7 +174,7 @@ function generateQuotient(rand, difficulty) {
         const question = `${k1}x${exponentToSuperscript(m)} ÷ ${k2}x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(factor, "x", diff);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     }
 }
 
@@ -187,7 +190,7 @@ function generatePower(rand, difficulty) {
         const question = `(x${exponentToSuperscript(m)})${exponentToSuperscript(n)} =`;
         const answer = formatTermText(1, "x", answerPower);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     } else if (difficulty === "normal") {
         const mx = randInt(rand, 1, 4);
         const my = randInt(rand, 1, 4);
@@ -198,7 +201,7 @@ function generatePower(rand, difficulty) {
         const question = `(${formatBiTermText(mx, my)})${exponentToSuperscript(n)} =`;
         const answer = formatBiTermText(mx * n, my * n);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     } else {
         // Hard: with coefficient
         const k = randInt(rand, 2, 4);
@@ -212,6 +215,6 @@ function generatePower(rand, difficulty) {
         const question = `(${k}x${exponentToSuperscript(m)})${exponentToSuperscript(n)} =`;
         const answer = formatTermText(kPower, "x", mPower);
 
-        return { questionHtml, question, answer };
+        return { questionHtml, question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
     }
 }
