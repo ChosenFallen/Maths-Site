@@ -95,12 +95,12 @@ function generateProblem(rand, difficulty) {
         const hcf = calculateHCF(factors1, factors2);
         const question = `Find the HCF of ${num1} and ${num2} using prime factorization.`;
         const answer = `${hcf}`;
-        return { question, answer };
+        return { question, answer, wrongAnswers: generateNumericDistracters(hcf, rand) };
     } else {
         // Find LCM
         const lcm = calculateLCM(factors1, factors2);
         const question = `Find the LCM of ${num1} and ${num2} using prime factorization.`;
         const answer = `${lcm}`;
-        return { question, answer };
+        return { question, answer, wrongAnswers: generateNumericDistracters(lcm, rand) };
     }
 }

@@ -68,7 +68,7 @@ function genEasy(rand) {
     // sin(60)=√3/2, cos(60)=0.5, tan(60)=√3
 
     const trigType = randInt(rand, 0, 2);  // 0=sin (find opposite), 1=cos (find adjacent), 2=tan
-    let opposite, adjacent, findWhat, answer;
+    let opposite, adjacent, findWhat, answer, numericAnswer;
 
     if (angle === 30) {
         if (trigType === 0) {
@@ -78,6 +78,7 @@ function genEasy(rand) {
             adjacent = Math.round(Math.sqrt(hyp * hyp - opposite * opposite));
             findWhat = "opposite";
             answer = `${opposite} cm`;
+            numericAnswer = opposite;
         } else if (trigType === 1) {
             // cos(30) = adj/hyp = √3/2 → adj = hyp·√3/2, but not integer typically
             // Instead: use tan(30) = opp/adj = 1/√3 → adj = opp·√3
@@ -88,6 +89,7 @@ function genEasy(rand) {
             adjacent = Math.round(Math.sqrt(hyp * hyp - opposite * opposite));
             findWhat = "hypotenuse (use sin)";
             answer = `${hyp} cm`;
+            numericAnswer = hyp;
         } else {
             // tan(30) = opp/adj = 1/√3 → not clean for integers
             // Skip: use cos instead
@@ -97,6 +99,7 @@ function genEasy(rand) {
             adjacent = adj;
             findWhat = "opposite";
             answer = `${opposite} cm`;
+            numericAnswer = opposite;
         }
     } else if (angle === 45) {
         // sin(45) = cos(45) = 1/√2 → legs are equal
@@ -105,6 +108,7 @@ function genEasy(rand) {
         adjacent = leg;
         findWhat = randInt(rand, 0, 1) === 0 ? "opposite" : "adjacent";
         answer = `${leg} cm`;
+        numericAnswer = leg;
     } else {
         // angle === 60
         if (trigType === 0) {
@@ -115,6 +119,7 @@ function genEasy(rand) {
             opposite = Math.round(Math.sqrt(hyp * hyp - adjacent * adjacent));
             findWhat = "adjacent";
             answer = `${adjacent} cm`;
+            numericAnswer = adjacent;
         } else if (trigType === 1) {
             // cos(60) = adj/hyp = 0.5 → adj = hyp/2
             const hyp = randInt(rand, 4, 8) * 2;
@@ -122,6 +127,7 @@ function genEasy(rand) {
             opposite = Math.round(Math.sqrt(hyp * hyp - adjacent * adjacent));
             findWhat = "adjacent";
             answer = `${adjacent} cm`;
+            numericAnswer = adjacent;
         } else {
             // tan(60) = opp/adj = √3 → opp = adj·√3, not integer
             const hyp = randInt(rand, 4, 8) * 2;
@@ -129,6 +135,7 @@ function genEasy(rand) {
             opposite = Math.round(Math.sqrt(hyp * hyp - adjacent * adjacent));
             findWhat = "opposite";
             answer = `${opposite} cm`;
+            numericAnswer = opposite;
         }
     }
 
@@ -140,6 +147,7 @@ function genEasy(rand) {
         question: `Right-angled triangle with angle ${angle}°. Find the ${findWhat} side.`,
         answer,
         answerHtml: answer,
+        wrongAnswers: generateNumericDistracters(numericAnswer, rand),
     };
 }
 
@@ -164,6 +172,7 @@ function genNormal(rand) {
         question: `Right-angled triangle with angle ${angle}°, hypotenuse ${hyp} cm. Find the ${findWhat === "opposite" ? "opposite" : "adjacent"} side (to 1 d.p.).`,
         answer: `${toFind} cm`,
         answerHtml: `${toFind} cm`,
+        wrongAnswers: generateNumericDistracters(toFind, rand),
     };
 }
 
@@ -184,6 +193,7 @@ function genHard(rand) {
         question: `Right-angled triangle with opposite side ${opposite} cm and adjacent side ${adjacent} cm. Find angle θ (to 1 d.p.).`,
         answer: `${angle}°`,
         answerHtml: `${angle}°`,
+        wrongAnswers: generateNumericDistracters(angle, rand),
     };
 }
 

@@ -21,7 +21,7 @@ export default {
             const base = baseAmount(rand, difficulty, percent);
             const answer = (base * percent) / 100;
             const question = `${percent}% of ${base} =`;
-            problems.push({ question, answer: formatNumber(answer) });
+            problems.push({ question, answer: formatNumber(answer), wrongAnswers: generateNumericDistracters(answer, rand) });
         }
         return problems;
     },

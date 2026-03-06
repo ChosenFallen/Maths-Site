@@ -25,7 +25,7 @@ export default {
 
         return all.slice(0, count).map(({ base, isNegative, isSquare }) => {
             const signedBase = isNegative ? -base : base;
-            return makeProblem(signedBase, isSquare);
+            return makeProblem(signedBase, isSquare, rand);
         });
     },
 };
@@ -69,17 +69,17 @@ function formatNum(n) {
     return n < 0 ? `−${Math.abs(n)}` : `${n}`;
 }
 
-function makeProblem(signedBase, isSquare) {
+function makeProblem(signedBase, isSquare, rand) {
     if (isSquare) {
         const answer = signedBase * signedBase;
         const latex = signedBase < 0 ? `(${signedBase})^2` : `${signedBase}^2`;
         const questionHtml = renderKatex(latex) || `${signedBase}²`;
-        return { questionHtml, answer: formatNum(answer) };
+        return { questionHtml, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
     } else {
         const radicand = signedBase * signedBase;
         const answer = Math.abs(signedBase);
         const latex = `\\sqrt{${radicand}}`;
         const questionHtml = renderKatex(latex) || `√(${radicand})`;
-        return { questionHtml, answer: formatNum(answer) };
+        return { questionHtml, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
     }
 }

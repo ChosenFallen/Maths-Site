@@ -74,6 +74,7 @@ function generateProblem(rand, difficulty) {
         question: `Triangle: base ${base} ${unit}, height ${height} ${unit}. Area = ?`,
         answer,
         answerHtml: answer,
+        wrongAnswers: generateNumericDistracters(area, rand),
     };
 }
 

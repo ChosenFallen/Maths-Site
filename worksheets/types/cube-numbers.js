@@ -26,7 +26,7 @@ export default {
 
         return all.slice(0, count).map(({ base, isNegative, isCube }) => {
             const signedBase = isNegative ? -base : base;
-            return makeProblem(signedBase, isCube);
+            return makeProblem(signedBase, isCube, rand);
         });
     },
 };
@@ -70,16 +70,16 @@ function formatNum(n) {
     return n < 0 ? `−${Math.abs(n)}` : `${n}`;
 }
 
-function makeProblem(signedBase, isCube) {
+function makeProblem(signedBase, isCube, rand) {
     if (isCube) {
         const answer = signedBase * signedBase * signedBase;
         const latex = signedBase < 0 ? `(${signedBase})^3` : `${signedBase}^3`;
         const questionHtml = renderKatex(latex) || `${signedBase}³`;
-        return { questionHtml, answer: formatNum(answer) };
+        return { questionHtml, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
     } else {
         const radicand = signedBase * signedBase * signedBase;
         const latex = `\\sqrt[3]{${radicand}}`;
         const questionHtml = renderKatex(latex) || `∛(${radicand})`;
-        return { questionHtml, answer: formatNum(signedBase) };
+        return { questionHtml, answer: formatNum(signedBase), wrongAnswers: generateNumericDistracters(signedBase, rand) };
     }
 }

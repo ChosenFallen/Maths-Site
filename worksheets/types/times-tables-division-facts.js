@@ -47,5 +47,5 @@ function generateProblem(rand, difficulty) {
     const question = `${dividend} ÷ ${divisor} =`;
     const answer = `${quotient}`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }

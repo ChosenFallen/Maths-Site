@@ -48,20 +48,24 @@ function generateEasy(rand) {
     if (type === 0) {
         // Circumference
         const C = (2 * Math.PI * r).toFixed(2);
+        const numericC = parseFloat(C);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the circumference</strong></div>${drawCircle(r, "radius", unit)}`,
             question: `Circle with radius ${r} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
+            wrongAnswers: generateNumericDistracters(numericC, rand),
         };
     } else {
         // Area
         const A = (Math.PI * r * r).toFixed(2);
+        const numericA = parseFloat(A);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the area</strong></div>${drawCircle(r, "radius", unit)}`,
             question: `Circle with radius ${r} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
+            wrongAnswers: generateNumericDistracters(numericA, rand),
         };
     }
 }
@@ -83,24 +87,28 @@ function generateNormal(rand) {
         const C = isRadius
             ? (2 * Math.PI * r).toFixed(2)
             : (Math.PI * measurement).toFixed(2);
+        const numericC = parseFloat(C);
 
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the circumference</strong></div>${drawCircle(r, isRadius ? "radius" : "diameter", unit)}`,
             question: `Circle with ${isRadius ? "radius" : "diameter"} ${measurement} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
+            wrongAnswers: generateNumericDistracters(numericC, rand),
         };
     } else {
         // Type B/D: Area (from radius/diameter)
         const isRadius = type === 1;
         const radiusVal = isRadius ? r : r; // diameter already half in draw
         const A = (Math.PI * radiusVal * radiusVal).toFixed(2);
+        const numericA = parseFloat(A);
 
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the area</strong></div>${drawCircle(r, isRadius ? "radius" : "diameter", unit)}`,
             question: `Circle with ${isRadius ? "radius" : "diameter"} ${isRadius ? r : 2 * r} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
+            wrongAnswers: generateNumericDistracters(numericA, rand),
         };
     }
 }
@@ -116,22 +124,26 @@ function generateHard(rand) {
         const rValue = randInt(rand, 6, 40);
         const r = rValue % 2 === 0 ? rValue / 2 : (rValue / 2).toFixed(1);
         const C = (2 * Math.PI * r).toFixed(2);
+        const numericC = parseFloat(C);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the circumference</strong></div>${drawCircle(r, "radius", unit)}`,
             question: `Circle with radius ${r} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
+            wrongAnswers: generateNumericDistracters(numericC, rand),
         };
     } else if (type === 1) {
         // Type B: Area from radius
         const rValue = randInt(rand, 6, 40);
         const r = rValue % 2 === 0 ? rValue / 2 : (rValue / 2).toFixed(1);
         const A = (Math.PI * r * r).toFixed(2);
+        const numericA = parseFloat(A);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the area</strong></div>${drawCircle(r, "radius", unit)}`,
             question: `Circle with radius ${r} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
+            wrongAnswers: generateNumericDistracters(numericA, rand),
         };
     } else if (type === 2) {
         // Type C: Circumference from diameter
@@ -139,11 +151,13 @@ function generateHard(rand) {
         const d = dValue % 2 === 0 ? dValue / 2 : (dValue / 2).toFixed(1);
         const r = d / 2;
         const C = (Math.PI * d).toFixed(2);
+        const numericC = parseFloat(C);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the circumference</strong></div>${drawCircle(r, "diameter", unit)}`,
             question: `Circle with diameter ${d} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
+            wrongAnswers: generateNumericDistracters(numericC, rand),
         };
     } else if (type === 3) {
         // Type D: Area from diameter
@@ -151,11 +165,13 @@ function generateHard(rand) {
         const d = dValue % 2 === 0 ? dValue / 2 : (dValue / 2).toFixed(1);
         const r = d / 2;
         const A = (Math.PI * r * r).toFixed(2);
+        const numericA = parseFloat(A);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the area</strong></div>${drawCircle(r, "diameter", unit)}`,
             question: `Circle with diameter ${d} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
+            wrongAnswers: generateNumericDistracters(numericA, rand),
         };
     } else if (type === 4) {
         // Type E: Find radius from circumference
@@ -163,11 +179,13 @@ function generateHard(rand) {
         const r = rValue % 2 === 0 ? rValue / 2 : (rValue / 2).toFixed(1);
         const C = (2 * Math.PI * r).toFixed(2);
         const radiusAnswer = r.toString();
+        const numericR = parseFloat(r);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the radius</strong></div><div style="margin: 0;">A circle has circumference ${C} ${unit}.</div>`,
             question: `Circumference ${C} ${unit}. Find radius.`,
             answer: `${radiusAnswer} ${unit}`,
             answerHtml: `${radiusAnswer} ${unit}`,
+            wrongAnswers: generateNumericDistracters(numericR, rand),
         };
     } else {
         // Type F: Find radius from area
@@ -175,11 +193,13 @@ function generateHard(rand) {
         const r = rValue % 2 === 0 ? rValue / 2 : (rValue / 2).toFixed(1);
         const A = (Math.PI * r * r).toFixed(2);
         const radiusAnswer = r.toString();
+        const numericR = parseFloat(r);
         return {
             questionHtml: `<div style="margin: 0; margin-bottom: 2px;"><strong>Find the radius</strong></div><div style="margin: 0;">A circle has area ${A} ${unit}².</div>`,
             question: `Area ${A} ${unit}². Find radius.`,
             answer: `${radiusAnswer} ${unit}`,
             answerHtml: `${radiusAnswer} ${unit}`,
+            wrongAnswers: generateNumericDistracters(numericR, rand),
         };
     }
 }

@@ -52,7 +52,7 @@ function genMean(rand, difficulty) {
         vals = sumTo(rand, n, total, 1, 30);
     }
     shuffle(rand, vals);
-    return { vals, answer: fmt(mean) };
+    return { vals, answer: fmt(mean), numericAnswer: mean };
 }
 
 // ── Median ────────────────────────────────────────────────────────────────────
@@ -101,7 +101,7 @@ function genMedian(rand, difficulty) {
     }
 
     shuffle(rand, vals);
-    return { vals, answer: fmt(median) };
+    return { vals, answer: fmt(median), numericAnswer: median };
 }
 
 // ── Mode ──────────────────────────────────────────────────────────────────────
@@ -124,7 +124,7 @@ function genMode(rand, difficulty) {
     }
     const vals = [...Array(freq).fill(mode), ...[...pool]];
     shuffle(rand, vals);
-    return { vals, answer: `${mode}` };
+    return { vals, answer: `${mode}`, numericAnswer: mode };
 }
 
 // ── Range ─────────────────────────────────────────────────────────────────────
@@ -142,7 +142,7 @@ function genRange(rand, difficulty) {
     const middles = Array.from({ length: totalNums - 2 }, () => randInt(rand, min + 1, max - 1));
     const vals = [min, max, ...middles];
     shuffle(rand, vals);
-    return { vals, answer: `${rangeVal}` };
+    return { vals, answer: `${rangeVal}`, numericAnswer: rangeVal };
 }
 
 // ── Worksheet export ──────────────────────────────────────────────────────────
@@ -220,5 +220,6 @@ function generateProblem(rand, difficulty, measure, isMixed) {
         questionHtml,
         answer: result.answer,
         answerPrefix: `${label} = `,
+        wrongAnswers: generateNumericDistracters(result.numericAnswer, rand),
     };
 }

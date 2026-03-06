@@ -23,10 +23,14 @@ export default {
             [all[i], all[j]] = [all[j], all[i]];
         }
 
-        return all.slice(0, count).map(({ base, power }) => ({
-            questionHtml: `${formatPower(base, power)} =`,
-            answer: Math.pow(base, power),
-        }));
+        return all.slice(0, count).map(({ base, power }) => {
+            const answer = Math.pow(base, power);
+            return {
+                questionHtml: `${formatPower(base, power)} =`,
+                answer,
+                wrongAnswers: generateNumericDistracters(answer, rand),
+            };
+        });
     },
 };
 

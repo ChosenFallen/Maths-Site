@@ -46,7 +46,7 @@ function generateEasy(rand) {
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }
 
 function generateNormal(rand) {
@@ -63,7 +63,7 @@ function generateNormal(rand) {
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }
 
 function generateHard(rand) {
@@ -80,5 +80,5 @@ function generateHard(rand) {
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }

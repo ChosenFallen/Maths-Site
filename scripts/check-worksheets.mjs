@@ -235,6 +235,9 @@ function evaluateExpression(expr, xValue) {
 }
 
 function checkType(type) {
+    // Log which worksheet is being tested (helps identify freezes)
+    process.stderr.write(`Testing: ${type.id}...\n`);
+
     const errors = [];
 
     // Test 1: Check required properties

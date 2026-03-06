@@ -42,7 +42,7 @@ function generateProblem(rand, difficulty) {
         const question = `Estimate: ${a} + ${b}`;
         const answer = `${estimate}`;
 
-        return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+        return { question, answer };
     } else if (difficulty === "normal") {
         // Two-number multiplication or three-number addition
         const type = randInt(rand, 0, 1);
@@ -58,7 +58,7 @@ function generateProblem(rand, difficulty) {
             const question = `Estimate: ${a} × ${b}`;
             const answer = `${estimate}`;
 
-            return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+            return { question, answer };
         } else {
             // Three-number addition
             const a = randInt(rand, 100, 300);
@@ -72,7 +72,7 @@ function generateProblem(rand, difficulty) {
             const question = `Estimate: ${a} + ${b} + ${c}`;
             const answer = `${estimate}`;
 
-            return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+            return { question, answer };
         }
     } else {
         // Hard: mix of operations with larger numbers
@@ -89,7 +89,7 @@ function generateProblem(rand, difficulty) {
             const question = `Estimate: ${a} × ${b}`;
             const answer = `${estimate}`;
 
-            return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+            return { question, answer };
         } else if (type === 1) {
             // Division
             const a = randInt(rand, 200, 1000);
@@ -101,7 +101,7 @@ function generateProblem(rand, difficulty) {
             const question = `Estimate: ${a} ÷ ${b}`;
             const answer = `${estimate}`;
 
-            return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+            return { question, answer };
         } else {
             // Complex: multiple operations
             const a = randInt(rand, 100, 300);
@@ -113,7 +113,7 @@ function generateProblem(rand, difficulty) {
             const question = `Estimate: ${a} + ${b}`;
             const answer = `${estimate}`;
 
-            return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+            return { question, answer };
         }
     }
 }

@@ -21,7 +21,7 @@ export default {
             const value = (numerator / denominator) * 100;
             const answer = formatPercent(value, dp);
             const questionHtml = `${formatFrac(numerator, denominator)} =`;
-            problems.push({ questionHtml, answer });
+            problems.push({ questionHtml, answer, wrongAnswers: generateNumericDistracters(value, rand) });
         }
         return problems;
     },

@@ -54,7 +54,7 @@ function generateEasy(rand) {
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }
 
 function generateNormal(rand) {
@@ -79,7 +79,7 @@ function generateNormal(rand) {
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }
 
 function generateHard(rand) {
@@ -104,5 +104,5 @@ function generateHard(rand) {
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }

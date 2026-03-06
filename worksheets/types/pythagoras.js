@@ -129,15 +129,18 @@ function generateProblem(rand, difficulty, find) {
             : ["hypotenuse", "base", "height"][randInt(rand, 0, 2)];
     }
 
-    let answer, question;
+    let answer, numericAnswer, question;
     if (findSide === "hypotenuse") {
         answer   = `${c} ${unit}`;
+        numericAnswer = c;
         question = `Right-angled triangle: legs ${a} ${unit} and ${b} ${unit}. Find the hypotenuse.`;
     } else if (findSide === "base") {
         answer   = `${a} ${unit}`;
+        numericAnswer = a;
         question = `Right-angled triangle: hypotenuse ${c} ${unit}, one leg ${b} ${unit}. Find the missing side.`;
     } else {
         answer   = `${b} ${unit}`;
+        numericAnswer = b;
         question = `Right-angled triangle: hypotenuse ${c} ${unit}, one leg ${a} ${unit}. Find the missing side.`;
     }
 
@@ -146,6 +149,7 @@ function generateProblem(rand, difficulty, find) {
         question,
         answer,
         answerHtml: answer,
+        wrongAnswers: generateNumericDistracters(numericAnswer, rand),
     };
 }
 

@@ -23,7 +23,7 @@ export default {
             [all[i], all[j]] = [all[j], all[i]];
         }
 
-        return all.slice(0, count).map(p => makeProblem(p));
+        return all.slice(0, count).map(p => makeProblem(p, rand));
     },
 };
 
@@ -57,19 +57,19 @@ function buildPool(difficulty) {
     return pool;
 }
 
-function makeProblem({ type, n }) {
+function makeProblem({ type, n }, rand) {
     if (type === "find") {
         const answer = triangularNumber(n);
         const ordinal = toOrdinal(n);
         const question = n <= 10
             ? `What is the ${ordinal} triangular number?`
             : `Find the ${ordinal} triangular number.`;
-        return { question, answer: `${answer}` };
+        return { question, answer: `${answer}`, wrongAnswers: generateNumericDistracters(answer, rand) };
     } else {
         // type === "position"
         const number = triangularNumber(n);
         const question = `What position is the triangular number ${number}?`;
-        return { question, answer: `${n}` };
+        return { question, answer: `${n}`, wrongAnswers: generateNumericDistracters(n, rand) };
     }
 }
 

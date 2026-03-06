@@ -59,7 +59,7 @@ function generateEasy(rand) {
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, the new amount is?`;
     const answer = `${finalResult}`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }
 
 function generateNormal(rand) {
@@ -89,7 +89,7 @@ function generateNormal(rand) {
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, the new amount is?`;
     const answer = `${finalResult}`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }
 
 function generateHard(rand) {
@@ -124,5 +124,5 @@ function generateHard(rand) {
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, then a ${change3} change, the new amount is?`;
     const answer = `${finalResult}`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }

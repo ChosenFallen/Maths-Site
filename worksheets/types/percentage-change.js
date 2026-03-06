@@ -83,5 +83,5 @@ function generateProblem(rand, difficulty, changeType) {
         ? `${percentStr}% increase`
         : `${percentStr}% decrease`;
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(parseInt(answer), rand) };
+    return { question, answer };
 }
