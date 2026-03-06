@@ -64,12 +64,12 @@ function makeProblem({ type, n }, rand) {
         const question = n <= 10
             ? `What is the ${ordinal} triangular number?`
             : `Find the ${ordinal} triangular number.`;
-        return { question, answer: `${answer}`, wrongAnswers: generateNumericDistracters(answer, rand) };
+        return { question, answer: `${answer}`, answerHtml: `${answer}`, wrongAnswers: generateNumericDistracters(answer, rand).map(wa => `${wa}`) };
     } else {
         // type === "position"
         const number = triangularNumber(n);
         const question = `What position is the triangular number ${number}?`;
-        return { question, answer: `${n}`, wrongAnswers: generateNumericDistracters(n, rand) };
+        return { question, answer: `${n}`, answerHtml: `${n}`, wrongAnswers: generateNumericDistracters(n, rand).map(wa => `${wa}`) };
     }
 }
 

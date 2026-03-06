@@ -26,7 +26,8 @@ export default {
             problems.push({
                 question: `${a} ÷ ${b} =`,
                 answer,
-                wrongAnswers: generateNumericDistracters(answer, rand),
+                answerHtml: answer,
+                wrongAnswers: generateNumericDistracters(answer, rand).map(wa => wa),
             });
         }
         return problems;

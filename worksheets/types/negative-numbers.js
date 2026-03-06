@@ -68,7 +68,7 @@ function generateEasy(rand) {
     const opStr = formatOp(op);
     const question = `${formatNum(a)} ${opStr} ${formatNum(b)} =`;
 
-    return { question, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
+    return { question, answer: formatNum(answer), answerHtml: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand).map(wa => formatNum(wa)) };
 }
 
 function generateNormal(rand) {
@@ -103,7 +103,7 @@ function generateNormal(rand) {
     const opStr = formatOp(op);
     const question = `${formatNum(a)} ${opStr} ${formatNum(b)} =`;
 
-    return { question, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
+    return { question, answer: formatNum(answer), answerHtml: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand).map(wa => formatNum(wa)) };
 }
 
 function generateHard(rand) {
@@ -120,7 +120,7 @@ function generateHard(rand) {
         answer = (a + b) * c;
 
         const question = `(${formatNum(a)} + ${formatNum(b)}) × ${formatNum(c)} =`;
-        return { question, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
+        return { question, answer: formatNum(answer), answerHtml: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand).map(wa => formatNum(wa)) };
     } else {
         // a + b × c
         b = randInt(rand, -5, 5);
@@ -132,6 +132,6 @@ function generateHard(rand) {
         answer = a + product;
 
         const question = `${formatNum(a)} + ${formatNum(b)} × ${formatNum(c)} =`;
-        return { question, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
+        return { question, answer: formatNum(answer), answerHtml: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand).map(wa => formatNum(wa)) };
     }
 }
