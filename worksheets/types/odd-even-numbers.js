@@ -36,6 +36,7 @@ function generateProblem(rand, difficulty) {
     const isOdd = num % 2 === 1;
     const answer = isOdd ? "Odd" : "Even";
     const question = `Is ${num} odd or even?`;
+    const wrongAnswer = isOdd ? "Even" : "Odd";
 
-    return { question, answer };
+    return { question, answer, answerHtml: answer, wrongAnswers: [wrongAnswer, "Neither", "Both"] };
 }

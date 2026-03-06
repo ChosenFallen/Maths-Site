@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-06T22:03:22.172Z
+Generated: 2026-03-06T22:09:40.925Z
 
 ---
 
@@ -61,6 +61,21 @@ Generated: 2026-03-06T22:03:22.172Z
 - 17
 - 15
 - 32
+
+---
+
+## Odd and Even Numbers
+**ID**: odd-even-numbers
+**Grades**: Easy=2, Normal=3, Hard=3
+
+**Question**: Is 196 odd or even?
+
+**Answer**: Even
+
+**Wrong Answers**:
+- Odd
+- Neither
+- Both
 
 ---
 
@@ -736,7 +751,7 @@ when x = 7
 **Grades**: Easy=5, Normal=6, Hard=7
 
 **Question**: 
-        <svg width="100%" height="89" viewBox="0 0 145 89" style="max-width: 145px; display: block;">
+        <svg width="100%" height="112" viewBox="0 0 145 112" style="max-width: 145px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -745,7 +760,7 @@ when x = 7
 
             <!-- Triangle -->
             <polygon
-                points="10,59 100,59 55,14"
+                points="10,82 100,82 55,14.5"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -754,9 +769,9 @@ when x = 7
             <!-- Base label (bottom) -->
             <line
                 x1="10"
-                y1="71"
+                y1="94"
                 x2="100"
-                y2="71"
+                y2="94"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -764,21 +779,21 @@ when x = 7
             />
             <text
                 x="55"
-                y="87"
+                y="110"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                12 m
+                8 m
             </text>
 
             <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="55"
-                y1="14"
+                y1="14.5"
                 x2="55"
-                y2="59"
+                y2="82"
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
@@ -787,7 +802,7 @@ when x = 7
             />
             <text
                 x="83"
-                y="36.5"
+                y="48.25"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -799,12 +814,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 36 m²
+**Answer**: 24 m²
 
 **Wrong Answers**:
-- 37 m²
-- 35 m²
-- 72 m²
+- 25 m²
+- 23 m²
+- 48 m²
 
 ---
 
