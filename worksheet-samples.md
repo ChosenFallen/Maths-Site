@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-06T21:52:03.934Z
+Generated: 2026-03-06T22:03:22.172Z
 
 ---
 
@@ -61,6 +61,21 @@ Generated: 2026-03-06T21:52:03.934Z
 - 17
 - 15
 - 32
+
+---
+
+## Place Value
+**ID**: place-value
+**Grades**: Easy=2, Normal=3, Hard=4
+
+**Question**: In 9799, what is the value of the digit 7?
+
+**Answer**: 700
+
+**Wrong Answers**:
+- 701
+- 699
+- 1400
 
 ---
 
@@ -334,6 +349,21 @@ Generated: 2026-03-06T21:52:03.934Z
 
 ---
 
+## Estimation and Sensible Estimates
+**ID**: estimation
+**Grades**: Easy=3, Normal=4, Hard=5
+
+**Question**: Estimate: 161 + 197 + 264
+
+**Answer**: 700
+
+**Wrong Answers**:
+- 701
+- 699
+- 1400
+
+---
+
 ## Standard Form: Addition and Subtraction
 **ID**: standard-form-operations
 **Grades**: Easy=6, Normal=7, Hard=8
@@ -421,6 +451,22 @@ Generated: 2026-03-06T21:52:03.934Z
 - 126
 - 124
 - 250
+
+---
+
+## Substitution
+**ID**: substitution
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: 3x² + 5
+when x = 7
+
+**Answer**: 152
+
+**Wrong Answers**:
+- 153
+- 151
+- 304
 
 ---
 
@@ -517,12 +563,102 @@ Generated: 2026-03-06T21:52:03.934Z
 
 ---
 
+## Solving Inequalities
+**ID**: solving-inequalities
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: 3x + 4 ≤ 13
+
+**Answer**: x ≤ 3
+
+**Wrong Answers**:
+- x ≤ 4
+- x ≤ 2
+- x ≤ 6
+
+---
+
+## Times Tables: Speed Drill
+**ID**: times-tables-speed
+**Grades**: Easy=2, Normal=3, Hard=4
+
+**Question**: 12 × 4 =
+
+**Answer**: 48
+
+**Wrong Answers**:
+- 49
+- 47
+- 96
+
+---
+
+## Times Tables: Missing Factor
+**ID**: times-tables-missing-factor
+**Grades**: Easy=2, Normal=3, Hard=4
+
+**Question**: 12 × ? = 48
+
+**Answer**: 4
+
+**Wrong Answers**:
+- 5
+- 3
+- 8
+
+---
+
+## Times Tables: Division Facts
+**ID**: times-tables-division-facts
+**Grades**: Easy=2, Normal=3, Hard=4
+
+**Question**: 84 ÷ 7 =
+
+**Answer**: 12
+
+**Wrong Answers**:
+- 13
+- 11
+- 24
+
+---
+
+## Times Tables: Mixed Drill
+**ID**: times-tables-mixed-drill
+**Grades**: Easy=2, Normal=3, Hard=4
+
+**Question**: 10 × 4 =
+
+**Answer**: 40
+
+**Wrong Answers**:
+- 41
+- 39
+- 80
+
+---
+
+## Times Tables: With Negative Numbers
+**ID**: times-tables-negative
+**Grades**: Easy=3, Normal=4, Hard=5
+
+**Question**: 10 × -4 =
+
+**Answer**: -40
+
+**Wrong Answers**:
+- -41
+- -39
+- -80
+
+---
+
 ## Area of Rectangles
 **ID**: area-rectangle
 **Grades**: Easy=4, Normal=5, Hard=6
 
 **Question**: 
-        <svg width="100%" height="96" viewBox="0 0 175 96" style="max-width: 175px; display: block;">
+        <svg width="100%" height="74" viewBox="0 0 175 74" style="max-width: 175px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -533,7 +669,7 @@ Generated: 2026-03-06T21:52:03.934Z
                 x="10"
                 y="6"
                 width="75"
-                height="60"
+                height="37.5"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -542,9 +678,9 @@ Generated: 2026-03-06T21:52:03.934Z
             <!-- Width label (bottom) -->
             <line
                 x1="10"
-                y1="78"
+                y1="55.5"
                 x2="85"
-                y2="78"
+                y2="55.5"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -552,13 +688,13 @@ Generated: 2026-03-06T21:52:03.934Z
             />
             <text
                 x="47.5"
-                y="94"
+                y="71.5"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                7.5 m
+                12 m
             </text>
 
             <!-- Height label (right) -->
@@ -566,7 +702,7 @@ Generated: 2026-03-06T21:52:03.934Z
                 x1="97"
                 y1="6"
                 x2="97"
-                y2="66"
+                y2="43.5"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -574,7 +710,7 @@ Generated: 2026-03-06T21:52:03.934Z
             />
             <text
                 x="113"
-                y="36"
+                y="24.75"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -586,12 +722,12 @@ Generated: 2026-03-06T21:52:03.934Z
         </svg>
     
 
-**Answer**: 45 m²
+**Answer**: 72 m²
 
 **Wrong Answers**:
-- 46 m²
-- 44 m²
-- 90 m²
+- 73 m²
+- 71 m²
+- 144 m²
 
 ---
 

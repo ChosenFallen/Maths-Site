@@ -41,8 +41,9 @@ function generateProblem(rand, difficulty) {
 
         const question = `Estimate: ${a} + ${b}`;
         const answer = `${estimate}`;
+        const numericAnswer = parseInt(answer);
 
-        return { question, answer };
+        return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => `${wa}`) };
     } else if (difficulty === "normal") {
         // Two-number multiplication or three-number addition
         const type = randInt(rand, 0, 1);
@@ -57,8 +58,9 @@ function generateProblem(rand, difficulty) {
 
             const question = `Estimate: ${a} × ${b}`;
             const answer = `${estimate}`;
+            const numericAnswer = parseInt(answer);
 
-            return { question, answer };
+            return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => `${wa}`) };
         } else {
             // Three-number addition
             const a = randInt(rand, 100, 300);
@@ -71,8 +73,9 @@ function generateProblem(rand, difficulty) {
 
             const question = `Estimate: ${a} + ${b} + ${c}`;
             const answer = `${estimate}`;
+            const numericAnswer = parseInt(answer);
 
-            return { question, answer };
+            return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => `${wa}`) };
         }
     } else {
         // Hard: mix of operations with larger numbers
@@ -88,8 +91,9 @@ function generateProblem(rand, difficulty) {
 
             const question = `Estimate: ${a} × ${b}`;
             const answer = `${estimate}`;
+            const numericAnswer = parseInt(answer);
 
-            return { question, answer };
+            return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => `${wa}`) };
         } else if (type === 1) {
             // Division
             const a = randInt(rand, 200, 1000);
@@ -100,8 +104,9 @@ function generateProblem(rand, difficulty) {
 
             const question = `Estimate: ${a} ÷ ${b}`;
             const answer = `${estimate}`;
+            const numericAnswer = estimate;
 
-            return { question, answer };
+            return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => `${wa}`) };
         } else {
             // Complex: multiple operations
             const a = randInt(rand, 100, 300);

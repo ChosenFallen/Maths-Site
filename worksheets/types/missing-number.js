@@ -102,5 +102,5 @@ function generateProblem(rand, difficulty, op) {
         symbol = "÷";
     }
 
-    return { question, answer, wrongAnswers: generateNumericDistracters(answer, rand) };
+    return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(answer, rand).map(wa => wa) };
 }

@@ -52,5 +52,5 @@ function generateProblem(rand, difficulty) {
     // This ensures "5 × ? = 20" not "? × 5 = 20"
     const question = `${table} × ? = ${product}`;
 
-    return { question, answer: `${missingFactor}` };
+    return { question, answer: `${missingFactor}`, answerHtml: `${missingFactor}`, wrongAnswers: generateNumericDistracters(missingFactor, rand).map(wa => `${wa}`) };
 }

@@ -126,6 +126,8 @@ function generateProblem(rand, difficulty, variableMode) {
         questionHtml,
         question,
         answer,
+        answerHtml: answer,
+        wrongAnswers: generateNumericDistracters(answer, rand).map(wa => wa),
     };
 }
 
@@ -174,5 +176,7 @@ function generateTwoVariableProblem(rand, difficulty) {
         questionHtml,
         question,
         answer,
+        answerHtml: answer,
+        wrongAnswers: generateNumericDistracters(answer, rand).map(wa => wa),
     };
 }

@@ -1,4 +1,4 @@
-import { randInt, INEQUALITY_SIGNS_ALL as SIGNS, formatSignValue, formatCoeff } from "./utils.js";
+import { randInt, INEQUALITY_SIGNS_ALL as SIGNS, formatSignValue, formatCoeff, generateNumericDistracters } from "./utils.js";
 
 export default {
     id: "solving-inequalities",
@@ -33,7 +33,7 @@ function generateProblem(rand, difficulty) {
             const question = `x + ${a} ${sign} ${b}`;
             const answer = `x ${sign} ${answerVal}`;
 
-            return { question, answer };
+            return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(answerVal, rand).map(wa => `x ${sign} ${wa}`) };
         } else {
             // Type B: ax ○ b → x ○ b/a
             const a = randInt(rand, 2, 5);
@@ -43,7 +43,7 @@ function generateProblem(rand, difficulty) {
             const question = `${a}x ${sign} ${b}`;
             const answer = `x ${sign} ${answerVal}`;
 
-            return { question, answer };
+            return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(answerVal, rand).map(wa => `x ${sign} ${wa}`) };
         }
     } else if (difficulty === "normal") {
         // ax + c ○ b
@@ -58,7 +58,7 @@ function generateProblem(rand, difficulty) {
         const question = `${a}x ${cSign} ${cAbs} ${sign} ${b}`;
         const answer = `x ${sign} ${answerVal}`;
 
-        return { question, answer };
+        return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(answerVal, rand).map(wa => `x ${sign} ${wa}`) };
     } else {
         // Hard: ax + c ○ dx + e (a > d, no sign flip)
         const diff = randInt(rand, 1, 3);
@@ -78,6 +78,6 @@ function generateProblem(rand, difficulty) {
         const question = `${formatCoeff(a)} + ${c} ${sign} ${rightSide}`;
         const answer = `x ${sign} ${answerVal}`;
 
-        return { question, answer };
+        return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(answerVal, rand).map(wa => `x ${sign} ${wa}`) };
     }
 }

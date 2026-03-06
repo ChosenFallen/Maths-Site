@@ -36,7 +36,7 @@ function generateProblem(rand, difficulty) {
         const question = `In ${num}, what is the value of the digit ${digit} in the ${place} place?`;
         const answer = `${value}`;
 
-        return { question, answer };
+        return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(value, rand).map(wa => `${wa}`) };
     } else if (difficulty === "normal") {
         // 3-4 digit numbers
         const num = randInt(rand, 100, 9999);
@@ -50,7 +50,7 @@ function generateProblem(rand, difficulty) {
         const question = `In ${num}, what is the value of the digit ${digit}?`;
         const answer = `${value}`;
 
-        return { question, answer };
+        return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(value, rand).map(wa => `${wa}`) };
     } else {
         // 4-5 digit numbers
         const num = randInt(rand, 1000, 99999);
@@ -64,6 +64,6 @@ function generateProblem(rand, difficulty) {
         const question = `In ${num}, what is the value of the digit ${digit}?`;
         const answer = `${value}`;
 
-        return { question, answer };
+        return { question, answer, answerHtml: answer, wrongAnswers: generateNumericDistracters(value, rand).map(wa => `${wa}`) };
     }
 }

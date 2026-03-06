@@ -69,5 +69,5 @@ function generateProblem(rand, difficulty) {
     const question = `${aFinal} × ${bFinal} =`;
     const answer_str = `${answer}`;
 
-    return { question, answer: answer_str };
+    return { question, answer: answer_str, answerHtml: answer_str, wrongAnswers: generateNumericDistracters(answer, rand).map(wa => `${wa}`) };
 }
