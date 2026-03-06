@@ -42,13 +42,22 @@ function makeEasyProblem(b) {
     const answer = `(x + ${b})(x − ${b})`;
     const katexHtml = renderKatex(latex);
     const questionHtml = katexHtml || question;
-    return { questionHtml, question, answer };
+
+    // Generate common wrong answers
+    const wrongAnswers = [
+        `(x − ${b})(x − ${b})`,  // both minus
+        `(x + ${b})(x + ${b})`,  // both plus
+        `(x + ${b})(x − ${b + 1})`, // wrong coefficient
+    ];
+
+    return { questionHtml, question, answer, answerHtml: answer, wrongAnswers };
 }
 
 function generateProblem(rand, difficulty) {
     let question = "";
     let latex = "";
     let answer = "";
+    let wrongAnswers = [];
 
     if (difficulty === "easy") {
         // x² - b² = (x + b)(x - b)  [only used for normal/hard path now]
@@ -58,6 +67,12 @@ function generateProblem(rand, difficulty) {
         question = `x² − ${bSq}`;
         latex = `x^2 - ${bSq}`;
         answer = `(x + ${b})(x − ${b})`;
+
+        wrongAnswers = [
+            `(x − ${b})(x − ${b})`,
+            `(x + ${b})(x + ${b})`,
+            `(x + ${b})(x − ${b + 1})`,
+        ];
     } else if (difficulty === "normal") {
         // (ax)² - b² = (ax + b)(ax - b)
         const a = randInt(rand, 2, 4);
@@ -68,6 +83,12 @@ function generateProblem(rand, difficulty) {
         question = `${aSq}x² − ${bSq}`;
         latex = `${aSq}x^2 - ${bSq}`;
         answer = `(${a}x + ${b})(${a}x − ${b})`;
+
+        wrongAnswers = [
+            `(${a}x − ${b})(${a}x − ${b})`,
+            `(${a}x + ${b})(${a}x + ${b})`,
+            `(${a}x + ${b})(${a}x − ${b + 1})`,
+        ];
     } else {
         // (ax)² - b² = (ax + b)(ax - b)
         const a = randInt(rand, 2, 5);
@@ -78,6 +99,12 @@ function generateProblem(rand, difficulty) {
         question = `${aSq}x² − ${bSq}`;
         latex = `${aSq}x^2 - ${bSq}`;
         answer = `(${a}x + ${b})(${a}x − ${b})`;
+
+        wrongAnswers = [
+            `(${a}x − ${b})(${a}x − ${b})`,
+            `(${a}x + ${b})(${a}x + ${b})`,
+            `(${a}x + ${b + 1})(${a}x − ${b})`,
+        ];
     }
 
     // Render with KaTeX
@@ -88,5 +115,7 @@ function generateProblem(rand, difficulty) {
         questionHtml,
         question,
         answer,
+        answerHtml: answer,
+        wrongAnswers,
     };
 }
