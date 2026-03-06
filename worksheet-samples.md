@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-06T22:28:29.003Z
+Generated: 2026-03-06T23:12:16.253Z
 
 ---
 
@@ -485,6 +485,36 @@ when x = 7
 
 ---
 
+## Collecting Like Terms
+**ID**: collecting-like-terms
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: 8x − 4y + 7x
+
+**Answer**: 15x − 4y
+
+**Wrong Answers**:
+- 8x
+- + 7x
+- 15x + 4y
+
+---
+
+## Expanding Brackets
+**ID**: expanding-brackets
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: 8(2x − 3y)
+
+**Answer**: 16x − 24y
+
+**Wrong Answers**:
+- 16x + 24y
+- 16x + 24y
+- 17x − 24y
+
+---
+
 ## Equations: Letters on Both Sides
 **ID**: equations-both-sides
 **Grades**: Easy=4, Normal=5, Hard=6
@@ -497,6 +527,36 @@ when x = 7
 - x = 10
 - x = 8
 - x = 18
+
+---
+
+## Factorising Expressions
+**ID**: factorising
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: 3x² + 3x
+
+**Answer**: x(3x + 3)
+
+**Wrong Answers**:
+- (3x + 3)
+- x(4x + 3)
+- x(3x − 3)
+
+---
+
+## Factorising Quadratics
+**ID**: factorising-quadratics
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: 2x² − 7x − 15
+
+**Answer**: (2x + 3)(x − 5)
+
+**Wrong Answers**:
+- (2x + 3)(x + 3)
+- (2x + 3)(x + 5)
+- (3x + 3)(x − 5)
 
 ---
 
@@ -590,6 +650,36 @@ when x = 7
 
 ---
 
+## Simplify Algebraic Fractions
+**ID**: simplify-algebraic-fractions
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: (3x − 15)/(x − 5)
+
+**Answer**: 3
+
+**Wrong Answers**:
+- 2
+- 3x
+- x
+
+---
+
+## Algebraic Fractions: Multiply & Divide
+**ID**: algebraic-fractions-mul-div
+**Grades**: Easy=7, Normal=8, Hard=9
+
+**Question**: (12(x + 3))/(4) ÷ (4(x + 3))/(4)
+
+**Answer**: 3
+
+**Wrong Answers**:
+- 2
+- 4
+- 3/2
+
+---
+
 ## Algebraic Fractions: Equations
 **ID**: algebraic-fractions-equations
 **Grades**: Easy=7, Normal=8, Hard=9
@@ -602,6 +692,21 @@ when x = 7
 - x = 2
 - x = 0
 - x = -1
+
+---
+
+## Quadratic Equations: Completing the Square
+**ID**: quadratic-equations-ctq
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: x² + 10x + 20  = 0
+
+**Answer**: x = −5 + √5 or x = −5 − √5
+
+**Wrong Answers**:
+- x = −5 + √5
+- x = 5 + √5 or x = 5 − √5
+- x = −5 + √4 or x = −5 − √4
 
 ---
 
@@ -650,6 +755,51 @@ when x = 7
 - x ≤ 4
 - x ≤ 2
 - x ≤ 6
+
+---
+
+## Quadratic Equations
+**ID**: quadratic-equations
+**Grades**: Easy=8, Normal=8, Hard=9
+
+**Question**: x² − 4x − 21  = 0
+
+**Answer**: x = −3<br>or<br>x = 7
+
+**Wrong Answers**:
+- x = −3
+- x = −3<br>or<br>x = −7
+- x = −2<br>or<br>x = 8
+
+---
+
+## Completing the Square
+**ID**: completing-the-square
+**Grades**: Easy=7, Normal=8, Hard=9
+
+**Question**: x² − 6x + 17
+
+**Answer**: (x − 3)² + 8
+
+**Wrong Answers**:
+- (x − 3)²
+- (x + 3)² + 8
+- (x − 3)² − 8
+
+---
+
+## Quadratic Formula
+**ID**: quadratic-formula
+**Grades**: Easy=8, Normal=9, Hard=9
+
+**Question**: x² − 8x + 11  = 0
+
+**Answer**: x = 4 + √5<br>or<br>x = 4 − √5
+
+**Wrong Answers**:
+- x = 4 + √5
+- x = 4 + √4<br>or<br>x = 4 − √4
+- x = √5<br>or<br>x = −√5
 
 ---
 
@@ -748,7 +898,7 @@ when x = 7
 **Grades**: Easy=4, Normal=5, Hard=6
 
 **Question**: 
-        <svg width="100%" height="74" viewBox="0 0 175 74" style="max-width: 175px; display: block;">
+        <svg width="100%" height="96" viewBox="0 0 175 96" style="max-width: 175px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -759,7 +909,7 @@ when x = 7
                 x="10"
                 y="6"
                 width="75"
-                height="37.5"
+                height="60"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -768,9 +918,9 @@ when x = 7
             <!-- Width label (bottom) -->
             <line
                 x1="10"
-                y1="55.5"
+                y1="78"
                 x2="85"
-                y2="55.5"
+                y2="78"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -778,13 +928,13 @@ when x = 7
             />
             <text
                 x="47.5"
-                y="71.5"
+                y="94"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                12 m
+                7.5 m
             </text>
 
             <!-- Height label (right) -->
@@ -792,7 +942,7 @@ when x = 7
                 x1="97"
                 y1="6"
                 x2="97"
-                y2="43.5"
+                y2="66"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -800,7 +950,7 @@ when x = 7
             />
             <text
                 x="113"
-                y="24.75"
+                y="36"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -812,12 +962,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 72 m²
+**Answer**: 45 m²
 
 **Wrong Answers**:
-- 73 m²
-- 71 m²
-- 144 m²
+- 46 m²
+- 44 m²
+- 90 m²
 
 ---
 
@@ -826,7 +976,7 @@ when x = 7
 **Grades**: Easy=5, Normal=6, Hard=7
 
 **Question**: 
-        <svg width="100%" height="89" viewBox="0 0 145 89" style="max-width: 145px; display: block;">
+        <svg width="100%" height="112" viewBox="0 0 145 112" style="max-width: 145px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -835,7 +985,7 @@ when x = 7
 
             <!-- Triangle -->
             <polygon
-                points="10,59 100,59 55,14"
+                points="10,82 100,82 55,14.5"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -844,9 +994,9 @@ when x = 7
             <!-- Base label (bottom) -->
             <line
                 x1="10"
-                y1="71"
+                y1="94"
                 x2="100"
-                y2="71"
+                y2="94"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -854,21 +1004,21 @@ when x = 7
             />
             <text
                 x="55"
-                y="87"
+                y="110"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                12 m
+                8 m
             </text>
 
             <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="55"
-                y1="14"
+                y1="14.5"
                 x2="55"
-                y2="59"
+                y2="82"
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
@@ -877,7 +1027,7 @@ when x = 7
             />
             <text
                 x="83"
-                y="36.5"
+                y="48.25"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -889,12 +1039,27 @@ when x = 7
         </svg>
     
 
-**Answer**: 36 m²
+**Answer**: 24 m²
 
 **Wrong Answers**:
-- 37 m²
-- 35 m²
-- 72 m²
+- 25 m²
+- 23 m²
+- 48 m²
+
+---
+
+## Arithmetic Sequences: nth Term
+**ID**: sequences-nth-term
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: −1, −5, −9, −13, ...   Find the nth term.
+
+**Answer**: −4n + 3
+
+**Wrong Answers**:
+- −4n
+- −3n + 3
+- −1
 
 ---
 
@@ -975,6 +1140,21 @@ when x = 7
 - 3 hours
 - 1 hour
 - 4 hours
+
+---
+
+## Simultaneous Equations
+**ID**: simultaneous-equations
+**Grades**: Easy=7, Normal=8, Hard=9
+
+**Question**: <div style="display:flex;flex-direction:column;gap:6px;">2x + 3y = 252x + 2y = 22</div>
+
+**Answer**: x = 8, y = 3
+
+**Wrong Answers**:
+- x = 8
+- x = 3, y = 8
+- x = 7, y = 2
 
 ---
 

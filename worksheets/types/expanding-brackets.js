@@ -140,15 +140,15 @@ function generateProblem(rand, difficulty, bracketType) {
         // Mistake 3: forgot to distribute to x
         wrongAnswers.push(`${b}x + ${constant}`);
     } else if (difficulty === "normal") {
-        // Generate contextual wrong answers based on what was actually generated
-        const answerParts = answer.split(/\s+/);
-        // Mistake 1: forgot one distribution
-        if (answerParts.length >= 3) {
-            wrongAnswers.push(answerParts.slice(0, 2).join(' ')); // just first term
+        // Mistake 1: forgot to distribute to some terms (sign swap)
+        wrongAnswers.push(answer.replace(/−/g, '→MINUS←').replace(/\+/g, '−').replace(/→MINUS←/g, '+')); // flip signs
+        // Mistake 2: wrong signs (all plus)
+        wrongAnswers.push(answer.replace(/−/g, '+')); // make all plus
+        // Mistake 3: coefficient error
+        if (answer.match(/\d/)) {
+            const firstNum = answer.match(/\d+/)[0];
+            wrongAnswers.push(answer.replace(/\d+/, (num) => num === firstNum ? String(parseInt(num) + 1) : num));
         }
-        // Mistake 2: forgot to distribute to some terms
-        wrongAnswers.push(answer.replace(/−/g, '+')); // wrong signs
-        wrongAnswers.push(answer.replace(/\+/g, '−')); // opposite wrong signs
     } else {
         // Hard: forgot one of the terms or wrong signs
         wrongAnswers.push(answer.replace(/−/g, '+'));
