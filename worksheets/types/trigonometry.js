@@ -147,7 +147,7 @@ function genEasy(rand) {
         question: `Right-angled triangle with angle ${angle}°. Find the ${findWhat} side.`,
         answer,
         answerHtml: answer,
-        wrongAnswers: generateNumericDistracters(numericAnswer, rand),
+        wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => `${wa} cm`),
     };
 }
 
@@ -172,7 +172,7 @@ function genNormal(rand) {
         question: `Right-angled triangle with angle ${angle}°, hypotenuse ${hyp} cm. Find the ${findWhat === "opposite" ? "opposite" : "adjacent"} side (to 1 d.p.).`,
         answer: `${toFind} cm`,
         answerHtml: `${toFind} cm`,
-        wrongAnswers: generateNumericDistracters(toFind, rand),
+        wrongAnswers: generateNumericDistracters(toFind, rand).map(wa => `${wa} cm`),
     };
 }
 
@@ -193,7 +193,7 @@ function genHard(rand) {
         question: `Right-angled triangle with opposite side ${opposite} cm and adjacent side ${adjacent} cm. Find angle θ (to 1 d.p.).`,
         answer: `${angle}°`,
         answerHtml: `${angle}°`,
-        wrongAnswers: generateNumericDistracters(angle, rand),
+        wrongAnswers: generateNumericDistracters(angle, rand).map(wa => `${wa}°`),
     };
 }
 

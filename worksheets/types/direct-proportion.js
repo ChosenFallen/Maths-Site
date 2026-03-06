@@ -28,9 +28,12 @@ function shopping(rand, unitPrices, qty1Range, qty2Range) {
     let qty2 = randInt(rand, qty2Range[0], qty2Range[1]);
     if (qty2 === qty1) qty2 = qty2 < qty2Range[1] ? qty2 + 1 : qty2 - 1;
     const item = pickItem(rand);
+    const totalPrice = unitPrice * qty2;
+    const formatWrongAnswer = (num) => fmtMoney(num);
     return {
         question: `${qty1} ${item} cost ${fmtMoney(unitPrice * qty1)}. How much do ${qty2} ${item} cost?`,
-        answer: fmtMoney(unitPrice * qty2),
+        answer: fmtMoney(totalPrice),
+        wrongAnswers: generateNumericDistracters(totalPrice, rand).map(formatWrongAnswer),
     };
 }
 
@@ -41,9 +44,12 @@ function recipe(rand, gramsPerPerson, servings1Range, servings2Range) {
     let s2 = randInt(rand, servings2Range[0], servings2Range[1]);
     if (s2 === s1) s2 = s2 < servings2Range[1] ? s2 + 1 : s2 - 1;
     const ingredient = pickIngredient(rand);
+    const totalGrams = gpp * s2;
+    const formatWrongAnswer = (num) => `${num}g`;
     return {
         question: `A recipe for ${s1} people needs ${gpp * s1}g of ${ingredient}. How much ${ingredient} is needed for ${s2} people?`,
-        answer: `${gpp * s2}g`,
+        answer: `${totalGrams}g`,
+        wrongAnswers: generateNumericDistracters(totalGrams, rand).map(formatWrongAnswer),
     };
 }
 
@@ -55,9 +61,11 @@ function shoppingReverse(rand, unitPrices, qty1Range, budgetMultiplierRange) {
     const item = pickItem(rand);
     const cost1 = unitPrice * qty1;
     const budget = unitPrice * multiplier; // guarantees whole answer
+    const formatWrongAnswer = (num) => `${num}`;
     return {
         question: `${qty1} ${item} cost ${fmtMoney(cost1)}. How many ${item} can you buy for ${fmtMoney(budget)}?`,
         answer: `${multiplier}`,
+        wrongAnswers: generateNumericDistracters(multiplier, rand).map(formatWrongAnswer),
     };
 }
 

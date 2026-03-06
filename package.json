@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node scripts/check-worksheets.mjs",
     "generate-pdfs": "node scripts/generate-worksheet-pdfs.mjs",
-    "check-papers": "node scripts/check-paper-analysis.mjs"
+    "check-papers": "node scripts/check-paper-analysis.mjs",
+    "sample-questions": "node scripts/sample-all-worksheets.mjs"
   },
   "devDependencies": {
     "pdf-parse": "^2.4.5",

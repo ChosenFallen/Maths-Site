@@ -1,4 +1,4 @@
-import { randInt, formatPercent, percentPlaces } from "./utils.js";
+import { randInt, formatPercent, formatDecimal, percentPlaces, generateNumericDistracters } from "./utils.js";
 
 export default {
     id: "fdp-percent-to-decimal",
@@ -18,7 +18,7 @@ export default {
             const value = percent / 100;
             const question = formatPercent(percent, dp);
             const answer = formatDecimal(value, dp + 2);
-            problems.push({ question, answer });
+            problems.push({ question, answer, wrongAnswers: generateNumericDistracters(value, rand).map(wa => formatDecimal(wa, dp + 2)) });
         }
         return problems;
     },
@@ -29,11 +29,4 @@ function randomPercent(rand, dp) {
     const max = 100 * Math.pow(10, dp);
     const n = randInt(rand, 1, Math.max(1, max));
     return n / Math.pow(10, dp);
-}
-
-
-function formatDecimal(value, dp) {
-    let s = value.toFixed(dp);
-    s = s.replace(/\.?0+$/, "");
-    return s;
 }

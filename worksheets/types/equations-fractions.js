@@ -27,6 +27,7 @@ function generateProblem(rand, difficulty) {
     let latex = "";
     let answer = "";
     let answerLatex = "";
+    let numericAnswer = 0;
 
     if (difficulty === "easy") {
         // x/a = N form
@@ -39,6 +40,7 @@ function generateProblem(rand, difficulty) {
         latex = `\\dfrac{x}{${a}} = ${N}`;
         answer = `x = ${x}`;
         answerLatex = `x = ${x}`;
+        numericAnswer = x;
     } else if (difficulty === "normal") {
         // (x + b)/a = c form
         // Pick a, c, b, set x = a*c - b
@@ -51,6 +53,7 @@ function generateProblem(rand, difficulty) {
         latex = `\\dfrac{x + ${b}}{${a}} = ${c}`;
         answer = `x = ${x}`;
         answerLatex = `x = ${x}`;
+        numericAnswer = x;
     } else {
         // x/a + x/b = c form
         // Pick a, b (a != b), then x = lcm(a,b) * k, c = x/a + x/b
@@ -71,7 +74,8 @@ function generateProblem(rand, difficulty) {
 
             const questionHtml = renderKatex(latex) || question;
             const answerHtml = renderKatex(answerLatex) || answer;
-            return { question, questionHtml, answer, answerHtml };
+            const formatWrongAnswer = (num) => `x = ${num}`;
+            return { question, questionHtml, answer, answerHtml, wrongAnswers: generateNumericDistracters(xVal, rand).map(formatWrongAnswer) };
         }
 
         const k = randInt(rand, 1, 4);
@@ -83,10 +87,12 @@ function generateProblem(rand, difficulty) {
         latex = `\\dfrac{x}{${a}} + \\dfrac{x}{${b}} = ${c}`;
         answer = `x = ${x}`;
         answerLatex = `x = ${x}`;
+        numericAnswer = x;
     }
 
     const questionHtml = renderKatex(latex) || question;
     const answerHtml = renderKatex(answerLatex) || answer;
+    const formatWrongAnswer = (num) => `x = ${num}`;
 
-    return { question, questionHtml, answer, answerHtml };
+    return { question, questionHtml, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
 }

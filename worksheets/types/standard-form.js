@@ -47,21 +47,30 @@ export default {
                 // Convert TO standard form
                 const question = number.toString();
                 const answer = standardForm;
+                const formatWrongAnswer = (num) => {
+                    // For wrong answers, generate standard form with the distracted number
+                    const coeff = num / Math.pow(10, Math.floor(Math.log10(num)));
+                    const exp = Math.floor(Math.log10(num));
+                    return `${coeff.toFixed(1)} × 10${exponentToSuperscript(exp)}`;
+                };
                 problems.push({
                     question,
                     questionHtml: question,
                     answer,
                     answerHtml: answer,
+                    wrongAnswers: generateNumericDistracters(number, rand).map(formatWrongAnswer),
                 });
             } else {
                 // Convert FROM standard form
                 const question = standardForm;
                 const answer = number.toString();
+                // For wrong answers, keep as plain numbers (same as answer format)
                 problems.push({
                     question,
                     questionHtml: standardFormToHtml(standardForm),
                     answer,
                     answerHtml: answer,
+                    wrongAnswers: generateNumericDistracters(number, rand).map(n => n.toString()),
                 });
             }
         }

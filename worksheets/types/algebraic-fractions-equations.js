@@ -1,4 +1,4 @@
-import { randInt, renderKatex, formatLinearLatex, formatLinearText } from "./utils.js";
+import { randInt, renderKatex, formatLinearLatex, formatLinearText, generateNumericDistracters } from "./utils.js";
 
 function render(latex, fallback) {
     return renderKatex(latex) || fallback;
@@ -22,6 +22,7 @@ function genEasy(rand) {
         question:     qText,
         answer:       `x = ${r}`,
         answerHtml:   `x = ${r}`,
+        wrongAnswers: generateNumericDistracters(r, rand).map(wa => `x = ${wa}`),
     };
 }
 
@@ -50,6 +51,7 @@ function genNormal(rand) {
         question:     qText,
         answer:       `x = ${r}`,
         answerHtml:   `x = ${r}`,
+        wrongAnswers: generateNumericDistracters(r, rand).map(wa => `x = ${wa}`),
     };
 }
 

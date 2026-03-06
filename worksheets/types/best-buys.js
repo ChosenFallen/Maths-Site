@@ -1,4 +1,4 @@
-import { randInt } from "./utils.js";
+import { randInt, generateNumericDistracters } from "./utils.js";
 
 export default {
     id: "best-buys",

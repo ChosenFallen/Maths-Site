@@ -149,7 +149,7 @@ function generateProblem(rand, difficulty, find) {
         question,
         answer,
         answerHtml: answer,
-        wrongAnswers: generateNumericDistracters(numericAnswer, rand),
+        wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => `${wa} ${unit}`),
     };
 }
 

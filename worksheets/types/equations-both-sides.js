@@ -39,11 +39,12 @@ function generateProblem(rand, difficulty, options = {}) {
     let answer = "";
     let latex = "";
     let answerLatex = "";
+    let x;  // Declare x here so it's accessible after the if/else
 
     if (difficulty === "easy") {
         // ax = bx + c form
         // x(a - b) = c, so x = c / (a - b)
-        const x = randInt(rand, 1, 9);
+        x = randInt(rand, 1, 9);
         let a = randInt(rand, 3, 8);
         let b = randInt(rand, 1, 8);
 
@@ -71,7 +72,7 @@ function generateProblem(rand, difficulty, options = {}) {
     } else if (difficulty === "normal") {
         // ax + b = cx + d
         // x(a - c) = d - b, so x = (d - b) / (a - c)
-        const x = randInt(rand, 1, 9);
+        x = randInt(rand, 1, 9);
         let a = randInt(rand, 2, 7);
         let c = randInt(rand, 1, 7);
 
@@ -103,7 +104,7 @@ function generateProblem(rand, difficulty, options = {}) {
         // Hard: a(bx + c) = dx + e
         // abx + ac = dx + e
         // x(ab - d) = e - ac, so x = (e - ac) / (ab - d)
-        const x = randInt(rand, 1, 8);
+        x = randInt(rand, 1, 8);
         const a = randInt(rand, 2, 4);
         let b = randInt(rand, 2, 4);
         let d = randInt(rand, 1, 12);
@@ -140,6 +141,7 @@ function generateProblem(rand, difficulty, options = {}) {
     // Render with KaTeX
     const questionHtml = renderKatex(latex) || question;
     const answerHtml = renderKatex(answerLatex) || answer;
+    const formatWrongAnswer = (num) => `x = ${num}`;
 
-    return { question, answer, questionHtml, answerHtml };
+    return { question, answer, questionHtml, answerHtml, wrongAnswers: generateNumericDistracters(x, rand).map(formatWrongAnswer) };
 }

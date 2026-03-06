@@ -51,8 +51,10 @@ function generateProblem(rand, difficulty) {
         const answerLatex = `${resultCoeffStr} \\times 10^{${resultPowerAdjusted}}`;
         const answerHtml = renderKatex(answerLatex) || `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
         const answer = `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
+        const numericAnswer = typeof resultCoeffStr === 'number' ? resultCoeffStr : parseFloat(resultCoeffStr);
+        const formatWrongAnswer = (num) => `${num.toFixed(1)} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
     } else if (difficulty === "normal") {
         // Mix of multiplication and division with decimal coefficients
         const type = randInt(rand, 0, 1);
@@ -86,8 +88,10 @@ function generateProblem(rand, difficulty) {
             const answerLatex = `${resultCoeffStr} \\times 10^{${resultPowerAdjusted}}`;
             const answerHtml = renderKatex(answerLatex) || `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
             const answer = `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
+            const numericAnswer = parseFloat(resultCoeffStr);
+            const formatWrongAnswer = (num) => `${num.toFixed(1)} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
 
-            return { questionHtml, question, answer, answerHtml };
+            return { questionHtml, question, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
         } else {
             // Division
             const a = (randInt(rand, 20, 80) / 10).toFixed(1);
@@ -117,8 +121,10 @@ function generateProblem(rand, difficulty) {
             const answerLatex = `${resultCoeffStr} \\times 10^{${resultPowerAdjusted}}`;
             const answerHtml = renderKatex(answerLatex) || `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
             const answer = `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
+            const numericAnswer = parseFloat(resultCoeffStr);
+            const formatWrongAnswer = (num) => `${num.toFixed(1)} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
 
-            return { questionHtml, question, answer, answerHtml };
+            return { questionHtml, question, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
         }
     } else {
         // Hard: larger numbers and more complex operations
@@ -152,7 +158,9 @@ function generateProblem(rand, difficulty) {
         const answerLatex = `${resultCoeffStr} \\times 10^{${resultPowerAdjusted}}`;
         const answerHtml = renderKatex(answerLatex) || `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
         const answer = `${resultCoeffStr} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
+        const numericAnswer = parseFloat(resultCoeffStr);
+        const formatWrongAnswer = (num) => `${num.toFixed(1)} × 10${exponentToSuperscript(resultPowerAdjusted)}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
     }
 }

@@ -723,7 +723,8 @@ if (worksheetsWithMC.length > 0) {
 }
 
 if (worksheetsWithoutMC.length > 0) {
-    console.log(`⏳ ${worksheetsWithoutMC.length} worksheet(s) not yet updated with wrongAnswers field.`);
+    console.log(`⏳ ${worksheetsWithoutMC.length} worksheet(s) not yet updated with wrongAnswers field:`);
+    worksheetsWithoutMC.sort().forEach(id => console.log(`   - ${id}`));
 }
 
 if (multipleChoiceIssues.length > 0) {

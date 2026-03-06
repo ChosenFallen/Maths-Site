@@ -54,7 +54,7 @@ function generateEasy(rand) {
             question: `Circle with radius ${r} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
-            wrongAnswers: generateNumericDistracters(numericC, rand),
+            wrongAnswers: generateNumericDistracters(numericC, rand).map(wa => `${wa} ${unit}`),
         };
     } else {
         // Area
@@ -65,7 +65,7 @@ function generateEasy(rand) {
             question: `Circle with radius ${r} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
-            wrongAnswers: generateNumericDistracters(numericA, rand),
+            wrongAnswers: generateNumericDistracters(numericA, rand).map(wa => `${wa} ${unit}²`),
         };
     }
 }
@@ -94,7 +94,7 @@ function generateNormal(rand) {
             question: `Circle with ${isRadius ? "radius" : "diameter"} ${measurement} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
-            wrongAnswers: generateNumericDistracters(numericC, rand),
+            wrongAnswers: generateNumericDistracters(numericC, rand).map(wa => `${wa} ${unit}`),
         };
     } else {
         // Type B/D: Area (from radius/diameter)
@@ -108,7 +108,7 @@ function generateNormal(rand) {
             question: `Circle with ${isRadius ? "radius" : "diameter"} ${isRadius ? r : 2 * r} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
-            wrongAnswers: generateNumericDistracters(numericA, rand),
+            wrongAnswers: generateNumericDistracters(numericA, rand).map(wa => `${wa} ${unit}²`),
         };
     }
 }
@@ -130,7 +130,7 @@ function generateHard(rand) {
             question: `Circle with radius ${r} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
-            wrongAnswers: generateNumericDistracters(numericC, rand),
+            wrongAnswers: generateNumericDistracters(numericC, rand).map(wa => `${wa} ${unit}`),
         };
     } else if (type === 1) {
         // Type B: Area from radius
@@ -143,7 +143,7 @@ function generateHard(rand) {
             question: `Circle with radius ${r} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
-            wrongAnswers: generateNumericDistracters(numericA, rand),
+            wrongAnswers: generateNumericDistracters(numericA, rand).map(wa => `${wa} ${unit}²`),
         };
     } else if (type === 2) {
         // Type C: Circumference from diameter
@@ -157,7 +157,7 @@ function generateHard(rand) {
             question: `Circle with diameter ${d} ${unit}. Find circumference.`,
             answer: `${C} ${unit}`,
             answerHtml: `${C} ${unit}`,
-            wrongAnswers: generateNumericDistracters(numericC, rand),
+            wrongAnswers: generateNumericDistracters(numericC, rand).map(wa => `${wa} ${unit}`),
         };
     } else if (type === 3) {
         // Type D: Area from diameter
@@ -171,7 +171,7 @@ function generateHard(rand) {
             question: `Circle with diameter ${d} ${unit}. Find area.`,
             answer: `${A} ${unit}²`,
             answerHtml: `${A} ${unit}²`,
-            wrongAnswers: generateNumericDistracters(numericA, rand),
+            wrongAnswers: generateNumericDistracters(numericA, rand).map(wa => `${wa} ${unit}²`),
         };
     } else if (type === 4) {
         // Type E: Find radius from circumference
@@ -185,7 +185,7 @@ function generateHard(rand) {
             question: `Circumference ${C} ${unit}. Find radius.`,
             answer: `${radiusAnswer} ${unit}`,
             answerHtml: `${radiusAnswer} ${unit}`,
-            wrongAnswers: generateNumericDistracters(numericR, rand),
+            wrongAnswers: generateNumericDistracters(numericR, rand).map(wa => `${wa} ${unit}`),
         };
     } else {
         // Type F: Find radius from area
@@ -199,7 +199,7 @@ function generateHard(rand) {
             question: `Area ${A} ${unit}². Find radius.`,
             answer: `${radiusAnswer} ${unit}`,
             answerHtml: `${radiusAnswer} ${unit}`,
-            wrongAnswers: generateNumericDistracters(numericR, rand),
+            wrongAnswers: generateNumericDistracters(numericR, rand).map(wa => `${wa} ${unit}`),
         };
     }
 }

@@ -1,4 +1,4 @@
-import { randInt, difficultyRange, renderKatex } from "./utils.js";
+import { randInt, difficultyRange, renderKatex, generateNumericDistracters } from "./utils.js";
 
 function generateOneStep(rand, difficulty) {
     const [min, max] = difficultyRange(difficulty);
@@ -27,8 +27,9 @@ function generateOneStep(rand, difficulty) {
     const questionHtml = renderKatex(questionLatex) || question;
     const answerText = `x = ${x}`;
     const answerHtml = renderKatex(answerText) || answerText;
+    const formatWrongAnswer = (num) => `x = ${num}`;
 
-    return { question, questionHtml, answer: x, answerHtml };
+    return { question, questionHtml, answer: x, answerHtml, wrongAnswers: generateNumericDistracters(x, rand).map(formatWrongAnswer) };
 }
 
 function generateTwoStep(rand, difficulty) {
@@ -43,7 +44,8 @@ function generateTwoStep(rand, difficulty) {
     const questionHtml = renderKatex(latex) || question;
     const answerText = `x = ${x}`;
     const answerHtml = renderKatex(answerText) || answerText;
-    return { question, questionHtml, answer: x, answerHtml };
+    const formatWrongAnswer = (num) => `x = ${num}`;
+    return { question, questionHtml, answer: x, answerHtml, wrongAnswers: generateNumericDistracters(x, rand).map(formatWrongAnswer) };
 }
 
 export default {

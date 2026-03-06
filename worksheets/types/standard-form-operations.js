@@ -26,12 +26,17 @@ function generateProblem(rand, difficulty) {
     if (difficulty === "easy") {
         // Same powers of 10, simple numbers
         const power = randInt(rand, 2, 4);
-        const a = randInt(rand, 1, 9);
-        const b = randInt(rand, 1, 9);
+        let a = randInt(rand, 1, 9);
+        let b = randInt(rand, 1, 9);
         const operation = randInt(rand, 0, 1) === 0 ? "+" : "−";
 
+        // For subtraction, ensure a >= b for positive result
+        if (operation === "−" && b > a) {
+            [a, b] = [b, a];
+        }
+
         const isAdd = operation === "+";
-        const resultCoeff = isAdd ? a + b : Math.abs(a - b);
+        const resultCoeff = isAdd ? a + b : a - b;
         let resultPower = power;
 
         let resultCoeffStr;
@@ -50,19 +55,28 @@ function generateProblem(rand, difficulty) {
         const answerLatex = `${resultCoeffStr} \\times 10^{${resultPower}}`;
         const answerHtml = renderKatex(answerLatex) || `${resultCoeffStr} × 10${exponentToSuperscript(resultPower)}`;
         const answer = `${resultCoeffStr} × 10${exponentToSuperscript(resultPower)}`;
+        const numericAnswer = parseFloat(resultCoeffStr);
+        const formatWrongAnswer = (num) => `${num.toFixed(1)} × 10${exponentToSuperscript(resultPower)}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
     } else if (difficulty === "normal") {
         // Same powers, decimal coefficients
         const power = randInt(rand, 2, 6);
-        const a = (randInt(rand, 10, 99) / 10).toFixed(1);
-        const b = (randInt(rand, 10, 99) / 10).toFixed(1);
+        let a = (randInt(rand, 10, 99) / 10).toFixed(1);
+        let b = (randInt(rand, 10, 99) / 10).toFixed(1);
         const operation = randInt(rand, 0, 1) === 0 ? "+" : "−";
 
+        let aNum = parseFloat(a);
+        let bNum = parseFloat(b);
+
+        // For subtraction, ensure aNum >= bNum for positive result
+        if (operation === "−" && bNum > aNum) {
+            [a, b] = [b, a];
+            [aNum, bNum] = [bNum, aNum];
+        }
+
         const isAdd = operation === "+";
-        const aNum = parseFloat(a);
-        const bNum = parseFloat(b);
-        const resultCoeff = isAdd ? aNum + bNum : Math.abs(aNum - bNum);
+        const resultCoeff = isAdd ? aNum + bNum : aNum - bNum;
 
         let resultPower = power;
         let resultCoeffStr;
@@ -81,8 +95,10 @@ function generateProblem(rand, difficulty) {
         const answerLatex = `${resultCoeffStr} \\times 10^{${resultPower}}`;
         const answerHtml = renderKatex(answerLatex) || `${resultCoeffStr} × 10${exponentToSuperscript(resultPower)}`;
         const answer = `${resultCoeffStr} × 10${exponentToSuperscript(resultPower)}`;
+        const numericAnswer = parseFloat(resultCoeffStr);
+        const formatWrongAnswer = (num) => `${num.toFixed(1)} × 10${exponentToSuperscript(resultPower)}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
     } else {
         // Different powers, need to convert
         const power1 = randInt(rand, 3, 6);
@@ -114,7 +130,9 @@ function generateProblem(rand, difficulty) {
         const answerLatex = `${resultCoeffStr} \\times 10^{${resultPower}}`;
         const answerHtml = renderKatex(answerLatex) || `${resultCoeffStr} × 10${exponentToSuperscript(resultPower)}`;
         const answer = `${resultCoeffStr} × 10${exponentToSuperscript(resultPower)}`;
+        const numericAnswer = parseFloat(resultCoeffStr);
+        const formatWrongAnswer = (num) => `${num.toFixed(1)} × 10${exponentToSuperscript(resultPower)}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(formatWrongAnswer) };
     }
 }

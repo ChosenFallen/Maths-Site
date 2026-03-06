@@ -39,7 +39,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `${a} + ? = ${c}`;
             const answer = `${b}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(b, rand) };
         } else {
             // Subtraction: a - ? = c, find ?
             const a = randInt(rand, 20, 60);
@@ -48,7 +48,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `${a} − ? = ${c}`;
             const answer = `${b}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(b, rand) };
         }
     } else if (difficulty === "normal") {
         // Mix of operations: multiplication, division
@@ -62,7 +62,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `? × ${b} = ${c}`;
             const answer = `${a}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(a, rand) };
         } else if (type === 1) {
             // Division: c ÷ b = ?, find ?
             const b = randInt(rand, 2, 10);
@@ -71,7 +71,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `${c} ÷ ${b} = ?`;
             const answer = `${a}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(a, rand) };
         } else {
             // Two-step: (a + b) × c = ?, find a
             const b = randInt(rand, 5, 15);
@@ -81,7 +81,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `(? + ${b}) × ${c} = ${result}`;
             const answer = `${a}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(a, rand) };
         }
     } else {
         // Hard: multi-step problems with negative numbers
@@ -96,7 +96,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `? × ${b} + ${c} = ${result}`;
             const answer = `${a}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(a, rand) };
         } else if (type === 1) {
             // Negative numbers: a − ? = c, with negative result
             const a = randInt(rand, 20, 50);
@@ -105,7 +105,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `${a} − ? = ${formatNum(c)}`;
             const answer = `${b}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(b, rand) };
         } else {
             // Division with remainder handling: ? ÷ b = c
             const b = randInt(rand, 3, 12);
@@ -114,7 +114,7 @@ function generateProblem(rand, difficulty) {
             
             const question = `? ÷ ${b} = ${c}`;
             const answer = `${a}`;
-            return { question, answer };
+            return { question, answer, wrongAnswers: generateNumericDistracters(a, rand) };
         }
     }
 }

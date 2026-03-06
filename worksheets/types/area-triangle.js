@@ -74,7 +74,10 @@ function generateProblem(rand, difficulty) {
         question: `Triangle: base ${base} ${unit}, height ${height} ${unit}. Area = ?`,
         answer,
         answerHtml: answer,
-        wrongAnswers: generateNumericDistracters(area, rand),
+        wrongAnswers: generateNumericDistracters(area, rand).map(wa => {
+            const waStr = wa % 1 === 0 ? `${wa}` : wa.toFixed(2);
+            return `${waStr} ${unit}²`;
+        }),
     };
 }
 

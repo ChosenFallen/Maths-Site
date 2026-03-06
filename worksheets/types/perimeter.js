@@ -70,7 +70,10 @@ function genRectangle(rand, difficulty) {
         question: `Rectangle: ${w} ${unit} × ${h} ${unit}. Perimeter = ?`,
         answer,
         answerHtml: answer,
-        wrongAnswers: generateNumericDistracters(perimeter, rand),
+        wrongAnswers: generateNumericDistracters(perimeter, rand).map(wa => {
+            const waStr = wa % 1 === 0 ? `${wa}` : wa.toFixed(1);
+            return `${waStr} ${unit}`;
+        }),
     };
 }
 
@@ -131,7 +134,7 @@ function genTriangle(rand) {
         question: `Right-angled triangle: sides ${a} ${unit}, ${b} ${unit}, ${c} ${unit}. Perimeter = ?`,
         answer,
         answerHtml: answer,
-        wrongAnswers: generateNumericDistracters(perimeter, rand),
+        wrongAnswers: generateNumericDistracters(perimeter, rand).map(wa => `${wa} ${unit}`),
     };
 }
 
@@ -236,7 +239,7 @@ function genLShape(rand, difficulty) {
         question: `L-shape: outer ${W}×${H} ${unit}, cut-out ${w}×${h} ${unit}. Perimeter = ?`,
         answer,
         answerHtml: answer,
-        wrongAnswers: generateNumericDistracters(perimeter, rand),
+        wrongAnswers: generateNumericDistracters(perimeter, rand).map(wa => `${wa} ${unit}`),
     };
 }
 

@@ -58,9 +58,11 @@ function generateProblem(rand, difficulty) {
         const r = workersDays(rand, [3, 6], [3, 8]);
         if (!r) return null;
         const { workers1, days1, workers2, days2 } = r;
+        const formatWrongAnswer = (num) => `${num} days`;
         return {
             question: `${workers1} workers take ${days1} days to complete a job. How long would ${workers2} workers take?`,
             answer: `${days2} days`,
+            wrongAnswers: generateNumericDistracters(days2, rand).map(formatWrongAnswer),
         };
     }
 
@@ -72,14 +74,18 @@ function generateProblem(rand, difficulty) {
         const { workers1, days1, workers2, days2 } = r;
 
         if (usePipes) {
+            const formatWrongAnswer = (num) => `${num} hours`;
             return {
                 question: `${workers1} pipes fill a tank in ${days1} hours. How long would ${workers2} pipes take?`,
                 answer: `${days2} hours`,
+                wrongAnswers: generateNumericDistracters(days2, rand).map(formatWrongAnswer),
             };
         }
+        const formatWrongAnswer = (num) => `${num} days`;
         return {
             question: `${workers1} workers take ${days1} days to complete a job. How long would ${workers2} workers take?`,
             answer: `${days2} days`,
+            wrongAnswers: generateNumericDistracters(days2, rand).map(formatWrongAnswer),
         };
     }
 
@@ -90,9 +96,11 @@ function generateProblem(rand, difficulty) {
         const r = workersDays(rand, [3, 10], [3, 15]);
         if (!r) return null;
         const { workers1, days1, workers2, days2 } = r;
+        const formatWrongAnswer = (num) => `${num} days`;
         return {
             question: `${workers1} workers take ${days1} days to complete a job. How long would ${workers2} workers take?`,
             answer: `${days2} days`,
+            wrongAnswers: generateNumericDistracters(days2, rand).map(formatWrongAnswer),
         };
     }
 
@@ -100,9 +108,11 @@ function generateProblem(rand, difficulty) {
         const r = workersDays(rand, [2, 8], [3, 15]);
         if (!r) return null;
         const { workers1: pipes1, days1: hours1, workers2: pipes2, days2: hours2 } = r;
+        const formatWrongAnswer = (num) => `${num} hours`;
         return {
             question: `${pipes1} pipes fill a tank in ${hours1} hours. How long would ${pipes2} pipes take?`,
             answer: `${hours2} hours`,
+            wrongAnswers: generateNumericDistracters(hours2, rand).map(formatWrongAnswer),
         };
     }
 
@@ -118,8 +128,10 @@ function generateProblem(rand, difficulty) {
 
     const speed1 = validSpeeds[randInt(rand, 0, validSpeeds.length - 1)];
     const time1  = distance / speed1;
+    const formatWrongAnswer = (num) => `${num} ${num === 1 ? "hour" : "hours"}`;
     return {
         question: `A car travelling at ${speed1} km/h takes ${time1} ${time1 === 1 ? "hour" : "hours"} for a journey. How long does the same journey take at ${speed2} km/h?`,
         answer: `${time2} ${time2 === 1 ? "hour" : "hours"}`,
+        wrongAnswers: generateNumericDistracters(time2, rand).map(formatWrongAnswer),
     };
 }
