@@ -13,15 +13,16 @@ body {
 
 .simon-board {
     display: grid;
-    grid-template-columns: repeat(2, 150px);
-    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 320px;
+    gap: 20px;
     justify-content: center;
     margin: 30px auto;
 }
 
 .simon-btn {
-    width: 150px;
-    height: 150px;
+    aspect-ratio: 1;
+    max-width: 150px;
     border-radius: 20px;
     opacity: 0.5;
     cursor: pointer;
