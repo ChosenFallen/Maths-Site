@@ -17,7 +17,8 @@ export default {
             const amount = amountForFraction(rand, difficulty, denominator);
             const numericAnswer = (amount * numerator) / denominator;
             const questionHtml = `${formatFrac(numerator, denominator)} of ${amount} =`;
-            problems.push({ questionHtml, answer: formatNumber(numericAnswer), wrongAnswers: generateNumericDistracters(numericAnswer, rand) });
+            const answerText = formatNumber(numericAnswer);
+            problems.push({ questionHtml, answer: answerText, answerHtml: answerText, wrongAnswers: generateNumericDistracters(numericAnswer, rand).map(wa => formatNumber(wa)) });
         }
         return problems;
     },

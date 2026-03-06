@@ -23,7 +23,7 @@ export default {
                 const j = Math.floor(rand() * (i + 1));
                 [all[i], all[j]] = [all[j], all[i]];
             }
-            return all.slice(0, count).map(makeEasyProblem);
+            return all.slice(0, count).map(p => makeEasyProblem(p, rand));
         }
 
         const problems = [];
@@ -36,9 +36,9 @@ export default {
 
 function generateProblem(rand, difficulty) {
     if (difficulty === "normal") {
-        return generateNormalProblem(rand, randInt(rand, 0, 2));
+        return generateNormalProblem(rand, randInt(rand, 0, 2), rand);
     } else {
-        return generateHardProblem(rand, randInt(rand, 0, 2));
+        return generateHardProblem(rand, randInt(rand, 0, 2), rand);
     }
 }
 
@@ -67,67 +67,75 @@ function buildEasyPool() {
     return pool; // 6 + 5 + 6 + 12 = 29 unique
 }
 
-function makeEasyProblem({ type, digits, items, coins, starters, mains }) {
+function makeEasyProblem({ type, digits, items, coins, starters, mains }, rand) {
     if (type === 0) {
         const answer = digits * (digits - 1);
         return {
             question: `How many 2-digit numbers can you make using ${digits} different digits (no repeats)?`,
             answer: `${answer}`,
+            answerHtml: `${answer}`,
+            wrongAnswers: generateNumericDistracters(answer, rand).map(wa => `${wa}`),
         };
     } else if (type === 1) {
         const factorial = [1, 1, 2, 6, 24, 120, 720][items];
         return {
             question: `In how many ways can you arrange ${items} different items in a line?`,
             answer: `${factorial}`,
+            answerHtml: `${factorial}`,
+            wrongAnswers: generateNumericDistracters(factorial, rand).map(wa => `${wa}`),
         };
     } else if (type === 2) {
         const answer = Math.pow(2, coins);
         return {
             question: `How many different outcomes are there when flipping ${coins} coin${coins > 1 ? "s" : ""}?`,
             answer: `${answer}`,
+            answerHtml: `${answer}`,
+            wrongAnswers: generateNumericDistracters(answer, rand).map(wa => `${wa}`),
         };
     } else {
         const answer = starters * mains;
         return {
             question: `A restaurant offers ${starters} starters and ${mains} main dishes. How many different two-course meals can be chosen?`,
             answer: `${answer}`,
+            answerHtml: `${answer}`,
+            wrongAnswers: generateNumericDistracters(answer, rand).map(wa => `${wa}`),
         };
     }
 }
 
-function generateNormalProblem(rand, type) {
+function generateNormalProblem(rand, type, randForDistractors) {
     if (type === 0) {
         // Selections/combinations
         const total = randInt(rand, 4, 6);
         const choose = randInt(rand, 2, total - 1);
         const answer = calculateCombinations(total, choose);
         const question = `How many ways can you choose ${choose} items from ${total} available items?`;
-        return { question, answer: `${answer}` };
+        return { question, answer: `${answer}`, answerHtml: `${answer}`, wrongAnswers: generateNumericDistracters(answer, randForDistractors).map(wa => `${wa}`) };
     } else if (type === 1) {
         // Permutations with larger sets
         const total = randInt(rand, 4, 6);
         const choose = randInt(rand, 2, Math.min(4, total));
         const answer = calculatePermutations(total, choose);
         const question = `How many ways can you arrange ${choose} items chosen from ${total} different items?`;
-        return { question, answer: `${answer}` };
+        return { question, answer: `${answer}`, answerHtml: `${answer}`, wrongAnswers: generateNumericDistracters(answer, randForDistractors).map(wa => `${wa}`) };
     } else {
         // Multiple events outcomes
         const event1 = randInt(rand, 2, 4);
         const event2 = randInt(rand, 2, 4);
         const answer = event1 * event2;
         const question = `A restaurant offers ${event1} main dishes and ${event2} desserts. How many different meals (main + dessert) can you choose?`;
-        return { question, answer: `${answer}` };
+        return { question, answer: `${answer}`, answerHtml: `${answer}`, wrongAnswers: generateNumericDistracters(answer, randForDistractors).map(wa => `${wa}`) };
     }
 }
 
-function generateHardProblem(rand, type) {
+function generateHardProblem(rand, type, randForDistractors) {
     if (type === 0) {
         // More complex combinations
         const total = randInt(rand, 5, 7);
         const choose = randInt(rand, 2, 4);
         const answer = calculateCombinations(total, choose);
         const question = `In how many ways can you choose ${choose} students from a group of ${total}?`;
-        return { question, answer: `${answer}` };
+        return { question, answer: `${answer}`, answerHtml: `${answer}`, wrongAnswers: generateNumericDistracters(answer, randForDistractors).map(wa => `${wa}`) };
     } else if (type === 1) {
         // Complex multi-step outcomes
         const choices1 = randInt(rand, 3, 5);
@@ -135,14 +143,14 @@ function generateHardProblem(rand, type) {
         const choices3 = randInt(rand, 2, 4);
         const answer = choices1 * choices2 * choices3;
         const question = `You choose: a shirt (${choices1} options), pants (${choices2} options), and shoes (${choices3} options). How many different outfits are possible?`;
-        return { question, answer: `${answer}` };
+        return { question, answer: `${answer}`, answerHtml: `${answer}`, wrongAnswers: generateNumericDistracters(answer, randForDistractors).map(wa => `${wa}`) };
     } else {
         // Arrangements with restrictions
         const total = randInt(rand, 4, 6);
         const arrange = randInt(rand, 3, Math.min(4, total));
         const answer = calculatePermutations(total, arrange);
         const question = `How many different ways can you arrange ${arrange} books from a shelf of ${total} different books?`;
-        return { question, answer: `${answer}` };
+        return { question, answer: `${answer}`, answerHtml: `${answer}`, wrongAnswers: generateNumericDistracters(answer, randForDistractors).map(wa => `${wa}`) };
     }
 }
 
