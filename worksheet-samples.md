@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-06T22:13:55.433Z
+Generated: 2026-03-06T22:24:28.558Z
 
 ---
 
@@ -148,9 +148,9 @@ Generated: 2026-03-06T22:13:55.433Z
 **Answer**: −7
 
 **Wrong Answers**:
-- -8
-- -6
-- -14
+- −8
+- −6
+- −14
 
 ---
 
@@ -515,6 +515,51 @@ when x = 7
 
 ---
 
+## Percentages: Expressing as a Percentage
+**ID**: percentages-as-percentage
+**Grades**: Easy=5, Normal=6, Hard=6
+
+**Question**: 35.2 out of 44 = ?%
+
+**Answer**: 80%
+
+**Wrong Answers**:
+- 81%
+- 79%
+- 160%
+
+---
+
+## Percentages: Multipliers
+**ID**: percentages-multipliers
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: 107 × 1.50 =
+
+**Answer**: 161
+
+**Wrong Answers**:
+- 162
+- 160
+- 322
+
+---
+
+## Percentages: Repeated Percentage Change
+**ID**: percentages-repeated
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: Start with 112. After a +30% change, then a −10% change, the new amount is?
+
+**Answer**: 131
+
+**Wrong Answers**:
+- 132
+- 130
+- 262
+
+---
+
 ## Equations with Fractions
 **ID**: equations-fractions
 **Grades**: Easy=5, Normal=6, Hard=7
@@ -665,6 +710,21 @@ when x = 7
 - -41
 - -39
 - -80
+
+---
+
+## Systematic Listing: Counting Outcomes
+**ID**: systematic-listing
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: A restaurant offers 2 main dishes and 3 desserts. How many different meals (main + dessert) can you choose?
+
+**Answer**: 6
+
+**Wrong Answers**:
+- 7
+- 5
+- 12
 
 ---
 
