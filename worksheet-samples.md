@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-06T22:24:28.558Z
+Generated: 2026-03-06T22:28:29.003Z
 
 ---
 
@@ -575,6 +575,21 @@ when x = 7
 
 ---
 
+## Difference of Two Squares
+**ID**: difference-of-two-squares
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: 16x² − 36
+
+**Answer**: (4x + 6)(4x − 6)
+
+**Wrong Answers**:
+- (4x − 6)(4x − 6)
+- (4x + 6)(4x + 6)
+- (4x + 6)(4x − 7)
+
+---
+
 ## Algebraic Fractions: Equations
 **ID**: algebraic-fractions-equations
 **Grades**: Easy=7, Normal=8, Hard=9
@@ -811,7 +826,7 @@ when x = 7
 **Grades**: Easy=5, Normal=6, Hard=7
 
 **Question**: 
-        <svg width="100%" height="112" viewBox="0 0 145 112" style="max-width: 145px; display: block;">
+        <svg width="100%" height="89" viewBox="0 0 145 89" style="max-width: 145px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -820,7 +835,7 @@ when x = 7
 
             <!-- Triangle -->
             <polygon
-                points="10,82 100,82 55,14.5"
+                points="10,59 100,59 55,14"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -829,9 +844,9 @@ when x = 7
             <!-- Base label (bottom) -->
             <line
                 x1="10"
-                y1="94"
+                y1="71"
                 x2="100"
-                y2="94"
+                y2="71"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -839,21 +854,21 @@ when x = 7
             />
             <text
                 x="55"
-                y="110"
+                y="87"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                8 m
+                12 m
             </text>
 
             <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="55"
-                y1="14.5"
+                y1="14"
                 x2="55"
-                y2="82"
+                y2="59"
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
@@ -862,7 +877,7 @@ when x = 7
             />
             <text
                 x="83"
-                y="48.25"
+                y="36.5"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -874,12 +889,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 24 m²
+**Answer**: 36 m²
 
 **Wrong Answers**:
-- 25 m²
-- 23 m²
-- 48 m²
+- 37 m²
+- 35 m²
+- 72 m²
 
 ---
 
@@ -1025,6 +1040,21 @@ when x = 7
 - 11 m
 - 9 m
 - 20 m
+
+---
+
+## Basic Probability
+**ID**: basic-probability
+**Grades**: Easy=3, Normal=4, Hard=5
+
+**Question**: Cards numbered 1 to 13 are shuffled. One card is picked at random. What is the probability it is less than 7?
+
+**Answer**: <span class="frac"><span class="top">6</span><span class="bottom">13</span></span>
+
+**Wrong Answers**:
+- <span class="frac"><span class="top">13</span><span class="bottom">6</span></span>
+- <span class="frac"><span class="top">18</span><span class="bottom">39</span></span>
+- <span class="frac"><span class="top">7</span><span class="bottom">13</span></span>
 
 ---
 
