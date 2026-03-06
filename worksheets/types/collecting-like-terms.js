@@ -24,6 +24,7 @@ function generateProblem(rand, difficulty) {
     let answer = "";
     let question = "";
     let latex = "";
+    let allCoeffs = [];  // Track all original coefficients for wrong answers
 
     if (difficulty === "easy") {
         // Simple: 2-3 x terms only (all must combine), simple coefficients, ensuring like terms
@@ -36,6 +37,7 @@ function generateProblem(rand, difficulty) {
             const isNegative = randInt(rand, 0, 1) === 0;
             const actualCoeff = isNegative ? -coeff : coeff;
             xCoeff += actualCoeff;
+            allCoeffs.push(actualCoeff);
 
             if (i === 0) {
                 terms.push(`${actualCoeff}x`);
@@ -166,9 +168,27 @@ function generateProblem(rand, difficulty) {
     const katexHtml = renderKatex(latex);
     const questionHtml = katexHtml || question;
 
+    // Generate wrong answers (simple, guaranteed approach)
+    const wrongAnswers = [];
+
+    // Always create candidates, even if some might duplicate
+    wrongAnswers.push(terms[0]); // Forgot to collect all terms
+    wrongAnswers.push(terms[terms.length - 1]); // Only combined some terms
+
+    // Add variant based on difficulty
+    if (difficulty === "easy") {
+        // Flip sign on the answer
+        wrongAnswers.push(answer.startsWith('-') ? answer.slice(1) : '-' + answer);
+    } else {
+        // Flip all signs in answer
+        const flipped = answer.replace(/−/g, '→MINUS←').replace(/\+/g, '−').replace(/→MINUS←/g, '+');
+        wrongAnswers.push(flipped !== answer ? flipped : answer + ' + 0');
+    }
+
     return {
         questionHtml,
         question,
         answer,
+        wrongAnswers: wrongAnswers.filter((wa, idx, arr) => wa && wa !== answer && wa !== '' && arr.indexOf(wa) === idx).slice(0, 3),
     };
 }

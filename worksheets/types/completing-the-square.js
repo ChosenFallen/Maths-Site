@@ -80,11 +80,25 @@ function genEasy(rand) {
     const b = 2 * h;
     const c = h * h + k;
 
+    const answer = fmtAnswerText(h, k);
+    const wrongAnswers = [];
+
+    // Mistake 1: only the squared bracket, no constant
+    wrongAnswers.push(fmtAnswerText(h, 0));
+
+    // Mistake 2: wrong sign on h
+    wrongAnswers.push(fmtAnswerText(-h, k));
+
+    // Mistake 3: constant off by 1
+    const kOff = k > 1 ? k - 1 : k + 1;
+    wrongAnswers.push(fmtAnswerText(h, kOff));
+
     return {
         questionHtml: render(fmtQuestionLatex(b, c), fmtQuestionText(b, c)),
         question: fmtQuestionText(b, c),
-        answer:   fmtAnswerText(h, k),
-        answerHtml: render(fmtAnswerLatex(h, k), fmtAnswerText(h, k)),
+        answer,
+        answerHtml: render(fmtAnswerLatex(h, k), answer),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 
@@ -99,11 +113,25 @@ function genNormal(rand) {
     const b = 2 * h;
     const c = h * h + k;
 
+    const answer = fmtAnswerText(h, k);
+    const wrongAnswers = [];
+
+    // Mistake 1: only the squared bracket, no constant
+    wrongAnswers.push(fmtAnswerText(h, 0));
+
+    // Mistake 2: wrong sign on h (flip the sign)
+    wrongAnswers.push(fmtAnswerText(-h, k));
+
+    // Mistake 3: wrong k (sign flipped or off by small amount)
+    const kWrong = -k;
+    wrongAnswers.push(fmtAnswerText(h, kWrong));
+
     return {
         questionHtml: render(fmtQuestionLatex(b, c), fmtQuestionText(b, c)),
         question: fmtQuestionText(b, c),
-        answer:   fmtAnswerText(h, k),
-        answerHtml: render(fmtAnswerLatex(h, k), fmtAnswerText(h, k)),
+        answer,
+        answerHtml: render(fmtAnswerLatex(h, k), answer),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 
@@ -123,12 +151,29 @@ function genHard(rand) {
     const c = randInt(rand, cMin, cMax);
 
     const b = p;
+    const answer = fmtAnswerTextHalf(p, c);
+    const wrongAnswers = [];
+
+    // Mistake 1: only the squared bracket, no constant
+    wrongAnswers.push(fmtAnswerTextHalf(p, 0));
+
+    // Mistake 2: wrong sign on p
+    wrongAnswers.push(fmtAnswerTextHalf(-p, c));
+
+    // Mistake 3: using whole number instead of half: (x ± p)² instead of (x ± p/2)²
+    const kNum = 4 * c - p * p;
+    const wrongBracket = p > 0 ? `x + ${pAbs}` : `x \u2212 ${pAbs}`;
+    let wrongHalf = `(${wrongBracket})\u00B2`;
+    if (kNum > 0)      wrongHalf += ` + ${kNum}/4`;
+    else if (kNum < 0) wrongHalf += ` \u2212 ${Math.abs(kNum)}/4`;
+    wrongAnswers.push(wrongHalf);
 
     return {
         questionHtml: render(fmtQuestionLatex(b, c), fmtQuestionText(b, c)),
         question: fmtQuestionText(b, c),
-        answer:   fmtAnswerTextHalf(p, c),
-        answerHtml: render(fmtAnswerLatexHalf(p, c), fmtAnswerTextHalf(p, c)),
+        answer,
+        answerHtml: render(fmtAnswerLatexHalf(p, c), answer),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 

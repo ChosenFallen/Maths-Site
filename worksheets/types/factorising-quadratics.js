@@ -26,6 +26,7 @@ function generateProblem(rand, difficulty) {
     let question = "";
     let latex = "";
     let answer = "";
+    let wrongAnswers = [];
 
     if (difficulty === "easy") {
         // (x + p)(x + q) = x² + (p+q)x + pq
@@ -55,6 +56,15 @@ function generateProblem(rand, difficulty) {
         const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
         answer = `(x ${pSign} ${pAbs})(x ${qSign} ${qAbs})`;
+
+        // Generate wrong answers
+        // Mistake 1: both signs the same
+        wrongAnswers.push(`(x ${pSign} ${pAbs})(x ${pSign} ${pAbs})`);
+        // Mistake 2: wrong sign on one factor
+        const qSignOpp = qSign === '−' ? '+' : '−';
+        wrongAnswers.push(`(x ${pSign} ${pAbs})(x ${qSignOpp} ${qAbs})`);
+        // Mistake 3: only one bracket
+        wrongAnswers.push(`(x ${pSign} ${pAbs})`);
     } else if (difficulty === "normal") {
         // 50% chance: (x + p)(x + q), 50% chance: (2x + p)(x + q) or (3x + p)(x + q)
         if (randInt(rand, 0, 1) === 0) {
@@ -81,6 +91,12 @@ function generateProblem(rand, difficulty) {
             const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
             answer = `(x ${pSign} ${pAbs})(x ${qSign} ${qAbs})`;
+
+            // Generate wrong answers
+            wrongAnswers.push(`(x ${pSign} ${pAbs})(x ${pSign} ${pAbs})`);
+            const qSignOpp = qSign === '−' ? '+' : '−';
+            wrongAnswers.push(`(x ${pSign} ${pAbs})(x ${qSignOpp} ${qAbs})`);
+            wrongAnswers.push(`(x ${pSign} ${pAbs})`);
         } else {
             // (ax + p)(x + q) where a = 2 or 3
             const a = randInt(rand, 2, 3);
@@ -107,6 +123,14 @@ function generateProblem(rand, difficulty) {
             const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
             answer = `(${a}x ${pSign} ${pAbs})(x ${qSign} ${qAbs})`;
+
+            // Generate wrong answers
+            wrongAnswers.push(`(${a}x ${pSign} ${pAbs})(x ${pSign} ${pAbs})`);
+            const qSignOpp = qSign === '−' ? '+' : '−';
+            wrongAnswers.push(`(${a}x ${pSign} ${pAbs})(x ${qSignOpp} ${qAbs})`);
+            // Mistake 3: wrong coefficient on x
+            const aWrong = a > 2 ? a - 1 : a + 1;
+            wrongAnswers.push(`(${aWrong}x ${pSign} ${pAbs})(x ${qSign} ${qAbs})`);
         }
     } else {
         // Hard: (ax + p)(bx + q) where a, b >= 2
@@ -135,6 +159,14 @@ function generateProblem(rand, difficulty) {
         const { sign: qSign, abs: qAbs } = formatSignValue(actualQ);
 
         answer = `(${a}x ${pSign} ${pAbs})(${b}x ${qSign} ${qAbs})`;
+
+        // Generate wrong answers
+        wrongAnswers.push(`(${a}x ${pSign} ${pAbs})(${b}x ${pSign} ${pAbs})`);
+        const qSignOpp = qSign === '−' ? '+' : '−';
+        wrongAnswers.push(`(${a}x ${pSign} ${pAbs})(${b}x ${qSignOpp} ${qAbs})`);
+        // Mistake 3: wrong coefficient on one x
+        const aWrong = a > 2 ? a - 1 : a + 1;
+        wrongAnswers.push(`(${aWrong}x ${pSign} ${pAbs})(${b}x ${qSign} ${qAbs})`);
     }
 
     // Render with KaTeX
@@ -145,5 +177,6 @@ function generateProblem(rand, difficulty) {
         questionHtml,
         question,
         answer,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }

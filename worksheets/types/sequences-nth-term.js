@@ -59,7 +59,24 @@ function generateNthTerm(rand, difficulty, direction) {
     const terms = [d + c, 2 * d + c, 3 * d + c, 4 * d + c];
     const question = terms.map(formatNum).join(", ") + ", ...   Find the nth term.";
     const answer = formatNthTerm(d, c);
-    return { question, answer };
+
+    // Generate wrong answers
+    const wrongAnswers = [];
+    // Mistake 1: only the coefficient of n (missing constant)
+    wrongAnswers.push(formatNthTerm(d, 0));
+    // Mistake 2: wrong d (off by 1)
+    const dWrong = d > 0 ? d - 1 : d + 1;
+    if (dWrong !== 0) {
+        wrongAnswers.push(formatNthTerm(dWrong, c));
+    }
+    // Mistake 3: first term instead of nth term
+    wrongAnswers.push(formatNum(terms[0]));
+
+    return {
+        question,
+        answer,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
+    };
 }
 
 function formatNum(n) {

@@ -90,11 +90,26 @@ function genEasy(rand) {
     const aLatex = sd === 1 ? ansNumL : fracL(ansNumL, `${sd}`);
     const aText  = sd === 1 ? ansNumT : `${ansNumT}/${sd}`;
 
+    // Generate wrong answers
+    const wrongAnswers = [];
+    // Mistake 1: forgot to cancel
+    wrongAnswers.push(op === "mult" ? `(${sn}${ansXExp > 0 ? `x^${ansXExp}` : ''}) / (${sd}${ansXExp > 0 ? 'C' : ''})` : `${sn}${ansXExp > 0 ? `x^${ansXExp}` : ''} / ${sd}`);
+    // Mistake 2: wrong exponent
+    if (ansXExp > 0) {
+        wrongAnswers.push(sd === 1 ? monoT(sn, Math.max(0, ansXExp - 1)) : `${monoT(sn, Math.max(0, ansXExp - 1))}/${sd}`);
+    } else {
+        wrongAnswers.push(sd === 1 ? monoT(sn, 1) : `${monoT(sn, 1)}/${sd}`);
+    }
+    // Mistake 3: coefficient off by 1
+    const wrongCoeff = sn > 1 ? sn - 1 : sn + 1;
+    wrongAnswers.push(sd === 1 ? monoT(wrongCoeff, ansXExp) : `${monoT(wrongCoeff, ansXExp)}/${sd}`);
+
     return {
         questionHtml: render(qLatex, qText),
         question: qText,
         answer: aText,
         answerHtml: render(aLatex, aText),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== aText).slice(0, 3),
     };
 }
 
@@ -141,11 +156,18 @@ function genNormal(rand) {
     const qLatex = `${fracL(n1L, d1L)} ${opSymL} ${fracL(n2L, d2L)}`;
     const qText  = `(${n1T})/(${d1T}) ${opSymT} (${n2T})/(${d2T})`;
 
+    // Generate wrong answers
+    const wrongAnswers = [];
+    wrongAnswers.push(`${n - 1}`); // Off by one
+    wrongAnswers.push(`${n + 1}`); // Off by one other direction
+    wrongAnswers.push(`${n}/${n > 2 ? 2 : 3}`); // Didn't fully simplify
+
     return {
         questionHtml: render(qLatex, qText),
         question: qText,
         answer: `${n}`,
         answerHtml: render(`${n}`, `${n}`),
+        wrongAnswers: wrongAnswers.filter((wa, idx, arr) => wa && wa !== `${n}` && arr.indexOf(wa) === idx).slice(0, 3),
     };
 }
 
@@ -191,11 +213,18 @@ function genHard(rand) {
         const ansL = formatLinearLatex(p);
         const ansT = formatLinearText(p);
 
+        // Generate wrong answers for multiplication
+        const wrongAnswers_mult = [];
+        wrongAnswers_mult.push(formatLinearText(q)); // Wrong factor
+        wrongAnswers_mult.push(formatLinearText(r)); // Wrong factor
+        wrongAnswers_mult.push(ansT.includes('-') ? ansT.replace('-', '') : `-${ansT}`); // Wrong sign
+
         return {
             questionHtml: render(qLatex, qText),
             question: qText,
             answer: ansT,
             answerHtml: render(ansL, ansT),
+            wrongAnswers: wrongAnswers_mult.filter((wa, idx, arr) => wa && wa !== ansT && arr.indexOf(wa) === idx).slice(0, 3),
         };
     } else {
         // (x² + (p+r)x + pr) / (x+q)  ÷  (x+p)  =  (x+r) / (x+q)
@@ -221,11 +250,18 @@ function genHard(rand) {
         const ansL = fracL(`(${formatLinearLatex(r)})`, `(${formatLinearLatex(q)})`);
         const ansT = `(${formatLinearText(r)})/(${formatLinearText(q)})`;
 
+        // Generate wrong answers for division
+        const wrongAnswers_div = [];
+        wrongAnswers_div.push(formatLinearText(r)); // Forgot denominator
+        wrongAnswers_div.push(`(${formatLinearText(p)})/(${formatLinearText(q)})`); // Wrong numerator
+        wrongAnswers_div.push(`(${formatLinearText(r)})/(${formatLinearText(p)})`); // Wrong denominator
+
         return {
             questionHtml: render(qLatex, qText),
             question: qText,
             answer: ansT,
             answerHtml: render(ansL, ansT),
+            wrongAnswers: wrongAnswers_div.filter((wa, idx, arr) => wa && wa !== ansT && arr.indexOf(wa) === idx).slice(0, 3),
         };
     }
 }

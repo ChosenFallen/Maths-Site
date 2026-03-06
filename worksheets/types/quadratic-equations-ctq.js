@@ -47,11 +47,22 @@ function genEasy(rand) {
 
     const ansStr = `x = ${lo} or x = ${hi}`;
 
+    const wrongAnswers = [];
+    // Mistake 1: only one root
+    wrongAnswers.push(`x = ${lo}`);
+    // Mistake 2: roots off by 1
+    const lo1 = lo > 0 ? lo + 1 : lo - 1;
+    const hi1 = hi > 0 ? hi + 1 : hi - 1;
+    wrongAnswers.push(`x = ${lo1} or x = ${hi1}`);
+    // Mistake 3: opposite sign
+    wrongAnswers.push(`x = ${-lo} or x = ${-hi}`);
+
     return {
         questionHtml: render(fmtCtqLatex(h, k), fmtCtqText(h, k)),
         question:     fmtCtqText(h, k),
         answer:       ansStr,
         answerHtml:   ansStr,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== ansStr).slice(0, 3),
     };
 }
 
@@ -74,11 +85,27 @@ function genNormal(rand) {
     const r1Html = render(`x = ${r1L}`, `x = ${r1T}`);
     const r2Html = render(`x = ${r2L}`, `x = ${r2T}`);
 
+    const answer = `x = ${r1T} or x = ${r2T}`;
+
+    const wrongAnswers = [];
+    // Mistake 1: only one root
+    wrongAnswers.push(`x = ${r1T}`);
+    // Mistake 2: wrong sign (opposite h)
+    const r1T_opp = rootText(-mh, 1, k);
+    const r2T_opp = rootText(-mh, -1, k);
+    wrongAnswers.push(`x = ${r1T_opp} or x = ${r2T_opp}`);
+    // Mistake 3: wrong radicand (off by 1)
+    const kWrong = k > 1 ? k - 1 : k + 1;
+    const r1T_wrong = rootText(mh, 1, kWrong);
+    const r2T_wrong = rootText(mh, -1, kWrong);
+    wrongAnswers.push(`x = ${r1T_wrong} or x = ${r2T_wrong}`);
+
     return {
         questionHtml: render(formatQuadraticLatex(1, b, c), formatQuadraticText(1, b, c)),
         question:     formatQuadraticText(1, b, c),
-        answer:       `x = ${r1T} or x = ${r2T}`,
+        answer,
         answerHtml:   `${r1Html} or ${r2Html}`,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 
@@ -99,11 +126,22 @@ function genHard(rand) {
 
     const ansStr = `x = ${lo} or x = ${hi}`;
 
+    const wrongAnswers = [];
+    // Mistake 1: only one root
+    wrongAnswers.push(`x = ${lo}`);
+    // Mistake 2: roots off by 1
+    const lo1 = lo > 0 ? lo + 1 : lo - 1;
+    const hi1 = hi > 0 ? hi + 1 : hi - 1;
+    wrongAnswers.push(`x = ${lo1} or x = ${hi1}`);
+    // Mistake 3: opposite sign
+    wrongAnswers.push(`x = ${-lo} or x = ${-hi}`);
+
     return {
         questionHtml: render(formatQuadraticLatex(a, b, c), formatQuadraticText(a, b, c)),
         question:     formatQuadraticText(a, b, c),
         answer:       ansStr,
         answerHtml:   ansStr,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== ansStr).slice(0, 3),
     };
 }
 

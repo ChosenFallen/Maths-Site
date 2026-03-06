@@ -99,11 +99,27 @@ function generateEasy(rand) {
     const questionHtml = renderKatex(questionLatex) || `(${numCoeff}x${numPow === 1 ? "" : "^" + numPow})/(${denCoeff}x${denPow === 1 ? "" : "^" + denPow})`;
     const answerHtml = renderKatex(answerLatex) || answer;
 
+    // Generate wrong answers
+    const wrongAnswers = [];
+    // Mistake 1: forgot to simplify the coefficient
+    wrongAnswers.push(`${numCoeff}x${numPow === 1 ? "" : "^" + numPow}/${denCoeff}x${denPow === 1 ? "" : "^" + denPow}`);
+    // Mistake 2: wrong power (always create something different)
+    const wrongPow = Math.max(0, r - 1);
+    wrongAnswers.push(`${c}x${wrongPow === 0 ? "" : wrongPow === 1 ? "" : "^" + wrongPow}/${q}`);
+    // Mistake 3: forgot the denominator (if q ≠ 1)
+    if (q !== 1) {
+        wrongAnswers.push(`${c}x${r === 1 ? "" : "^" + r}`);
+    } else {
+        // If q=1, create a different mistake
+        wrongAnswers.push(`${c}x${r === 1 ? "^2" : "^" + (r + 1)}`);
+    }
+
     return {
         questionHtml,
         question: `(${numCoeff}x${numPow === 1 ? "" : "^" + numPow})/(${denCoeff}x${denPow === 1 ? "" : "^" + denPow})`,
         answer,
         answerHtml,
+        wrongAnswers: wrongAnswers.filter((wa, idx, arr) => wa && wa !== answer && arr.indexOf(wa) === idx).slice(0, 3),
     };
 }
 
@@ -120,11 +136,19 @@ function generateNormal(rand) {
 
         const questionHtml = renderKatex(questionLatex) || `(x^2 + ${a}x)/x`;
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        const aAlt = a > 1 ? a - 1 : a + 1; // Make sure it's different from a
+        wrongAnswers.push(`x + ${aAlt}`); // Off by one
+        wrongAnswers.push(`x`); // Forgot the constant
+        wrongAnswers.push(`${a}`); // Only the constant
+
         return {
             questionHtml,
             question: `(x^2 + ${a}x)/x`,
             answer,
             answerHtml: answer,
+            wrongAnswers: wrongAnswers.filter((wa, idx, arr) => wa && wa !== answer && arr.indexOf(wa) === idx).slice(0, 3),
         };
     } else {
         // Type B: (cx + ca) / (x + a) = c (with 50% negative a)
@@ -138,11 +162,18 @@ function generateNormal(rand) {
 
         const questionHtml = renderKatex(questionLatex) || `(${c}x ${ca >= 0 ? '+' : '−'} ${Math.abs(ca)})/(${formatLinearText(a)})`;
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        wrongAnswers.push(`${c - 1}`); // Off by one
+        wrongAnswers.push(`${c}x`); // Forgot to divide numerator
+        wrongAnswers.push(`x`); // Wrong simplification
+
         return {
             questionHtml,
             question: `(${c}x ${ca >= 0 ? '+' : '−'} ${Math.abs(ca)})/(${formatLinearText(a)})`,
             answer,
             answerHtml: answer,
+            wrongAnswers: wrongAnswers.filter((wa, idx, arr) => wa && wa !== answer && arr.indexOf(wa) === idx).slice(0, 3),
         };
     }
 }
@@ -173,11 +204,18 @@ function generateHard(rand) {
         const questionHtml = renderKatex(questionLatex) || `(x^2 + ${bCoeff}x + ${cCoeff})/(${formatLinearText(p)})`;
         const answerHtml = renderKatex(answerLatex) || answer;
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        wrongAnswers.push(formatLinearText(-q)); // Wrong sign
+        wrongAnswers.push(formatLinearText(p)); // Cancelled wrong factor
+        wrongAnswers.push(`x^2 + ${bCoeff}x + ${cCoeff}`); // Forgot to divide
+
         return {
             questionHtml,
             question: `(x^2 + ${bCoeff}x + ${cCoeff})/(${formatLinearText(p)})`,
             answer,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter((wa, idx, arr) => wa && wa !== answer && arr.indexOf(wa) === idx).slice(0, 3),
         };
     } else {
         // Type B: (x+p)(x+q) / ((x+p)(x+r)) = (x+q)/(x+r) (with signed p, q, r)
@@ -212,11 +250,18 @@ function generateHard(rand) {
         const questionHtml = renderKatex(questionLatex) || `(x^2 + ${numBCoeff}x + ${numCCoeff})/(x^2 + ${denBCoeff}x + ${denCCoeff})`;
         const answerHtml = renderKatex(answerLatex) || answer;
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        wrongAnswers.push(`(${formatLinearText(-q)})/(${formatLinearText(r)})`); // Wrong sign on q
+        wrongAnswers.push(`(${formatLinearText(q)})/(${formatLinearText(p)})`); // Wrong denominator
+        wrongAnswers.push(`(${formatLinearText(p)})/(${formatLinearText(r)})`); // Cancelled wrong factor
+
         return {
             questionHtml,
             question: `(x^2 + ${numBCoeff}x + ${numCCoeff})/(x^2 + ${denBCoeff}x + ${denCCoeff})`,
             answer,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter((wa, idx, arr) => wa && wa !== answer && arr.indexOf(wa) === idx).slice(0, 3),
         };
     }
 }

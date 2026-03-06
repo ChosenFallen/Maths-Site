@@ -137,10 +137,22 @@ function generateProblem(rand, difficulty) {
     const answerLatex = `x = ${x},\\ y = ${y}`;
     const answerHtml = renderKatex(answerLatex) || answerText;
 
+    // Generate wrong answers
+    const wrongAnswers = [];
+    // Mistake 1: only one value
+    wrongAnswers.push(`x = ${x}`);
+    // Mistake 2: swapped values
+    wrongAnswers.push(`x = ${y}, y = ${x}`);
+    // Mistake 3: values off by 1
+    const xOff = x > 0 ? x - 1 : x + 1;
+    const yOff = y > 0 ? y - 1 : y + 1;
+    wrongAnswers.push(`x = ${xOff}, y = ${yOff}`);
+
     return {
         questionHtml: qHtml,
         question: qText,
         answer: answerText,
         answerHtml,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
     };
 }

@@ -61,11 +61,32 @@ function genEasy(rand) {
     const r1Html = renderKatex(`x = ${sorted[0].latex}`) || `x = ${sorted[0].text}`;
     const r2Html = renderKatex(`x = ${sorted[1].latex}`) || `x = ${sorted[1].text}`;
 
+    const answer = `x = ${sorted[0].text}\nor x = ${sorted[1].text}`;
+    const wrongAnswers = [];
+
+    // Mistake 1: only one root
+    wrongAnswers.push(`x = ${sorted[0].text}`);
+    // Mistake 2: only the other root
+    wrongAnswers.push(`x = ${sorted[1].text}`);
+    // Mistake 3: wrong sign on the fraction root (if sorted[0] is a fraction)
+    if (sorted[0].text.includes('/')) {
+        const fractionParts = sorted[0].text.split('/');
+        const negNum = fractionParts[0].startsWith('−') ? fractionParts[0].replace('−', '') : `−${fractionParts[0]}`;
+        const wrongFrac = `${negNum}/${fractionParts[1]}`;
+        wrongAnswers.push(`x = ${wrongFrac}\nor x = ${sorted[1].text}`);
+    } else {
+        // Both are integers, create off-by-one version
+        const off1 = sorted[0].val > 0 ? sorted[0].val - 1 : sorted[0].val + 1;
+        const off1Str = off1 < 0 ? `\u2212${Math.abs(off1)}` : `${off1}`;
+        wrongAnswers.push(`x = ${off1Str}\nor x = ${sorted[1].text}`);
+    }
+
     return {
         questionHtml: renderKatex(formatQuadraticLatex(a, b, c)) || formatQuadraticText(a, b, c),
         question:     formatQuadraticText(a, b, c),
-        answer:       `x = ${sorted[0].text}\nor x = ${sorted[1].text}`,
+        answer,
         answerHtml:   r1Html + `<br>or<br>` + r2Html,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 
@@ -79,11 +100,26 @@ function genNormal(rand) {
     const k = K_NORMAL[randInt(rand, 0, K_NORMAL.length - 1)];
     const { answerHtml, answer } = buildSurdAnswer(h, 1, k);
 
+    const wrongAnswers = [];
+    // Mistake 1: only one root (the + version)
+    const r1T = surdRootText(h, 1, 1, k);
+    wrongAnswers.push(`x = ${r1T}`);
+    // Mistake 2: wrong radicand (off by 1)
+    const kWrong = k > 1 ? k - 1 : k + 1;
+    const r1Wrong = surdRootText(h, 1, 1, kWrong);
+    const r2Wrong = surdRootText(h, -1, 1, kWrong);
+    wrongAnswers.push(`x = ${r1Wrong}\nor x = ${r2Wrong}`);
+    // Mistake 3: missing the h component
+    const r1NoH = surdRootText(0, 1, 1, k);
+    const r2NoH = surdRootText(0, -1, 1, k);
+    wrongAnswers.push(`x = ${r1NoH}\nor x = ${r2NoH}`);
+
     return {
         questionHtml: renderKatex(formatQuadraticLatex(1, -2 * h, h * h - k)) || formatQuadraticText(1, -2 * h, h * h - k),
         question:     formatQuadraticText(1, -2 * h, h * h - k),
         answer,
         answerHtml,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 
@@ -97,11 +133,26 @@ function genHard(rand) {
     const k = K_HARD[randInt(rand, 0, K_HARD.length - 1)];
     const { answerHtml, answer } = buildSurdAnswer(h, 2, k);
 
+    const wrongAnswers = [];
+    // Mistake 1: forgot the coefficient 2 on the surd
+    const r1_no2 = surdRootText(h, 1, 1, k);
+    const r2_no2 = surdRootText(h, -1, 1, k);
+    wrongAnswers.push(`x = ${r1_no2}\nor x = ${r2_no2}`);
+    // Mistake 2: only one root
+    const r1T = surdRootText(h, 1, 2, k);
+    wrongAnswers.push(`x = ${r1T}`);
+    // Mistake 3: wrong radicand
+    const kWrong = k > 1 ? k - 1 : k + 1;
+    const r1Wrong = surdRootText(h, 1, 2, kWrong);
+    const r2Wrong = surdRootText(h, -1, 2, kWrong);
+    wrongAnswers.push(`x = ${r1Wrong}\nor x = ${r2Wrong}`);
+
     return {
         questionHtml: renderKatex(formatQuadraticLatex(1, -2 * h, h * h - 4 * k)) || formatQuadraticText(1, -2 * h, h * h - 4 * k),
         question:     formatQuadraticText(1, -2 * h, h * h - 4 * k),
         answer,
         answerHtml,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 

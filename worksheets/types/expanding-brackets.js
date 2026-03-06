@@ -129,10 +129,43 @@ function generateProblem(rand, difficulty, bracketType) {
     const katexHtml = renderKatex(latex);
     const questionHtml = katexHtml || expression;
 
+    // Generate common wrong answers for single bracket expansion
+    const wrongAnswers = [];
+    if (difficulty === "easy") {
+        // For a(bx + c), common mistakes:
+        const xCoeff = a * b;
+        const constant = a * c;
+        wrongAnswers.push(`${xCoeff}x + ${c}`); // forgot to multiply constant
+        wrongAnswers.push(`${a}(${b}x) + ${constant}`); // incomplete distribution
+        // Mistake 3: forgot to distribute to x
+        wrongAnswers.push(`${b}x + ${constant}`);
+    } else if (difficulty === "normal") {
+        // Generate contextual wrong answers based on what was actually generated
+        const answerParts = answer.split(/\s+/);
+        // Mistake 1: forgot one distribution
+        if (answerParts.length >= 3) {
+            wrongAnswers.push(answerParts.slice(0, 2).join(' ')); // just first term
+        }
+        // Mistake 2: forgot to distribute to some terms
+        wrongAnswers.push(answer.replace(/−/g, '+')); // wrong signs
+        wrongAnswers.push(answer.replace(/\+/g, '−')); // opposite wrong signs
+    } else {
+        // Hard: forgot one of the terms or wrong signs
+        wrongAnswers.push(answer.replace(/−/g, '+'));
+        wrongAnswers.push(answer.replace(/\+/g, '−'));
+        // Mistake 3: forgot constant term
+        const answerWithoutConst = answer.replace(/\s+[+−]\s+\d+\w*$/, '');
+        if (answerWithoutConst !== answer) {
+            wrongAnswers.push(answerWithoutConst);
+        }
+    }
+
     return {
         questionHtml,
         question: expression,
         answer,
+        answerHtml: answer,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
 
@@ -227,9 +260,18 @@ function generateDoubleExpandProblem(rand, difficulty) {
     const katexHtml = renderKatex(latex);
     const questionHtml = katexHtml || expression;
 
+    // Generate common wrong answers for double bracket expansion
+    const wrongAnswers = [];
+    // Common mistakes: forgetting middle term, wrong signs, etc.
+    wrongAnswers.push(answer.replace(/\+/g, '−')); // flip all signs
+    wrongAnswers.push(answer.replace(/x²/g, 'x')); // drop the square
+    wrongAnswers.push(answer.match(/\d+/) ? answer.replace(/\d+$/, parseInt(answer.match(/\d+$/)[0]) + 1) : answer); // wrong constant
+
     return {
         questionHtml,
         question: expression,
         answer,
+        answerHtml: answer,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }

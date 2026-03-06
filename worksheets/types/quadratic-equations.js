@@ -51,11 +51,27 @@ function generateProblem(rand, difficulty) {
 
         const questionHtml = renderKatex(questionLatex) || questionText;
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        // Common mistake 1: only one root
+        wrongAnswers.push(`x = ${root1Str}`);
+        // Common mistake 2: roots with opposite sign
+        const root1Opp = root1 > 0 ? `−${root1}` : root1.toString();
+        const root2Opp = root2 > 0 ? `−${root2}` : root2.toString();
+        wrongAnswers.push(`x = ${root1Opp}\nor x = ${root2Opp}`);
+        // Common mistake 3: roots off by 1
+        const root1Off = root1 + 1;
+        const root2Off = root2 + 1;
+        const root1OffStr = root1Off < 0 ? `−${Math.abs(root1Off)}` : root1Off.toString();
+        const root2OffStr = root2Off < 0 ? `−${Math.abs(root2Off)}` : root2Off.toString();
+        wrongAnswers.push(`x = ${root1OffStr}\nor x = ${root2OffStr}`);
+
         return {
             questionHtml,
             question: questionText,
             answerHtml,
             answer,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
         };
     } else if (difficulty === "normal") {
         // Monic quadratic with wider integer roots (0 allowed)
@@ -83,11 +99,27 @@ function generateProblem(rand, difficulty) {
 
         const questionHtml = renderKatex(questionLatex) || questionText;
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        // Common mistake 1: only one root
+        wrongAnswers.push(`x = ${root1Str}`);
+        // Common mistake 2: roots with opposite sign
+        const root1Opp = root1 > 0 ? `−${root1}` : root1.toString();
+        const root2Opp = root2 > 0 ? `−${root2}` : root2.toString();
+        wrongAnswers.push(`x = ${root1Opp}\nor x = ${root2Opp}`);
+        // Common mistake 3: roots off by 1
+        const root1Off = root1 + 1;
+        const root2Off = root2 + 1;
+        const root1OffStr = root1Off < 0 ? `−${Math.abs(root1Off)}` : root1Off.toString();
+        const root2OffStr = root2Off < 0 ? `−${Math.abs(root2Off)}` : root2Off.toString();
+        wrongAnswers.push(`x = ${root1OffStr}\nor x = ${root2OffStr}`);
+
         return {
             questionHtml,
             question: questionText,
             answerHtml,
             answer,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
         };
     } else {
         // Hard: non-monic (ax + p)(x + q) = 0 with fractional root
@@ -157,11 +189,28 @@ function generateProblem(rand, difficulty) {
 
         const questionHtml = renderKatex(questionLatex) || questionText;
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        // Common mistake 1: only one root
+        wrongAnswers.push(`x = ${root1Str}`);
+        // Common mistake 2: roots with opposite sign
+        const root1OppStr = roots[0] === integerRoot
+            ? (roots[0] > 0 ? `−${roots[0]}` : roots[0].toString())
+            : `${-(-p) < 0 ? '−' : ''}${Math.abs(-(-p))}/${a}`;
+        const root2OppStr = roots[1] === integerRoot
+            ? (roots[1] > 0 ? `−${roots[1]}` : roots[1].toString())
+            : `${-(-p) < 0 ? '−' : ''}${Math.abs(-(-p))}/${a}`;
+        wrongAnswers.push(`x = ${root1OppStr}\nor x = ${root2OppStr}`);
+        // Common mistake 3: only the integer root (missing fractional)
+        const intRootStr = integerRoot < 0 ? `−${Math.abs(integerRoot)}` : integerRoot.toString();
+        wrongAnswers.push(`x = ${intRootStr}`);
+
         return {
             questionHtml,
             question: questionText,
             answerHtml,
             answer,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
         };
     }
 }
