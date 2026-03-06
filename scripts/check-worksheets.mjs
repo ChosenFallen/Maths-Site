@@ -148,6 +148,92 @@ function mulberry32(seed) {
     };
 }
 
+/**
+ * Verify that an equation answer is mathematically correct.
+ * Handles equation worksheets by substituting the answer back into the equation.
+ * Returns true if correct, false if wrong, null if unable to verify.
+ */
+function verifyAnswer(worksheetId, questionText, answerText, questionHtml) {
+    // Handle both string and numeric answers
+    let xValue;
+
+    if (typeof answerText === "number") {
+        xValue = answerText;
+    } else if (typeof answerText === "string") {
+        // Extract numeric answer (format: "x = 5" or similar)
+        const answerMatch = answerText.match(/x\s*=\s*([-\d.]+)/);
+        if (!answerMatch) return null;
+        xValue = parseFloat(answerMatch[1]);
+    } else {
+        return null;
+    }
+
+    if (isNaN(xValue)) return null;
+
+    // Normalize the question text (use HTML version if available, but strip tags for math)
+    let question = questionHtml || questionText;
+    // Remove KaTeX delimiters if present
+    question = question.replace(/\$\$/g, "").replace(/\$/g, "").replace(/<[^>]+>/g, "");
+
+    // Handle Unicode minus sign
+    question = question.replace(/−/g, "-");
+
+    // For equations, we need to evaluate both sides
+    const parts = question.split("=");
+    if (parts.length !== 2) return null;
+
+    const [leftStr, rightStr] = parts.map(s => s.trim());
+
+    try {
+        const leftVal = evaluateExpression(leftStr, xValue);
+        const rightVal = evaluateExpression(rightStr, xValue);
+
+        if (leftVal === null || rightVal === null) return null;
+
+        return Math.abs(leftVal - rightVal) < 0.0001;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * Evaluate a mathematical expression with x substituted.
+ * Handles formats like "3x + 2", "−4x − 5" (Unicode), "3(2x + 1)", etc.
+ */
+function evaluateExpression(expr, xValue) {
+    try {
+        let result = expr;
+
+        // Normalize Unicode minus (−) to ASCII minus (-)
+        result = result.replace(/−/g, "-");
+
+        // Handle number followed by parenthesis: 4( -> 4*(
+        result = result.replace(/(\d)\(/g, "$1*(");
+
+        // Replace coefficient x patterns: 3x, -2x, etc. (digit directly before x)
+        result = result.replace(/(\d)x/g, "$1*" + xValue);
+
+        // Replace -x with -(xValue) to avoid creating -*4
+        result = result.replace(/-x/g, "-" + xValue);
+
+        // Replace +x with +xValue
+        result = result.replace(/\+x/g, "+" + xValue);
+
+        // Handle bare x at start of expression
+        result = result.replace(/^x(?![0-9])/, "" + xValue);
+
+        // Handle x after whitespace
+        result = result.replace(/\s+x(?![0-9])/g, "*" + xValue);
+
+        // Evaluate using Function instead of eval for safety
+        const func = new Function("return " + result);
+        const value = func();
+        return typeof value === "number" ? value : null;
+    } catch {
+        return null;
+    }
+}
+
 function checkType(type) {
     const errors = [];
 
@@ -383,6 +469,38 @@ function checkType(type) {
             const unique = new Set(p50.map(p => p.questionHtml || p.question || JSON.stringify(p)));
             if (unique.size < 20) {
                 errors.push(`${difficulty}: only ${unique.size} distinct questions in 50-sample (need ≥ 20).`);
+            }
+        }
+    }
+
+    // Test 6: For worksheets with equations, verify answers are mathematically correct
+    if (type.id.includes("equation")) {
+        // Test with default options AND any worksheet-specific options
+        const optionsToTest = [{}];
+
+        // Add negative coefficients option if available
+        if (type.id === "equations-both-sides") {
+            optionsToTest.push({ includeNegativeCoefficients: true });
+        }
+
+        for (const options of optionsToTest) {
+            for (const difficulty of ["easy", "normal", "hard"]) {
+                const r = mulberry32(77777);
+                let problems;
+                try {
+                    problems = type.generate(r, difficulty, 15, options);
+                } catch {
+                    continue;
+                }
+
+                for (const p of problems) {
+                    // Try to verify the answer
+                    const verified = verifyAnswer(type.id, p.question, p.answer, p.questionHtml);
+                    if (verified === false) {
+                        const optionStr = Object.keys(options).length > 0 ? ` (${JSON.stringify(options)})` : "";
+                        errors.push(`${difficulty}${optionStr}: Answer "${p.answer}" is WRONG for question "${(p.questionHtml || p.question).substring(0, 50)}..."`);
+                    }
+                }
             }
         }
     }
