@@ -58,7 +58,9 @@ export default {
                     dp,
                 )} =`;
                 const answer = formatDecimal(result, answerDp);
-                problems.push({ question, answer, wrongAnswers: generateNumericDistracters(result, rand) });
+                const answerHtml = answer;
+                const wrongAnswers = generateNumericDistracters(result, rand).map(wa => formatDecimal(wa, answerDp));
+                problems.push({ question, answer, answerHtml, wrongAnswers });
             } else {
                 // Create clean division: dividend = divisor * quotient
                 const divisor =
@@ -71,7 +73,9 @@ export default {
                     dp,
                 )} =`;
                 const answer = formatDecimal(quotient, answerDp);
-                problems.push({ question, answer, wrongAnswers: generateNumericDistracters(quotient, rand) });
+                const answerHtml = answer;
+                const wrongAnswers = generateNumericDistracters(quotient, rand).map(wa => formatDecimal(wa, answerDp));
+                problems.push({ question, answer, answerHtml, wrongAnswers });
             }
         }
 

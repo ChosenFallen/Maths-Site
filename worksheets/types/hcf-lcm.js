@@ -55,7 +55,7 @@ export default {
                 questionHtml: question,
                 answer: answer.toString(),
                 answerHtml: answer.toString(),
-                wrongAnswers: generateNumericDistracters(answer, rand),
+                wrongAnswers: generateNumericDistracters(answer, rand).map(wa => `${wa}`),
             });
         }
 

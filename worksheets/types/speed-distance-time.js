@@ -53,9 +53,11 @@ function genFindSpeed(rand, difficulty) {
     const timeStr = fmtTime(time);
     const formatWrongAnswer = (num) => `${num} km/h`;
 
+    const answerText = `${speed} km/h`;
     return {
         question: `${subject} ${verb} ${distance} km in ${timeStr}. What is the average speed?`,
-        answer: `${speed} km/h`,
+        answer: answerText,
+        answerHtml: answerText,
         wrongAnswers: generateNumericDistracters(speed, rand).map(formatWrongAnswer),
     };
 }
@@ -86,9 +88,11 @@ function genFindDistance(rand, difficulty) {
     const timeStr = fmtTime(time);
     const formatWrongAnswer = (num) => `${num} km`;
 
+    const answerText = `${distance} km`;
     return {
         question: `${subject} ${verb} at ${speed} km/h for ${timeStr}. How far does it travel?`,
-        answer: `${distance} km`,
+        answer: answerText,
+        answerHtml: answerText,
         wrongAnswers: generateNumericDistracters(distance, rand).map(formatWrongAnswer),
     };
 }
@@ -118,9 +122,11 @@ function genFindTime(rand, difficulty) {
     const { subject, verb } = pickContext(rand);
     const formatWrongAnswer = (num) => fmtTime(num);
 
+    const answerText = fmtTime(time);
     return {
         question: `${subject} ${verb} ${distance} km at ${speed} km/h. How long does the journey take?`,
-        answer: fmtTime(time),
+        answer: answerText,
+        answerHtml: answerText,
         wrongAnswers: generateNumericDistracters(time, rand).map(formatWrongAnswer),
     };
 }

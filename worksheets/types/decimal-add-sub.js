@@ -31,7 +31,9 @@ export default {
                 dp,
             )} =`;
             const answer = formatDecimal(result, dp);
-            problems.push({ question, answer, wrongAnswers: generateNumericDistracters(result, rand) });
+            const answerHtml = answer;
+            const wrongAnswers = generateNumericDistracters(result, rand).map(wa => formatDecimal(wa, dp));
+            problems.push({ question, answer, answerHtml, wrongAnswers });
         }
         return problems;
     },

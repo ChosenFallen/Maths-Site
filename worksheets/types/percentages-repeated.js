@@ -51,15 +51,17 @@ function generateEasy(rand) {
 
     // Calculate second change
     const mult2 = isIncrease2 ? (1 + percent2 / 100) : (1 - percent2 / 100);
-    const finalResult = afterFirst * mult2;
+    const finalResult = Math.round(afterFirst * mult2);
 
     // Build question
     const change1 = isIncrease1 ? `+${percent1}%` : `−${percent1}%`;
     const change2 = isIncrease2 ? `+${percent2}%` : `−${percent2}%`;
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, the new amount is?`;
     const answer = `${finalResult}`;
+    const answerHtml = `${finalResult}`;
+    const wrongAnswers = generateNumericDistracters(finalResult, rand).map(wa => `${wa}`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }
 
 function generateNormal(rand) {
@@ -81,15 +83,17 @@ function generateNormal(rand) {
 
     // Calculate second change
     const mult2 = isIncrease2 ? (1 + percent2 / 100) : (1 - percent2 / 100);
-    const finalResult = afterFirst * mult2;
+    const finalResult = Math.round(afterFirst * mult2);
 
     // Build question
     const change1 = isIncrease1 ? `+${percent1}%` : `−${percent1}%`;
     const change2 = isIncrease2 ? `+${percent2}%` : `−${percent2}%`;
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, the new amount is?`;
     const answer = `${finalResult}`;
+    const answerHtml = `${finalResult}`;
+    const wrongAnswers = generateNumericDistracters(finalResult, rand).map(wa => `${wa}`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }
 
 function generateHard(rand) {
@@ -115,7 +119,7 @@ function generateHard(rand) {
     const afterSecond = afterFirst * mult2;
 
     const mult3 = isIncrease3 ? (1 + percent3 / 100) : (1 - percent3 / 100);
-    const finalResult = afterSecond * mult3;
+    const finalResult = Math.round(afterSecond * mult3);
 
     // Build question
     const change1 = isIncrease1 ? `+${percent1}%` : `−${percent1}%`;
@@ -123,6 +127,8 @@ function generateHard(rand) {
     const change3 = isIncrease3 ? `+${percent3}%` : `−${percent3}%`;
     const question = `Start with ${startValue}. After a ${change1} change, then a ${change2} change, then a ${change3} change, the new amount is?`;
     const answer = `${finalResult}`;
+    const answerHtml = `${finalResult}`;
+    const wrongAnswers = generateNumericDistracters(finalResult, rand).map(wa => `${wa}`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }

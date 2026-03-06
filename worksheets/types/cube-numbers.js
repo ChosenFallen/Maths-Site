@@ -75,11 +75,13 @@ function makeProblem(signedBase, isCube, rand) {
         const answer = signedBase * signedBase * signedBase;
         const latex = signedBase < 0 ? `(${signedBase})^3` : `${signedBase}^3`;
         const questionHtml = renderKatex(latex) || `${signedBase}³`;
-        return { questionHtml, answer: formatNum(answer), wrongAnswers: generateNumericDistracters(answer, rand) };
+        const answerText = formatNum(answer);
+        return { questionHtml, answer: answerText, answerHtml: answerText, wrongAnswers: generateNumericDistracters(answer, rand).map(wa => formatNum(wa)) };
     } else {
         const radicand = signedBase * signedBase * signedBase;
         const latex = `\\sqrt[3]{${radicand}}`;
         const questionHtml = renderKatex(latex) || `∛(${radicand})`;
-        return { questionHtml, answer: formatNum(signedBase), wrongAnswers: generateNumericDistracters(signedBase, rand) };
+        const answerText = formatNum(signedBase);
+        return { questionHtml, answer: answerText, answerHtml: answerText, wrongAnswers: generateNumericDistracters(signedBase, rand).map(wa => formatNum(wa)) };
     }
 }

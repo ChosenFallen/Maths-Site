@@ -45,8 +45,10 @@ function generateEasy(rand) {
 
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
+    const answerHtml = `${percent}%`;
+    const wrongAnswers = generateNumericDistracters(percent, rand).map(wa => `${wa}%`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }
 
 function generateNormal(rand) {
@@ -62,8 +64,10 @@ function generateNormal(rand) {
 
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
+    const answerHtml = `${percent}%`;
+    const wrongAnswers = generateNumericDistracters(percent, rand).map(wa => `${wa}%`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }
 
 function generateHard(rand) {
@@ -79,6 +83,8 @@ function generateHard(rand) {
 
     const question = `${part} out of ${total} = ?%`;
     const answer = `${percent}%`;
+    const answerHtml = `${percent}%`;
+    const wrongAnswers = generateNumericDistracters(percent, rand).map(wa => `${wa}%`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }

@@ -25,10 +25,12 @@ export default {
 
         return all.slice(0, count).map(({ base, power }) => {
             const answer = Math.pow(base, power);
+            const answerStr = `${answer}`;
             return {
                 questionHtml: `${formatPower(base, power)} =`,
-                answer,
-                wrongAnswers: generateNumericDistracters(answer, rand),
+                answer: answerStr,
+                answerHtml: answerStr,
+                wrongAnswers: generateNumericDistracters(answer, rand).map(wa => `${wa}`),
             };
         });
     },

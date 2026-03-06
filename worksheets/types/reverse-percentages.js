@@ -91,6 +91,6 @@ function generateProblem(rand, difficulty, changeType) {
         questionHtml: question,
         answer,
         answerHtml: answer,
-        wrongAnswers: generateNumericDistracters(original, rand),
+        wrongAnswers: generateNumericDistracters(original, rand).map(wa => `${wa}`),
     };
 }

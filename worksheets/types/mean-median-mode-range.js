@@ -219,7 +219,8 @@ function generateProblem(rand, difficulty, measure, isMixed) {
         question,
         questionHtml,
         answer: result.answer,
+        answerHtml: result.answer,
         answerPrefix: `${label} = `,
-        wrongAnswers: generateNumericDistracters(result.numericAnswer, rand),
+        wrongAnswers: generateNumericDistracters(result.numericAnswer, rand).map(wa => fmt(wa)),
     };
 }

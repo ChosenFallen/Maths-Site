@@ -119,7 +119,7 @@ function typeC_FindY(rand, minM, maxM, minC, maxC) {
         questionHtml,
         answer: `${y}`,
         answerHtml: `y = ${y}`,
-        wrongAnswers: generateNumericDistracters(y, rand),
+        wrongAnswers: generateNumericDistracters(y, rand).map(wa => `${wa}`),
     };
 }
 

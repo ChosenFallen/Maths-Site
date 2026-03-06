@@ -47,14 +47,16 @@ function generateEasy(rand) {
     const multiplier = isIncrease ? (1 + percent / 100) : (1 - percent / 100);
 
     // Calculate result
-    const result = startValue * multiplier;
+    const result = Math.round(startValue * multiplier);
 
     // Build question
     const changeDir = isIncrease ? "increase" : "decrease";
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
+    const answerHtml = `${result}`;
+    const wrongAnswers = generateNumericDistracters(result, rand).map(wa => `${wa}`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }
 
 function generateNormal(rand) {
@@ -72,14 +74,16 @@ function generateNormal(rand) {
     const multiplier = isIncrease ? (1 + percent / 100) : (1 - percent / 100);
 
     // Calculate result
-    const result = startValue * multiplier;
+    const result = Math.round(startValue * multiplier);
 
     // Build question
     const changeDir = isIncrease ? "increase" : "decrease";
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
+    const answerHtml = `${result}`;
+    const wrongAnswers = generateNumericDistracters(result, rand).map(wa => `${wa}`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }
 
 function generateHard(rand) {
@@ -97,12 +101,14 @@ function generateHard(rand) {
     const multiplier = isIncrease ? (1 + percent / 100) : (1 - percent / 100);
 
     // Calculate result
-    const result = startValue * multiplier;
+    const result = Math.round(startValue * multiplier);
 
     // Build question
     const changeDir = isIncrease ? "increase" : "decrease";
     const question = `${startValue} × ${multiplier.toFixed(2)} =`;
     const answer = `${result}`;
+    const answerHtml = `${result}`;
+    const wrongAnswers = generateNumericDistracters(result, rand).map(wa => `${wa}`);
 
-    return { question, answer };
+    return { question, answer, answerHtml, wrongAnswers };
 }

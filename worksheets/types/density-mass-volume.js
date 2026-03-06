@@ -51,9 +51,11 @@ function genFindMass(rand, difficulty) {
     const obj  = pickObject(rand);
     const formatWrongAnswer = (num) => `${num} g`;
 
+    const answerText = `${mass} g`;
     return {
         question: `${cap(obj)} has a density of ${density} g/cm³ and a volume of ${volume} cm³. What is its mass?`,
-        answer: `${mass} g`,
+        answer: answerText,
+        answerHtml: answerText,
         wrongAnswers: generateNumericDistracters(mass, rand).map(formatWrongAnswer),
     };
 }
@@ -82,9 +84,11 @@ function genFindDensity(rand, difficulty) {
     const obj  = pickObject(rand);
     const formatWrongAnswer = (num) => `${fmt(num)} g/cm³`;
 
+    const answerText = `${fmt(density)} g/cm³`;
     return {
         question: `${cap(obj)} has a mass of ${fmt(mass)} g and a volume of ${volume} cm³. What is its density?`,
-        answer: `${fmt(density)} g/cm³`,
+        answer: answerText,
+        answerHtml: answerText,
         wrongAnswers: generateNumericDistracters(density, rand).map(formatWrongAnswer),
     };
 }
@@ -112,9 +116,11 @@ function genFindVolume(rand, difficulty) {
     const obj  = pickObject(rand);
     const formatWrongAnswer = (num) => `${num} cm³`;
 
+    const answerText = `${volume} cm³`;
     return {
         question: `${cap(obj)} has a density of ${density} g/cm³ and a mass of ${mass} g. What is its volume?`,
-        answer: `${volume} cm³`,
+        answer: answerText,
+        answerHtml: answerText,
         wrongAnswers: generateNumericDistracters(volume, rand).map(formatWrongAnswer),
     };
 }
