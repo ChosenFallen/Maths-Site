@@ -152,26 +152,6 @@ function generateWorksheetInternal(forceNewId) {
 function renderWorksheet(problems) {
     output.innerHTML = "";
 
-    // DEBUG: Log all problems to console for diagnostics
-    console.log("\n" + "=".repeat(70));
-    console.log("WORKSHEET DIAGNOSTIC DATA");
-    console.log("=".repeat(70) + "\n");
-
-    problems.forEach((p, i) => {
-        const questionText = p.question || p.questionHtml || "";
-        const answerText = p.answer || p.answerHtml || "";
-        console.log(`Question ${i + 1}:`);
-        console.log(`  Question (text): ${p.question}`);
-        console.log(`  Question (HTML): ${p.questionHtml || "N/A"}`);
-        console.log(`  Answer: ${p.answer}`);
-        console.log(`  Answer HTML: ${p.answerHtml || "N/A"}`);
-        console.log("");
-    });
-
-    console.log("=".repeat(70));
-    console.log("END DIAGNOSTIC DATA - Copy the above and paste to report bugs");
-    console.log("=".repeat(70) + "\n");
-
     // Problems grid
     const grid = document.createElement("div");
     grid.className = "problems-grid";
