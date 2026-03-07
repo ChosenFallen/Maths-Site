@@ -625,23 +625,49 @@ function expectedPrintTitle(type, options) {
 }
 
 let totalErrors = 0;
-for (const type of TYPES) {
-    const errors = checkType(type);
-    if (errors.length) {
-        totalErrors += errors.length;
-        console.log(`❌ ${type.id}:`);
-        errors.forEach((e) => console.log(`   - ${e}`));
-    } else {
-        console.log(`✅ ${type.id}: OK`);
-    }
-}
-
-// Test 6: Ensure all worksheets have grades property for teacher questions page
-console.log("\n── Grades validation ──────────────────────────────────");
+// Track MC and grades status during main loop
+const worksheetsWithMC = [];
+const worksheetsWithoutMC = [];
+const multipleChoiceIssues = [];
 const worksheetsWithoutGrades = [];
 const worksheetsWithInvalidGrades = [];
 
 for (const type of TYPES) {
+    const errors = checkType(type);
+
+    // Check for wrongAnswers immediately after checkType
+    const r = mulberry32(12345);
+    let problems;
+    try {
+        problems = type.generate(r, "easy", 3);
+    } catch (e) {
+        problems = [];
+    }
+
+    const hasWrongAnswers = problems.length > 0 && problems[0].wrongAnswers !== undefined;
+
+    if (!hasWrongAnswers) {
+        worksheetsWithoutMC.push(type.id);
+    } else {
+        worksheetsWithMC.push(type.id);
+        // Validate the multiple choice structure - must have exactly 3 wrong answers and all 4 must be unique
+        for (let i = 0; i < problems.length; i++) {
+            const p = problems[i];
+            if (!Array.isArray(p.wrongAnswers) || p.wrongAnswers.length !== 3) {
+                multipleChoiceIssues.push(`${type.id}: problem ${i + 1} has ${p.wrongAnswers?.length || 0} wrong answers (need exactly 3)`);
+                totalErrors++;
+            } else {
+                const allAnswers = [p.answer, ...p.wrongAnswers];
+                const uniqueAnswers = new Set(allAnswers.map(a => JSON.stringify(a)));
+                if (uniqueAnswers.size !== 4) {
+                    multipleChoiceIssues.push(`${type.id}: problem ${i + 1} has duplicate answers (need 4 unique)`);
+                    totalErrors++;
+                }
+            }
+        }
+    }
+
+    // Check grades property
     if (!type.grades) {
         worksheetsWithoutGrades.push(type.id);
         totalErrors++;
@@ -656,8 +682,19 @@ for (const type of TYPES) {
             totalErrors++;
         }
     }
+
+    const mcStatus = hasWrongAnswers ? "✓ MC" : "⏳ no MC";
+    if (errors.length) {
+        totalErrors += errors.length;
+        console.log(`❌ ${type.id}: [${mcStatus}]`);
+        errors.forEach((e) => console.log(`   - ${e}`));
+    } else {
+        console.log(`✅ ${type.id}: OK [${mcStatus}]`);
+    }
 }
 
+// Output grades validation results
+console.log("\n── Grades validation ──────────────────────────────────");
 if (worksheetsWithoutGrades.length === 0 && worksheetsWithInvalidGrades.length === 0) {
     console.log("✅ All worksheets have valid grades property.");
 } else {
@@ -671,52 +708,8 @@ if (worksheetsWithoutGrades.length === 0 && worksheetsWithInvalidGrades.length =
     }
 }
 
-// Test 7: Multiple choice answers validation (for worksheets that have been updated)
+// Output MC validation results (multiple choice validation - collected during main loop)
 console.log("\n── Multiple choice answers validation ─────────────────────");
-const multipleChoiceIssues = [];
-const worksheetsWithMC = [];
-const worksheetsWithoutMC = [];
-
-for (const type of TYPES) {
-    const r = mulberry32(12345);
-    let problems;
-    try {
-        problems = type.generate(r, "easy", 3);
-    } catch (e) {
-        continue;
-    }
-
-    // Check if this worksheet has wrongAnswers
-    const hasWrongAnswers = problems.length > 0 && problems[0].wrongAnswers !== undefined;
-
-    if (!hasWrongAnswers) {
-        worksheetsWithoutMC.push(type.id);
-        continue;
-    }
-
-    worksheetsWithMC.push(type.id);
-
-    // Validate the multiple choice structure for worksheets that have it
-    for (let i = 0; i < problems.length; i++) {
-        const p = problems[i];
-
-        // Check if wrongAnswers is an array with 3 elements
-        if (!Array.isArray(p.wrongAnswers) || p.wrongAnswers.length !== 3) {
-            multipleChoiceIssues.push(`${type.id}: problem ${i + 1} has ${p.wrongAnswers?.length || 0} wrong answers (need 3)`);
-            totalErrors++;
-            continue;
-        }
-
-        // Check if all 4 answers (1 right + 3 wrong) are different
-        const allAnswers = [p.answer, ...p.wrongAnswers];
-        const uniqueAnswers = new Set(allAnswers.map(a => JSON.stringify(a)));
-
-        if (uniqueAnswers.size !== 4) {
-            multipleChoiceIssues.push(`${type.id}: problem ${i + 1} has duplicate answers`);
-            totalErrors++;
-        }
-    }
-}
 
 if (worksheetsWithMC.length > 0) {
     console.log(`✅ ${worksheetsWithMC.length} worksheet(s) have valid multiple choice answers (4 unique answers per question).`);

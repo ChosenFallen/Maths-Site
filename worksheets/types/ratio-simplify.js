@@ -58,8 +58,27 @@ function generateRatio(rand, difficulty) {
     const finalA = unsimplifiedA / g;
     const finalB = unsimplifiedB / g;
 
+    // Wrong answers: common simplification mistakes
+    const wrongAnswers = [];
+
+    // Mistake 1: only divided one part by the factor
+    wrongAnswers.push(`${Math.floor(unsimplifiedA / factor)} : ${unsimplifiedB}`);
+
+    // Mistake 2: divided by wrong common factor (not the GCD)
+    const halfFactor = Math.max(2, Math.floor(g / 2));
+    if (halfFactor !== g) {
+        wrongAnswers.push(`${Math.floor(unsimplifiedA / halfFactor)} : ${Math.floor(unsimplifiedB / halfFactor)}`);
+    } else {
+        // Alternative: didn't simplify at all
+        wrongAnswers.push(`${unsimplifiedA} : ${unsimplifiedB}`);
+    }
+
+    // Mistake 3: subtracted instead of divided
+    wrongAnswers.push(`${Math.max(1, unsimplifiedA - unsimplifiedB)} : 0`);
+
     return {
         question: `${unsimplifiedA} : ${unsimplifiedB} =`,
         answer: `${finalA} : ${finalB}`,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== `${finalA} : ${finalB}`).slice(0, 3),
     };
 }

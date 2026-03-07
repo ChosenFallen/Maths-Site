@@ -57,7 +57,16 @@ function generateProblem(rand, difficulty, mode = "mixed") {
     const answer = cmp === 0 ? "=" : cmp > 0 ? ">" : "<";
     const questionHtml = `${left}  ?  ${right}`;
     const answerKeyHtml = `${left} ${answer} ${right}`;
-    return { questionHtml, answer, answerKeyHtml };
+
+    // Note: Comparison problems have only 3 possible answers (<, =, >)
+    // so we cannot generate 3 unique wrong answers without duplicates.
+    // These worksheets are designed for selection-style answers, not multiple choice.
+
+    return {
+        questionHtml,
+        answer,
+        answerKeyHtml,
+    };
 }
 
 function compareFractions(n1, d1, n2, d2) {

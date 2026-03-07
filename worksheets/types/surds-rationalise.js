@@ -52,11 +52,29 @@ function generateProblem(rand, difficulty) {
 
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers: common rationalization mistakes
+        const wrongAnswers = [];
+        // Mistake 1: completely forgot to rationalize
+        wrongAnswers.push(`${a}/√${k}`);
+
+        // Mistake 2: depends on whether simplification happened
+        if (g > 1) {
+            // If simplification was needed, show the unsimplified version
+            wrongAnswers.push(`${a}√${k}/${k}`);
+        } else {
+            // If no simplification needed, show a different mistake (forgot denominator)
+            wrongAnswers.push(`${a}√${k}`);
+        }
+
+        // Mistake 3: another common error
+        wrongAnswers.push(`${numCoeff + 1}√${k}/${denVal}`); // off-by-one on coefficient
+
         return {
             questionHtml,
             question: `${a}/√${k}`,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     } else if (difficulty === "normal") {
         // n / (m√k) = n√k / (mk)
@@ -90,11 +108,21 @@ function generateProblem(rand, difficulty) {
 
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers
+        const wrongAnswers = [];
+        // Mistake 1: rationalized but didn't simplify by GCD
+        wrongAnswers.push(`${n}√${k}/${mk}`);
+        // Mistake 2: forgot to rationalize completely
+        wrongAnswers.push(`${n}/(${m}√${k})`);
+        // Mistake 3: only rationalized partially (forgot the coefficient m)
+        wrongAnswers.push(`${n}√${k}/${k}`);
+
         return {
             questionHtml,
             question: `${n}/(${m}√${k})`,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     } else {
         // Hard: a / (b + √k)
@@ -154,6 +182,20 @@ function generateProblem(rand, difficulty) {
 
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers: rationalization mistakes
+        const wrongAnswers = [];
+        // Mistake 1: used + instead of - when multiplying by conjugate
+        wrongAnswers.push(`${aSimp}(${b} + √${k})/${dSimp}`);
+        // Mistake 2: forgot to simplify by GCD
+        wrongAnswers.push(`${a}(${b} - √${k})/${d}`);
+        // Mistake 3: denominator calculation error (added instead of subtracted)
+        const wrongDenom = b * b + k;
+        if (wrongDenom !== d) {
+            wrongAnswers.push(`${aSimp}(${b} - √${k})/${wrongDenom}`);
+        } else {
+            wrongAnswers.push(`${aSimp * 2}(${b} - √${k})/${dSimp * 2}`);
+        }
+
         // Question: a / (b + √k)
         const questionLatex = `\\dfrac{${a}}{${b} + \\sqrt{${k}}}`;
         const questionHtml = renderKatex(questionLatex) || `${a}/(${b} + √${k})`;
@@ -163,6 +205,7 @@ function generateProblem(rand, difficulty) {
             question: `${a}/(${b} + √${k})`,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     }
 }

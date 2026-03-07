@@ -57,10 +57,21 @@ function generateProblem(rand, difficulty) {
     const questionHtml = renderKatex(questionLatex) || questionText;
     const answerHtml = renderKatex(answerLatex) || answerText;
 
+    // Generate wrong answers
+    const wrongAnswers = [];
+    // Mistake 1: forgot to simplify
+    wrongAnswers.push(`√${n}`);
+    // Mistake 2: wrong coefficient (off by 1)
+    const wrongA = a > 1 ? a - 1 : a + 1;
+    wrongAnswers.push(`${wrongA}√${b}`);
+    // Mistake 3: forgot the radicand or just the coefficient
+    wrongAnswers.push(`${a}`);
+
     return {
         questionHtml,
         question: questionText,
         answer: answerText,
         answerHtml,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
     };
 }

@@ -105,7 +105,44 @@ function generateProblem(rand, difficulty, like) {
     const answerHtml = formatted.html;
     const answer = formatted.text;
 
-    return { questionHtml, answerHtml, answer };
+    // Wrong answers: common fraction addition/subtraction mistakes
+    const wrongAnswers = [];
+
+    if (like) {
+        // Like denominators (same denominator)
+        // Mistake 1: wrong operation (added when should subtract or vice versa)
+        const wrongOp = doSub ? n1 + n2 : n1 - n2;
+        if (wrongOp > 0) {
+            wrongAnswers.push(formatFracOrWhole(wrongOp, d1).text);
+        }
+        // Mistake 2: forgot to operate (just take one numerator)
+        wrongAnswers.push(formatFracOrWhole(n1, d1).text);
+        // Mistake 3: multiplied numerators instead of adding
+        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1).text);
+    } else {
+        // Unlike denominators
+        const common = lcm(d1, d2);
+        const a = n1 * (common / d1);
+        const b = n2 * (common / d2);
+
+        // Mistake 1: just added/subtracted numerators without finding common denominator
+        const wrongNum = doSub ? n1 - n2 : n1 + n2;
+        if (wrongNum > 0) {
+            wrongAnswers.push(formatFracOrWhole(wrongNum, d1).text);
+        }
+        // Mistake 2: forgot to add/subtract (just used first fraction)
+        wrongAnswers.push(formatFracOrWhole(n1, d1).text);
+        // Mistake 3: wrong denominator (used wrong calculation)
+        // Try: multiplied numerators but added denominators
+        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1 + d2).text);
+    }
+
+    return {
+        questionHtml,
+        answerHtml,
+        answer,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
+    };
 }
 
 function denominatorRange(difficulty) {

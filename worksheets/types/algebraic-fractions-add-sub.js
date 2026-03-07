@@ -46,11 +46,26 @@ function genEasy(rand) {
     const qText  = `x/${a} ${op} x/${b}`;
     const aText  = sd === 1 ? `${sn}x` : `${sn}x/${sd}`;
 
+    // Wrong answers: common algebraic fraction mistakes
+    const wrongAnswers = [];
+    // Mistake 1: added denominators instead of multiplying
+    wrongAnswers.push(`${numCoeff}x/${a + b}`);
+    // Mistake 2: forgot to multiply coefficients (just x/(ab) or x/(a+b))
+    wrongAnswers.push(`x/${denom}`);
+    // Mistake 3: used wrong numerator coefficient
+    const wrongNumCoeff = op === "+" ? (a - b) : (a + b); // opposite operation
+    if (wrongNumCoeff > 0 && wrongNumCoeff !== numCoeff) {
+        wrongAnswers.push(`${wrongNumCoeff}x/${denom}`);
+    } else {
+        wrongAnswers.push(`${numCoeff + 1}x/${denom}`); // off-by-one
+    }
+
     return {
         questionHtml: render(qLatex, qText),
         question: qText,
         answer: aText,
         answerHtml: render(aLatex, aText),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== aText).slice(0, 3),
     };
 }
 
@@ -80,11 +95,23 @@ function genNormal(rand) {
     const qText  = `(${n1Text})/${a} ${op} (${n2Text})/${b}`;
     const aText  = `(${fmtT(xCoeff, constPart)})/${denom}`;
 
+    // Wrong answers: common mistakes in adding fractions with linear numerators
+    const wrongAnswers = [];
+    // Mistake 1: added denominators instead of multiplying them
+    wrongAnswers.push(`(${fmtT(xCoeff, constPart)})/${a + b}`);
+    // Mistake 2: wrong constant term (opposite operation)
+    const wrongConst = op === "+" ? (b * p - a * q) : (b * p + a * q);
+    if (wrongConst !== constPart) wrongAnswers.push(`(${fmtT(xCoeff, wrongConst)})/${denom}`);
+    // Mistake 3: wrong x coefficient
+    const wrongXCoeff = op === "+" ? (a - b) : (b + a); // different error
+    if (wrongXCoeff !== xCoeff && wrongXCoeff > 0) wrongAnswers.push(`(${fmtT(wrongXCoeff, constPart)})/${denom}`);
+
     return {
         questionHtml: render(qLatex, qText),
         question: qText,
         answer: aText,
         answerHtml: render(aLatex, aText),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== aText).slice(0, 3),
     };
 }
 
@@ -115,11 +142,24 @@ function genHard(rand) {
     const qText = `${A}/(${d1T}) ${op} ${B}/(${d2T})`;
     const aText = `(${fmtT(xCoeff, constPart)})/((${d1T})(${d2T}))`;
 
+    // Wrong answers: mistakes in combining fractions with linear denominators
+    const wrongAnswers = [];
+    // Mistake 1: added denominators instead of multiplying
+    const wrongDenStr1 = `(${d1T}) + (${d2T})`;
+    wrongAnswers.push(`(${fmtT(xCoeff, constPart)})/${wrongDenStr1}`);
+    // Mistake 2: opposite sign on constant part
+    const wrongConstOp = op === "+" ? (A * q - B * p) : (A * q + B * p);
+    if (wrongConstOp !== constPart) wrongAnswers.push(`(${fmtT(xCoeff, wrongConstOp)})/(${d1T})(${d2T})`);
+    // Mistake 3: wrong x coefficient (opposite operation)
+    const wrongXCoeff = op === "+" ? (A - B) : (A + B);
+    if (wrongXCoeff !== xCoeff) wrongAnswers.push(`(${fmtT(wrongXCoeff, constPart)})/(${d1T})(${d2T})`);
+
     return {
         questionHtml: render(qLatex, qText),
         question: qText,
         answer: aText,
         answerHtml: render(aLatex, aText),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== aText).slice(0, 3),
     };
 }
 

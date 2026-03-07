@@ -49,11 +49,21 @@ function generateProblem(rand, difficulty) {
             const questionHtml = renderKatex(questionLatex) || questionLatex;
             const answerHtml = renderKatex(answerLatex) || answerText;
 
+            // Wrong answers: common mistakes in expansion
+            const wrongAnswers = [];
+            // Mistake 1: forgot to multiply inside - just distribute a to first term
+            wrongAnswers.push(formatAnswerWithSurd(a * b, c, k));
+            // Mistake 2: multiplied by a but forgot the surd gets it too
+            if (surdCoeff !== c) wrongAnswers.push(formatAnswerWithSurd(intPart, c, k));
+            // Mistake 3: wrong distribution (common error)
+            wrongAnswers.push(formatAnswerWithSurd(b, a * c, k));
+
             return {
                 questionHtml,
                 question: `${a}(${b} + ${c}√${k})`,
                 answer: answerText,
                 answerHtml,
+                wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
             };
         } else {
             // Type B: √k(a + b√k) = a√k + bk
@@ -72,11 +82,21 @@ function generateProblem(rand, difficulty) {
             const questionHtml = renderKatex(questionLatex) || questionLatex;
             const answerHtml = renderKatex(answerLatex) || answerText;
 
+            // Wrong answers
+            const wrongAnswers = [];
+            // Mistake 1: forgot to multiply the first term by √k
+            wrongAnswers.push(formatAnswerWithSurd(0, a, k));
+            // Mistake 2: forgot the b√k term
+            wrongAnswers.push(formatAnswerWithSurd(intPart, 0, k));
+            // Mistake 3: wrong multiplication in second term
+            wrongAnswers.push(formatAnswerWithSurd(intPart, a + b, k));
+
             return {
                 questionHtml,
                 question: `√${k}(${a} + ${b}√${k})`,
                 answer: answerText,
                 answerHtml,
+                wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
             };
         }
     } else if (difficulty === "normal") {
@@ -96,11 +116,21 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(questionLatex) || questionLatex;
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers: common mistakes in double bracket expansion
+        const wrongAnswers = [];
+        // Mistake 1: forgot the k term in the integer part (just ab + (a+b)√k)
+        wrongAnswers.push(formatAnswerWithSurd(a * b, a + b, k));
+        // Mistake 2: forgot the cross terms (just a*b + b*b*k)
+        wrongAnswers.push(formatAnswerWithSurd(a * b + k, 0, k));
+        // Mistake 3: only did partial distribution
+        wrongAnswers.push(formatAnswerWithSurd(a * b, b, k));
+
         return {
             questionHtml,
             question: `(${a} + √${k})(${b} + √${k})`,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     } else {
         // Hard: (a + b√k)² = a² + 2ab√k + b²k = (a² + b²k) + 2ab√k
@@ -119,11 +149,21 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(questionLatex) || questionLatex;
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers: common mistakes in squaring
+        const wrongAnswers = [];
+        // Mistake 1: forgot the middle term (a² + b²k)
+        wrongAnswers.push(formatAnswerWithSurd(a * a, b * b, k));
+        // Mistake 2: used ab instead of 2ab (a² + ab√k + b²k)
+        wrongAnswers.push(formatAnswerWithSurd(a * a + b * b * k, a * b, k));
+        // Mistake 3: just squared the bracket naively
+        wrongAnswers.push(formatAnswerWithSurd(a * a + b, b, k));
+
         return {
             questionHtml,
             question: `(${a} + ${b}√${k})²`,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     }
 }

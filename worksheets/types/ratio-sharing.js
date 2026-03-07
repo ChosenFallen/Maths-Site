@@ -36,9 +36,53 @@ function makeProblem(parts, total, shares, fmt) {
     const answer = shares.length === 2
         ? `${fmt(shares[0])} and ${fmt(shares[1])}`
         : `${shares.slice(0, -1).map(s => fmt(s)).join(", ")} and ${fmt(shares[last])}`;
+
+    // Wrong answers: common mistakes in sharing
+    const wrongAnswers = [];
+
+    if (shares.length === 2) {
+        const [s1, s2] = shares;
+        const [p1, p2] = parts;
+
+        // Mistake 1: divided total equally (not by ratio) - unless answer is already equal
+        const equal = Math.floor(total / 2);
+        if (!(equal === s1 && equal === s2)) {
+            wrongAnswers.push(`${fmt(equal)} and ${fmt(equal)}`);
+        }
+
+        // Mistake 2: swapped/reversed ratio
+        if (s1 !== s2) {
+            wrongAnswers.push(`${fmt(s2)} and ${fmt(s1)}`);
+        } else {
+            // If equal, halve the total unequally
+            wrongAnswers.push(`${fmt(Math.floor(total / 4))} and ${fmt(Math.floor(total * 3 / 4))}`);
+        }
+
+        // Mistake 3: forgot to scale the simplified ratio
+        wrongAnswers.push(`${fmt(p1)} and ${fmt(p2)}`);
+
+        // Mistake 4 (fallback): off-by-one error
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`${fmt(s1 + 1)} and ${fmt(Math.max(0, s2 - 1))}`);
+        }
+    } else {
+        // For 3-part ratios
+        // Mistake 1: divided equally
+        const equal = Math.floor(total / shares.length);
+        wrongAnswers.push(shares.slice(0, -1).map(() => fmt(equal)).join(", ") + ` and ${fmt(equal)}`);
+
+        // Mistake 2: reversed
+        const reversed = shares.slice().reverse();
+        wrongAnswers.push(reversed.slice(0, -1).map(s => fmt(s)).join(", ") + ` and ${fmt(reversed[reversed.length - 1])}`);
+
+        // Mistake 3: forgot to scale the simplified ratio
+        wrongAnswers.push(parts.slice(0, -1).map(p => fmt(p)).join(", ") + ` and ${fmt(parts[parts.length - 1])}`);
+    }
+
     return {
         question: `Share ${fmt(total)} in the ratio ${ratio}.`,
         answer,
+        wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3),
     };
 }
 

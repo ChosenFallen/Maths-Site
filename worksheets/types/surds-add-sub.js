@@ -47,11 +47,19 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(questionLatex) || questionText;
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers
+        const wrongAnswers = [];
+        wrongAnswers.push(formatSurdText(a, k)); // forgot to add/subtract
+        wrongAnswers.push(formatSurdText(b, k)); // only the second term
+        const wrongOp = isAddition ? a - b : a + b; // opposite operation
+        if (wrongOp > 0) wrongAnswers.push(formatSurdText(wrongOp, k));
+
         return {
             questionHtml,
             question: questionText,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     } else if (difficulty === "normal") {
         // Simplify one term, then add/subtract
@@ -78,11 +86,19 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(questionLatex) || questionText;
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers
+        const wrongAnswers = [];
+        wrongAnswers.push(formatSurdText(a, k)); // forgot to add/subtract
+        wrongAnswers.push(`√${aSquaredK} ${sign} √${k}`); // forgot to simplify the nested root
+        const wrongOp = isAddition ? a - b : a + b;
+        if (wrongOp !== resultCoeff) wrongAnswers.push(formatSurdText(wrongOp, k));
+
         return {
             questionHtml,
             question: questionText,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     } else {
         // Hard: simplify both terms
@@ -115,11 +131,19 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(questionLatex) || questionText;
         const answerHtml = renderKatex(answerLatex) || answerText;
 
+        // Wrong answers
+        const wrongAnswers = [];
+        wrongAnswers.push(formatSurdText(a, k)); // forgot to add second simplified term
+        wrongAnswers.push(`√${aSquaredK} ${sign} √${bSquaredK}`); // forgot to simplify
+        const wrongOp = isAddition ? a - b : a + b;
+        if (wrongOp !== resultCoeff) wrongAnswers.push(formatSurdText(wrongOp, k));
+
         return {
             questionHtml,
             question: questionText,
             answer: answerText,
             answerHtml,
+            wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerText).slice(0, 3),
         };
     }
 }
