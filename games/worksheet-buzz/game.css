@@ -145,6 +145,48 @@ body {
     opacity: 0.8;
 }
 
+/* Worksheet Selector */
+.worksheet-selector {
+    margin-bottom: 20px;
+}
+
+.worksheet-selector select {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 15px;
+    font-size: 1.1em;
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.worksheet-selector select:hover {
+    border-color: #673ab7;
+}
+
+.worksheet-selector select:focus {
+    outline: none;
+    border-color: #673ab7;
+    background: #f9f5ff;
+}
+
+/* Topic Display */
+.topic-display {
+    text-align: center;
+    color: #666;
+    font-size: 0.95em;
+    margin: 10px 0 20px 0;
+    font-weight: 500;
+}
+
+#current-topic {
+    color: #673ab7;
+    font-weight: 700;
+}
+
 /* Buttons */
 .start-btn {
     width: 100%;

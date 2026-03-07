@@ -60,6 +60,16 @@
                     </div>
                 </div>
 
+                <!-- Worksheet Selection -->
+                <div class="menu-section">
+                    <h3>Topics</h3>
+                    <div class="worksheet-selector">
+                        <select id="worksheet-select">
+                            <option value="all">All Topics (Mixed)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <!-- Number of Questions -->
                 <div class="menu-section">
                     <h3>Number of Questions</h3>
@@ -162,6 +172,11 @@
                     </div>
                 </div>
 
+                <!-- Topic Display -->
+                <div class="topic-display" id="topic-display">
+                    Topic: <span id="current-topic">Loading...</span>
+                </div>
+
                 <!-- Question Display -->
                 <div class="question-section">
                     <div class="question-text" id="question-text">Loading question...</div>
@@ -223,11 +238,12 @@
                 try {
                     const rand = Math.random;
                     const problem = ws.generate(rand, "normal", 1)[0];
-                    return problem && problem.wrongAnswers && problem.wrongAnswers.length === 3;
+                    return problem && problem.wrongAnswers && Array.isArray(problem.wrongAnswers) && problem.wrongAnswers.length >= 3;
                 } catch {
                     return false;
                 }
             });
+            console.log(`Loaded ${window.WORKSHEETS_WITH_MC.length} worksheets with multiple choice questions`);
         </script>
         <script src="game.js"></script>
     </body>

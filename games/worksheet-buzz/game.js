@@ -27,6 +27,8 @@ let activePlayers = [];
 // Worksheet state
 let worksheetQuestions = [];
 let currentQuestionIndex = 0;
+let selectedWorksheets = []; // All worksheets selected by default
+let currentWorksheet = null; // Currently active worksheet for display
 
 // Buzzer mode state
 let buzzerPressed = false;
@@ -114,6 +116,39 @@ startBtn.addEventListener("click", startGame);
 playAgainBtn.addEventListener("click", resetToSetup);
 keyboardModeBtn.addEventListener("click", enableKeyboardMode);
 endGameBtn.addEventListener("click", endGame);
+
+// Initialize worksheet selector once worksheets load
+function initializeWorksheetSelector() {
+    if (!window.WORKSHEETS_WITH_MC) {
+        setTimeout(initializeWorksheetSelector, 100);
+        return;
+    }
+
+    const select = document.getElementById("worksheet-select");
+
+    // Add individual worksheet options
+    window.WORKSHEETS_WITH_MC.forEach(ws => {
+        const option = document.createElement("option");
+        option.value = ws.id;
+        option.textContent = ws.label;
+        select.appendChild(option);
+    });
+
+    // Set default to all worksheets
+    selectedWorksheets = [...window.WORKSHEETS_WITH_MC];
+
+    // Handle selection changes
+    select.addEventListener("change", (e) => {
+        if (e.target.value === "all") {
+            selectedWorksheets = [...window.WORKSHEETS_WITH_MC];
+        } else {
+            selectedWorksheets = window.WORKSHEETS_WITH_MC.filter(ws => ws.id === e.target.value);
+        }
+    });
+}
+
+// Start initialization when page loads
+initializeWorksheetSelector();
 
 // Controller detection
 function updateControllerStatus() {
@@ -376,6 +411,11 @@ function startRound() {
     document.getElementById("question-num").textContent = currentQuestion;
     document.getElementById("total-questions").textContent = totalQuestions;
 
+    // Update topic display
+    if (currentWorksheet) {
+        document.getElementById("current-topic").textContent = currentWorksheet.label;
+    }
+
     // Generate question
     generateQuestion();
 
@@ -452,21 +492,21 @@ function generateQuestion() {
 }
 
 function generateQuestionBatch() {
-    // Pick a random worksheet
-    if (!window.WORKSHEETS_WITH_MC || window.WORKSHEETS_WITH_MC.length === 0) {
-        console.error("No worksheets with multiple choice available");
+    // Pick a random worksheet from selected worksheets
+    if (!selectedWorksheets || selectedWorksheets.length === 0) {
+        console.error("No worksheets selected");
         worksheetQuestions = [];
         return;
     }
 
-    const worksheet = window.WORKSHEETS_WITH_MC[randInt(0, window.WORKSHEETS_WITH_MC.length - 1)];
+    currentWorksheet = selectedWorksheets[randInt(0, selectedWorksheets.length - 1)];
 
     // Use Math.random directly as the rand function
     const rand = Math.random;
 
     // Generate enough questions for the game
     try {
-        worksheetQuestions = worksheet.generate(rand, selectedDifficulty, totalQuestions);
+        worksheetQuestions = currentWorksheet.generate(rand, selectedDifficulty, totalQuestions);
     } catch (error) {
         console.error("Error generating questions from worksheet:", error);
         worksheetQuestions = [];
