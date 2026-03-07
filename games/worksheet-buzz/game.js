@@ -1,0 +1,1681 @@
+// WebHID variables
+let hidDevices = [];
+let hidDevice = null;
+let ledStates = [false, false, false, false]; // Track LED state for all 4 players
+let webHIDPromptShown = false; // Track if we've already prompted for WebHID
+
+// Game settings
+let selectedMode = "buzzer";
+let selectedDifficulty = "normal";
+let totalQuestions = 10;
+let buzzerTimeLimit = 10; // Configurable buzzer answer time
+let allAnswerTimeLimit = 15; // Configurable all-answer time
+let isKeyboardMode = false;
+let isHubMode = false; // True if all controllers are in one gamepad
+
+// Game state
+let gamepads = [];
+let numPlayers = 0;
+let playerReady = [];
+let currentQuestion = 1;
+let currentQuestionData = null;
+let playerScores = [];
+let playerCorrect = [];
+let playerAnswers = [];
+let activePlayers = [];
+
+// Worksheet state
+let worksheetQuestions = [];
+let currentQuestionIndex = 0;
+
+// Buzzer mode state
+let buzzerPressed = false;
+let activePlayer = -1;
+let frozenPlayers = []; // Players locked out for current question
+let buzzerTimer = null;
+let buzzerTimeLeft = 0;
+
+// All-answer mode state
+let timerInterval = null;
+let timeLeft = 0;
+let allAnswered = false;
+let questionStartTime = 0;
+let answerTimes = [];
+
+// Button state tracking for debouncing
+let previousButtonStates = [];
+
+// UI elements
+const setupScreen = document.getElementById("setup-screen");
+const gameScreen = document.getElementById("game-screen");
+const resultsScreen = document.getElementById("results-screen");
+const startBtn = document.getElementById("start-btn");
+const keyboardModeBtn = document.getElementById("keyboard-mode-btn");
+const playAgainBtn = document.getElementById("play-again-btn");
+const endGameBtn = document.getElementById("end-game-btn");
+
+// Worksheets are loaded dynamically from groups.js via module import
+
+// Player colors
+const playerColors = [
+    { bg: "#ffebee", text: "#d32f2f", border: "#d32f2f", name: "Red" },
+    { bg: "#e3f2fd", text: "#1976d2", border: "#1976d2", name: "Blue" },
+    { bg: "#e8f5e9", text: "#388e3c", border: "#388e3c", name: "Green" },
+    { bg: "#fffde7", text: "#f57f17", border: "#f57f17", name: "Yellow" },
+];
+
+// Utility functions
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// Menu button handlers
+document.querySelectorAll(".option-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const parent = btn.parentElement;
+        parent.querySelectorAll(".option-btn").forEach((b) =>
+            b.classList.remove("active"),
+        );
+        btn.classList.add("active");
+
+        if (btn.dataset.mode) {
+            selectedMode = btn.dataset.mode;
+            // Toggle timer sections based on selected mode
+            const buzzerTimerSection = document.getElementById("buzzer-timer-section");
+            const allAnswerTimerSection = document.getElementById("all-answer-timer-section");
+            if (selectedMode === "buzzer") {
+                buzzerTimerSection.classList.remove("hidden");
+                allAnswerTimerSection.classList.add("hidden");
+            } else if (selectedMode === "all-answer") {
+                buzzerTimerSection.classList.add("hidden");
+                allAnswerTimerSection.classList.remove("hidden");
+            }
+        }
+        if (btn.dataset.difficulty) selectedDifficulty = btn.dataset.difficulty;
+        if (btn.dataset.questions)
+            totalQuestions = parseInt(btn.dataset.questions);
+        if (btn.dataset.buzzerTime)
+            buzzerTimeLimit = parseInt(btn.dataset.buzzerTime);
+        if (btn.dataset.allAnswerTime)
+            allAnswerTimeLimit = parseInt(btn.dataset.allAnswerTime);
+    });
+});
+
+startBtn.addEventListener("click", startGame);
+playAgainBtn.addEventListener("click", resetToSetup);
+keyboardModeBtn.addEventListener("click", enableKeyboardMode);
+endGameBtn.addEventListener("click", endGame);
+
+// Controller detection
+function updateControllerStatus() {
+    const gps = navigator.getGamepads();
+    gamepads = Array.from(gps).filter((gp) => gp !== null);
+
+    const countDiv = document.getElementById("controller-count");
+
+    if (isKeyboardMode) {
+        countDiv.textContent = "Keyboard Mode (2-4 Players)";
+        countDiv.style.color = "#ff9800";
+        startBtn.disabled = false;
+        startBtn.textContent = "Start Game";
+        numPlayers = 4;
+        updatePlayerReadyDisplay();
+        return;
+    }
+
+    // Check for hub mode: single gamepad with 20 buttons (4 controllers × 5 buttons)
+    if (gamepads.length === 1 && gamepads[0].buttons.length >= 20) {
+        isHubMode = true;
+        numPlayers = Math.min(4, Math.floor(gamepads[0].buttons.length / 5));
+        countDiv.textContent = `Buzz Hub Detected (${numPlayers} Players)`;
+        countDiv.style.color = "#4caf50";
+        startBtn.disabled = false;
+        startBtn.textContent = "Start Game";
+        updatePlayerReadyDisplay();
+    }
+    // Check for separate gamepads (2-4 individual controllers)
+    else if (gamepads.length >= 2 && gamepads.length <= 4) {
+        isHubMode = false;
+        numPlayers = gamepads.length;
+        countDiv.textContent = `${numPlayers} Controller${numPlayers > 1 ? "s" : ""}`;
+        countDiv.style.color = "#4caf50";
+        startBtn.disabled = false;
+        startBtn.textContent = "Start Game";
+        updatePlayerReadyDisplay();
+    }
+    // Single gamepad but not enough buttons for hub mode
+    else if (gamepads.length === 1) {
+        isHubMode = false;
+        numPlayers = 1;
+        countDiv.textContent = "1 Controller (Need 2-4)";
+        countDiv.style.color = "#ff9800";
+        startBtn.disabled = true;
+        startBtn.textContent = "Connect more controllers";
+    }
+    // No controllers
+    else {
+        isHubMode = false;
+        numPlayers = 0;
+        countDiv.textContent = "No Controllers";
+        countDiv.style.color = "#f44336";
+        startBtn.disabled = true;
+        startBtn.textContent = "Waiting for controllers...";
+    }
+
+    // Initialize button states
+    if (isHubMode && previousButtonStates.length === 0) {
+        // For hub mode, track buttons for the single gamepad
+        previousButtonStates = [[]];
+    } else if (!isHubMode && previousButtonStates.length !== numPlayers) {
+        previousButtonStates = [];
+        for (let i = 0; i < numPlayers; i++) {
+            previousButtonStates[i] = [];
+        }
+    }
+
+    // Update start button state
+    if (numPlayers >= 2 || isKeyboardMode) {
+        updateStartButton();
+    }
+
+    // Auto-prompt for WebHID connection when controllers detected
+    if (!isKeyboardMode && numPlayers >= 2 && !hidDevice?.opened && !webHIDPromptShown) {
+        webHIDPromptShown = true;
+        showWebHIDPrompt();
+    }
+}
+
+function updatePlayerReadyDisplay() {
+    const section = document.getElementById("player-ready-section");
+    const list = document.getElementById("player-ready-list");
+
+    const count = isKeyboardMode ? 4 : numPlayers;
+
+    if (count < 2) {
+        section.classList.add("hidden");
+        return;
+    }
+
+    section.classList.remove("hidden");
+    list.innerHTML = "";
+
+    // Initialize playerReady array if needed
+    if (playerReady.length !== count) {
+        playerReady = new Array(count).fill(false);
+    }
+
+    for (let i = 0; i < count; i++) {
+        const item = document.createElement("div");
+        item.className = `player-ready-item player-${i} ${playerReady[i] ? "ready" : "not-ready"}`;
+        item.textContent = `Player ${i + 1} ${playerReady[i] ? "✓" : "○"}`;
+        list.appendChild(item);
+    }
+
+    // Update start button based on ready count
+    updateStartButton();
+}
+
+function updateStartButton() {
+    const readyCount = playerReady.filter(r => r).length;
+
+    if (readyCount >= 2) {
+        startBtn.disabled = false;
+        startBtn.textContent = `Start Game (${readyCount} Players Ready)`;
+    } else if (numPlayers >= 2 || isKeyboardMode) {
+        startBtn.disabled = true;
+        startBtn.textContent = `Need at least 2 ready players (${readyCount} ready)`;
+    }
+}
+
+function enableKeyboardMode() {
+    isKeyboardMode = true;
+    numPlayers = 4; // Default to 4 players for keyboard
+    playerReady = [false, false, false, false];
+    updateControllerStatus();
+}
+
+// Gamepad events
+window.addEventListener("gamepadconnected", (e) => {
+    console.log("Gamepad connected:", e.gamepad);
+    updateControllerStatus();
+});
+
+window.addEventListener("gamepaddisconnected", (e) => {
+    console.log("Gamepad disconnected:", e.gamepad);
+    updateControllerStatus();
+});
+
+// Start game
+function startGame() {
+    // Check if worksheets are loaded
+    if (!window.WORKSHEETS_WITH_MC || window.WORKSHEETS_WITH_MC.length === 0) {
+        alert("⚠️ Worksheets not loaded yet. Please wait a moment and try again.");
+        return;
+    }
+
+    // Check if WebHID is connected for LED control
+    if (!isKeyboardMode && !hidDevice?.opened) {
+        const confirmStart = confirm(
+            "⚠️ WebHID device not connected!\n\n" +
+            "The game will work, but LED control won't be available.\n\n" +
+            "Click 'Cancel' to connect WebHID first, or 'OK' to continue without LEDs."
+        );
+
+        if (!confirmStart) {
+            // User wants to connect WebHID first
+            document.getElementById("connect-webhid-btn").scrollIntoView({ behavior: "smooth" });
+            document.getElementById("connect-webhid-btn").classList.add("pulse-animation");
+            setTimeout(() => {
+                document.getElementById("connect-webhid-btn").classList.remove("pulse-animation");
+            }, 2000);
+            return;
+        }
+    }
+
+    // Get only ready players
+    const readyPlayerIndices = [];
+    for (let i = 0; i < playerReady.length; i++) {
+        if (playerReady[i]) {
+            readyPlayerIndices.push(i);
+        }
+    }
+
+    if (readyPlayerIndices.length < 2) {
+        alert("At least 2 players must be ready to start!");
+        return;
+    }
+
+    // activePlayers contains the original controller indices of ready players
+    activePlayers = readyPlayerIndices;
+    const count = activePlayers.length;
+
+    // Initialize game state
+    currentQuestion = 1;
+    playerScores = new Array(count).fill(0);
+    playerCorrect = new Array(count).fill(0);
+    playerAnswers = new Array(count).fill(null);
+    worksheetQuestions = [];
+    currentQuestionIndex = 0;
+
+    setupScreen.classList.add("hidden");
+    gameScreen.classList.remove("hidden");
+    resultsScreen.classList.add("hidden");
+
+    setupPlayerPanels();
+    generateQuestionBatch(); // Generate all questions upfront
+    startRound();
+
+    if (!isKeyboardMode) {
+        startGamepadPolling();
+    }
+}
+
+function setupPlayerPanels() {
+    const panelsContainer = document.getElementById("player-panels");
+    panelsContainer.innerHTML = "";
+
+    for (let i = 0; i < activePlayers.length; i++) {
+        const controllerIndex = activePlayers[i]; // Original controller number
+        const panel = document.createElement("div");
+        panel.className = `player-panel player-${controllerIndex}`;
+        panel.style.background = playerColors[controllerIndex].bg;
+        panel.style.color = playerColors[controllerIndex].text;
+        panel.style.borderColor = playerColors[controllerIndex].border;
+
+        panel.innerHTML = `
+            <div class="player-name">Player ${controllerIndex + 1}</div>
+            <div class="player-score">${playerScores[i]}</div>
+            <div class="player-status"></div>
+            <div class="answer-indicator"></div>
+        `;
+
+        panelsContainer.appendChild(panel);
+    }
+}
+
+function startRound() {
+    // Reset round state
+    playerAnswers = new Array(activePlayers.length).fill(null);
+    buzzerPressed = false;
+    activePlayer = -1;
+    allAnswered = false;
+    frozenPlayers = []; // Reset frozen players for new question
+    answerTimes = new Array(activePlayers.length).fill(null);
+
+    // Clear any existing buzzer timer
+    if (buzzerTimer) {
+        clearInterval(buzzerTimer);
+        buzzerTimer = null;
+    }
+
+    // LED behavior depends on game mode
+    if (selectedMode === "all-answer") {
+        // All-answer mode: Turn on all active players' LEDs
+        for (let i = 0; i < activePlayers.length; i++) {
+            const controllerIndex = activePlayers[i];
+            setPlayerLED(controllerIndex, true);
+        }
+    } else {
+        // Buzzer mode: Turn off all LEDs (will light up when someone buzzes)
+        for (let i = 0; i < activePlayers.length; i++) {
+            const controllerIndex = activePlayers[i];
+            setPlayerLED(controllerIndex, false);
+        }
+    }
+
+    // Update question number
+    document.getElementById("question-num").textContent = currentQuestion;
+    document.getElementById("total-questions").textContent = totalQuestions;
+
+    // Generate question
+    generateQuestion();
+
+    // Clear player statuses
+    document.querySelectorAll(".player-panel").forEach((panel) => {
+        panel.classList.remove("active", "correct", "wrong");
+        panel.querySelector(".player-status").textContent = "";
+        const indicator = panel.querySelector(".answer-indicator");
+        indicator.textContent = "";
+        indicator.classList.remove("buzzer-active");
+    });
+
+    // Clear answer highlights
+    document.querySelectorAll(".answer-option").forEach((opt) => {
+        opt.classList.remove("correct", "wrong", "selected");
+    });
+
+    // Set up mode-specific UI
+    if (selectedMode === "buzzer") {
+        setupBuzzerMode();
+    } else {
+        setupAllAnswerMode();
+    }
+}
+
+// Question generation from worksheets
+function generateQuestion() {
+    // Wait for worksheets to load
+    if (!window.WORKSHEETS_WITH_MC || window.WORKSHEETS_WITH_MC.length === 0) {
+        console.error("No worksheets with multiple choice loaded");
+        document.getElementById("question-text").textContent = "Error loading questions";
+        return;
+    }
+
+    // Generate new batch of questions if needed
+    if (worksheetQuestions.length === 0) {
+        generateQuestionBatch();
+    }
+
+    if (worksheetQuestions.length === 0) {
+        document.getElementById("question-text").textContent = "Error generating questions";
+        return;
+    }
+
+    // Get next question
+    const problem = worksheetQuestions.shift();
+    const correctAnswer = problem.answer;
+    const wrongAnswers = problem.wrongAnswers || [];
+
+    // Shuffle answers
+    const allAnswers = shuffle([correctAnswer, ...wrongAnswers]);
+
+    currentQuestionData = {
+        question: problem.question,
+        questionHtml: problem.questionHtml,
+        answers: allAnswers,
+        correctIndex: allAnswers.indexOf(correctAnswer),
+        correctAnswer: correctAnswer,
+    };
+
+    // Display question
+    const questionElement = document.getElementById("question-text");
+    if (problem.questionHtml) {
+        questionElement.innerHTML = problem.questionHtml;
+    } else {
+        questionElement.textContent = problem.question;
+    }
+
+    // Display answers
+    allAnswers.forEach((answer, index) => {
+        const answerElement = document.getElementById(`answer-${index}`);
+        answerElement.textContent = answer;
+    });
+}
+
+function generateQuestionBatch() {
+    // Pick a random worksheet
+    if (!window.WORKSHEETS_WITH_MC || window.WORKSHEETS_WITH_MC.length === 0) {
+        console.error("No worksheets with multiple choice available");
+        worksheetQuestions = [];
+        return;
+    }
+
+    const worksheet = window.WORKSHEETS_WITH_MC[randInt(0, window.WORKSHEETS_WITH_MC.length - 1)];
+
+    // Use Math.random directly as the rand function
+    const rand = Math.random;
+
+    // Generate enough questions for the game
+    try {
+        worksheetQuestions = worksheet.generate(rand, selectedDifficulty, totalQuestions);
+    } catch (error) {
+        console.error("Error generating questions from worksheet:", error);
+        worksheetQuestions = [];
+    }
+}
+
+// Buzzer mode
+function setupBuzzerMode() {
+    const statusDiv = document.getElementById("game-status");
+    statusDiv.textContent = "🔴 First to buzz in!";
+    statusDiv.className = "game-status buzzer-waiting";
+
+    const timerContainer = document.getElementById("timer-container");
+    timerContainer.classList.add("hidden");
+}
+
+function handleBuzzerPress(playerIndex) {
+    if (selectedMode !== "buzzer") return;
+    if (buzzerPressed) return; // Someone already buzzing
+    if (frozenPlayers.includes(playerIndex)) return; // Player is frozen out
+
+    buzzerPressed = true;
+    activePlayer = playerIndex;
+
+    // Turn on LED for player who buzzed
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, true);
+
+    // Highlight active player
+    const panels = document.querySelectorAll(".player-panel");
+    panels[playerIndex].classList.add("active", "buzz-animation");
+
+    // Show big pulsing red buzzer indicator
+    panels[playerIndex].querySelector(".player-status").textContent = "🔴 Select your answer!";
+    const indicator = panels[playerIndex].querySelector(".answer-indicator");
+    indicator.textContent = "🔴";
+    indicator.classList.add("buzzer-active");
+
+    // Start countdown timer
+    buzzerTimeLeft = buzzerTimeLimit;
+    startBuzzerTimer();
+
+    // Update status
+    const statusDiv = document.getElementById("game-status");
+    statusDiv.textContent = `Player ${activePlayers[playerIndex] + 1} buzzed in! ${buzzerTimeLeft}s remaining...`;
+    statusDiv.className = "game-status buzzer-locked";
+}
+
+function startBuzzerTimer() {
+    if (buzzerTimer) clearInterval(buzzerTimer);
+
+    buzzerTimer = setInterval(() => {
+        buzzerTimeLeft--;
+
+        // Update status message
+        const statusDiv = document.getElementById("game-status");
+        statusDiv.textContent = `Player ${activePlayers[activePlayer] + 1} buzzed in! ${buzzerTimeLeft}s remaining...`;
+
+        if (buzzerTimeLeft <= 0) {
+            clearInterval(buzzerTimer);
+            buzzerTimer = null;
+            // Time's up! Freeze this player
+            freezePlayer(activePlayer, "Time's up!");
+        }
+    }, 1000);
+}
+
+function handleBuzzerAnswer(playerIndex, answerIndex) {
+    if (selectedMode !== "buzzer") return;
+    if (!buzzerPressed || playerIndex !== activePlayer) return;
+    if (playerAnswers[playerIndex] !== null) return;
+
+    // Stop the timer
+    if (buzzerTimer) {
+        clearInterval(buzzerTimer);
+        buzzerTimer = null;
+    }
+
+    playerAnswers[playerIndex] = answerIndex;
+
+    checkBuzzerAnswer(playerIndex, answerIndex);
+}
+
+function checkBuzzerAnswer(playerIndex, answerIndex) {
+    const isCorrect = answerIndex === currentQuestionData.correctIndex;
+
+    // Highlight answer
+    const answerOptions = document.querySelectorAll(".answer-option");
+    answerOptions[answerIndex].classList.add(
+        isCorrect ? "correct" : "wrong",
+    );
+
+    // Update player panel
+    const panel = document.querySelectorAll(".player-panel")[playerIndex];
+    panel.classList.remove("active");
+    panel.classList.add(isCorrect ? "correct" : "wrong");
+
+    // Remove buzzer animation
+    const indicator = panel.querySelector(".answer-indicator");
+    indicator.classList.remove("buzzer-active");
+
+    if (isCorrect) {
+        // Correct answer - award points and end round
+        playerScores[playerIndex] += 10;
+        playerCorrect[playerIndex]++;
+        panel.querySelector(".player-status").textContent = "✓ Correct!";
+        indicator.textContent = "✓";
+        panel.querySelector(".player-score").textContent = playerScores[playerIndex];
+
+        // Show correct answer
+        answerOptions[currentQuestionData.correctIndex].classList.add("correct");
+
+        // Turn off LED
+        const controllerIndex = activePlayers[playerIndex];
+        setPlayerLED(controllerIndex, false);
+
+        // Next round after delay
+        setTimeout(() => {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                startRound();
+            } else {
+                endGame();
+            }
+        }, 2000);
+    } else {
+        // Wrong answer - freeze this player and let others try
+        panel.querySelector(".player-status").textContent = "✗ Wrong - Frozen!";
+        indicator.textContent = "❄️";
+
+        freezePlayer(playerIndex, "Wrong answer!");
+    }
+}
+
+function freezePlayer(playerIndex, reason) {
+    // Add to frozen list
+    frozenPlayers.push(playerIndex);
+
+    // Turn off their LED
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, false);
+
+    // Update panel
+    const panel = document.querySelectorAll(".player-panel")[playerIndex];
+    panel.classList.add("wrong");
+    panel.querySelector(".player-status").textContent = `❄️ ${reason}`;
+    const indicator = panel.querySelector(".answer-indicator");
+    indicator.textContent = "❄️";
+    indicator.classList.remove("buzzer-active");
+
+    // Reset buzzer state to allow others to try
+    buzzerPressed = false;
+    activePlayer = -1;
+
+    // Check if all players are frozen
+    if (frozenPlayers.length >= activePlayers.length) {
+        // All frozen - show answer and move on
+        const answerOptions = document.querySelectorAll(".answer-option");
+        answerOptions[currentQuestionData.correctIndex].classList.add("correct");
+
+        const statusDiv = document.getElementById("game-status");
+        statusDiv.textContent = "All players frozen! No points awarded.";
+        statusDiv.className = "game-status";
+
+        setTimeout(() => {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                startRound();
+            } else {
+                endGame();
+            }
+        }, 3000);
+    } else {
+        // Let other players try
+        const statusDiv = document.getElementById("game-status");
+        statusDiv.textContent = `Player ${controllerIndex + 1} frozen! Others can buzz in...`;
+        statusDiv.className = "game-status buzzer-waiting";
+    }
+}
+
+// All-answer mode
+function setupAllAnswerMode() {
+    const statusDiv = document.getElementById("game-status");
+    statusDiv.textContent = "Select your answers!";
+    statusDiv.className = "game-status";
+
+    const timerContainer = document.getElementById("timer-container");
+    timerContainer.classList.remove("hidden");
+
+    timeLeft = allAnswerTimeLimit;
+    startTimer();
+}
+
+function startTimer() {
+    const timerBar = document.getElementById("timer-bar");
+    const timerText = document.getElementById("timer-text");
+
+    timerBar.style.width = "100%";
+    timerBar.classList.remove("warning", "danger");
+
+    questionStartTime = Date.now();
+    timerText.textContent = `${timeLeft}s`;
+
+    if (timerInterval) clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerText.textContent = `${timeLeft}s`;
+
+        const percentage = (timeLeft / allAnswerTimeLimit) * 100;
+        timerBar.style.width = percentage + "%";
+
+        if (timeLeft <= 5) {
+            timerBar.classList.add("danger");
+        } else if (timeLeft <= 10) {
+            timerBar.classList.add("warning");
+        }
+
+        if (timeLeft <= 0 || allAnswered) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            revealAnswers();
+        }
+    }, 1000);
+}
+
+function handleAllAnswer(playerIndex, answerIndex) {
+    if (selectedMode !== "all-answer") return;
+    if (playerAnswers[playerIndex] !== null) return;
+
+    playerAnswers[playerIndex] = answerIndex;
+    answerTimes[playerIndex] = Date.now() - questionStartTime; // Record time in milliseconds
+
+    // Turn off LED for this player (they've answered)
+    const controllerIndex = activePlayers[playerIndex];
+    setPlayerLED(controllerIndex, false);
+
+    // Show checkmark
+    const panel = document.querySelectorAll(".player-panel")[playerIndex];
+    panel.querySelector(".answer-indicator").textContent = "✓";
+    panel.querySelector(".player-status").textContent = "Answered";
+
+    // Check if all answered
+    allAnswered = playerAnswers.every((a) => a !== null);
+    if (allAnswered && timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        setTimeout(revealAnswers, 500);
+    }
+}
+
+function revealAnswers() {
+    // Highlight correct answer
+    const answerOptions = document.querySelectorAll(".answer-option");
+    answerOptions[currentQuestionData.correctIndex].classList.add("correct");
+
+    // Calculate speed bonuses for correct answers
+    const correctAnswers = [];
+    playerAnswers.forEach((answerIndex, playerIndex) => {
+        if (answerIndex === currentQuestionData.correctIndex && answerTimes[playerIndex] !== null) {
+            correctAnswers.push({
+                playerIndex: playerIndex,
+                time: answerTimes[playerIndex]
+            });
+        }
+    });
+
+    // Sort by time (fastest first)
+    correctAnswers.sort((a, b) => a.time - b.time);
+
+    // Calculate speed bonuses (5 points for fastest, decreasing to 0 for slowest)
+    const speedBonuses = {};
+    correctAnswers.forEach((entry, rank) => {
+        if (correctAnswers.length === 1) {
+            speedBonuses[entry.playerIndex] = 5; // Only one correct, full bonus
+        } else {
+            // Linear decrease from 5 to 0 based on rank
+            speedBonuses[entry.playerIndex] = Math.round(5 * (1 - rank / (correctAnswers.length - 1)));
+        }
+    });
+
+    // Check each player's answer
+    playerAnswers.forEach((answerIndex, playerIndex) => {
+        if (answerIndex === null) return;
+
+        const isCorrect = answerIndex === currentQuestionData.correctIndex;
+        const panel = document.querySelectorAll(".player-panel")[playerIndex];
+
+        panel.classList.add(isCorrect ? "correct" : "wrong");
+
+        if (isCorrect) {
+            const basePoints = 10;
+            const bonus = speedBonuses[playerIndex] || 0;
+            const totalPoints = basePoints + bonus;
+
+            playerScores[playerIndex] += totalPoints;
+            playerCorrect[playerIndex]++;
+
+            const statusText = bonus > 0
+                ? `✓ Correct! +${totalPoints} (+${bonus} speed)`
+                : "✓ Correct! +10";
+            panel.querySelector(".player-status").textContent = statusText;
+            panel.querySelector(".answer-indicator").textContent = "✓";
+        } else {
+            panel.querySelector(".player-status").textContent = "✗ Wrong";
+            panel.querySelector(".answer-indicator").textContent = "✗";
+            answerOptions[answerIndex].classList.add("wrong");
+        }
+
+        panel.querySelector(".player-score").textContent =
+            playerScores[playerIndex];
+    });
+
+    // Next round after delay
+    setTimeout(() => {
+        if (currentQuestion < totalQuestions) {
+            currentQuestion++;
+            startRound();
+        } else {
+            endGame();
+        }
+    }, 3000);
+}
+
+// End game and show results
+function endGame() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+
+    // Turn off all LEDs when game ends
+    setAllLEDs(false);
+
+    gameScreen.classList.add("hidden");
+    resultsScreen.classList.remove("hidden");
+
+    displayResults();
+    saveHighScore();
+}
+
+function displayResults() {
+    const podium = document.getElementById("results-podium");
+    const statsDiv = document.getElementById("results-stats");
+
+    podium.innerHTML = "";
+
+    // Create results with rankings
+    const results = activePlayers.map((controllerIndex, i) => ({
+        controllerIndex: controllerIndex, // Original controller number
+        activePlayerIndex: i, // Index in activePlayers array
+        score: playerScores[i],
+        correct: playerCorrect[i],
+    }));
+
+    results.sort((a, b) => b.score - a.score);
+
+    // Calculate proper ranks (handle ties)
+    let currentRank = 1;
+    results.forEach((result, index) => {
+        // If this player has a different score than the previous, update rank
+        if (index > 0 && result.score < results[index - 1].score) {
+            currentRank = index + 1;
+        }
+        result.displayRank = currentRank;
+    });
+
+    results.forEach((result, index) => {
+        const card = document.createElement("div");
+        card.className = `result-card player-${result.controllerIndex}`;
+        card.style.background = playerColors[result.controllerIndex].bg;
+        card.style.color = playerColors[result.controllerIndex].text;
+        card.style.borderColor = playerColors[result.controllerIndex].border;
+
+        const accuracy = Math.round((result.correct / totalQuestions) * 100);
+
+        // Check if this is a tie (same score as someone else with same rank)
+        const isTied = results.filter(r => r.displayRank === result.displayRank).length > 1;
+        const rankDisplay = isTied ? `T${result.displayRank}` : result.displayRank;
+
+        card.innerHTML = `
+            <div class="result-rank rank-${result.displayRank}">${rankDisplay}</div>
+            <div class="result-player-name">Player ${result.controllerIndex + 1}</div>
+            <div class="result-score">${result.score}</div>
+            <div class="result-stats">
+                ${result.correct}/${totalQuestions} correct (${accuracy}%)
+            </div>
+        `;
+
+        podium.appendChild(card);
+    });
+
+    // Winner announcement - handle ties
+    const topScore = results[0].score;
+    const winners = results.filter(r => r.score === topScore);
+
+    let winnerText;
+    if (winners.length === 1) {
+        winnerText = `🏆 Player ${winners[0].controllerIndex + 1} Wins!`;
+    } else if (winners.length === results.length) {
+        // All players tied
+        const playerNumbers = winners.map(w => w.controllerIndex + 1).join(", ");
+        winnerText = `🏆 It's a Draw! Players ${playerNumbers}`;
+    } else {
+        // Some players tied for first
+        const playerNumbers = winners.map(w => w.controllerIndex + 1).join(", ");
+        winnerText = `🏆 It's a Tie! Players ${playerNumbers}`;
+    }
+
+    statsDiv.innerHTML = `
+        <h3>${winnerText}</h3>
+        <p>Final Score: ${topScore} points</p>
+        <p>Mode: ${selectedMode === "buzzer" ? "Buzzer Race" : "All Answer"}</p>
+        <p>Difficulty: ${selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1)}</p>
+    `;
+}
+
+function saveHighScore() {
+    const key = `buzz-quiz-${selectedMode}-${selectedDifficulty}`;
+    const existingScores = JSON.parse(localStorage.getItem(key) || "[]");
+
+    existingScores.push({
+        scores: playerScores,
+        topScore: Math.max(...playerScores),
+        date: new Date().toISOString(),
+    });
+
+    existingScores.sort((a, b) => b.topScore - a.topScore);
+    const topScores = existingScores.slice(0, 5);
+
+    localStorage.setItem(key, JSON.stringify(topScores));
+}
+
+function resetToSetup() {
+    resultsScreen.classList.add("hidden");
+    setupScreen.classList.remove("hidden");
+    playerReady = [];
+    updateControllerStatus();
+}
+
+// Setup screen polling for player ready status
+let setupPollingActive = true;
+
+function pollSetupGamepads() {
+    if (!setupPollingActive) return;
+    if (!setupScreen.classList.contains("hidden")) {
+        const gps = navigator.getGamepads();
+
+        if (isHubMode) {
+            const gp = gps[0];
+            if (gp) {
+                // Initialize button state for hub mode
+                if (!previousButtonStates[0]) {
+                    previousButtonStates[0] = [];
+                }
+
+                for (let playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
+                    const buttonOffset = playerIndex * 5;
+                    const buzzerBtnIndex = buttonOffset + 0; // Buzzer is button 0
+
+                    if (gp.buttons[buzzerBtnIndex]) {
+                        const pressed = gp.buttons[buzzerBtnIndex].pressed;
+                        const wasPressedBefore = previousButtonStates[0][buzzerBtnIndex];
+
+                        if (pressed && !wasPressedBefore) {
+                            // Toggle ready status
+                            playerReady[playerIndex] = !playerReady[playerIndex];
+                            updatePlayerReadyDisplay();
+
+                            // Update LED to reflect ready status
+                            setPlayerLED(playerIndex, playerReady[playerIndex]);
+                        }
+
+                        previousButtonStates[0][buzzerBtnIndex] = pressed;
+                    }
+                }
+            }
+        } else if (!isKeyboardMode) {
+            // Separate gamepad mode
+            for (let i = 0; i < numPlayers; i++) {
+                const gp = gps[i];
+                if (!gp) continue;
+
+                // Initialize button state if needed
+                if (!previousButtonStates[i]) {
+                    previousButtonStates[i] = [];
+                }
+
+                // Check for buzzer button press (try multiple indices)
+                const buzzerButtons = [0, 4, 5, 6, 7, 8, 9];
+                for (const btnIndex of buzzerButtons) {
+                    if (gp.buttons[btnIndex]) {
+                        const pressed = gp.buttons[btnIndex].pressed;
+                        const wasPressedBefore = previousButtonStates[i][btnIndex];
+
+                        if (pressed && !wasPressedBefore) {
+                            // Toggle ready status
+                            playerReady[i] = !playerReady[i];
+                            updatePlayerReadyDisplay();
+
+                            // Update LED to reflect ready status
+                            setPlayerLED(i, playerReady[i]);
+                            break; // Only process first buzzer button
+                        }
+
+                        previousButtonStates[i][btnIndex] = pressed;
+                    }
+                }
+            }
+        }
+    }
+
+    requestAnimationFrame(pollSetupGamepads);
+}
+
+// Gamepad polling
+let pollingActive = false;
+
+function startGamepadPolling() {
+    if (pollingActive) return;
+    pollingActive = true;
+    pollGamepads();
+}
+
+function pollGamepads() {
+    if (!pollingActive) return;
+
+    const gps = navigator.getGamepads();
+
+    if (isHubMode) {
+        // Hub mode: single gamepad with buttons mapped to players
+        // Player 0: buttons 0-4, Player 1: buttons 5-9, Player 2: buttons 10-14, Player 3: buttons 15-19
+        // Button mapping per player: 0=Buzzer, 1=Yellow(D), 2=Green(C), 3=Orange(B), 4=Blue(A)
+        const gp = gps[0];
+        if (!gp) {
+            requestAnimationFrame(pollGamepads);
+            return;
+        }
+
+        // Initialize button state if needed
+        if (!previousButtonStates[0]) {
+            previousButtonStates[0] = [];
+        }
+
+        for (let i = 0; i < activePlayers.length; i++) {
+            const controllerIndex = activePlayers[i]; // Original controller number (0-3)
+            const buttonOffset = controllerIndex * 5;
+
+            // Check buzzer button (button 0 in each player's set)
+            const buzzerBtnIndex = buttonOffset + 0;
+            if (gp.buttons[buzzerBtnIndex]) {
+                const pressed = gp.buttons[buzzerBtnIndex].pressed;
+                const wasPressedBefore = previousButtonStates[0][buzzerBtnIndex];
+
+                if (pressed && !wasPressedBefore) {
+                    handleBuzzerPress(i); // i is the active player index
+                }
+
+                previousButtonStates[0][buzzerBtnIndex] = pressed;
+            }
+
+            // Check colored answer buttons
+            // Map: Blue(btn 4)→A(0), Orange(btn 3)→B(1), Green(btn 2)→C(2), Yellow(btn 1)→D(3)
+            const buttonMapping = [
+                { btnOffset: 4, answerIndex: 0 }, // Blue → A
+                { btnOffset: 3, answerIndex: 1 }, // Orange → B
+                { btnOffset: 2, answerIndex: 2 }, // Green → C
+                { btnOffset: 1, answerIndex: 3 }, // Yellow → D
+            ];
+
+            for (const mapping of buttonMapping) {
+                const btnIndex = buttonOffset + mapping.btnOffset;
+                if (gp.buttons[btnIndex]) {
+                    const pressed = gp.buttons[btnIndex].pressed;
+                    const wasPressedBefore = previousButtonStates[0][btnIndex];
+
+                    if (pressed && !wasPressedBefore) {
+                        if (selectedMode === "buzzer") {
+                            handleBuzzerAnswer(i, mapping.answerIndex); // i is the active player index
+                        } else {
+                            handleAllAnswer(i, mapping.answerIndex); // i is the active player index
+                        }
+                    }
+
+                    previousButtonStates[0][btnIndex] = pressed;
+                }
+            }
+        }
+    } else {
+        // Separate gamepad mode: each player has their own gamepad
+        // activePlayers contains the controller indices that are ready
+        for (let i = 0; i < activePlayers.length; i++) {
+            const controllerIndex = activePlayers[i];
+            const gp = gps[controllerIndex];
+            if (!gp) continue;
+
+            // Initialize button state if needed
+            if (!previousButtonStates[controllerIndex]) {
+                previousButtonStates[controllerIndex] = [];
+            }
+
+            // Check buzzer button (button 4 or higher index buttons)
+            // Try multiple button indices as different controllers may vary
+            const buzzerButtons = [4, 5, 6, 7, 8, 9];
+            for (const btnIndex of buzzerButtons) {
+                if (gp.buttons[btnIndex]) {
+                    const pressed = gp.buttons[btnIndex].pressed;
+                    const wasPressedBefore = previousButtonStates[controllerIndex][btnIndex];
+
+                    if (pressed && !wasPressedBefore) {
+                        handleBuzzerPress(i); // i is the active player index
+                    }
+
+                    previousButtonStates[controllerIndex][btnIndex] = pressed;
+                }
+            }
+
+            // Check colored answer buttons (0-3 for A, B, C, D)
+            for (let b = 0; b < 4; b++) {
+                if (gp.buttons[b]) {
+                    const pressed = gp.buttons[b].pressed;
+                    const wasPressedBefore = previousButtonStates[controllerIndex][b];
+
+                    if (pressed && !wasPressedBefore) {
+                        if (selectedMode === "buzzer") {
+                            handleBuzzerAnswer(i, b); // i is the active player index
+                        } else {
+                            handleAllAnswer(i, b); // i is the active player index
+                        }
+                    }
+
+                    previousButtonStates[controllerIndex][b] = pressed;
+                }
+            }
+        }
+    }
+
+    requestAnimationFrame(pollGamepads);
+}
+
+// Keyboard fallback
+document.addEventListener("keydown", (e) => {
+    if (!isKeyboardMode) return;
+
+    const key = e.key.toLowerCase();
+
+    // Handle player ready on setup screen
+    if (!setupScreen.classList.contains("hidden")) {
+        if (key === " ") {
+            e.preventDefault();
+            playerReady[0] = !playerReady[0];
+            updatePlayerReadyDisplay();
+            setPlayerLED(0, playerReady[0]);
+        } else if (key === "enter") {
+            e.preventDefault();
+            playerReady[1] = !playerReady[1];
+            updatePlayerReadyDisplay();
+            setPlayerLED(1, playerReady[1]);
+        } else if (key === "shift") {
+            e.preventDefault();
+            playerReady[2] = !playerReady[2];
+            updatePlayerReadyDisplay();
+            setPlayerLED(2, playerReady[2]);
+        } else if (key === "control") {
+            e.preventDefault();
+            playerReady[3] = !playerReady[3];
+            updatePlayerReadyDisplay();
+            setPlayerLED(3, playerReady[3]);
+        }
+        return;
+    }
+
+    // Map controller indices to active player indices
+    const getActivePlayerIndex = (controllerIndex) => {
+        return activePlayers.indexOf(controllerIndex);
+    };
+
+    // Player 1 (Controller 0): Q/W/E/R for ABCD, Space for buzzer
+    const p0Index = getActivePlayerIndex(0);
+    if (p0Index !== -1) {
+        if (key === " ") {
+            e.preventDefault();
+            handleBuzzerPress(p0Index);
+        } else if (key === "q") handleAnswer(p0Index, 0);
+        else if (key === "w") handleAnswer(p0Index, 1);
+        else if (key === "e") handleAnswer(p0Index, 2);
+        else if (key === "r") handleAnswer(p0Index, 3);
+    }
+
+    // Player 2 (Controller 1): U/I/O/P for ABCD, Enter for buzzer
+    const p1Index = getActivePlayerIndex(1);
+    if (p1Index !== -1) {
+        if (key === "enter") {
+            e.preventDefault();
+            handleBuzzerPress(p1Index);
+        } else if (key === "u") handleAnswer(p1Index, 0);
+        else if (key === "i") handleAnswer(p1Index, 1);
+        else if (key === "o") handleAnswer(p1Index, 2);
+        else if (key === "p") handleAnswer(p1Index, 3);
+    }
+
+    // Player 3 (Controller 2): A/S/D/F for ABCD, Shift for buzzer
+    const p2Index = getActivePlayerIndex(2);
+    if (p2Index !== -1) {
+        if (key === "shift") {
+            e.preventDefault();
+            handleBuzzerPress(p2Index);
+        } else if (key === "a") handleAnswer(p2Index, 0);
+        else if (key === "s") handleAnswer(p2Index, 1);
+        else if (key === "d") handleAnswer(p2Index, 2);
+        else if (key === "f") handleAnswer(p2Index, 3);
+    }
+
+    // Player 4 (Controller 3): J/K/L/; for ABCD, Ctrl for buzzer
+    const p3Index = getActivePlayerIndex(3);
+    if (p3Index !== -1) {
+        if (key === "control") {
+            e.preventDefault();
+            handleBuzzerPress(p3Index);
+        } else if (key === "j") handleAnswer(p3Index, 0);
+        else if (key === "k") handleAnswer(p3Index, 1);
+        else if (key === "l") handleAnswer(p3Index, 2);
+        else if (key === ";") handleAnswer(p3Index, 3);
+    }
+});
+
+function handleAnswer(playerIndex, answerIndex) {
+    if (selectedMode === "buzzer") {
+        handleBuzzerAnswer(playerIndex, answerIndex);
+    } else {
+        handleAllAnswer(playerIndex, answerIndex);
+    }
+}
+
+// Debug panel
+let debugPanelVisible = false;
+
+function toggleDebugPanel() {
+    debugPanelVisible = !debugPanelVisible;
+    const debugInfo = document.getElementById("debug-info");
+    const toggleBtn = document.getElementById("toggle-debug-btn");
+
+    if (debugPanelVisible) {
+        debugInfo.classList.remove("hidden");
+        toggleBtn.textContent = "🔧 Hide Controller Debug Info";
+        startDebugPolling();
+    } else {
+        debugInfo.classList.add("hidden");
+        toggleBtn.textContent = "🔧 Show Controller Debug Info";
+    }
+}
+
+document.getElementById("toggle-debug-btn").addEventListener("click", toggleDebugPanel);
+
+// Keyboard shortcut: Press "d" to toggle debug and WebHID panels
+let debugSectionsVisible = false;
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "d" || e.key === "D") {
+        debugSectionsVisible = !debugSectionsVisible;
+        const webhidPanel = document.querySelector(".webhid-panel");
+        const debugPanel = document.querySelector(".debug-panel");
+
+        if (debugSectionsVisible) {
+            webhidPanel.classList.remove("hidden");
+            debugPanel.classList.remove("hidden");
+        } else {
+            webhidPanel.classList.add("hidden");
+            debugPanel.classList.add("hidden");
+        }
+    }
+});
+
+function startDebugPolling() {
+    if (!debugPanelVisible) return;
+
+    updateDebugInfo();
+    requestAnimationFrame(startDebugPolling);
+}
+
+function updateDebugInfo() {
+    const debugOutput = document.getElementById("debug-output");
+    const gps = navigator.getGamepads();
+
+    let html = "";
+
+    if (isHubMode) {
+        // Hub mode: show single hub with player sections
+        const gp = gps[0];
+        if (gp) {
+            html += `
+                <div class="gamepad-debug">
+                    <h4>Buzz Controller Hub</h4>
+                    <div class="gamepad-name">ID: ${gp.id}</div>
+                    <div class="gamepad-name">Total Buttons: ${gp.buttons.length} | Axes: ${gp.axes.length}</div>
+                    <div style="margin-top: 15px; color: #81c784;">Player Button Mapping:</div>
+            `;
+
+            // Show each player's section
+            for (let p = 0; p < numPlayers; p++) {
+                const playerColor = playerColors[p];
+                const buttonStart = p * 5;
+                const buttonEnd = buttonStart + 4;
+
+                html += `
+                    <div style="margin: 15px 0; padding: 10px; background: ${playerColor.bg}; border-left: 4px solid ${playerColor.border}; border-radius: 5px;">
+                        <div style="color: ${playerColor.text}; font-weight: bold; margin-bottom: 5px;">
+                            Player ${p + 1} (${playerColor.name}) - Buttons ${buttonStart}-${buttonEnd}
+                        </div>
+                        <div class="button-grid">
+                `;
+
+                for (let b = 0; b < 5; b++) {
+                    const btnIndex = buttonStart + b;
+                    const pressed = gp.buttons[btnIndex].pressed;
+                    const value = gp.buttons[btnIndex].value.toFixed(2);
+
+                    let btnLabel = "BTN " + btnIndex;
+                    if (b === 0) btnLabel += " 🔴";
+                    else if (b === 1) btnLabel += " 🟡";
+                    else if (b === 2) btnLabel += " 🟢";
+                    else if (b === 3) btnLabel += " 🟠";
+                    else if (b === 4) btnLabel += " 🔵";
+
+                    // Keep buzzer lit if this player buzzed in and hasn't answered yet
+                    // activePlayer is an index into activePlayers, so get the controller index
+                    const activeControllerIndex = activePlayer >= 0 ? activePlayers[activePlayer] : -1;
+                    const isBuzzerLit = (b === 0 && selectedMode === "buzzer" && activeControllerIndex === p && buzzerPressed);
+                    const isPressed = pressed || isBuzzerLit;
+
+                    html += `
+                        <div class="button-state ${isPressed ? "pressed" : ""}">
+                            <div class="button-number">${btnLabel}</div>
+                            <div class="button-value">${value}</div>
+                        </div>
+                    `;
+                }
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                </div>
+            `;
+        } else {
+            html += `
+                <div class="gamepad-debug" style="opacity: 0.5; border-left-color: #f44336;">
+                    <h4>Buzz Controller Hub</h4>
+                    <div class="gamepad-name">Not connected</div>
+                    <div style="color: #ef5350; margin-top: 10px;">
+                        Connect Buzz controller hub and press any button
+                    </div>
+                </div>
+            `;
+        }
+    } else {
+        // Separate gamepad mode: show each gamepad separately
+        for (let i = 0; i < 4; i++) {
+            const gp = gps[i];
+
+            if (gp) {
+                html += `
+                    <div class="gamepad-debug">
+                        <h4>Gamepad ${i + 1}</h4>
+                        <div class="gamepad-name">ID: ${gp.id}</div>
+                        <div class="gamepad-name">Buttons: ${gp.buttons.length} | Axes: ${gp.axes.length}</div>
+                        <div class="button-grid">
+                `;
+
+                // Show all buttons
+                for (let b = 0; b < gp.buttons.length; b++) {
+                    const pressed = gp.buttons[b].pressed;
+                    const value = gp.buttons[b].value.toFixed(2);
+                    html += `
+                        <div class="button-state ${pressed ? "pressed" : ""}">
+                            <div class="button-number">BTN ${b}</div>
+                            <div class="button-value">${value}</div>
+                        </div>
+                    `;
+                }
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="gamepad-debug" style="opacity: 0.5; border-left-color: #f44336;">
+                        <h4>Gamepad ${i + 1}</h4>
+                        <div class="gamepad-name">Not connected</div>
+                        <div style="color: #ef5350; margin-top: 10px;">
+                            Press any button on gamepad ${i + 1} to activate it
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    debugOutput.innerHTML = html;
+}
+
+// Initialize
+updateControllerStatus();
+setInterval(updateControllerStatus, 1000);
+pollSetupGamepads(); // Start polling for player ready status
+
+// Prevent right-click menu
+document.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+});
+
+// ============================================
+// WebHID LED Control (Experimental)
+// ============================================
+
+// Check if WebHID is supported
+function checkWebHIDSupport() {
+    if (!("hid" in navigator)) {
+        document.getElementById("webhid-status").innerHTML = `
+            <div style="color: #f44336; padding: 10px; background: #ffcdd2; border-radius: 5px;">
+                ❌ WebHID API not supported in this browser.<br>
+                Please use Chrome or Edge (version 89+)
+            </div>
+        `;
+        return false;
+    }
+    return true;
+}
+
+// Show WebHID prompt when controllers detected
+function showWebHIDPrompt() {
+    if (!checkWebHIDSupport()) return;
+    if (hidDevice?.opened) return; // Already connected
+
+    // Create notification banner
+    const banner = document.createElement('div');
+    banner.id = 'webhid-prompt-banner';
+    banner.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        z-index: 10000;
+        text-align: center;
+        max-width: 500px;
+        animation: slideDown 0.3s ease-out;
+    `;
+
+    banner.innerHTML = `
+        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">
+            🎮 Buzz Controllers Detected!
+        </div>
+        <div style="margin-bottom: 15px; opacity: 0.95;">
+            Enable LED control for a better experience
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="webhid-prompt-connect" style="
+                background: #4caf50;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 1.1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+            ">
+                ✨ Enable LEDs
+            </button>
+            <button id="webhid-prompt-dismiss" style="
+                background: rgba(255,255,255,0.2);
+                color: white;
+                border: 2px solid white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 1.1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+            ">
+                Skip
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(banner);
+
+    // Add animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Connect button
+    document.getElementById('webhid-prompt-connect').addEventListener('click', async () => {
+        banner.remove();
+        await connectWebHID();
+    });
+
+    // Dismiss button
+    document.getElementById('webhid-prompt-dismiss').addEventListener('click', () => {
+        banner.style.animation = 'slideDown 0.3s ease-out reverse';
+        setTimeout(() => banner.remove(), 300);
+    });
+}
+
+// Connect to HID devices
+async function connectWebHID() {
+    if (!checkWebHIDSupport()) return;
+
+    try {
+        const webhidInfo = document.getElementById("webhid-info");
+        webhidInfo.classList.remove("hidden");
+
+        // Request HID device (Sony vendor ID for PlayStation devices)
+        const devices = await navigator.hid.requestDevice({
+            filters: [
+                { vendorId: 0x054c }, // Sony
+                { vendorId: 0x0e8f }, // Logitech (some Buzz controllers)
+            ],
+        });
+
+        if (devices.length === 0) {
+            updateWebHIDStatus("No devices selected");
+            return;
+        }
+
+        hidDevice = devices[0];
+        updateWebHIDStatus(`✅ Connected: ${hidDevice.productName || "Unknown Device"}`);
+
+        // Open the device
+        if (!hidDevice.opened) {
+            await hidDevice.open();
+        }
+
+        // Display device information
+        displayHIDInfo(hidDevice);
+
+        // Set up input report listener
+        hidDevice.addEventListener("inputreport", (event) => {
+            const { data, reportId } = event;
+            console.log("Input Report ID:", reportId, "Data:", new Uint8Array(data.buffer));
+        });
+
+        // Sync LEDs with current player ready states
+        if (!setupScreen.classList.contains("hidden")) {
+            // Set ALL LED states to match ready status
+            for (let i = 0; i < 4; i++) {
+                const isReady = playerReady[i] === true;
+                setPlayerLED(i, isReady);
+            }
+        }
+
+    } catch (error) {
+        console.error("WebHID Error:", error);
+        updateWebHIDStatus(`Error: ${error.message}`);
+        webHIDPromptShown = false; // Allow retry
+    }
+}
+
+// Manual connection button
+document.getElementById("connect-webhid-btn").addEventListener("click", async () => {
+    await connectWebHID();
+});
+
+function updateWebHIDStatus(message) {
+    document.getElementById("webhid-status").innerHTML = `
+        <div style="padding: 10px; background: #37474f; border-radius: 5px; margin-bottom: 10px;">
+            ${message}
+        </div>
+    `;
+}
+
+function displayHIDInfo(device) {
+    const output = document.getElementById("webhid-output");
+
+    let html = `
+        <div style="background: #37474f; padding: 15px; border-radius: 8px; margin-top: 10px;">
+            <h4 style="color: #4caf50; margin-top: 0;">Device Details</h4>
+            <div style="color: #b0bec5; font-size: 0.9em; line-height: 1.8;">
+                <strong>Product:</strong> ${device.productName || "Unknown"}<br>
+                <strong>Vendor ID:</strong> 0x${device.vendorId.toString(16).padStart(4, '0')}<br>
+                <strong>Product ID:</strong> 0x${device.productId.toString(16).padStart(4, '0')}<br>
+                <strong>Collections:</strong> ${device.collections.length}<br>
+            </div>
+        </div>
+
+        <div style="background: #37474f; padding: 15px; border-radius: 8px; margin-top: 10px;">
+            <h4 style="color: #4caf50; margin-top: 0;">Output Reports (For LED Control)</h4>
+            <div style="color: #b0bec5; font-size: 0.85em; line-height: 1.6;">
+    `;
+
+    device.collections.forEach((collection, idx) => {
+        html += `<strong>Collection ${idx}:</strong><br>`;
+        html += `&nbsp;&nbsp;Usage: 0x${collection.usage.toString(16)} (Page: 0x${collection.usagePage.toString(16)})<br>`;
+
+        if (collection.outputReports && collection.outputReports.length > 0) {
+            collection.outputReports.forEach(report => {
+                html += `&nbsp;&nbsp;📤 Output Report ID: ${report.reportId}, Size: ${report.items.length} items<br>`;
+                report.items.forEach((item, i) => {
+                    html += `&nbsp;&nbsp;&nbsp;&nbsp;Item ${i}: ${item.reportSize} bits, Count: ${item.reportCount}<br>`;
+                });
+            });
+        } else {
+            html += `&nbsp;&nbsp;No output reports found<br>`;
+        }
+    });
+
+    html += `
+            </div>
+        </div>
+    `;
+
+    output.innerHTML = html;
+}
+
+// LED control functions - EXPERIMENTAL
+// These are attempts to control LEDs. The exact protocol is unknown.
+
+async function setPlayerLED(playerIndex, state) {
+    if (!hidDevice || !hidDevice.opened) {
+        return; // Silently fail if not connected
+    }
+
+    try {
+        // CONFIRMED WORKING PROTOCOL:
+        // Report ID: 0 (7 bytes)
+        // Byte position playerIndex+1 controls that player's LED
+        // Player 1: byte[1], Player 2: byte[2], Player 3: byte[3], Player 4: byte[4]
+        // IMPORTANT: Must send ALL LED states at once (0x00 turns off LEDs)
+
+        // Update the state for this player
+        ledStates[playerIndex] = state;
+
+        // Build data array with ALL current LED states
+        const data = new Uint8Array(7);
+        for (let i = 0; i < 4; i++) {
+            data[i + 1] = ledStates[i] ? 0xff : 0x00;
+        }
+
+        await hidDevice.sendReport(0, data);
+        console.log(`Player ${playerIndex + 1} LED ${state ? "ON" : "OFF"}`);
+    } catch (error) {
+        console.error("LED Control Error:", error);
+    }
+}
+
+async function setAllLEDs(state) {
+    if (!hidDevice || !hidDevice.opened) {
+        return; // Silently fail if not connected
+    }
+
+    try {
+        // Update all LED states
+        for (let i = 0; i < 4; i++) {
+            ledStates[i] = state;
+        }
+
+        // Build data array with all LEDs in same state
+        const data = new Uint8Array(7);
+        for (let i = 0; i < 4; i++) {
+            data[i + 1] = state ? 0xff : 0x00;
+        }
+
+        await hidDevice.sendReport(0, data);
+        console.log(`All LEDs ${state ? "ON" : "OFF"}`);
+    } catch (error) {
+        console.error("LED Control Error:", error);
+    }
+}
+
+// LED test button handlers
+document.querySelectorAll(".led-test-btn[data-player]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        const playerIndex = parseInt(btn.dataset.player);
+        await setPlayerLED(playerIndex, true);
+
+        // Auto-turn off after 2 seconds
+        setTimeout(() => setPlayerLED(playerIndex, false), 2000);
+    });
+});
+
+document.getElementById("led-all-off-btn").addEventListener("click", async () => {
+    for (let i = 0; i < 4; i++) {
+        await setPlayerLED(i, false);
+    }
+});
+
+// LED control is integrated directly into game functions
+// - Setup: LEDs show ready status
+// - Buzzer mode: LED turns on when player buzzes, off when frozen or answered
+// - All-answer mode: LEDs on at question start, off when answered
+// - Game end: All LEDs off
