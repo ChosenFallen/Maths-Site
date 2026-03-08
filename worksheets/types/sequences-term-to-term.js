@@ -63,7 +63,16 @@ function generateArithmetic(rand, difficulty) {
     const terms = [a1, a1 + d, a1 + 2 * d, a1 + 3 * d, a1 + 4 * d];
     const question = terms.map(formatNum).join(", ") + ", ...";
     const answer = d > 0 ? `Add ${d}` : `Subtract ${Math.abs(d)}`;
-    return { question, answer };
+
+    // Wrong answers: common mistakes
+    const wrongAnswers = [];
+    const wrongD = d > 0 ? d - 1 : d + 1; // off by 1
+    wrongAnswers.push(wrongD > 0 ? `Add ${wrongD}` : `Subtract ${Math.abs(wrongD)}`);
+    wrongAnswers.push(d > 0 ? `Subtract ${d}` : `Add ${Math.abs(d)}`); // wrong operation
+    const wrongD2 = d > 0 ? d + 1 : d - 1; // off by 1 other direction
+    wrongAnswers.push(wrongD2 > 0 ? `Add ${wrongD2}` : `Subtract ${Math.abs(wrongD2)}`);
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }
 
 function generateGeometric(rand, difficulty) {
@@ -90,7 +99,22 @@ function generateGeometric(rand, difficulty) {
     const terms = [a1, a1 * r, a1 * r ** 2, a1 * r ** 3, a1 * r ** 4];
     const question = terms.map(n => `${n}`).join(", ") + ", ...";
     const answer = r === 0.5 ? "Divide by 2" : `Multiply by ${r}`;
-    return { question, answer };
+
+    // Wrong answers: common mistakes
+    const wrongAnswers = [];
+    if (r === 0.5) {
+        wrongAnswers.push("Multiply by 2"); // opposite operation
+        wrongAnswers.push("Divide by 3");
+        wrongAnswers.push("Subtract 2");
+    } else {
+        const wrongR = r > 1 ? r - 1 : r + 1;
+        wrongAnswers.push(`Multiply by ${wrongR}`); // off by 1
+        wrongAnswers.push(`Divide by ${r}`); // opposite operation
+        const wrongR2 = r > 1 ? r + 1 : r - 1;
+        wrongAnswers.push(`Multiply by ${wrongR2}`);
+    }
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }
 
 function formatNum(n) {

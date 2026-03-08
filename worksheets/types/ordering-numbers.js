@@ -60,5 +60,19 @@ function generateProblem(rand, difficulty) {
     const question = `Order from smallest to largest: ${originalOrder}`;
     const answer = sortedOrder;
 
-    return { question, answer };
+    // Wrong answers: common ordering mistakes
+    const wrongAnswers = [];
+    // Mistake 1: reverse order (largest to smallest)
+    const reversedOrder = [...sortedNumbers].reverse().join(", ");
+    wrongAnswers.push(reversedOrder);
+    // Mistake 2: swap first two
+    const swapped = [...sortedNumbers];
+    if (swapped.length > 1) {
+        [swapped[0], swapped[1]] = [swapped[1], swapped[0]];
+        wrongAnswers.push(swapped.join(", "));
+    }
+    // Mistake 3: keep original order
+    wrongAnswers.push(originalOrder);
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }

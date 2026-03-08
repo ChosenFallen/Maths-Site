@@ -94,7 +94,18 @@ function buildProblem(terms, missingPos) {
     const display = terms.map((t, i) => i === missingPos ? "___" : formatNum(t));
     const question = display.join(", ");
     const answer = formatNum(missingValue);
-    return { question, answer };
+
+    // Generate wrong answers based on common mistakes
+    const wrongAnswers = [];
+    // Mistake 1: off by 1 error
+    wrongAnswers.push(formatNum(missingValue + 1));
+    // Mistake 2: off by -1 error
+    wrongAnswers.push(formatNum(missingValue - 1));
+    // Mistake 3: used adjacent term instead
+    const adjacentPos = missingPos > 0 ? missingPos - 1 : missingPos + 1;
+    wrongAnswers.push(formatNum(terms[adjacentPos]));
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }
 
 function formatNum(n) {

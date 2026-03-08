@@ -63,7 +63,15 @@ export default {
                 b,
                 dp,
             )}`;
-            problems.push({ question, answer, answerKeyHtml: answerKey });
+
+            // Wrong answers (3 comparison symbols + "None")
+            const wrongAnswers = [];
+            if (answer !== "=") wrongAnswers.push("=");
+            if (answer !== ">") wrongAnswers.push(">");
+            if (answer !== "<") wrongAnswers.push("<");
+            wrongAnswers.push("None"); // placeholder for 3 wrong answers
+
+            problems.push({ question, answer, answerKeyHtml: answerKey, wrongAnswers: wrongAnswers.slice(0, 3) });
         }
 
         return problems;

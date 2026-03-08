@@ -63,7 +63,18 @@ function generateContinue(rand, difficulty, direction) {
 
     const question = terms.map(formatNum).join(", ") + ", ___, ___";
     const answer = next.map(formatNum).join(", ");
-    return { question, answer };
+
+    // Generate wrong answers
+    const wrongAnswers = [];
+    // Mistake 1: used wrong common difference (off by 1)
+    const wrongD = d + (d > 0 ? -1 : 1);
+    wrongAnswers.push(formatNum(a1 + 4 * wrongD) + ", " + formatNum(a1 + 5 * wrongD));
+    // Mistake 2: only got one term right
+    wrongAnswers.push(formatNum(a1 + 4 * d) + ", " + formatNum(a1 + 4 * d + d + 1));
+    // Mistake 3: repeated the last term instead of continuing
+    wrongAnswers.push(formatNum(a1 + 3 * d) + ", " + formatNum(a1 + 3 * d));
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }
 
 function formatNum(n) {

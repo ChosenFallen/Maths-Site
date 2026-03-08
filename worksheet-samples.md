@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-08T00:20:03.769Z
+Generated: 2026-03-08T00:39:28.677Z
 
 ---
 
@@ -94,6 +94,21 @@ Generated: 2026-03-08T00:20:03.769Z
 
 ---
 
+## Ordering Numbers
+**ID**: ordering-numbers
+**Grades**: Easy=2, Normal=3, Hard=4
+
+**Question**: Order from smallest to largest: 490, 154, 243, 409, 255
+
+**Answer**: 154, 243, 255, 409, 490
+
+**Wrong Answers**:
+- 490, 409, 255, 243, 154
+- 243, 154, 255, 409, 490
+- 490, 154, 243, 409, 255
+
+---
+
 ## Triangular Numbers
 **ID**: triangular-numbers
 **Grades**: Easy=4, Normal=5, Hard=6
@@ -106,6 +121,21 @@ Generated: 2026-03-08T00:20:03.769Z
 - 2
 - 0
 - -1
+
+---
+
+## Ordering Negative Numbers
+**ID**: negative-numbers-ordering
+**Grades**: Easy=3, Normal=4, Hard=4
+
+**Question**: Order from smallest to largest: 96, −39, −3, 64, 2
+
+**Answer**: −39, −3, 2, 64, 96
+
+**Wrong Answers**:
+- 96, 64, 2, −3, −39
+- 2, 3, 39, 64, 96
+- 96, −39, −3, 64, 2
 
 ---
 
@@ -304,6 +334,21 @@ Generated: 2026-03-08T00:20:03.769Z
 
 ---
 
+## Compare Fractions
+**ID**: fraction-compare
+**Grades**: Easy=4, Normal=5, Hard=5
+
+**Question**: <span class="frac"><span class="top">6</span><span class="bottom">12</span></span>  ?  <span class="frac"><span class="top">4</span><span class="bottom">5</span></span>
+
+**Answer**: <
+
+**Wrong Answers**:
+- =
+- >
+- None
+
+---
+
 ## Multiply/Divide Decimals
 **ID**: decimal-mul-div
 **Grades**: Easy=4, Normal=5, Hard=6
@@ -316,6 +361,21 @@ Generated: 2026-03-08T00:20:03.769Z
 - 10.69
 - 8.69
 - 19.38
+
+---
+
+## Compare Decimals
+**ID**: decimal-compare
+**Grades**: Easy=3, Normal=4, Hard=5
+
+**Question**: 25.48  ?  25.48
+
+**Answer**: =
+
+**Wrong Answers**:
+- >
+- <
+- None
 
 ---
 
@@ -1063,7 +1123,7 @@ when x = 7
 **Grades**: Easy=4, Normal=5, Hard=6
 
 **Question**: 
-        <svg width="100%" height="74" viewBox="0 0 175 74" style="max-width: 175px; display: block;">
+        <svg width="100%" height="96" viewBox="0 0 175 96" style="max-width: 175px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -1074,7 +1134,7 @@ when x = 7
                 x="10"
                 y="6"
                 width="75"
-                height="37.5"
+                height="60"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -1083,9 +1143,9 @@ when x = 7
             <!-- Width label (bottom) -->
             <line
                 x1="10"
-                y1="55.5"
+                y1="78"
                 x2="85"
-                y2="55.5"
+                y2="78"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1093,13 +1153,13 @@ when x = 7
             />
             <text
                 x="47.5"
-                y="71.5"
+                y="94"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                12 m
+                7.5 m
             </text>
 
             <!-- Height label (right) -->
@@ -1107,7 +1167,7 @@ when x = 7
                 x1="97"
                 y1="6"
                 x2="97"
-                y2="43.5"
+                y2="66"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1115,7 +1175,7 @@ when x = 7
             />
             <text
                 x="113"
-                y="24.75"
+                y="36"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -1127,12 +1187,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 72 m²
+**Answer**: 45 m²
 
 **Wrong Answers**:
-- 73 m²
-- 71 m²
-- 144 m²
+- 46 m²
+- 44 m²
+- 90 m²
 
 ---
 
@@ -1141,7 +1201,7 @@ when x = 7
 **Grades**: Easy=5, Normal=6, Hard=7
 
 **Question**: 
-        <svg width="100%" height="89" viewBox="0 0 145 89" style="max-width: 145px; display: block;">
+        <svg width="100%" height="112" viewBox="0 0 145 112" style="max-width: 145px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -1150,7 +1210,7 @@ when x = 7
 
             <!-- Triangle -->
             <polygon
-                points="10,59 100,59 55,14"
+                points="10,82 100,82 55,14.5"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -1159,9 +1219,9 @@ when x = 7
             <!-- Base label (bottom) -->
             <line
                 x1="10"
-                y1="71"
+                y1="94"
                 x2="100"
-                y2="71"
+                y2="94"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1169,21 +1229,21 @@ when x = 7
             />
             <text
                 x="55"
-                y="87"
+                y="110"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                12 m
+                8 m
             </text>
 
             <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="55"
-                y1="14"
+                y1="14.5"
                 x2="55"
-                y2="59"
+                y2="82"
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
@@ -1192,7 +1252,7 @@ when x = 7
             />
             <text
                 x="83"
-                y="36.5"
+                y="48.25"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -1204,12 +1264,27 @@ when x = 7
         </svg>
     
 
-**Answer**: 36 m²
+**Answer**: 24 m²
 
 **Wrong Answers**:
-- 37 m²
-- 35 m²
-- 72 m²
+- 25 m²
+- 23 m²
+- 48 m²
+
+---
+
+## Continue Arithmetic Sequences
+**ID**: sequences-continue
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: 15, 11, 7, 3, ___, ___
+
+**Answer**: −1, −5
+
+**Wrong Answers**:
+- 3, 0
+- −1, −4
+- 3, 3
 
 ---
 
@@ -1225,6 +1300,66 @@ when x = 7
 - −4n
 - −3n + 3
 - −1
+
+---
+
+## Geometric Sequences
+**ID**: sequences-geometric
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: 1, 2, 4, 8, ___, ___
+
+**Answer**: 16, 32
+
+**Wrong Answers**:
+- 1, 1
+- 8, 16
+- 9, 10
+
+---
+
+## Missing Terms in Sequences
+**ID**: sequences-missing-term
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: 25, 31, ___, 43, 49
+
+**Answer**: 37
+
+**Wrong Answers**:
+- 38
+- 36
+- 31
+
+---
+
+## Fibonacci-type Sequences
+**ID**: sequences-fibonacci
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: 8, 3, 11, 14, 25, 39, ___, ___
+
+**Answer**: 64, 103
+
+**Wrong Answers**:
+- 39, 39
+- 64, 39
+- 25, 39
+
+---
+
+## Term-to-Term Rules
+**ID**: sequences-term-to-term
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: 25, 31, 37, 43, 49, ...
+
+**Answer**: Add 6
+
+**Wrong Answers**:
+- Add 5
+- Subtract 6
+- Add 7
 
 ---
 

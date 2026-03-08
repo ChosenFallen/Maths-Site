@@ -58,14 +58,18 @@ function generateProblem(rand, difficulty, mode = "mixed") {
     const questionHtml = `${left}  ?  ${right}`;
     const answerKeyHtml = `${left} ${answer} ${right}`;
 
-    // Note: Comparison problems have only 3 possible answers (<, =, >)
-    // so we cannot generate 3 unique wrong answers without duplicates.
-    // These worksheets are designed for selection-style answers, not multiple choice.
+    // Wrong answers: the other comparison symbols + "None"
+    const wrongAnswers = [];
+    if (answer !== "=") wrongAnswers.push("=");
+    if (answer !== ">") wrongAnswers.push(">");
+    if (answer !== "<") wrongAnswers.push("<");
+    wrongAnswers.push("None"); // placeholder for 3 wrong answers
 
     return {
         questionHtml,
         answer,
         answerKeyHtml,
+        wrongAnswers: wrongAnswers.slice(0, 3),
     };
 }
 

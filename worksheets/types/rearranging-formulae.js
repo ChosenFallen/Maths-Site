@@ -119,7 +119,7 @@ function generateProblem(rand, difficulty) {
             const wrongAnswers = [
                 `x = y / ${a}`, // wrong operation
                 `y = x × ${a}`, // forgot to rearrange
-                `x = y / ${a}`, // wrong operation
+                `x = y + ${a}`, // wrong operation (add instead)
             ];
             return {
                 question,

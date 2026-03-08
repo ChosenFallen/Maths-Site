@@ -58,7 +58,17 @@ function makeProblem({ a, b }) {
     const next = terms.slice(6, 8);
     const question = shown.map(formatNum).join(", ") + ", ___, ___";
     const answer = next.map(formatNum).join(", ");
-    return { question, answer };
+
+    // Wrong answers: common Fibonacci mistakes
+    const wrongAnswers = [];
+    // Mistake 1: forgot to add both previous terms (repeated last)
+    wrongAnswers.push(formatNum(terms[5]) + ", " + formatNum(terms[5]));
+    // Mistake 2: only used one previous term
+    wrongAnswers.push(formatNum(terms[5] + terms[4]) + ", " + formatNum(terms[5]));
+    // Mistake 3: used the previous two terms unchanged instead of adding
+    wrongAnswers.push(formatNum(terms[4]) + ", " + formatNum(terms[5]));
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }
 
 function formatNum(n) {

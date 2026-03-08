@@ -65,5 +65,17 @@ function makeProblem({ a1, r }) {
 
     const question = terms.map(n => `${n}`).join(", ") + ", ___, ___";
     const answer = next.map(n => `${n}`).join(", ");
-    return { question, answer };
+
+    // Wrong answers: common geometric sequence mistakes
+    const wrongAnswers = [];
+    // Mistake 1: used wrong ratio (off by 1)
+    const wrongR = r === 0.5 ? 1 : (r > 1 ? r - 1 : r + 1);
+    wrongAnswers.push(`${a1 * wrongR ** 4}, ${a1 * wrongR ** 5}`);
+    // Mistake 2: only multiplied once more
+    wrongAnswers.push(`${a1 * r ** 3}, ${a1 * r ** 4}`);
+    // Mistake 3: added instead of multiplied (arithmetic pattern)
+    const diff = a1 * r - a1;
+    wrongAnswers.push(`${a1 * r ** 3 + diff}, ${a1 * r ** 3 + 2 * diff}`);
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }

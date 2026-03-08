@@ -68,5 +68,20 @@ function generateProblem(rand, difficulty) {
     const question = `Order from smallest to largest: ${originalOrder}`;
     const answer = sortedOrder;
 
-    return { question, answer };
+    // Wrong answers: common ordering mistakes with negatives
+    const wrongAnswers = [];
+    // Mistake 1: reverse order (largest to smallest)
+    const reversedOrder = [...sortedNumbers].reverse().map(formatNum).join(", ");
+    wrongAnswers.push(reversedOrder);
+    // Mistake 2: treated negatives as positive (e.g., -5 > -2)
+    const wrongNegatives = [...sortedNumbers];
+    wrongNegatives.forEach((n, i) => {
+        if (n < 0) wrongNegatives[i] = -n;
+    });
+    wrongNegatives.sort((a, b) => a - b);
+    wrongAnswers.push(wrongNegatives.map(formatNum).join(", "));
+    // Mistake 3: keep original order
+    wrongAnswers.push(originalOrder);
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }
