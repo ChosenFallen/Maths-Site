@@ -86,8 +86,8 @@ function generateProblem(rand, difficulty) {
             const wrongAnswers = [];
             // Mistake 1: forgot to multiply the first term by √k
             wrongAnswers.push(formatAnswerWithSurd(0, a, k));
-            // Mistake 2: forgot the b√k term
-            wrongAnswers.push(formatAnswerWithSurd(intPart, 0, k));
+            // Mistake 2: only took the surd term (forgot to simplify the integer part)
+            wrongAnswers.push(formatAnswerWithSurd(b, surdCoeff, k));
             // Mistake 3: wrong multiplication in second term
             wrongAnswers.push(formatAnswerWithSurd(intPart, a + b, k));
 
@@ -120,8 +120,8 @@ function generateProblem(rand, difficulty) {
         const wrongAnswers = [];
         // Mistake 1: forgot the k term in the integer part (just ab + (a+b)√k)
         wrongAnswers.push(formatAnswerWithSurd(a * b, a + b, k));
-        // Mistake 2: forgot the cross terms (just a*b + b*b*k)
-        wrongAnswers.push(formatAnswerWithSurd(a * b + k, 0, k));
+        // Mistake 2: forgot the cross terms/surd part (just the integer)
+        wrongAnswers.push(formatAnswerWithSurd(a * b + k, b, k));
         // Mistake 3: only did partial distribution
         wrongAnswers.push(formatAnswerWithSurd(a * b, b, k));
 

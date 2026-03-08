@@ -113,12 +113,12 @@ function generateProblem(rand, difficulty, like) {
         // Mistake 1: wrong operation (added when should subtract or vice versa)
         const wrongOp = doSub ? n1 + n2 : n1 - n2;
         if (wrongOp > 0) {
-            wrongAnswers.push(formatFracOrWhole(wrongOp, d1).text);
+            wrongAnswers.push(formatFracOrWhole(wrongOp, d1).html);
         }
         // Mistake 2: forgot to operate (just take one numerator)
-        wrongAnswers.push(formatFracOrWhole(n1, d1).text);
+        wrongAnswers.push(formatFracOrWhole(n1, d1).html);
         // Mistake 3: multiplied numerators instead of adding
-        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1).text);
+        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1).html);
     } else {
         // Unlike denominators
         const common = lcm(d1, d2);
@@ -128,20 +128,20 @@ function generateProblem(rand, difficulty, like) {
         // Mistake 1: just added/subtracted numerators without finding common denominator
         const wrongNum = doSub ? n1 - n2 : n1 + n2;
         if (wrongNum > 0) {
-            wrongAnswers.push(formatFracOrWhole(wrongNum, d1).text);
+            wrongAnswers.push(formatFracOrWhole(wrongNum, d1).html);
         }
         // Mistake 2: forgot to add/subtract (just used first fraction)
-        wrongAnswers.push(formatFracOrWhole(n1, d1).text);
+        wrongAnswers.push(formatFracOrWhole(n1, d1).html);
         // Mistake 3: wrong denominator (used wrong calculation)
         // Try: multiplied numerators but added denominators
-        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1 + d2).text);
+        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1 + d2).html);
     }
 
     return {
         questionHtml,
         answerHtml,
         answer,
-        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerHtml).slice(0, 3),
     };
 }
 

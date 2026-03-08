@@ -66,7 +66,6 @@ function generateProblem(rand, difficulty) {
         const k = kOptions[randInt(rand, 0, kOptions.length - 1)];
         let a = randInt(rand, 2, 4); // for √(a²k)
         let b = randInt(rand, 1, 5); // for b√k
-        const aSquaredK = a * a * k;
 
         // For subtraction, ensure the simplified term >= the like term
         if (!isAddition && a <= b) {
@@ -74,6 +73,8 @@ function generateProblem(rand, difficulty) {
             a = b;
             b = temp;
         }
+
+        const aSquaredK = a * a * k;
 
         const resultCoeff = isAddition ? a + b : a - b;
         const sign = isAddition ? "+" : "−";

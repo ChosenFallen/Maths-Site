@@ -89,30 +89,30 @@ function generateProblem(rand, difficulty, op) {
         // Mistake 1: added instead of multiplied numerators
         const wrongNum1 = n1 + n2;
         const wrongDen1 = d1 + d2;
-        wrongAnswers.push(formatFracOrWhole(wrongNum1, wrongDen1).text);
+        wrongAnswers.push(formatFracOrWhole(wrongNum1, wrongDen1).html);
 
         // Mistake 2: multiplied numerators but added denominators
-        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1 + d2).text);
+        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1 + d2).html);
 
         // Mistake 3: added numerators, multiplied denominators
-        wrongAnswers.push(formatFracOrWhole(n1 + n2, d1 * d2).text);
+        wrongAnswers.push(formatFracOrWhole(n1 + n2, d1 * d2).html);
     } else {
         // Division mistakes: should be (n1/d1) × (d2/n2)
         // Mistake 1: forgot to flip the second fraction (just multiplied)
-        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1 * d2).text);
+        wrongAnswers.push(formatFracOrWhole(n1 * n2, d1 * d2).html);
 
         // Mistake 2: flipped but then added instead of multiplied
-        wrongAnswers.push(formatFracOrWhole(n1 + d2, d1 + n2).text);
+        wrongAnswers.push(formatFracOrWhole(n1 + d2, d1 + n2).html);
 
         // Mistake 3: wrong flip (flipped first instead of second)
-        wrongAnswers.push(formatFracOrWhole(d1 * n2, n1 * d2).text);
+        wrongAnswers.push(formatFracOrWhole(d1 * n2, n1 * d2).html);
     }
 
     return {
         questionHtml,
         answerHtml,
         answer,
-        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answerHtml).slice(0, 3),
     };
 }
 
