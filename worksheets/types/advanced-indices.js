@@ -91,7 +91,35 @@ function buildEasyPool(type) {
                 const latex = `${base}^{\\dfrac{1}{${n}}} =`;
                 const questionHtml = renderKatexLocal(latex) || `${base}^(1/${n}) =`;
                 const question = `${base}^(1/${n}) =`;
-                pool.push({ questionHtml, question, answer: `${k}` });
+                const answer = `${k}`;
+
+                // Wrong answers
+                const wrongAnswers = [];
+                const seen = new Set([answer]);
+
+                const wrong1 = `${base}`;
+                if (!seen.has(wrong1)) {
+                    wrongAnswers.push(wrong1);
+                    seen.add(wrong1);
+                }
+
+                const wrong2 = `${Math.floor(base / n)}`;
+                if (!seen.has(wrong2)) {
+                    wrongAnswers.push(wrong2);
+                    seen.add(wrong2);
+                }
+
+                const wrong3 = `${Math.max(1, k - 1)}`;
+                if (!seen.has(wrong3)) {
+                    wrongAnswers.push(wrong3);
+                    seen.add(wrong3);
+                }
+
+                if (wrongAnswers.length < 3) {
+                    wrongAnswers.push(`${k + 1}`);
+                }
+
+                pool.push({ questionHtml, question, answer, wrongAnswers: wrongAnswers.slice(0, 3) });
             }
         }
     }
@@ -107,7 +135,34 @@ function buildEasyPool(type) {
                 const answerLatex = `\\dfrac{1}{${denom}}`;
                 const answerHtml = renderKatexLocal(answerLatex) || `1/${denom}`;
                 const answer = `1/${denom}`;
-                pool.push({ questionHtml, question, answer, answerHtml });
+
+                // Wrong answers
+                const wrongAnswers = [];
+                const seen = new Set([answer]);
+
+                const wrong1 = `${a}`;
+                if (!seen.has(wrong1)) {
+                    wrongAnswers.push(wrong1);
+                    seen.add(wrong1);
+                }
+
+                const wrong2 = `${denom}`;
+                if (!seen.has(wrong2)) {
+                    wrongAnswers.push(wrong2);
+                    seen.add(wrong2);
+                }
+
+                const wrong3 = `1/${denom + 1}`;
+                if (!seen.has(wrong3)) {
+                    wrongAnswers.push(wrong3);
+                    seen.add(wrong3);
+                }
+
+                if (wrongAnswers.length < 3) {
+                    wrongAnswers.push(`1/${Math.max(1, denom - 1)}`);
+                }
+
+                pool.push({ questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) });
             }
         }
     }

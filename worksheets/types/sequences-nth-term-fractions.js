@@ -98,7 +98,50 @@ function makeProblem(dp, q, c) {
     const answer = formatNthTermText(dp, q, c);
     const answerHtml = renderKatex(formatNthTermLatex(dp, q, c)) || answer;
 
-    return { questionHtml, question, answer, answerHtml };
+    // Generate wrong answers
+    const wrongAnswers = [];
+    const wrongAnswersHtml = [];
+    const seen = new Set([answer]);
+
+    // Mistake 1: forgot the constant c
+    const wrong1 = formatNthTermText(dp, q, 0);
+    if (!seen.has(wrong1)) {
+        wrongAnswers.push(wrong1);
+        wrongAnswersHtml.push(renderKatex(formatNthTermLatex(dp, q, 0)) || wrong1);
+        seen.add(wrong1);
+    }
+
+    // Mistake 2: wrong sign on the coefficient
+    const wrong2 = formatNthTermText(-dp, q, c);
+    if (!seen.has(wrong2)) {
+        wrongAnswers.push(wrong2);
+        wrongAnswersHtml.push(renderKatex(formatNthTermLatex(-dp, q, c)) || wrong2);
+        seen.add(wrong2);
+    }
+
+    // Mistake 3: off by one in numerator of coefficient
+    const wrong3 = formatNthTermText(dp + 1, q, c);
+    if (!seen.has(wrong3)) {
+        wrongAnswers.push(wrong3);
+        wrongAnswersHtml.push(renderKatex(formatNthTermLatex(dp + 1, q, c)) || wrong3);
+        seen.add(wrong3);
+    }
+
+    // Fallback: wrong sign on constant
+    if (wrongAnswers.length < 3) {
+        const wrong4 = formatNthTermText(dp, q, -c);
+        wrongAnswers.push(wrong4);
+        wrongAnswersHtml.push(renderKatex(formatNthTermLatex(dp, q, -c)) || wrong4);
+    }
+
+    return {
+        questionHtml,
+        question,
+        answer,
+        answerHtml,
+        wrongAnswers: wrongAnswers.slice(0, 3),
+        wrongAnswersHtml: wrongAnswersHtml.slice(0, 3),
+    };
 }
 
 function formatNthTermText(dp, q, c) {

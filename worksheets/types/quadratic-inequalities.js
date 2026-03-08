@@ -67,10 +67,45 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(formatQuadraticLatex(a, b, c, sign)) || formatQuadraticText(a, b, c, sign);
         const answer = buildAnswer(r1, r2, a, sign);
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: swapped bounds
+        const wrong1 = buildAnswer(r2, r1, a, sign);
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: wrong region (if was inside, make outside; if outside, make inside)
+        const isOutside = (a > 0 && (sign === ">" || sign === "≥")) ||
+                          (a < 0 && (sign === "<" || sign === "≤"));
+        const oppositeA = -a;
+        const wrong2 = buildAnswer(r1, r2, oppositeA, sign);
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one on lower bound
+        const wrong3 = buildAnswer(r1 + 1, r2, a, sign);
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            const wrong4 = buildAnswer(r1, r2 + 1, a, sign);
+            wrongAnswers.push(wrong4);
+        }
+
         return {
             questionHtml,
             question: formatQuadraticText(a, b, c, sign),
             answer,
+            wrongAnswers: wrongAnswers.slice(0, 3),
         };
 
     } else if (difficulty === "normal") {
@@ -93,10 +128,45 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(formatQuadraticLatex(a, b, c, sign)) || formatQuadraticText(a, b, c, sign);
         const answer = buildAnswer(r1, r2, a, sign);
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: swapped bounds
+        const wrong1 = buildAnswer(r2, r1, a, sign);
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: wrong region (if was inside, make outside; if outside, make inside)
+        const isOutside = (a > 0 && (sign === ">" || sign === "≥")) ||
+                          (a < 0 && (sign === "<" || sign === "≤"));
+        const oppositeA = -a;
+        const wrong2 = buildAnswer(r1, r2, oppositeA, sign);
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one on lower bound
+        const wrong3 = buildAnswer(r1 + 1, r2, a, sign);
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            const wrong4 = buildAnswer(r1, r2 + 1, a, sign);
+            wrongAnswers.push(wrong4);
+        }
+
         return {
             questionHtml,
             question: formatQuadraticText(a, b, c, sign),
             answer,
+            wrongAnswers: wrongAnswers.slice(0, 3),
         };
 
     } else {
@@ -122,10 +192,45 @@ function generateProblem(rand, difficulty) {
         const questionHtml = renderKatex(formatQuadraticLatex(a, b, c, sign)) || formatQuadraticText(a, b, c, sign);
         const answer = buildAnswer(r1, r2, a, sign);
 
+        // Generate wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: swapped bounds
+        const wrong1 = buildAnswer(r2, r1, a, sign);
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: wrong region (if was inside, make outside; if outside, make inside)
+        const isOutside = (a > 0 && (sign === ">" || sign === "≥")) ||
+                          (a < 0 && (sign === "<" || sign === "≤"));
+        const oppositeA = -a;
+        const wrong2 = buildAnswer(r1, r2, oppositeA, sign);
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one on lower bound
+        const wrong3 = buildAnswer(r1 + 1, r2, a, sign);
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            const wrong4 = buildAnswer(r1, r2 + 1, a, sign);
+            wrongAnswers.push(wrong4);
+        }
+
         return {
             questionHtml,
             question: formatQuadraticText(a, b, c, sign),
             answer,
+            wrongAnswers: wrongAnswers.slice(0, 3),
         };
     }
 }

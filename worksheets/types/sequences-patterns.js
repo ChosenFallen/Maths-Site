@@ -192,16 +192,70 @@ function makeProblem(pattern, patternId, mode) {
     // Plain-text question for dedup key
     const question = `${patternId}: ${counts.join(", ")}. ${mode === "count" ? "Next?" : "nth term?"}`;
 
-    let answer, answerHtml;
+    let answer, answerHtml, wrongAnswers = [];
     if (mode === "count") {
         answer = `${pattern.nth(4)}`;
         answerHtml = answer;
+        // Generate numeric distractors for count mode
+        wrongAnswers = generateNumericDistracters(pattern.nth(4), { seed: Math.random });
     } else {
         answer = pattern.answerText;
         answerHtml = renderKatex(pattern.answerLatex) || answer;
+        // Generate wrong answers for nth-term mode
+        wrongAnswers = generateNthTermWrongAnswers(answer);
     }
 
-    return { questionHtml, question, answer, answerHtml };
+    return { questionHtml, question, answer, answerHtml, wrongAnswers };
+}
+
+// Generate common wrong answers for nth-term expressions
+function generateNthTermWrongAnswers(answer) {
+    const wrongAnswers = [];
+    const seen = new Set([answer]);
+
+    // Mistake 1: off by one in constant (if present)
+    let wrong1;
+    if (answer.includes("+")) {
+        wrong1 = answer.replace(/\+\s*(\d+)/, (m, num) => `+ ${parseInt(num) + 1}`);
+    } else if (answer.includes("−")) {
+        wrong1 = answer.replace(/−\s*(\d+)/, (m, num) => `− ${parseInt(num) + 1}`);
+    } else {
+        wrong1 = `${answer} + 1`;
+    }
+    if (!seen.has(wrong1)) {
+        wrongAnswers.push(wrong1);
+        seen.add(wrong1);
+    }
+
+    // Mistake 2: forget constant (if has one)
+    let wrong2 = answer;
+    if (answer.includes("+") || answer.includes("−")) {
+        wrong2 = answer.replace(/\s*[+−]\s*\d+$/, "");
+    } else {
+        wrong2 = `${answer} − 1`;
+    }
+    if (!seen.has(wrong2)) {
+        wrongAnswers.push(wrong2);
+        seen.add(wrong2);
+    }
+
+    // Mistake 3: off by one in coefficient
+    let wrong3;
+    if (answer.includes("n²")) {
+        wrong3 = answer.replace("n²", "2n");
+    } else if (answer.match(/^(\d+)n/)) {
+        wrong3 = answer.replace(/^(\d+)n/, m => `${parseInt(m) + 1}n`);
+    } else if (answer.match(/^n\//)) {
+        wrong3 = `2n${answer.substring(1)}`;
+    } else {
+        wrong3 = `2${answer}`;
+    }
+    if (!seen.has(wrong3)) {
+        wrongAnswers.push(wrong3);
+        seen.add(wrong3);
+    }
+
+    return wrongAnswers.slice(0, 3);
 }
 
 // ── SVG builder ──────────────────────────────────────────────────────────────

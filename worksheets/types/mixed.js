@@ -4,6 +4,7 @@ import {
     applyOp,
     isHighPrecedence,
     getRandomFactor,
+    generateNumericDistracters,
 } from "./utils.js";
 
 export default {
@@ -84,7 +85,7 @@ function generateMixedProblem(rand, difficulty, options) {
         )} ${c} =`;
         const first = applyOpExtended(a, b, op1);
         const answer = applyOpExtended(first, c, op2);
-        return { questionHtml: question, answer };
+        return { questionHtml: question, answer, wrongAnswers: generateNumericDistracters(answer, rand) };
     }
 
     const precedenceFirst =
@@ -114,7 +115,7 @@ function generateMixedProblem(rand, difficulty, options) {
             op2,
         )} ${c} =`;
         const answer = applyOpExtended(firstVal, c, op2);
-        return { questionHtml: question, answer };
+        return { questionHtml: question, answer, wrongAnswers: generateNumericDistracters(answer, rand) };
     }
 
     // a op1 (b op2 c)
@@ -140,7 +141,7 @@ function generateMixedProblem(rand, difficulty, options) {
         op2,
     )} =`;
     const answer = applyOpExtended(a, secondVal, op1);
-    return { questionHtml: question, answer };
+    return { questionHtml: question, answer, wrongAnswers: generateNumericDistracters(answer, rand) };
 }
 
 function applyOpExtended(x, y, op) {

@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-08T01:08:01.844Z
+Generated: 2026-03-08T01:20:12.577Z
 
 ---
 
@@ -61,6 +61,21 @@ Generated: 2026-03-08T01:08:01.844Z
 - 17
 - 15
 - 32
+
+---
+
+## Mixed Operations
+**ID**: mixed
+**Grades**: Easy=2, Normal=3, Hard=4
+
+**Question**: 784 ÷ 16 × 25 =
+
+**Answer**: 1225
+
+**Wrong Answers**:
+- 1226
+- 1224
+- 2450
 
 ---
 
@@ -950,6 +965,21 @@ when x = 7
 
 ---
 
+## Recurring Decimals to Fractions
+**ID**: recurring-decimals-to-fractions
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: 0.(142857) =
+
+**Answer**: 1/7
+
+**Wrong Answers**:
+- 7/1
+- 2/7
+- 1/8
+
+---
+
 ## Difference of Two Squares
 **ID**: difference-of-two-squares
 **Grades**: Easy=6, Normal=7, Hard=8
@@ -1208,6 +1238,21 @@ when x = 7
 
 ---
 
+## Quadratic Inequalities
+**ID**: quadratic-inequalities
+**Grades**: Easy=7, Normal=8, Hard=9
+
+**Question**: x² + 2x ≤
+
+**Answer**: −2 ≤ x ≤ 0
+
+**Wrong Answers**:
+- 0 ≤ x ≤ −2
+- x ≤ −2 or x ≥ 0
+- −1 ≤ x ≤ 0
+
+---
+
 ## Times Tables: Speed Drill
 **ID**: times-tables-speed
 **Grades**: Easy=2, Normal=3, Hard=4
@@ -1303,7 +1348,7 @@ when x = 7
 **Grades**: Easy=4, Normal=5, Hard=6
 
 **Question**: 
-        <svg width="100%" height="96" viewBox="0 0 175 96" style="max-width: 175px; display: block;">
+        <svg width="100%" height="74" viewBox="0 0 175 74" style="max-width: 175px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -1314,7 +1359,7 @@ when x = 7
                 x="10"
                 y="6"
                 width="75"
-                height="60"
+                height="37.5"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -1323,9 +1368,9 @@ when x = 7
             <!-- Width label (bottom) -->
             <line
                 x1="10"
-                y1="78"
+                y1="55.5"
                 x2="85"
-                y2="78"
+                y2="55.5"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1333,13 +1378,13 @@ when x = 7
             />
             <text
                 x="47.5"
-                y="94"
+                y="71.5"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                7.5 m
+                12 m
             </text>
 
             <!-- Height label (right) -->
@@ -1347,7 +1392,7 @@ when x = 7
                 x1="97"
                 y1="6"
                 x2="97"
-                y2="66"
+                y2="43.5"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1355,7 +1400,7 @@ when x = 7
             />
             <text
                 x="113"
-                y="36"
+                y="24.75"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -1367,12 +1412,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 45 m²
+**Answer**: 72 m²
 
 **Wrong Answers**:
-- 46 m²
-- 44 m²
-- 90 m²
+- 73 m²
+- 71 m²
+- 144 m²
 
 ---
 
@@ -1381,7 +1426,7 @@ when x = 7
 **Grades**: Easy=5, Normal=6, Hard=7
 
 **Question**: 
-        <svg width="100%" height="112" viewBox="0 0 145 112" style="max-width: 145px; display: block;">
+        <svg width="100%" height="89" viewBox="0 0 145 89" style="max-width: 145px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -1390,7 +1435,7 @@ when x = 7
 
             <!-- Triangle -->
             <polygon
-                points="10,82 100,82 55,14.5"
+                points="10,59 100,59 55,14"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -1399,9 +1444,9 @@ when x = 7
             <!-- Base label (bottom) -->
             <line
                 x1="10"
-                y1="94"
+                y1="71"
                 x2="100"
-                y2="94"
+                y2="71"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1409,21 +1454,21 @@ when x = 7
             />
             <text
                 x="55"
-                y="110"
+                y="87"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                8 m
+                12 m
             </text>
 
             <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="55"
-                y1="14.5"
+                y1="14"
                 x2="55"
-                y2="82"
+                y2="59"
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
@@ -1432,7 +1477,7 @@ when x = 7
             />
             <text
                 x="83"
-                y="48.25"
+                y="36.5"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -1444,12 +1489,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 24 m²
+**Answer**: 36 m²
 
 **Wrong Answers**:
-- 25 m²
-- 23 m²
-- 48 m²
+- 37 m²
+- 35 m²
+- 72 m²
 
 ---
 
@@ -1483,6 +1528,21 @@ when x = 7
 
 ---
 
+## Sequences: Fractional nth Term
+**ID**: sequences-nth-term-fractions
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: <span class="frac"><span class="top">14</span><span class="bottom">3</span></span>, <span class="frac"><span class="top">16</span><span class="bottom">3</span></span>, 6, <span class="frac"><span class="top">20</span><span class="bottom">3</span></span>, …   Find the nth term.
+
+**Answer**: 2/3n + 4
+
+**Wrong Answers**:
+- 2/3n
+- −2/3n + 4
+- 3/3n + 4
+
+---
+
 ## Geometric Sequences
 **ID**: sequences-geometric
 **Grades**: Easy=6, Normal=7, Hard=8
@@ -1495,6 +1555,21 @@ when x = 7
 - 1, 1
 - 8, 16
 - 9, 10
+
+---
+
+## Quadratic Sequences
+**ID**: sequences-quadratic
+**Grades**: Easy=7, Normal=8, Hard=9
+
+**Question**: 2, 9, 22, 41, 66, ...   Find the nth term.
+
+**Answer**: 3n² − 2n + 1
+
+**Wrong Answers**:
+- −2n + 1
+- 4n² − 2n + 1
+- 3n² + 2n + 1
 
 ---
 
@@ -1540,6 +1615,21 @@ when x = 7
 - Add 5
 - Subtract 6
 - Add 7
+
+---
+
+## Pattern Sequences
+**ID**: sequences-patterns
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: <svg width="100%" viewBox="0 0 280 96" style="max-width:280px;display:block;margin-bottom:4px;"><rect x="30" y="29" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="41" y="29" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="52" y="29" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="41" y="40" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><text x="45" y="91" text-anchor="middle" font-size="11" fill="#555">Pattern 1</text><rect x="114" y="24" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="125" y="24" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="136" y="24" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="147" y="24" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="158" y="24" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="136" y="35" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="136" y="46" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><text x="140" y="91" text-anchor="middle" font-size="11" fill="#555">Pattern 2</text><rect x="198" y="18" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="209" y="18" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="220" y="18" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="231" y="18" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="242" y="18" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="253" y="18" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="264" y="18" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="231" y="29" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="231" y="40" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><rect x="231" y="51" width="9" height="9" fill="#4f9ef8" stroke="#1a56db" stroke-width="0.5" rx="1"/><text x="235" y="91" text-anchor="middle" font-size="11" fill="#555">Pattern 3</text></svg>
+
+**Answer**: 3n + 1
+
+**Wrong Answers**:
+- 3n + 2
+- 3n
+- 4n + 1
 
 ---
 
@@ -1715,6 +1805,21 @@ when x = 7
 - <span class="frac"><span class="top">13</span><span class="bottom">6</span></span>
 - <span class="frac"><span class="top">18</span><span class="bottom">39</span></span>
 - <span class="frac"><span class="top">7</span><span class="bottom">13</span></span>
+
+---
+
+## Linear Graphs (y = mx + c)
+**ID**: linear-graphs
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: Does the point (3, -7) lie on the line y = -3x + 0?
+
+**Answer**: No
+
+**Wrong Answers**:
+- Yes
+- Maybe
+- Unclear
 
 ---
 

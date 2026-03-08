@@ -45,7 +45,38 @@ function generateProblem(rand, difficulty) {
     const question = terms.map(formatNum).join(", ") + ", ...   Find the nth term.";
     const answer = formatNthTerm(a, b, c);
 
-    return { question, answer };
+    // Generate wrong answers
+    const wrongAnswers = [];
+    const seen = new Set([answer]);
+
+    // Mistake 1: forgot the quadratic term (just bn + c)
+    const wrong1 = formatNthTerm(0, b, c);
+    if (!seen.has(wrong1)) {
+        wrongAnswers.push(wrong1);
+        seen.add(wrong1);
+    }
+
+    // Mistake 2: wrong coefficient on n² (off by one)
+    const wrong2 = formatNthTerm(a + 1, b, c);
+    if (!seen.has(wrong2)) {
+        wrongAnswers.push(wrong2);
+        seen.add(wrong2);
+    }
+
+    // Mistake 3: wrong sign on b
+    const wrong3 = formatNthTerm(a, -b, c);
+    if (!seen.has(wrong3)) {
+        wrongAnswers.push(wrong3);
+        seen.add(wrong3);
+    }
+
+    // Fallback: wrong sign on c
+    if (wrongAnswers.length < 3) {
+        const wrong4 = formatNthTerm(a, b, -c);
+        wrongAnswers.push(wrong4);
+    }
+
+    return { question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
 }
 
 function formatNum(n) {
@@ -55,21 +86,27 @@ function formatNum(n) {
 function formatNthTerm(a, b, c) {
     let result = "";
 
-    // an² part
-    if (a === 1) result += "n²";
+    // an² part (skip if a === 0)
+    if (a === 0) {
+        // Skip the n² term
+    } else if (a === 1) result += "n²";
     else if (a === -1) result += "−n²";
     else if (a > 0) result += `${a}n²`;
     else result += `−${Math.abs(a)}n²`;
 
-    // bn part
-    if (b === 1) result += " + n";
-    else if (b === -1) result += " − n";
-    else if (b > 0) result += ` + ${b}n`;
-    else if (b < 0) result += ` − ${Math.abs(b)}n`;
+    // bn part (skip if b === 0)
+    if (b === 0) {
+        // Skip the n term
+    } else if (b === 1) result += result ? " + n" : "n";
+    else if (b === -1) result += result ? " − n" : "−n";
+    else if (b > 0) result += result ? ` + ${b}n` : `${b}n`;
+    else if (b < 0) result += result ? ` − ${Math.abs(b)}n` : `−${Math.abs(b)}n`;
 
-    // c part
-    if (c > 0) result += ` + ${c}`;
-    else if (c < 0) result += ` − ${Math.abs(c)}`;
+    // c part (skip if c === 0)
+    if (c === 0) {
+        // Skip the constant term
+    } else if (c > 0) result += result ? ` + ${c}` : `${c}`;
+    else if (c < 0) result += result ? ` − ${Math.abs(c)}` : `−${Math.abs(c)}`;
 
     return result;
 }

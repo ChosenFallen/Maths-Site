@@ -73,10 +73,41 @@ function typeA_IdentifyGradientIntercept(rand, minM, maxM, minC, maxC) {
 
     const questionHtml = `For the line y = ${mxCoeff} ${sign} ${abs}, write down the gradient and y-intercept.`;
 
+    const answer = `m = ${m}, c = ${c}`;
+    const wrongAnswers = [];
+    const seen = new Set([answer]);
+
+    // Mistake 1: swapped m and c
+    const wrong1 = `m = ${c}, c = ${m}`;
+    if (!seen.has(wrong1)) {
+        wrongAnswers.push(wrong1);
+        seen.add(wrong1);
+    }
+
+    // Mistake 2: wrong sign on c
+    const wrong2 = `m = ${m}, c = ${-c}`;
+    if (!seen.has(wrong2)) {
+        wrongAnswers.push(wrong2);
+        seen.add(wrong2);
+    }
+
+    // Mistake 3: off by one
+    const wrong3 = `m = ${m + 1}, c = ${c}`;
+    if (!seen.has(wrong3)) {
+        wrongAnswers.push(wrong3);
+        seen.add(wrong3);
+    }
+
+    // Fallback
+    if (wrongAnswers.length < 3) {
+        wrongAnswers.push(`m = ${m}, c = ${c + 1}`);
+    }
+
     return {
         questionHtml,
-        answer: `m = ${m}, c = ${c}`,
-        answerHtml: `m = ${m}, c = ${c}`,
+        answer,
+        answerHtml: answer,
+        wrongAnswers: wrongAnswers.slice(0, 3),
     };
 }
 
@@ -94,10 +125,43 @@ function typeB_WriteEquation(rand, minM, maxM, minC, maxC) {
 
     const answerText = `y = ${mxCoeff} ${sign} ${abs}`;
 
+    const wrongAnswers = [];
+    const seen = new Set([answerText]);
+
+    // Mistake 1: forgot the y =
+    const wrong1 = `${mxCoeff} ${sign} ${abs}`;
+    if (!seen.has(wrong1)) {
+        wrongAnswers.push(wrong1);
+        seen.add(wrong1);
+    }
+
+    // Mistake 2: swapped m and c positions
+    const cCoeff = formatCoeff(c, "x");
+    const { sign: signM, abs: absM } = formatSignValue(m, true);
+    const wrong2 = `y = ${cCoeff} ${signM} ${absM}`;
+    if (!seen.has(wrong2)) {
+        wrongAnswers.push(wrong2);
+        seen.add(wrong2);
+    }
+
+    // Mistake 3: wrong sign on c
+    const { sign: wrongSign, abs: wrongAbs } = formatSignValue(-c, true);
+    const wrong3 = `y = ${mxCoeff} ${wrongSign} ${wrongAbs}`;
+    if (!seen.has(wrong3)) {
+        wrongAnswers.push(wrong3);
+        seen.add(wrong3);
+    }
+
+    // Fallback
+    if (wrongAnswers.length < 3) {
+        wrongAnswers.push(`y = ${formatCoeff(m + 1, "x")} ${sign} ${abs}`);
+    }
+
     return {
         questionHtml,
         answer: answerText,
         answerHtml: answerText,
+        wrongAnswers: wrongAnswers.slice(0, 3),
     };
 }
 
@@ -153,10 +217,33 @@ function typeD_PointOnLine(rand, minM, maxM, minC, maxC) {
     const questionHtml = `Does the point (${x}, ${y}) lie on the line y = ${mxCoeff} ${sign} ${abs}?`;
     const answer = isOnLine ? "Yes" : "No";
 
+    const wrongAnswers = [];
+    const seen = new Set([answer]);
+
+    // Mistake 1: gave opposite answer
+    const wrong1 = isOnLine ? "No" : "Yes";
+    if (!seen.has(wrong1)) {
+        wrongAnswers.push(wrong1);
+        seen.add(wrong1);
+    }
+
+    // Mistake 2: unclear answer
+    const wrong2 = "Maybe";
+    if (!seen.has(wrong2)) {
+        wrongAnswers.push(wrong2);
+        seen.add(wrong2);
+    }
+
+    // Fallback
+    if (wrongAnswers.length < 3) {
+        wrongAnswers.push("Unclear");
+    }
+
     return {
         questionHtml,
         answer,
         answerHtml: answer,
+        wrongAnswers: wrongAnswers.slice(0, 3),
     };
 }
 
@@ -187,9 +274,43 @@ function typeE_ParallelLine(rand, minM, maxM, minC, maxC) {
     const { sign: sign2, abs: abs2 } = formatSignValue(newC, true);
     const answerText = `y = ${mxCoeffAnswer} ${sign2} ${abs2}`;
 
+    const wrongAnswers = [];
+    const seen = new Set([answerText]);
+
+    // Mistake 1: used original c instead of new c
+    const wrong1 = `y = ${mxCoeffAnswer} ${sign1} ${abs1}`;
+    if (!seen.has(wrong1)) {
+        wrongAnswers.push(wrong1);
+        seen.add(wrong1);
+    }
+
+    // Mistake 2: changed gradient instead of keeping it same
+    const wrongM = m + 1;
+    const wrongMCoeff = formatCoeff(wrongM, "x");
+    const wrong2 = `y = ${wrongMCoeff} ${sign2} ${abs2}`;
+    if (!seen.has(wrong2)) {
+        wrongAnswers.push(wrong2);
+        seen.add(wrong2);
+    }
+
+    // Mistake 3: perpendicular instead of parallel (negative reciprocal gradient)
+    const perpM = m === 1 ? -1 : m === -1 ? 1 : -m;
+    const perpMCoeff = formatCoeff(perpM, "x");
+    const wrong3 = `y = ${perpMCoeff} ${sign2} ${abs2}`;
+    if (!seen.has(wrong3)) {
+        wrongAnswers.push(wrong3);
+        seen.add(wrong3);
+    }
+
+    // Fallback
+    if (wrongAnswers.length < 3) {
+        wrongAnswers.push(`y = ${mxCoeffAnswer} ${sign2} ${Math.abs(newC) + 1}`);
+    }
+
     return {
         questionHtml,
         answer: answerText,
         answerHtml: answerText,
+        wrongAnswers: wrongAnswers.slice(0, 3),
     };
 }
