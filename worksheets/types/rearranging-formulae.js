@@ -62,11 +62,17 @@ function generateProblem(rand, difficulty) {
             const questionLatex = `y = x + ${a}`;
             const answer = `x = y − ${a}`;
             const answerLatex = `x = y - ${a}`;
+            const wrongAnswers = [
+                `x = y + ${a}`, // wrong operation
+                `y = x − ${a}`, // forgot to rearrange
+                `x = ${a} − y`, // wrong order
+            ];
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
                 answer,
                 answerHtml: renderKatex(answerLatex) || answer,
+                wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3),
             };
         } else if (type === 1) {
             // y = x − a, make x the subject
@@ -74,11 +80,17 @@ function generateProblem(rand, difficulty) {
             const questionLatex = `y = x - ${a}`;
             const answer = `x = y + ${a}`;
             const answerLatex = `x = y + ${a}`;
+            const wrongAnswers = [
+                `x = y − ${a}`, // wrong operation
+                `y = x + ${a}`, // forgot to rearrange
+                `x = ${a} − y`, // wrong order
+            ];
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
                 answer,
                 answerHtml: renderKatex(answerLatex) || answer,
+                wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3),
             };
         } else if (type === 2) {
             // y = ax, make x the subject
@@ -86,11 +98,17 @@ function generateProblem(rand, difficulty) {
             const questionLatex = `y = ${a}x`;
             const answer = `x = y / ${a}`;
             const answerLatex = `x = \\dfrac{y}{${a}}`;
+            const wrongAnswers = [
+                `x = ${a} / y`, // wrong order
+                `x = y × ${a}`, // wrong operation
+                `y = x / ${a}`, // forgot to rearrange
+            ];
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
                 answer,
                 answerHtml: renderKatex(answerLatex) || answer,
+                wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3),
             };
         } else {
             // y = x / a, make x the subject
@@ -98,11 +116,17 @@ function generateProblem(rand, difficulty) {
             const questionLatex = `y = \\dfrac{x}{${a}}`;
             const answer = `x = ${a}y`;
             const answerLatex = `x = ${a}y`;
+            const wrongAnswers = [
+                `x = y / ${a}`, // wrong operation
+                `y = x × ${a}`, // forgot to rearrange
+                `x = y / ${a}`, // wrong operation
+            ];
             return {
                 question,
                 questionHtml: renderKatex(questionLatex) || question,
                 answer,
                 answerHtml: renderKatex(answerLatex) || answer,
+                wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3),
             };
         }
     } else if (difficulty === "normal") {

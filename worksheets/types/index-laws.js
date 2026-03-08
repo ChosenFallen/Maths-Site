@@ -102,7 +102,13 @@ function generateProduct(rand, difficulty) {
         const question = `x${exponentToSuperscript(m)} × x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(1, "x", answerPower);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatTermText(1, "x", m), // forgot n
+            formatTermText(1, "x", n), // forgot m
+            formatTermText(1, "x", m * n), // multiplied instead of added
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     } else if (difficulty === "normal") {
         const mx = randInt(rand, 1, 5);
         const nx = randInt(rand, 1, 5);
@@ -114,7 +120,13 @@ function generateProduct(rand, difficulty) {
         const question = `${formatBiTermText(mx, my)} × ${formatBiTermText(nx, ny)} =`;
         const answer = formatBiTermText(mx + nx, my + ny);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatBiTermText(mx, my), // forgot to add second term
+            formatBiTermText(mx * nx, my * ny), // multiplied instead of added
+            formatBiTermText(mx + nx, my), // forgot second y power
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     } else {
         // Hard: coefficients
         const k1 = randInt(rand, 2, 4);
@@ -128,7 +140,13 @@ function generateProduct(rand, difficulty) {
         const question = `${k1}x${exponentToSuperscript(m)} × ${k2}x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(kProduct, "x", m + n);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatTermText(k1 * k2, "x", m), // forgot n
+            formatTermText(kProduct, "x", m * n), // multiplied powers
+            formatTermText(k1 + k2, "x", m + n), // added coefficients
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     }
 }
 
@@ -144,7 +162,13 @@ function generateQuotient(rand, difficulty) {
         const question = `x${exponentToSuperscript(m)} ÷ x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(1, "x", diff);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatTermText(1, "x", m), // forgot to subtract
+            formatTermText(1, "x", n), // subtracted wrong way
+            formatTermText(1, "x", m + n), // added instead of subtracted
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     } else if (difficulty === "normal") {
         const diffX = randInt(rand, 1, 4);
         const diffY = randInt(rand, 1, 4);
@@ -158,7 +182,13 @@ function generateQuotient(rand, difficulty) {
         const question = `${formatBiTermText(mx, my)} ÷ ${formatBiTermText(nx, ny)} =`;
         const answer = formatBiTermText(diffX, diffY);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatBiTermText(mx, my), // forgot to divide
+            formatBiTermText(mx + nx, my + ny), // added instead
+            formatBiTermText(mx - nx, my - ny), // subtracted numerator only
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     } else {
         // Hard: coefficients, ensure clean division
         const k2 = randInt(rand, 2, 4);
@@ -173,7 +203,13 @@ function generateQuotient(rand, difficulty) {
         const question = `${k1}x${exponentToSuperscript(m)} ÷ ${k2}x${exponentToSuperscript(n)} =`;
         const answer = formatTermText(factor, "x", diff);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatTermText(factor, "x", m - n), // wrong difference
+            formatTermText(k1 / k2, "x", diff), // didn't simplify coefficient
+            formatTermText(factor, "x", m + n), // added instead of subtracted
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     }
 }
 
@@ -189,7 +225,13 @@ function generatePower(rand, difficulty) {
         const question = `(x${exponentToSuperscript(m)})${exponentToSuperscript(n)} =`;
         const answer = formatTermText(1, "x", answerPower);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatTermText(1, "x", m), // forgot the outer power
+            formatTermText(1, "x", n), // forgot the inner power
+            formatTermText(1, "x", m + n), // added instead of multiplied
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     } else if (difficulty === "normal") {
         const mx = randInt(rand, 1, 4);
         const my = randInt(rand, 1, 4);
@@ -200,7 +242,13 @@ function generatePower(rand, difficulty) {
         const question = `(${formatBiTermText(mx, my)})${exponentToSuperscript(n)} =`;
         const answer = formatBiTermText(mx * n, my * n);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatBiTermText(mx, my), // forgot the power
+            formatBiTermText(mx * mx, my * my), // squared instead
+            formatBiTermText(mx + n, my + n), // added instead of multiplied
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     } else {
         // Hard: with coefficient
         const k = randInt(rand, 2, 4);
@@ -214,6 +262,12 @@ function generatePower(rand, difficulty) {
         const question = `(${k}x${exponentToSuperscript(m)})${exponentToSuperscript(n)} =`;
         const answer = formatTermText(kPower, "x", mPower);
 
-        return { questionHtml, question, answer };
+        const wrongAnswers = [
+            formatTermText(k * n, "x", m * n), // didn't raise coefficient
+            formatTermText(kPower, "x", m + n), // added powers
+            formatTermText(kPower, "x", m), // forgot to multiply power
+        ];
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
     }
 }

@@ -47,6 +47,7 @@ function generateProblem(rand, difficulty, operation) {
     let question = "";
     let latex = "";
     let answer = "";
+    let wrongAnswers = [];
 
     if (operation === "multiply") {
         if (difficulty === "easy") {
@@ -58,6 +59,11 @@ function generateProblem(rand, difficulty, operation) {
             question = `${a} × ${formatCoeff(b, "x")}`;
             latex = `${a} \\times ${formatCoeff(b, "x")}`;
             answer = `${coeff}x`;
+
+            wrongAnswers.push(`${a}x`); // forgot to multiply both
+            wrongAnswers.push(`${a}${b}x`); // concatenated instead of multiplied
+            const wrongCoeff = coeff > 2 ? coeff - 1 : coeff + 1;
+            wrongAnswers.push(`${wrongCoeff}x`);
         } else if (difficulty === "normal") {
             // 50% ax × by = abxy, 50% ax × bx = abx²
             if (randInt(rand, 0, 1) === 0) {
@@ -69,6 +75,11 @@ function generateProblem(rand, difficulty, operation) {
                 question = `${formatCoeff(a, "x")} × ${formatCoeff(b, "y")}`;
                 latex = `${formatCoeff(a, "x")} \\times ${formatCoeff(b, "y")}`;
                 answer = `${coeff}xy`;
+
+                wrongAnswers.push(`${coeff}`); // forgot variables
+                const wrongCoeff = coeff > 2 ? coeff - 1 : coeff + 1;
+                wrongAnswers.push(`${wrongCoeff}xy`);
+                wrongAnswers.push(`${coeff}x`);
             } else {
                 // ax × bx = abx²
                 const a = randInt(rand, 1, 8);
@@ -78,6 +89,11 @@ function generateProblem(rand, difficulty, operation) {
                 question = `${formatCoeff(a, "x")} × ${formatCoeff(b, "x")}`;
                 latex = `${formatCoeff(a, "x")} \\times ${formatCoeff(b, "x")}`;
                 answer = `${coeff}x²`;
+
+                wrongAnswers.push(`${coeff}x`); // forgot the power
+                const wrongCoeff = coeff > 2 ? coeff - 1 : coeff + 1;
+                wrongAnswers.push(`${wrongCoeff}x²`);
+                wrongAnswers.push(`${coeff}`);
             }
         } else {
             // Hard: 50% ax² × bx = abx³, 50% ax × bx² = abx³
@@ -90,6 +106,11 @@ function generateProblem(rand, difficulty, operation) {
                 question = `${formatCoeff(a, "x²")} × ${formatCoeff(b, "x")}`;
                 latex = `${formatCoeff(a, "x^2")} \\times ${formatCoeff(b, "x")}`;
                 answer = `${coeff}x³`;
+
+                wrongAnswers.push(`${coeff}x²`); // wrong power
+                const wrongCoeff = coeff > 2 ? coeff - 1 : coeff + 1;
+                wrongAnswers.push(`${wrongCoeff}x³`);
+                wrongAnswers.push(`${coeff}x`);
             } else {
                 // ax × bx² = abx³
                 const a = randInt(rand, 1, 8);
@@ -99,6 +120,11 @@ function generateProblem(rand, difficulty, operation) {
                 question = `${formatCoeff(a, "x")} × ${formatCoeff(b, "x²")}`;
                 latex = `${formatCoeff(a, "x")} \\times ${formatCoeff(b, "x^2")}`;
                 answer = `${coeff}x³`;
+
+                wrongAnswers.push(`${coeff}x²`);
+                const wrongCoeff = coeff > 2 ? coeff - 1 : coeff + 1;
+                wrongAnswers.push(`${wrongCoeff}x³`);
+                wrongAnswers.push(`${coeff}x`);
             }
         }
     } else {
@@ -112,6 +138,11 @@ function generateProblem(rand, difficulty, operation) {
             question = `${ab}x ÷ ${a}`;
             latex = `${ab}x \\div ${a}`;
             answer = `${b}x`;
+
+            wrongAnswers.push(`${ab}x`); // forgot to divide
+            wrongAnswers.push(`${b}`); // forgot x
+            const wrongCoeff = b > 1 ? b - 1 : b + 1;
+            wrongAnswers.push(`${wrongCoeff}x`);
         } else if (difficulty === "normal") {
             // abxy ÷ ax = by
             const a = randInt(rand, 2, 8);
@@ -121,6 +152,11 @@ function generateProblem(rand, difficulty, operation) {
             question = `${ab}xy ÷ ${formatCoeff(a, "x")}`;
             latex = `${ab}xy \\div ${formatCoeff(a, "x")}`;
             answer = `${b}y`;
+
+            wrongAnswers.push(`${ab}xy`); // forgot to divide
+            wrongAnswers.push(`${ab}y`); // forgot to divide numerator
+            const wrongCoeff = b > 1 ? b - 1 : b + 1;
+            wrongAnswers.push(`${wrongCoeff}y`);
         } else {
             // Hard: abx² ÷ bx = ax
             const a = randInt(rand, 1, 8);
@@ -130,6 +166,11 @@ function generateProblem(rand, difficulty, operation) {
             question = `${ab}x² ÷ ${formatCoeff(b, "x")}`;
             latex = `${ab}x^2 \\div ${formatCoeff(b, "x")}`;
             answer = `${a}x`;
+
+            wrongAnswers.push(`${ab}x`); // forgot to divide
+            const wrongCoeff = a > 1 ? a - 1 : a + 1;
+            wrongAnswers.push(`${wrongCoeff}x`);
+            wrongAnswers.push(`${a}x²`); // forgot to reduce power
         }
     }
 
@@ -141,5 +182,6 @@ function generateProblem(rand, difficulty, operation) {
         questionHtml,
         question,
         answer,
+        wrongAnswers: wrongAnswers.filter(wa => wa && wa !== answer).slice(0, 3),
     };
 }
