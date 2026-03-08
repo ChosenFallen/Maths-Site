@@ -60,17 +60,85 @@ function generateProblem(rand, difficulty, toImproper) {
     const improperHtml = improper.html;
 
     if (toImproper) {
+        // Converting mixed to improper: a b/c = (ac+b)/c
+        const wrongAnswers = [];
+        const seen = new Set([improper.text]);
+
+        // Mistake 1: forgot the whole part
+        const onlyFrac = formatFracOrWhole(num, den);
+        if (!seen.has(onlyFrac.text)) {
+            wrongAnswers.push(onlyFrac.html);
+            seen.add(onlyFrac.text);
+        }
+
+        // Mistake 2: multiplied wrong (e.g., added instead of multiplied)
+        const wrongNum2 = whole + num;
+        const wrong2 = formatFracOrWhole(wrongNum2, den);
+        if (!seen.has(wrong2.text)) {
+            wrongAnswers.push(wrong2.html);
+            seen.add(wrong2.text);
+        }
+
+        // Mistake 3: off by one
+        const wrongNum3 = improperNum - 1;
+        const wrong3 = formatFracOrWhole(wrongNum3, den);
+        if (!seen.has(wrong3.text)) {
+            wrongAnswers.push(wrong3.html);
+            seen.add(wrong3.text);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            const fallback = formatFracOrWhole(improperNum + 1, den);
+            wrongAnswers.push(fallback.html);
+        }
+
         return {
             questionHtml: `${mixedHtml} =`,
             answerHtml: improperHtml,
             answer: improper.text,
+            wrongAnswers: wrongAnswers.slice(0, 3),
         };
+    }
+
+    // Converting improper to mixed: a/b = c d/e where c = floor(a/b), d = a mod b
+    const wrongAnswers = [];
+    const seen = new Set([`${whole} ${num}/${den}`]);
+
+    // Mistake 1: didn't convert (just returned original improper)
+    if (!seen.has(improper.text)) {
+        wrongAnswers.push(improperHtml);
+        seen.add(improper.text);
+    }
+
+    // Mistake 2: wrong whole part (off by one)
+    const wrongWhole = whole - 1;
+    const wrong2Text = wrongWhole > 0 ? `${wrongWhole} ${num}/${den}` : `${num}/${den}`;
+    if (!seen.has(wrong2Text)) {
+        const wrong2Html = wrongWhole > 0 ? formatMixedNum(wrongWhole, num, den) : formatFrac(num, den);
+        wrongAnswers.push(wrong2Html);
+        seen.add(wrong2Text);
+    }
+
+    // Mistake 3: swapped numerator and whole
+    const wrong3Text = `${num} ${whole}/${den}`;
+    if (!seen.has(wrong3Text)) {
+        const wrong3Html = formatMixedNum(num, whole, den);
+        wrongAnswers.push(wrong3Html);
+        seen.add(wrong3Text);
+    }
+
+    // Fallback
+    if (wrongAnswers.length < 3) {
+        const fallbackHtml = formatMixedNum(whole, num, den + 1);
+        wrongAnswers.push(fallbackHtml);
     }
 
     return {
         questionHtml: `${improperHtml} =`,
         answerHtml: mixedHtml,
         answer: `${whole} ${num}/${den}`,
+        wrongAnswers: wrongAnswers.slice(0, 3),
     };
 }
 

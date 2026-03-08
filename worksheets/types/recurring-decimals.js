@@ -41,11 +41,57 @@ export default {
             const answer = decimal.notation;
             const answerHtml = decimal.html;
 
+            // Generate wrong answers: common recurring decimal mistakes
+            const wrongAnswers = [];
+            const seen = new Set([answer]);
+
+            // Mistake 1: forgot the recurring part (just used non-recurring digits)
+            const parts = answer.split('.');
+            if (parts.length > 1) {
+                const nonRecurringOnly = parts[0] + '.' + parts[1].split('(')[0];
+                if (!seen.has(nonRecurringOnly) && nonRecurringOnly !== answer) {
+                    const wrong1Html = renderKatex(nonRecurringOnly) || nonRecurringOnly;
+                    wrongAnswers.push(wrong1Html);
+                    seen.add(nonRecurringOnly);
+                }
+            }
+
+            // Mistake 2: only part of the recurring sequence
+            if (answer.includes('(')) {
+                const bracketStart = answer.indexOf('(');
+                const bracketEnd = answer.lastIndexOf(')');
+                const recurring = answer.substring(bracketStart + 1, bracketEnd);
+                if (recurring.length > 1) {
+                    const partialRecurring = recurring.substring(0, recurring.length - 1);
+                    const wrongNotation = answer.substring(0, bracketStart) + '(' + partialRecurring + ')';
+                    if (!seen.has(wrongNotation)) {
+                        const wrong2Html = renderKatex(wrongNotation) || wrongNotation;
+                        wrongAnswers.push(wrong2Html);
+                        seen.add(wrongNotation);
+                    }
+                }
+            }
+
+            // Mistake 3: repeated the decimal value (showing question answer)
+            const wrongDecimal = fraction.n + '.' + fraction.d;
+            if (!seen.has(wrongDecimal)) {
+                const wrong3Html = renderKatex(wrongDecimal) || wrongDecimal;
+                wrongAnswers.push(wrong3Html);
+                seen.add(wrongDecimal);
+            }
+
+            // Fallback
+            if (wrongAnswers.length < 3) {
+                const fallbackHtml = renderKatex('0.\\overline{9}') || '0.999...';
+                wrongAnswers.push(fallbackHtml);
+            }
+
             problems.push({
                 questionHtml,
                 question,
                 answerHtml,
-                answer
+                answer,
+                wrongAnswers: wrongAnswers.slice(0, 3),
             });
         }
 

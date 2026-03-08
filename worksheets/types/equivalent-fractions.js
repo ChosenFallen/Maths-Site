@@ -34,7 +34,53 @@ export default {
             const answerHtml = `${leftFrac} = ${rightFrac}`;
             const answer = `${numerator}/${denominator} = ${scaledNum}/${scaledDen}`;
 
-            problems.push({ questionHtml, answer, answerHtml });
+            // Generate wrong answers: common equivalent fraction mistakes
+            const wrongAnswers = [];
+            const seen = new Set([answer]);
+
+            // Mistake 1: scaled by wrong factor (factor - 1)
+            if (factor > 2) {
+                const wrongFactor1 = factor - 1;
+                const wrongAnswer1 = hideTop
+                    ? `${numerator}/${denominator} = ${numerator * wrongFactor1}/${scaledDen}`
+                    : `${numerator}/${denominator} = ${scaledNum}/${denominator * wrongFactor1}`;
+                if (!seen.has(wrongAnswer1)) {
+                    const wrongNum1 = hideTop ? numerator * wrongFactor1 : scaledNum;
+                    const wrongDen1 = hideTop ? scaledDen : denominator * wrongFactor1;
+                    const wrongHtml1 = `${formatFraction(numerator, denominator)} = ${formatFractionWithBold(wrongNum1, wrongDen1, hideTop)}`;
+                    wrongAnswers.push(wrongHtml1);
+                    seen.add(wrongAnswer1);
+                }
+            }
+
+            // Mistake 2: scaled by wrong factor (factor + 1)
+            const wrongFactor2 = factor + 1;
+            const wrongAnswer2 = hideTop
+                ? `${numerator}/${denominator} = ${numerator * wrongFactor2}/${scaledDen}`
+                : `${numerator}/${denominator} = ${scaledNum}/${denominator * wrongFactor2}`;
+            if (!seen.has(wrongAnswer2)) {
+                const wrongNum2 = hideTop ? numerator * wrongFactor2 : scaledNum;
+                const wrongDen2 = hideTop ? scaledDen : denominator * wrongFactor2;
+                const wrongHtml2 = `${formatFraction(numerator, denominator)} = ${formatFractionWithBold(wrongNum2, wrongDen2, hideTop)}`;
+                wrongAnswers.push(wrongHtml2);
+                seen.add(wrongAnswer2);
+            }
+
+            // Mistake 3: swapped numerator and denominator in second fraction
+            const wrongAnswer3 = `${numerator}/${denominator} = ${scaledDen}/${scaledNum}`;
+            if (!seen.has(wrongAnswer3)) {
+                const wrongHtml3 = `${formatFraction(numerator, denominator)} = ${formatFractionWithBold(scaledDen, scaledNum, !hideTop)}`;
+                wrongAnswers.push(wrongHtml3);
+                seen.add(wrongAnswer3);
+            }
+
+            // Fallback
+            if (wrongAnswers.length < 3) {
+                const fallbackHtml = `${formatFraction(numerator, denominator)} = ${formatFractionWithBold(numerator, scaledDen, hideTop)}`;
+                wrongAnswers.push(fallbackHtml);
+            }
+
+            problems.push({ questionHtml, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) });
         }
         return problems;
     },

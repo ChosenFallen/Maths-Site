@@ -19,10 +19,48 @@ export default {
             const simpDen = denominator / divisor;
             const questionHtml = `${formatFrac(numerator, denominator)} =`;
             const formatted = formatFracOrWhole(simpNum, simpDen);
+
+            // Generate wrong answers: common simplification mistakes
+            const wrongAnswers = [];
+            const seen = new Set([formatted.text]);
+
+            // Mistake 1: didn't simplify (original fraction)
+            const original = formatFracOrWhole(numerator, denominator);
+            if (!seen.has(original.text)) {
+                wrongAnswers.push(original.html);
+                seen.add(original.text);
+            }
+
+            // Mistake 2: only simplified numerator or denominator
+            const partialNum = formatFracOrWhole(simpNum, denominator);
+            if (!seen.has(partialNum.text)) {
+                wrongAnswers.push(partialNum.html);
+                seen.add(partialNum.text);
+            }
+
+            // Mistake 3: simplified by wrong factor
+            if (divisor > 2) {
+                const wrongDiv = divisor / 2;
+                const wrongNum = numerator / wrongDiv;
+                const wrongDen = denominator / wrongDiv;
+                const wrongSimp = formatFracOrWhole(wrongNum, wrongDen);
+                if (!seen.has(wrongSimp.text)) {
+                    wrongAnswers.push(wrongSimp.html);
+                    seen.add(wrongSimp.text);
+                }
+            }
+
+            // Fallback: add a clearly wrong answer
+            if (wrongAnswers.length < 3) {
+                const fallback = formatFracOrWhole(simpNum, simpDen + 1);
+                wrongAnswers.push(fallback.html);
+            }
+
             problems.push({
                 questionHtml,
                 answerHtml: formatted.html,
                 answer: formatted.text,
+                wrongAnswers: wrongAnswers.slice(0, 3),
             });
         }
         return problems;

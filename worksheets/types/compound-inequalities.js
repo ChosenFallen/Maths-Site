@@ -46,7 +46,37 @@ function generateProblem(rand, difficulty) {
         const question = `${formatBound(a)} ${signL} x + ${k} ${signR} ${formatBound(b)}`;
         const answer = `${formatBound(lo)} ${signL} x ${signR} ${formatBound(hi)}`;
 
-        return { question, answer };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: didn't subtract k from bounds
+        const wrong1 = `${formatBound(a)} ${signL} x ${signR} ${formatBound(b)}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: swapped bounds
+        const wrong2 = `${formatBound(hi)} ${signL} x ${signR} ${formatBound(lo)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one in one bound
+        const wrong3 = `${formatBound(lo + 1)} ${signL} x ${signR} ${formatBound(hi)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`${formatBound(lo)} ${signL} x ${signR} ${formatBound(hi + 1)}`);
+        }
+
+        return { question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else if (difficulty === "normal") {
         // a < mx + k < b (multiplication and addition)
         const m = randInt(rand, 2, 4);
@@ -66,7 +96,37 @@ function generateProblem(rand, difficulty) {
 
         const answer = `${formatBound(lo)} ${signL} x ${signR} ${formatBound(hi)}`;
 
-        return { question, answer };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot to divide by m
+        const wrong1 = `${formatBound(lo * m)} ${signL} x ${signR} ${formatBound(hi * m)}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: swapped bounds
+        const wrong2 = `${formatBound(hi)} ${signL} x ${signR} ${formatBound(lo)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one
+        const wrong3 = `${formatBound(lo + 1)} ${signL} x ${signR} ${formatBound(hi)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`${formatBound(lo)} ${signL} x ${signR} ${formatBound(hi + 1)}`);
+        }
+
+        return { question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else {
         // Hard: a < cx + d < b (larger coefficients, more variety)
         const c = randInt(rand, 2, 5);
@@ -86,6 +146,37 @@ function generateProblem(rand, difficulty) {
 
         const answer = `${formatBound(lo)} ${signL} x ${signR} ${formatBound(hi)}`;
 
-        return { question, answer };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot to divide by c
+        const wrong1 = `${formatBound(lo * c)} ${signL} x ${signR} ${formatBound(hi * c)}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: swapped bounds
+        const wrong2 = `${formatBound(hi)} ${signL} x ${signR} ${formatBound(lo)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: only subtracted on one side
+        const wrongLo = Math.floor(a / c);
+        const wrong3 = `${formatBound(wrongLo)} ${signL} x ${signR} ${formatBound(hi)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`${formatBound(lo)} ${signL} x ${signR} ${formatBound(hi + 1)}`);
+        }
+
+        return { question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
     }
 }

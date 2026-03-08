@@ -143,7 +143,37 @@ function generateFractionalNumerical(rand, difficulty) {
         const question = `${base}^(1/${n}) =`;
         const answer = `${k}`;
 
-        return { questionHtml, question, answer };
+        // Wrong answers: common mistakes with fractional exponents
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: inverted exponent (treated as k^n instead of k^(1/n))
+        const wrong1 = `${base}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: divided by n instead of taking nth root
+        const wrong2 = `${Math.floor(base / n)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one
+        const wrong3 = `${Math.max(1, k - 1)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`${k + 1}`);
+        }
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else if (difficulty === "normal") {
         // base^(m/n) = k^m, with m ≠ n, k ∈ [2, 12] → 22 unique
         const k = randInt(rand, 2, 12);
@@ -159,7 +189,37 @@ function generateFractionalNumerical(rand, difficulty) {
         const question = `${base}^(${m}/${n}) =`;
         const answer = `${answerValue}`;
 
-        return { questionHtml, question, answer };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot numerator (took nth root only)
+        const wrong1 = `${k}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: used n instead of m
+        const wrong2 = `${Math.pow(k, n)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one in answer
+        const wrong3 = `${Math.max(1, answerValue - 1)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`${answerValue + 1}`);
+        }
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else {
         // Hard: wider range
         const k = randInt(rand, 2, 5);
@@ -183,7 +243,37 @@ function generateFractionalNumerical(rand, difficulty) {
         const question = `${base}^(${m}/${n}) =`;
         const answer = `${answerValue}`;
 
-        return { questionHtml, question, answer };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: just evaluated base
+        const wrong1 = `${base}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: forgot exponent numerator
+        const wrong2 = `${k}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: off by one
+        const wrong3 = `${Math.max(1, answerValue - 1)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`${answerValue + 1}`);
+        }
+
+        return { questionHtml, question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
     }
 }
 
@@ -203,7 +293,37 @@ function generateNegativeNumerical(rand, difficulty) {
         const answerHtml = renderKatexLocal(answerLatex) || `1/${denom}`;
         const answer = `1/${denom}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot the negative (just a^n)
+        const wrong1 = `${denom}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: made reciprocal of base instead of power
+        const wrong2 = `1/${a}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: negative reciprocal
+        const wrong3 = `-1/${denom}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`1/${denom + 1}`);
+        }
+
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else if (difficulty === "normal") {
         // a ∈ [2, 8], n ∈ {1, 2, 3} → 21 unique
         const a = randInt(rand, 2, 8);
@@ -218,7 +338,37 @@ function generateNegativeNumerical(rand, difficulty) {
         const answerHtml = renderKatexLocal(answerLatex) || `1/${denom}`;
         const answer = `1/${denom}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot negative sign
+        const wrong1 = `${denom}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: just reciprocal of base
+        const wrong2 = `1/${a}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: wrong power
+        const wrong3 = `1/${Math.pow(a, Math.max(1, n - 1))}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`1/${denom + 1}`);
+        }
+
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else {
         // Hard: negative fractional
         const k = randInt(rand, 2, 4);
@@ -236,7 +386,37 @@ function generateNegativeNumerical(rand, difficulty) {
         const answerHtml = renderKatexLocal(answerLatex) || `1/${answerDenom}`;
         const answer = `1/${answerDenom}`;
 
-        return { questionHtml, question, answer, answerHtml };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot negative
+        const wrong1 = `${answerDenom}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: wrong denominator power
+        const wrong2 = `1/${base}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: forgot fraction exponent
+        const wrong3 = `1/${k}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`1/${answerDenom + 1}`);
+        }
+
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
     }
 }
 
@@ -272,7 +452,37 @@ function generateAlgebraicFractional(rand, difficulty, lawType) {
         const answer = "x";
         const answerHtml = renderKatexLocal("x") || "x";
 
-        return { questionHtml, question, answer, answerHtml };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: just took first term
+        const wrong1 = `x^(${p}/${n})`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: added exponents wrong
+        const wrong2 = `x^${exponentToSuperscript(n)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: didn't simplify
+        const wrong3 = `x^(1/${n}) × x^(${q}/${n})`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push("x^2");
+        }
+
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else if (lawType === "power") {
         // (x^m)^(1/n) = x^(m/n), pick m divisible by n for clean answer
         const n = randInt(rand, 2, 3);
@@ -287,7 +497,37 @@ function generateAlgebraicFractional(rand, difficulty, lawType) {
         const answerLatex = resultNum === 1 ? "x" : `x^{${resultNum}}`;
         const answerHtml = renderKatexLocal(answerLatex) || answer;
 
-        return { questionHtml, question, answer, answerHtml };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot to apply power rule
+        const wrong1 = `x^(${m}/${n})`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: just took the inner exponent
+        const wrong2 = `x${exponentToSuperscript(m)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: wrong exponent value
+        const wrong3 = `x${exponentToSuperscript(Math.max(1, resultNum - 1))}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`x^${exponentToSuperscript(resultNum + 1)}`);
+        }
+
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else {
         // Quotient with fractional
         const n = randInt(rand, 2, 3);
@@ -304,7 +544,38 @@ function generateAlgebraicFractional(rand, difficulty, lawType) {
             const answerLatex = resultNum === 1 ? "x" : `x^{\\dfrac{${resultNum}}{${n}}}`;
             const answerHtml = renderKatexLocal(answerLatex) || answer;
 
-            return { questionHtml, question, answer, answerHtml };
+            // Wrong answers
+            const wrongAnswers = [];
+            const seen = new Set([answer]);
+
+            // Mistake 1: added exponents instead of subtracting
+            const sum = p + q;
+            const wrong1 = `x^(${sum}/${n})`;
+            if (!seen.has(wrong1)) {
+                wrongAnswers.push(wrong1);
+                seen.add(wrong1);
+            }
+
+            // Mistake 2: just took first term
+            const wrong2 = `x^(${p}/${n})`;
+            if (!seen.has(wrong2)) {
+                wrongAnswers.push(wrong2);
+                seen.add(wrong2);
+            }
+
+            // Mistake 3: wrong denominator
+            const wrong3 = resultNum === 1 ? "x^2" : `x${exponentToSuperscript(resultNum)}`;
+            if (!seen.has(wrong3)) {
+                wrongAnswers.push(wrong3);
+                seen.add(wrong3);
+            }
+
+            // Fallback
+            if (wrongAnswers.length < 3) {
+                wrongAnswers.push("1");
+            }
+
+            return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
         } else {
             // x^(q/n) ÷ x^(p/n) = x^((q-p)/n), then simplify if possible
             const resultNum = q - p;
@@ -316,7 +587,38 @@ function generateAlgebraicFractional(rand, difficulty, lawType) {
             const answerLatex = resultNum === 1 ? "x" : `x^{\\dfrac{${resultNum}}{${n}}}`;
             const answerHtml = renderKatexLocal(answerLatex) || answer;
 
-            return { questionHtml, question, answer, answerHtml };
+            // Wrong answers
+            const wrongAnswers = [];
+            const seen = new Set([answer]);
+
+            // Mistake 1: added exponents
+            const sum = q + p;
+            const wrong1 = `x^(${sum}/${n})`;
+            if (!seen.has(wrong1)) {
+                wrongAnswers.push(wrong1);
+                seen.add(wrong1);
+            }
+
+            // Mistake 2: just took first term
+            const wrong2 = `x^(${q}/${n})`;
+            if (!seen.has(wrong2)) {
+                wrongAnswers.push(wrong2);
+                seen.add(wrong2);
+            }
+
+            // Mistake 3: wrong exponent
+            const wrong3 = `x^(${p}/${n})`;
+            if (!seen.has(wrong3)) {
+                wrongAnswers.push(wrong3);
+                seen.add(wrong3);
+            }
+
+            // Fallback
+            if (wrongAnswers.length < 3) {
+                wrongAnswers.push("1");
+            }
+
+            return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
         }
     }
 }
@@ -336,16 +638,109 @@ function generateAlgebraicNegative(rand, difficulty, lawType) {
         if (result > 0) {
             const answer = `x${exponentToSuperscript(result)}`;
             const answerHtml = renderKatexLocal(`x^{${result}}`) || answer;
-            return { questionHtml, question, answer, answerHtml };
+
+            // Wrong answers
+            const wrongAnswers = [];
+            const seen = new Set([answer]);
+
+            // Mistake 1: forgot the negative (added instead)
+            const wrong1 = `x${exponentToSuperscript(m + n)}`;
+            if (!seen.has(wrong1)) {
+                wrongAnswers.push(wrong1);
+                seen.add(wrong1);
+            }
+
+            // Mistake 2: just took first term
+            const wrong2 = `x${exponentToSuperscript(m)}`;
+            if (!seen.has(wrong2)) {
+                wrongAnswers.push(wrong2);
+                seen.add(wrong2);
+            }
+
+            // Mistake 3: wrong exponent value
+            const wrong3 = `x${exponentToSuperscript(result + 1)}`;
+            if (!seen.has(wrong3)) {
+                wrongAnswers.push(wrong3);
+                seen.add(wrong3);
+            }
+
+            // Fallback
+            if (wrongAnswers.length < 3) {
+                wrongAnswers.push(`x${exponentToSuperscript(result - 1)}`);
+            }
+
+            return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
         } else if (result === 0) {
             const answer = "1";
-            return { questionHtml, question, answer };
+
+            // Wrong answers
+            const wrongAnswers = [];
+            const seen = new Set([answer]);
+
+            // Mistake 1: forgot to simplify
+            const wrong1 = `x${exponentToSuperscript(m)}/x${exponentToSuperscript(n)}`;
+            if (!seen.has(wrong1)) {
+                wrongAnswers.push(wrong1);
+                seen.add(wrong1);
+            }
+
+            // Mistake 2: used m
+            const wrong2 = `x${exponentToSuperscript(m)}`;
+            if (!seen.has(wrong2)) {
+                wrongAnswers.push(wrong2);
+                seen.add(wrong2);
+            }
+
+            // Mistake 3: used n
+            const wrong3 = `x${exponentToSuperscript(n)}`;
+            if (!seen.has(wrong3)) {
+                wrongAnswers.push(wrong3);
+                seen.add(wrong3);
+            }
+
+            // Fallback
+            if (wrongAnswers.length < 3) {
+                wrongAnswers.push("0");
+            }
+
+            return { questionHtml, question, answer, wrongAnswers: wrongAnswers.slice(0, 3) };
         } else {
             const absResult = Math.abs(result);
             const answer = `1/x${exponentToSuperscript(absResult)}`;
             const answerLatex = `\\dfrac{1}{x^{${absResult}}}`;
             const answerHtml = renderKatexLocal(answerLatex) || answer;
-            return { questionHtml, question, answer, answerHtml };
+
+            // Wrong answers
+            const wrongAnswers = [];
+            const seen = new Set([answer]);
+
+            // Mistake 1: forgot negative (positive exponent)
+            const wrong1 = `x${exponentToSuperscript(absResult)}`;
+            if (!seen.has(wrong1)) {
+                wrongAnswers.push(wrong1);
+                seen.add(wrong1);
+            }
+
+            // Mistake 2: wrong exponent in denominator
+            const wrong2 = `1/x${exponentToSuperscript(m)}`;
+            if (!seen.has(wrong2)) {
+                wrongAnswers.push(wrong2);
+                seen.add(wrong2);
+            }
+
+            // Mistake 3: wrong exponent value
+            const wrong3 = `1/x${exponentToSuperscript(absResult + 1)}`;
+            if (!seen.has(wrong3)) {
+                wrongAnswers.push(wrong3);
+                seen.add(wrong3);
+            }
+
+            // Fallback
+            if (wrongAnswers.length < 3) {
+                wrongAnswers.push(`x^(-${absResult})`);
+            }
+
+            return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
         }
     } else if (lawType === "power") {
         // (x^m)^(-n) = x^(-mn) = 1/x^(mn)
@@ -361,7 +756,37 @@ function generateAlgebraicNegative(rand, difficulty, lawType) {
         const answerLatex = `\\dfrac{1}{x^{${result}}}`;
         const answerHtml = renderKatexLocal(answerLatex) || answer;
 
-        return { questionHtml, question, answer, answerHtml };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot power rule (didn't multiply exponents)
+        const wrong1 = `1/x${exponentToSuperscript(m)}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: forgot negative
+        const wrong2 = `x${exponentToSuperscript(result)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: wrong exponent
+        const wrong3 = `1/x${exponentToSuperscript(result + 1)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`x^(-${result})`);
+        }
+
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
     } else {
         // Quotient with negative
         const m = randInt(rand, 2, 4);
@@ -375,6 +800,36 @@ function generateAlgebraicNegative(rand, difficulty, lawType) {
         const answer = `x${exponentToSuperscript(result)}`;
         const answerHtml = renderKatexLocal(`x^{${result}}`) || answer;
 
-        return { questionHtml, question, answer, answerHtml };
+        // Wrong answers
+        const wrongAnswers = [];
+        const seen = new Set([answer]);
+
+        // Mistake 1: forgot negative (subtracted instead)
+        const wrong1 = `x${exponentToSuperscript(m - n)}`;
+        if (!seen.has(wrong1)) {
+            wrongAnswers.push(wrong1);
+            seen.add(wrong1);
+        }
+
+        // Mistake 2: just took first term
+        const wrong2 = `x${exponentToSuperscript(m)}`;
+        if (!seen.has(wrong2)) {
+            wrongAnswers.push(wrong2);
+            seen.add(wrong2);
+        }
+
+        // Mistake 3: wrong exponent
+        const wrong3 = `x${exponentToSuperscript(result - 1)}`;
+        if (!seen.has(wrong3)) {
+            wrongAnswers.push(wrong3);
+            seen.add(wrong3);
+        }
+
+        // Fallback
+        if (wrongAnswers.length < 3) {
+            wrongAnswers.push(`x${exponentToSuperscript(result + 1)}`);
+        }
+
+        return { questionHtml, question, answer, answerHtml, wrongAnswers: wrongAnswers.slice(0, 3) };
     }
 }

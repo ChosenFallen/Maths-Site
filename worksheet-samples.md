@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-08T00:50:37.835Z
+Generated: 2026-03-08T01:08:01.844Z
 
 ---
 
@@ -214,6 +214,51 @@ Generated: 2026-03-08T00:50:37.835Z
 
 ---
 
+## Advanced Indices (Fractional & Negative)
+**ID**: advanced-indices
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: 144^(3/2) =
+
+**Answer**: 1728
+
+**Wrong Answers**:
+- 12
+- 144
+- 1727
+
+---
+
+## Simplify Fractions
+**ID**: simplify-fractions
+**Grades**: Easy=3, Normal=4, Hard=5
+
+**Question**: <span class="frac"><span class="top">16</span><span class="bottom">48</span></span> =
+
+**Answer**: <span class="frac"><span class="top">1</span><span class="bottom">3</span></span>
+
+**Wrong Answers**:
+- <span class="frac"><span class="top">16</span><span class="bottom">48</span></span>
+- <span class="frac"><span class="top">1</span><span class="bottom">48</span></span>
+- <span class="frac"><span class="top">2</span><span class="bottom">6</span></span>
+
+---
+
+## Equivalent Fractions
+**ID**: equivalent-fractions
+**Grades**: Easy=3, Normal=4, Hard=5
+
+**Question**: <span class="frac"><span class="top">1</span><span class="bottom">3</span></span> = <span class="frac"><span class="top">4</span><span class="bottom blank"></span></span>
+
+**Answer**: <span class="frac"><span class="top">1</span><span class="bottom">3</span></span> = <span class="frac"><span class="top">4</span><span class="bottom"><strong>12</strong></span></span>
+
+**Wrong Answers**:
+- <span class="frac"><span class="top">1</span><span class="bottom">3</span></span> = <span class="frac"><span class="top">4</span><span class="bottom"><strong>9</strong></span></span>
+- <span class="frac"><span class="top">1</span><span class="bottom">3</span></span> = <span class="frac"><span class="top">4</span><span class="bottom"><strong>15</strong></span></span>
+- <span class="frac"><span class="top">1</span><span class="bottom">3</span></span> = <span class="frac"><span class="top"><strong>12</strong></span><span class="bottom">4</span></span>
+
+---
+
 ## Add/Subtract Fractions
 **ID**: fraction-add-sub
 **Grades**: Easy=4, Normal=5, Hard=6
@@ -259,6 +304,21 @@ Generated: 2026-03-08T00:50:37.835Z
 
 ---
 
+## Mixed Numbers/Improper Fractions
+**ID**: mixed-numbers
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: <span class="frac"><span class="top">37</span><span class="bottom">5</span></span> =
+
+**Answer**: <span class="mixed"><span class="whole">7</span><span class="frac"><span class="top">2</span><span class="bottom">5</span></span></span>
+
+**Wrong Answers**:
+- <span class="frac"><span class="top">37</span><span class="bottom">5</span></span>
+- <span class="mixed"><span class="whole">6</span><span class="frac"><span class="top">2</span><span class="bottom">5</span></span></span>
+- <span class="mixed"><span class="whole">2</span><span class="frac"><span class="top">7</span><span class="bottom">5</span></span></span>
+
+---
+
 ## Fraction → Decimal
 **ID**: fdp-fraction-to-decimal
 **Grades**: Easy=4, Normal=5, Hard=5
@@ -274,6 +334,21 @@ Generated: 2026-03-08T00:50:37.835Z
 
 ---
 
+## Decimal → Fraction
+**ID**: fdp-decimal-to-fraction
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: 0.97
+
+**Answer**: <span class="frac"><span class="top">97</span><span class="bottom">100</span></span>
+
+**Wrong Answers**:
+- <span class="frac"><span class="top">97</span><span class="bottom">10</span></span>
+- <span class="frac"><span class="top">98</span><span class="bottom">100</span></span>
+- <span class="frac"><span class="top">97</span><span class="bottom">101</span></span>
+
+---
+
 ## Fraction → Percentage
 **ID**: fdp-fraction-to-percent
 **Grades**: Easy=4, Normal=5, Hard=6
@@ -286,6 +361,21 @@ Generated: 2026-03-08T00:50:37.835Z
 - 51%
 - 49%
 - 100%
+
+---
+
+## Percentage → Fraction
+**ID**: fdp-percent-to-fraction
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: 98%
+
+**Answer**: <span class="frac"><span class="top">49</span><span class="bottom">50</span></span>
+
+**Wrong Answers**:
+- <span class="frac"><span class="top">980</span><span class="bottom">1000</span></span>
+- <span class="frac"><span class="top">1</span><span class="bottom">98</span></span>
+- <span class="frac"><span class="top">50</span><span class="bottom">50</span></span>
 
 ---
 
@@ -406,6 +496,21 @@ Generated: 2026-03-08T00:50:37.835Z
 - 97
 - 95
 - 192
+
+---
+
+## Recurring Decimals
+**ID**: recurring-decimals
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: <span class="frac"><span class="top">1</span><span class="bottom">12</span></span>
+
+**Answer**: 0.08(3)
+
+**Wrong Answers**:
+- 0.08
+- 1.12
+- 0.999...
 
 ---
 
@@ -1088,6 +1193,21 @@ when x = 7
 
 ---
 
+## Compound Inequalities
+**ID**: compound-inequalities
+**Grades**: Easy=6, Normal=7, Hard=8
+
+**Question**: 10 ≤ 3x + 4 < 16
+
+**Answer**: 2 ≤ x < 4
+
+**Wrong Answers**:
+- 6 ≤ x < 12
+- 4 ≤ x < 2
+- 3 ≤ x < 4
+
+---
+
 ## Times Tables: Speed Drill
 **ID**: times-tables-speed
 **Grades**: Easy=2, Normal=3, Hard=4
@@ -1261,7 +1381,7 @@ when x = 7
 **Grades**: Easy=5, Normal=6, Hard=7
 
 **Question**: 
-        <svg width="100%" height="89" viewBox="0 0 145 89" style="max-width: 145px; display: block;">
+        <svg width="100%" height="112" viewBox="0 0 145 112" style="max-width: 145px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -1270,7 +1390,7 @@ when x = 7
 
             <!-- Triangle -->
             <polygon
-                points="10,59 100,59 55,14"
+                points="10,82 100,82 55,14.5"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -1279,9 +1399,9 @@ when x = 7
             <!-- Base label (bottom) -->
             <line
                 x1="10"
-                y1="71"
+                y1="94"
                 x2="100"
-                y2="71"
+                y2="94"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1289,21 +1409,21 @@ when x = 7
             />
             <text
                 x="55"
-                y="87"
+                y="110"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                12 m
+                8 m
             </text>
 
             <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="55"
-                y1="14"
+                y1="14.5"
                 x2="55"
-                y2="59"
+                y2="82"
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
@@ -1312,7 +1432,7 @@ when x = 7
             />
             <text
                 x="83"
-                y="36.5"
+                y="48.25"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -1324,12 +1444,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 36 m²
+**Answer**: 24 m²
 
 **Wrong Answers**:
-- 37 m²
-- 35 m²
-- 72 m²
+- 25 m²
+- 23 m²
+- 48 m²
 
 ---
 
