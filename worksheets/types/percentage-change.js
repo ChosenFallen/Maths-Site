@@ -83,5 +83,19 @@ function generateProblem(rand, difficulty, changeType) {
         ? `${percentStr}% increase`
         : `${percentStr}% decrease`;
 
-    return { question, answer };
+    // Wrong answers: common percentage change mistakes
+    const wrongAnswers = [];
+    // Mistake 1: wrong direction (increase vs decrease)
+    const oppositeDir = changeType === "increase" ? "decrease" : "increase";
+    wrongAnswers.push(`${percentStr}% ${oppositeDir}`);
+    // Mistake 2: off by 5% (or 1% for hard mode)
+    const offsetPercent = difficulty === "hard" ? (percent - 1) : (percent - 5);
+    const offsetPercentStr = offsetPercent === Math.floor(offsetPercent) ? offsetPercent.toString() : offsetPercent.toFixed(1);
+    wrongAnswers.push(`${offsetPercentStr}% ${changeType === "increase" ? "increase" : "decrease"}`);
+    // Mistake 3: decimal point error (e.g., 20 instead of 2, or vice versa)
+    const altPercent = percent < 10 ? (percent * 10) : (percent / 10);
+    const altPercentStr = altPercent === Math.floor(altPercent) ? altPercent.toString() : altPercent.toFixed(1);
+    wrongAnswers.push(`${altPercentStr}% ${changeType === "increase" ? "increase" : "decrease"}`);
+
+    return { question, answer, wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3) };
 }

@@ -39,11 +39,45 @@ export default {
 
             const answer = mode === "full" ? answerFull : answerIndex;
 
+            // Generate wrong answers (common prime factorization mistakes)
+            const wrongAnswers = [];
+
+            if (primeFactors.length > 0) {
+                // Mistake 1: remove last factor
+                const missingLastFactor = primeFactors.slice(0, -1);
+                const wrongFull1 = missingLastFactor.length > 0 ? formatPrimeFactorsFull(missingLastFactor) : "1";
+                const wrongIndex1 = missingLastFactor.length > 0 ? formatPrimeFactorsIndex(missingLastFactor) : "1";
+                wrongAnswers.push(mode === "full" ? wrongFull1 : wrongIndex1);
+
+                // Mistake 2: double one of the factors
+                const withDoubledFactor = [...primeFactors];
+                if (withDoubledFactor.length > 0) {
+                    const idxToDouble = randInt(rand, 0, withDoubledFactor.length - 1);
+                    withDoubledFactor.push(withDoubledFactor[idxToDouble]);
+                    const wrongFull2 = formatPrimeFactorsFull(withDoubledFactor);
+                    const wrongIndex2 = formatPrimeFactorsIndex(withDoubledFactor);
+                    wrongAnswers.push(mode === "full" ? wrongFull2 : wrongIndex2);
+                }
+
+                // Mistake 3: replace a factor with its double
+                if (primeFactors.length > 0) {
+                    const factorsCopy = [...primeFactors];
+                    const idxToDouble2 = 0;
+                    if (idxToDouble2 < factorsCopy.length) {
+                        factorsCopy[idxToDouble2] = factorsCopy[idxToDouble2] * 2;
+                        const wrongFull3 = formatPrimeFactorsFull(factorsCopy);
+                        const wrongIndex3 = formatPrimeFactorsIndex(factorsCopy);
+                        wrongAnswers.push(mode === "full" ? wrongFull3 : wrongIndex3);
+                    }
+                }
+            }
+
             problems.push({
                 question,
                 questionHtml: question,
                 answer,
                 answerHtml: answer,
+                wrongAnswers: wrongAnswers.filter(wa => wa !== answer).slice(0, 3),
             });
         }
 

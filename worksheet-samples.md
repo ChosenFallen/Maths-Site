@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-08T00:39:28.677Z
+Generated: 2026-03-08T00:50:37.835Z
 
 ---
 
@@ -499,6 +499,21 @@ Generated: 2026-03-08T00:39:28.677Z
 
 ---
 
+## Factors and Multiples
+**ID**: factors-multiples
+**Grades**: Easy=4, Normal=5, Hard=5
+
+**Question**: List the first 7 multiples of 8.
+
+**Answer**: 8, 16, 24, 32, 40, 48, 56
+
+**Wrong Answers**:
+- 8, 16, 24, 32, 40, 48
+- 9, 18, 27, 36, 45, 54, 63
+- 7, 14, 21, 28, 35, 42, 49
+
+---
+
 ## Estimation and Sensible Estimates
 **ID**: estimation
 **Grades**: Easy=3, Normal=4, Hard=5
@@ -541,6 +556,21 @@ Generated: 2026-03-08T00:39:28.677Z
 - 2.1 × 10²
 - 0.1 × 10²
 - 2.2 × 10²
+
+---
+
+## Best Buys and Unit Pricing
+**ID**: best-buys
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: Option A: £60 for 4 items. Option B: £39 for 7 items. Which is better value?
+
+**Answer**: Option B
+
+**Wrong Answers**:
+- Option A
+- Option C
+- They are the same
 
 ---
 
@@ -589,6 +619,21 @@ Generated: 2026-03-08T00:39:28.677Z
 
 ---
 
+## Prime Factorization
+**ID**: prime-factorization
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: 188
+
+**Answer**: 2² × 47
+
+**Wrong Answers**:
+- 2²
+- 2³ × 47
+- 2 × 4 × 47
+
+---
+
 ## Missing Number
 **ID**: missing-number
 **Grades**: Easy=2, Normal=3, Hard=4
@@ -601,6 +646,21 @@ Generated: 2026-03-08T00:39:28.677Z
 - 126
 - 124
 - 250
+
+---
+
+## Percentage Change
+**ID**: percentage-change
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: Original: 200,  New: 170
+
+**Answer**: 15% decrease
+
+**Wrong Answers**:
+- 15% increase
+- 10% decrease
+- 1.5% decrease
 
 ---
 
@@ -1201,7 +1261,7 @@ when x = 7
 **Grades**: Easy=5, Normal=6, Hard=7
 
 **Question**: 
-        <svg width="100%" height="112" viewBox="0 0 145 112" style="max-width: 145px; display: block;">
+        <svg width="100%" height="89" viewBox="0 0 145 89" style="max-width: 145px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -1210,7 +1270,7 @@ when x = 7
 
             <!-- Triangle -->
             <polygon
-                points="10,82 100,82 55,14.5"
+                points="10,59 100,59 55,14"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -1219,9 +1279,9 @@ when x = 7
             <!-- Base label (bottom) -->
             <line
                 x1="10"
-                y1="94"
+                y1="71"
                 x2="100"
-                y2="94"
+                y2="71"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1229,21 +1289,21 @@ when x = 7
             />
             <text
                 x="55"
-                y="110"
+                y="87"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                8 m
+                12 m
             </text>
 
             <!-- Height label (dashed line from apex perpendicular to base, with arrows) -->
             <line
                 x1="55"
-                y1="14.5"
+                y1="14"
                 x2="55"
-                y2="82"
+                y2="59"
                 stroke="#666"
                 stroke-width="1"
                 stroke-dasharray="4,2"
@@ -1252,7 +1312,7 @@ when x = 7
             />
             <text
                 x="83"
-                y="48.25"
+                y="36.5"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -1264,12 +1324,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 24 m²
+**Answer**: 36 m²
 
 **Wrong Answers**:
-- 25 m²
-- 23 m²
-- 48 m²
+- 37 m²
+- 35 m²
+- 72 m²
 
 ---
 
