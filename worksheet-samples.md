@@ -1,6 +1,6 @@
 # Sample Questions - Worksheets with Wrong Answers
 
-Generated: 2026-03-08T00:13:50.465Z
+Generated: 2026-03-08T00:20:03.769Z
 
 ---
 
@@ -166,6 +166,21 @@ Generated: 2026-03-08T00:13:50.465Z
 - 101
 - 99
 - 200
+
+---
+
+## Index Laws
+**ID**: index-laws
+**Grades**: Easy=5, Normal=6, Hard=7
+
+**Question**: (x²y²)³ =
+
+**Answer**: x⁶y⁶
+
+**Wrong Answers**:
+- x²y²
+- x⁴y⁴
+- x⁵y⁵
 
 ---
 
@@ -572,6 +587,21 @@ when x = 7
 - 16x + 24y
 - 16x + 24y
 - 17x − 24y
+
+---
+
+## Multiplying and Dividing Terms
+**ID**: multiplying-terms
+**Grades**: Easy=4, Normal=5, Hard=6
+
+**Question**: 16xy ÷ 4x
+
+**Answer**: 4y
+
+**Wrong Answers**:
+- 16xy
+- 16y
+- 3y
 
 ---
 
@@ -1033,7 +1063,7 @@ when x = 7
 **Grades**: Easy=4, Normal=5, Hard=6
 
 **Question**: 
-        <svg width="100%" height="96" viewBox="0 0 175 96" style="max-width: 175px; display: block;">
+        <svg width="100%" height="74" viewBox="0 0 175 74" style="max-width: 175px; display: block;">
             <defs>
                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto-start-reverse">
                     <polygon points="0 0, 10 3, 0 6" fill="#666"/>
@@ -1044,7 +1074,7 @@ when x = 7
                 x="10"
                 y="6"
                 width="75"
-                height="60"
+                height="37.5"
                 fill="none"
                 stroke="#0066cc"
                 stroke-width="2.5"
@@ -1053,9 +1083,9 @@ when x = 7
             <!-- Width label (bottom) -->
             <line
                 x1="10"
-                y1="78"
+                y1="55.5"
                 x2="85"
-                y2="78"
+                y2="55.5"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1063,13 +1093,13 @@ when x = 7
             />
             <text
                 x="47.5"
-                y="94"
+                y="71.5"
                 text-anchor="middle"
                 font-size="14"
                 font-weight="bold"
                 fill="#333"
             >
-                7.5 m
+                12 m
             </text>
 
             <!-- Height label (right) -->
@@ -1077,7 +1107,7 @@ when x = 7
                 x1="97"
                 y1="6"
                 x2="97"
-                y2="66"
+                y2="43.5"
                 stroke="#666"
                 stroke-width="1"
                 marker-end="url(#arrowhead)"
@@ -1085,7 +1115,7 @@ when x = 7
             />
             <text
                 x="113"
-                y="36"
+                y="24.75"
                 text-anchor="start"
                 dominant-baseline="middle"
                 font-size="14"
@@ -1097,12 +1127,12 @@ when x = 7
         </svg>
     
 
-**Answer**: 45 m²
+**Answer**: 72 m²
 
 **Wrong Answers**:
-- 46 m²
-- 44 m²
-- 90 m²
+- 73 m²
+- 71 m²
+- 144 m²
 
 ---
 
