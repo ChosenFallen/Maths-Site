@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do Now</title>
+
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            height: 52px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        #header h1 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        .header-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #code-display {
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: bold;
+            background: white;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #0066cc;
+        }
+
+        #copy-code-btn {
+            padding: 4px 8px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        #copy-code-btn:hover {
+            background: #0052a3;
+        }
+
+        #new-questions-btn {
+            padding: 6px 12px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        #new-questions-btn:hover {
+            background: #0052a3;
+        }
+
+        .color-presets {
+            display: flex;
+            gap: 4px;
+        }
+
+        .color-preset {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #999;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .color-preset:hover {
+            border-color: #333;
+        }
+
+        #reveal-all-btn {
+            padding: 6px 12px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        #reveal-all-btn:hover {
+            background: #0052a3;
+        }
+
+        #fullscreen-btn {
+            padding: 6px 12px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        #fullscreen-btn:hover {
+            background: #0052a3;
+        }
+
+        #grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 16px;
+            padding: 16px;
+            height: calc(100vh - 52px);
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Flip card styles */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .flip-card-front {
+            color: #333;
+            text-align: center;
+            border: 2px solid #0066cc;
+        }
+
+        .flip-card-back {
+            background-color: #e8f4e8;
+            color: #0066cc;
+            transform: rotateY(180deg);
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .question-content {
+            width: 100%;
+            overflow: visible;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .question-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .question-instruction {
+            font-size: 12px;
+            color: #0066cc;
+            font-style: italic;
+            margin-bottom: 10px;
+            padding: 4px 0;
+        }
+
+        .flip-hint {
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        /* Fraction rendering */
+        .frac {
+            display: inline-grid;
+            grid-template-rows: 1em 1em;
+            justify-items: center;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1;
+        }
+
+        .frac .top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 1em;
+            padding: 0 8px;
+            border-bottom: 2px solid #222;
+        }
+
+        .frac .bottom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 1em;
+            padding: 2px 8px 0;
+        }
+
+        .frac .blank {
+            min-width: 56px;
+        }
+
+        .mixed {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mixed .whole {
+            font-weight: 600;
+        }
+
+        #fullscreen-header {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px 40px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            height: 80px;
+        }
+
+        #fullscreen-header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+            text-align: center;
+        }
+
+        #fullscreen-date {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Fullscreen mode */
+        html:fullscreen {
+            width: 100%;
+            height: 100%;
+        }
+
+        html:fullscreen #header {
+            display: none;
+        }
+
+        html:fullscreen #fullscreen-header {
+            display: flex;
+        }
+
+        html:fullscreen #grid {
+            height: calc(100vh - 80px);
+            padding: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #header {
+                flex-direction: column;
+                height: auto;
+                gap: 4px;
+            }
+
+            #grid {
+                gap: 8px;
+                padding: 8px;
+            }
+
+            .flip-card-front,
+            .flip-card-back {
+                padding: 12px;
+            }
+
+            .question-content {
+                font-size: 14px;
+            }
+
+            .flip-card-back {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Do Now</h1>
+
+        <div class="header-section">
+            <span>Code:</span>
+            <span id="code-display">—</span>
+            <button id="copy-code-btn">📋</button>
+        </div>
+
+        <button id="new-questions-btn">New Questions</button>
+
+        <div class="color-presets">
+            <button class="color-preset" data-color="#ffffff" style="background-color: #ffffff;"></button>
+            <button class="color-preset" data-color="#F5F5F0" style="background-color: #F5F5F0;"></button>
+            <button class="color-preset" data-color="#FEF3C7" style="background-color: #FEF3C7;"></button>
+            <button class="color-preset" data-color="#FFFFA7" style="background-color: #FFFFA7;"></button>
+            <button class="color-preset" data-color="#FFE4B5" style="background-color: #FFE4B5;"></button>
+            <button class="color-preset" data-color="#E6F2FF" style="background-color: #E6F2FF;"></button>
+            <button class="color-preset" data-color="#E0F2FE" style="background-color: #E0F2FE;"></button>
+        </div>
+
+        <button id="reveal-all-btn">Reveal All</button>
+        <button id="fullscreen-btn">Fullscreen</button>
+    </div>
+
+    <div id="fullscreen-header">
+        <h1>Do Now</h1>
+        <div id="fullscreen-date"></div>
+    </div>
+
+    <div id="grid"></div>
+
+    <script type="module">
+        import { WORKSHEET_TYPES } from './groups.js';
+        import { mulberry32, renderKatex } from './types/utils.js';
+
+        // ==================== State ====================
+        let allCards = [];
+        let allFlipped = false;
+
+        // ==================== Utilities ====================
+        function generateCode() {
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let code = '';
+            for (let i = 0; i < 8; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        function codeToString(code) {
+            return code;
+        }
+
+        function stringToCode(str) {
+            return str;
+        }
+
+        // ==================== Generate Questions ====================
+        function generateQuestions(code) {
+            // Create seeded PRNG from code
+            const seed = code.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+            const rand = mulberry32(seed);
+
+            // Pick 4 random worksheets (no repeats)
+            const shuffled = [...WORKSHEET_TYPES].sort(() => rand() - 0.5);
+            const selected = shuffled.slice(0, 4);
+            console.log('Selected worksheets:', selected.map(ws => ws.id));
+
+            // Generate one question from each at 'normal' difficulty
+            const problems = selected.map(ws => {
+                const generated = ws.generate(rand, 'normal', 1);
+                console.log(`Generated ${ws.id}:`, generated[0]);
+                return {
+                    worksheet: ws,
+                    problem: generated[0]
+                };
+            });
+
+            return problems;
+        }
+
+        // ==================== Render Grid ====================
+        function renderGrid(problems) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            allCards = [];
+
+            problems.forEach((item, index) => {
+                const { problem, worksheet } = item;
+
+                // Question HTML
+                const questionHtml = problem.questionHtml || problem.question;
+
+                // Answer HTML
+                const answerHtml = problem.answerHtml || problem.answer;
+
+                // Get worksheet instruction
+                const instruction = worksheet.instruction ? worksheet.instruction() : '';
+                const instructionHtml = instruction ? `<div class="question-instruction">${instruction}</div>` : '';
+
+                // Create card
+                const card = document.createElement('div');
+                card.className = 'flip-card';
+                card.innerHTML = `
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="question-label">Question ${index + 1}</div>
+                            ${instructionHtml}
+                            <div class="question-content">${questionHtml}</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div>${answerHtml}</div>
+                        </div>
+                    </div>
+                `;
+
+                // Click to flip
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flipped');
+                });
+
+                grid.appendChild(card);
+                allCards.push(card);
+            });
+        }
+
+        // ==================== Initialization ====================
+        function initialize() {
+            // Get code from URL or generate new
+            const params = new URLSearchParams(window.location.search);
+            let code = params.get('code');
+
+            if (!code) {
+                code = generateCode();
+                history.replaceState(null, '', `?code=${code}`);
+            }
+
+            // Update display
+            document.getElementById('code-display').textContent = code;
+
+            // Set date in fullscreen header
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('fullscreen-date').textContent = dateStr;
+
+            // Generate and render
+            const problems = generateQuestions(code);
+            renderGrid(problems);
+
+            // Store current code for copy button
+            window.currentCode = code;
+        }
+
+        // ==================== Event Handlers ====================
+        document.getElementById('new-questions-btn').addEventListener('click', () => {
+            const newCode = generateCode();
+            window.currentCode = newCode;
+            history.replaceState(null, '', `?code=${newCode}`);
+            document.getElementById('code-display').textContent = newCode;
+            const problems = generateQuestions(newCode);
+            renderGrid(problems);
+            allFlipped = false;
+            document.getElementById('reveal-all-btn').textContent = 'Reveal All';
+        });
+
+        document.getElementById('copy-code-btn').addEventListener('click', () => {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-code-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        });
+
+        document.querySelectorAll('.color-preset').forEach(button => {
+            button.addEventListener('click', () => {
+                const color = button.getAttribute('data-color');
+                document.body.style.backgroundColor = color;
+                document.getElementById('grid').style.backgroundColor = color;
+                allCards.forEach(card => {
+                    card.style.backgroundColor = color;
+                });
+            });
+        });
+
+        document.getElementById('reveal-all-btn').addEventListener('click', () => {
+            allFlipped = !allFlipped;
+            const btn = document.getElementById('reveal-all-btn');
+            allCards.forEach(card => {
+                if (allFlipped) {
+                    card.classList.add('flipped');
+                } else {
+                    card.classList.remove('flipped');
+                }
+            });
+            btn.textContent = allFlipped ? 'Hide All' : 'Reveal All';
+        });
+
+        // Fullscreen button
+        let isFullscreen = false;
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+        fullscreenBtn.addEventListener('click', () => {
+            const elem = document.documentElement;
+            if (!isFullscreen) {
+                if (elem.requestFullscreen) elem.requestFullscreen();
+                else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+                else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
+                else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+                fullscreenBtn.textContent = 'Exit Fullscreen';
+                isFullscreen = true;
+            } else {
+                if (document.fullscreenElement) document.exitFullscreen();
+                else if (document.webkitFullscreenElement) document.webkitExitFullscreen();
+                else if (document.mozFullScreenElement) document.mozCancelFullScreen();
+                else if (document.msFullscreenElement) document.msExitFullscreen();
+                fullscreenBtn.textContent = 'Fullscreen';
+                isFullscreen = false;
+            }
+        });
+
+        // Handle external fullscreen exit (Escape key)
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.textContent = 'Fullscreen';
+                isFullscreen = false;
+            }
+        });
+
+        document.addEventListener('webkitfullscreenchange', () => {
+            if (!document.webkitFullscreenElement) {
+                fullscreenBtn.textContent = 'Fullscreen';
+                isFullscreen = false;
+            }
+        });
+
+        document.addEventListener('mozfullscreenchange', () => {
+            if (!document.mozFullScreenElement) {
+                fullscreenBtn.textContent = 'Fullscreen';
+                isFullscreen = false;
+            }
+        });
+
+        // Initialize on load
+        initialize();
+    </script>
+</body>
+</html>

@@ -676,3 +676,18 @@ export function generateNumericDistracters(answer, rand) {
 
     return wrong.slice(0, 3);
 }
+
+/**
+ * Mulberry32: A fast, simple 32-bit PRNG seeded by an integer.
+ * Produces deterministic sequences for reproducible problem generation.
+ * @param {number} seed - Integer seed value
+ * @returns {function} Returns a function that produces random numbers [0, 1)
+ */
+export function mulberry32(seed) {
+    return function () {
+        let t = (seed += 0x6d2b79f5);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
