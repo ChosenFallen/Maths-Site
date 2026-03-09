@@ -55,12 +55,12 @@ function generateProblem(rand, difficulty, op) {
 
     if (op === "addition") {
         // _____ + b = result  or  a + _____ = result
+        // Generate a and b, then calculate result = a + b to ensure validity
+        a = randInt(rand, minVal, maxVal);
         b = randInt(rand, minVal, maxVal);
-        result = randInt(rand, minVal + 1, maxVal + minVal);
-        a = result - b;
-        if (a < minVal) a = minVal + 1;
+        result = a + b;
         const blankLeft = randInt(rand, 0, 1) === 0;
-        answer = blankLeft ? a : (result - a);  // If blank left: answer = a, if blank right: answer = result - a
+        answer = blankLeft ? a : b;  // If blank left: answer = a, if blank right: answer = b
         question = blankLeft ? `${blank} + ${b} = ${result}` : `${a} + ${blank} = ${result}`;
         symbol = "+";
     } else if (op === "subtraction") {
