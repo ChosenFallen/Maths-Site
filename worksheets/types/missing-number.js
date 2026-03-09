@@ -84,20 +84,20 @@ function generateProblem(rand, difficulty, op) {
         const multiplierRange = difficulty === "easy" ? [2, 5] : difficulty === "normal" ? [2, 12] : [2, 20];
         b = randInt(rand, multiplierRange[0], multiplierRange[1]);
         const maxResult = difficulty === "easy" ? 25 : difficulty === "normal" ? 144 : 400;
-        result = randInt(rand, multiplierRange[0], Math.min(maxResult / b, 50)) * b;
+        result = randInt(rand, multiplierRange[0], Math.floor(Math.min(maxResult / b, 50))) * b;
         a = result / b;
-        answer = a;
         const blankLeft = randInt(rand, 0, 1) === 0;
+        answer = blankLeft ? a : b;  // If blank left: answer = a, if blank right: answer = b
         question = blankLeft ? `${blank} × ${b} = ${result}` : `${a} × ${blank} = ${result}`;
         symbol = "×";
     } else {
         // _____ ÷ b = result  or  a ÷ _____ = result
         const divisorRange = difficulty === "easy" ? [2, 5] : difficulty === "normal" ? [2, 12] : [2, 20];
         b = randInt(rand, divisorRange[0], divisorRange[1]);
-        result = randInt(rand, divisorRange[0], Math.min(50, 400 / b));
+        result = randInt(rand, divisorRange[0], Math.floor(Math.min(50, 400 / b)));
         a = result * b;
-        answer = a;
         const blankLeft = randInt(rand, 0, 1) === 0;
+        answer = blankLeft ? a : b;  // If blank left: answer = a, if blank right: answer = b
         question = blankLeft ? `${blank} ÷ ${b} = ${result}` : `${a} ÷ ${blank} = ${result}`;
         symbol = "÷";
     }
