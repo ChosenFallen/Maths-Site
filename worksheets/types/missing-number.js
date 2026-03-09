@@ -59,8 +59,8 @@ function generateProblem(rand, difficulty, op) {
         result = randInt(rand, minVal + 1, maxVal + minVal);
         a = result - b;
         if (a < minVal) a = minVal + 1;
-        answer = a;
         const blankLeft = randInt(rand, 0, 1) === 0;
+        answer = blankLeft ? a : (result - a);  // If blank left: answer = a, if blank right: answer = result - a
         question = blankLeft ? `${blank} + ${b} = ${result}` : `${a} + ${blank} = ${result}`;
         symbol = "+";
     } else if (op === "subtraction") {
