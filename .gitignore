@@ -15,10 +15,6 @@ sparx-files/
 # Sparx curriculum Excel file
 *.xlsx
 
-# Sparx generated data files (too large for version control)
-sparx-curriculum-raw.json
-worksheets/sparx-curriculum.js
-
 # Puppeteer cache
 .cache/
 
