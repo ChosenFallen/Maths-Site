@@ -48,6 +48,16 @@
             gap: 8px;
         }
 
+        #topic-selector {
+            padding: 6px 12px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background: white;
+            cursor: pointer;
+            min-width: 180px;
+        }
+
         #code-display {
             font-family: monospace;
             font-size: 12px;
@@ -353,6 +363,13 @@
         <h1>Do Now</h1>
 
         <div class="header-section">
+            <label for="topic-selector">Topic:</label>
+            <select id="topic-selector">
+                <option value="">Random (Current Mode)</option>
+            </select>
+        </div>
+
+        <div class="header-section">
             <span>Code:</span>
             <span id="code-display">—</span>
             <button id="copy-code-btn">📋</button>
@@ -384,10 +401,68 @@
     <script type="module">
         import { WORKSHEET_TYPES } from './groups.js';
         import { mulberry32, renderKatex } from './types/utils.js';
+        import { SPARX_TOPICS, SPARX_YEARS, SPARX_YEAR_LABELS } from './sparx-curriculum.js';
+        import {
+            getPreviousTopicWorksheetsForTopic,
+            getWorksheetsForTopicCode
+        } from './worksheet-sparx-mappings.js';
 
         // ==================== State ====================
         let allCards = [];
         let allFlipped = false;
+        let selectedTopic = null; // Track selected curriculum topic
+
+        // ==================== Initialize Topic Selector ====================
+        function initializeTopicSelector() {
+            const selector = document.getElementById('topic-selector');
+
+            try {
+                // Clear existing options
+                selector.innerHTML = '<option value="">Random (Current Mode)</option>';
+
+                console.log('Initializing topics. Total topics:', SPARX_TOPICS.allTopics.length);
+                console.log('Years:', SPARX_YEARS);
+
+                // Group topics by year
+                for (const year of SPARX_YEARS) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = SPARX_YEAR_LABELS[year] || year;
+
+                    const topics = SPARX_TOPICS.getTopicsByYear(year);
+                    console.log(`Year ${year}: ${topics.length} topics`);
+
+                    for (const topic of topics) {
+                        const option = document.createElement('option');
+                        option.value = topic.code;
+                        option.textContent = topic.name;
+                        optgroup.appendChild(option);
+                    }
+
+                    if (topics.length > 0) {
+                        selector.appendChild(optgroup);
+                    }
+                }
+
+                console.log('Topic selector initialized successfully');
+
+                // Handle selection change
+                selector.addEventListener('change', (e) => {
+                    selectedTopic = e.target.value ? SPARX_TOPICS.getTopicByCode(e.target.value) : null;
+                    console.log('Selected topic:', selectedTopic);
+                    // Regenerate questions with new topic
+                    const params = new URLSearchParams(window.location.search);
+                    const code = params.get('code') || generateCode();
+                    const problems = selectedTopic
+                        ? generateQuestionsForTopic(code, selectedTopic)
+                        : generateQuestions(code);
+                    renderGrid(problems);
+                    allFlipped = false;
+                    document.getElementById('reveal-all-btn').textContent = 'Reveal All';
+                });
+            } catch (err) {
+                console.error('Error initializing topic selector:', err);
+            }
+        }
 
         // ==================== Utilities ====================
         function generateCode() {
@@ -408,6 +483,133 @@
         }
 
         // ==================== Generate Questions ====================
+
+        // Generate questions based on selected curriculum topic
+        function generateQuestionsForTopic(code, topic) {
+            // Create seeded PRNG from code
+            const seed = code.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+            const rand = mulberry32(seed);
+
+            console.log(`Selected topic: ${topic.code} - ${topic.name}`);
+            console.log(`Topic sequence: ${topic.sequence}, Year: ${topic.year}`);
+
+            const problems = [];
+            const allTopics = SPARX_TOPICS.allTopics;
+
+            // Q4: Building blocks - pick from building block topics
+            try {
+                const buildingBlockTopics = topic.buildingBlockCodes || [];
+                let q4Worksheets = [];
+
+                if (buildingBlockTopics.length > 0) {
+                    // Get all worksheets that cover building block topics
+                    const blockWorksheets = new Set();
+                    for (const blockCode of buildingBlockTopics) {
+                        const ws = getWorksheetsForTopicCode(blockCode);
+                        ws.forEach(w => blockWorksheets.add(w));
+                    }
+                    q4Worksheets = Array.from(blockWorksheets);
+                }
+
+                if (q4Worksheets.length === 0) {
+                    // If no building blocks mapped, use main topic worksheets
+                    q4Worksheets = getWorksheetsForTopicCode(topic.code);
+                }
+
+                const q4Ws = selectRandomWorksheet(q4Worksheets, rand);
+                if (q4Ws) {
+                    problems.push(generateQuestionFromWorksheet(q4Ws, rand));
+                } else {
+                    problems.push(generateQuestionFromRandomWorksheet(rand));
+                }
+                console.log(`Q4 (Building Blocks): ${q4Ws?.id || 'random'}`);
+            } catch (err) {
+                console.error('Error generating Q4:', err);
+                problems.push(generateQuestionFromRandomWorksheet(rand));
+            }
+
+            // Q3: Last topic (immediate previous)
+            try {
+                const lastTopicWs = getPreviousTopicWorksheetsForTopic(allTopics, topic.sequence, 1);
+                const q3Ws = selectRandomWorksheet(lastTopicWs, rand);
+                if (q3Ws) {
+                    problems.push(generateQuestionFromWorksheet(q3Ws, rand));
+                } else {
+                    problems.push(generateQuestionFromRandomWorksheet(rand));
+                }
+                console.log(`Q3 (Last Topic): ${q3Ws?.id || 'random'}`);
+            } catch (err) {
+                console.error('Error generating Q3:', err);
+                problems.push(generateQuestionFromRandomWorksheet(rand));
+            }
+
+            // Q2: Two topics back
+            try {
+                const twoBackWs = getPreviousTopicWorksheetsForTopic(allTopics, topic.sequence, 2);
+                const q2Ws = selectRandomWorksheet(twoBackWs, rand);
+                if (q2Ws) {
+                    problems.push(generateQuestionFromWorksheet(q2Ws, rand));
+                } else {
+                    problems.push(generateQuestionFromRandomWorksheet(rand));
+                }
+                console.log(`Q2 (Two Topics Back): ${q2Ws?.id || 'random'}`);
+            } catch (err) {
+                console.error('Error generating Q2:', err);
+                problems.push(generateQuestionFromRandomWorksheet(rand));
+            }
+
+            // Q1: Random earlier topic
+            try {
+                // Pick a random topic from earlier topics
+                const earlierTopics = allTopics.filter((t, idx) => idx < topic.sequence);
+                if (earlierTopics.length > 0) {
+                    const randomEarlierTopic = earlierTopics[Math.floor(rand() * earlierTopics.length)];
+                    const q1Worksheets = getWorksheetsForTopicCode(randomEarlierTopic.code);
+                    const q1Ws = selectRandomWorksheet(q1Worksheets, rand);
+                    if (q1Ws) {
+                        problems.push(generateQuestionFromWorksheet(q1Ws, rand));
+                    } else {
+                        problems.push(generateQuestionFromRandomWorksheet(rand));
+                    }
+                    console.log(`Q1 (Earlier Topic): ${randomEarlierTopic.name} - ${q1Ws?.id || 'random'}`);
+                } else {
+                    problems.push(generateQuestionFromRandomWorksheet(rand));
+                }
+            } catch (err) {
+                console.error('Error generating Q1:', err);
+                problems.push(generateQuestionFromRandomWorksheet(rand));
+            }
+
+            return problems;
+        }
+
+        // Helper: Select random worksheet from array
+        function selectRandomWorksheet(worksheetIds, rand) {
+            if (!worksheetIds || worksheetIds.length === 0) return null;
+            const id = worksheetIds[Math.floor(rand() * worksheetIds.length)];
+            return WORKSHEET_TYPES.find(ws => ws.id === id);
+        }
+
+        // Helper: Generate question from specific worksheet
+        function generateQuestionFromWorksheet(worksheet, rand) {
+            if (!worksheet) return generateQuestionFromRandomWorksheet(rand);
+            const generated = worksheet.generate(rand, 'normal', 1);
+            return {
+                worksheet: worksheet,
+                problem: generated[0]
+            };
+        }
+
+        // Helper: Generate question from random worksheet
+        function generateQuestionFromRandomWorksheet(rand) {
+            const randomWs = WORKSHEET_TYPES[Math.floor(rand() * WORKSHEET_TYPES.length)];
+            const generated = randomWs.generate(rand, 'normal', 1);
+            return {
+                worksheet: randomWs,
+                problem: generated[0]
+            };
+        }
+
         function generateQuestions(code) {
             // Create seeded PRNG from code
             const seed = code.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
@@ -478,6 +680,9 @@
 
         // ==================== Initialization ====================
         function initialize() {
+            // Initialize topic selector dropdown
+            initializeTopicSelector();
+
             // Get code from URL or generate new
             const params = new URLSearchParams(window.location.search);
             let code = params.get('code');

@@ -1,0 +1,352 @@
+{
+  "Year 7 Term 1": {
+    "Number sense": {
+      "topics": [
+        "M763",
+        "M704",
+        "M522",
+        "M527",
+        "M111",
+        "M431"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Adding and subtracting": {
+      "topics": [
+        "M928",
+        "M429",
+        "M347",
+        "M152"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Multiplying": {
+      "topics": [
+        "M113",
+        "M911",
+        "M187",
+        "M803"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Dividing": {
+      "topics": [
+        "M462",
+        "M354",
+        "M873",
+        "M262",
+        "M491"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Calculating with negative numbers": {
+      "topics": [
+        "M106",
+        "M288"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Order of operations": {
+      "topics": [
+        "M135",
+        "M521",
+        "M952",
+        "M409"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Expressions": {
+      "topics": [
+        "M813",
+        "M830",
+        "M795",
+        "M531",
+        "M949"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Substitution": {
+      "topics": [
+        "M417",
+        "M327",
+        "M208",
+        "M979"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Solving equations": {
+      "topics": [
+        "M707",
+        "M634",
+        "M647"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Time": {
+      "topics": [
+        "M515",
+        "M892",
+        "M627",
+        "M963",
+        "M747"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Measures": {
+      "topics": [
+        "M828",
+        "M774",
+        "M487"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    }
+  },
+  "Year 7 Term 2": {
+    "Line and shape properties": {
+      "topics": [
+        "M814",
+        "M276",
+        "M523"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Perimeter": {
+      "topics": [
+        "M920",
+        "M635",
+        "M690"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Area": {
+      "topics": [
+        "M900",
+        "M390",
+        "M269",
+        "M610",
+        "M996"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Coordinates and shapes": {
+      "topics": [
+        "M618",
+        "M230"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Factors and multiples": {
+      "topics": [
+        "M227",
+        "M823",
+        "M698"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Primes": {
+      "topics": [
+        "M322",
+        "M108"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Writing and comparing fractions": {
+      "topics": [
+        "M158",
+        "M939",
+        "M410",
+        "M671",
+        "M335",
+        "M601"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Adding and subtracting fractions": {
+      "topics": [
+        "M835",
+        "M931"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Single brackets": {
+      "topics": [
+        "M637",
+        "M237",
+        "M792",
+        "M100"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    }
+  },
+  "Year 7 Term 3": {
+    "Angles": {
+      "topics": [
+        "M502",
+        "M541",
+        "M780",
+        "M331"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Finding unknown angles": {
+      "topics": [
+        "M818",
+        "M163",
+        "M351"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Averages and range": {
+      "topics": [
+        "M328",
+        "M934",
+        "M841",
+        "M940"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Collecting and presenting data": {
+      "topics": [
+        "M899",
+        "M597",
+        "M644"
+      ],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Fractions, decimals and percentages": {
+      "topics": [],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Fractions of an amount": {
+      "topics": [],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Multiplying and dividing fractions": {
+      "topics": [],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Proportion word problems": {
+      "topics": [],
+      "files": [
+        "ExamplePairs",
+        "Deepen"
+      ]
+    },
+    "Theoretical probability": {
+      "topics": [],
+      "files": [
+        "BuildingBlocks",
+        "ExamplePairs",
+        "Deepen"
+      ]
+    }
+  }
+}

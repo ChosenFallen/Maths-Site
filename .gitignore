@@ -9,6 +9,16 @@ output/papers-analysis.html
 # Past paper analysis (large volume, not version controlled)
 docs/analysis/
 
+# Sparx resources (large PDF files, not version controlled)
+sparx-files/
+
+# Sparx curriculum Excel file
+*.xlsx
+
+# Sparx generated data files (too large for version control)
+sparx-curriculum-raw.json
+worksheets/sparx-curriculum.js
+
 # Puppeteer cache
 .cache/
 

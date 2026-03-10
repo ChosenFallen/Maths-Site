@@ -1,0 +1,1856 @@
+{
+  "total_documents": 149,
+  "documents_by_type": {
+    "Assessment": 8,
+    "BuildingBlocks": 48,
+    "Deepen": 30,
+    "ExamplePairs": 60,
+    "Revision": 3
+  },
+  "documents": [
+    {
+      "filename": "Sparx_Year7_Term1_Assessment",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Assessment.pdf",
+      "pages": 16,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7 Term 1\nAssessment\nTime allowed: 50 minutes Non-calculator\nFirst name :\nSurname :\nTeacher : Teaching group :\nInformation Instructions\n\u2022 The assessment is 50 minutes long. \u2022 Use black ink and draw diagrams in\npencil.\n\u2022 The maximum mark for this paper is 60.\n\u2022 Fill in your name, teacher and teaching\n\u2022 The marks available for each question\ngroup in the boxes above.\nare shown in brackets [ ].\n\u2022 Answer all questions.\n\u2022 Answer the questions in the spaces\nMaterials provided.\n\u2022 Show clearly how yo"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Assessment_Mark_Scheme",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Assessment_Mark_Scheme.pdf",
+      "pages": 5,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7 Term 1\nAssessment\nMark Scheme\nGuidance\n\u2022 Unless indicated otherwise, a correct answer with no working is awarded full marks.\n\u2022 If no answer appears on the answer line, accept answers shown in working.\n\u2022 Method marks should be awarded for any correct method, even if it differs from\nthose given in this mark scheme.\n\u2022 The following abbreviations are used in this mark scheme:\n\u2022 ft: follow through\n\u2022 oe: or equivalent\n\u2022 There is an accompanying QLA that supports this assessment.\nPsapgaerxm1aths"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Adding_and_Subtracting",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Adding_and_Subtracting.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M704",
+        "M522"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Adding and subtracting\nY7\nTopics in this unit:\nInteger place value M704\nDecimal place value M522\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Adding and subtracting Y7 Back to topic list\nInteger place value M704\nThese example pairs cover the following learning points:\nOrdering 3-digit integers\nPartitioning a 3-digit integer\nWriting a 3-digit integer in figures, including a zero\nWriting a large integer in figures, including multiple zeros\ns"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Adding_and_Subtracting_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Adding_and_Subtracting_blank.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M704",
+        "M522"
+      ],
+      "text": "Example pairs\nBuilding blocks - Adding and subtracting\nY7\nTopics in this unit:\nInteger place value M704\nDecimal place value M522\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Adding and subtracting Y7 Back to topic list\nInteger place value M704\nThese example pairs cover the following learning points:\nOrdering 3-digit integers\nPartitioning a 3-digit integer\nWriting a 3-digit integer in figures, including a zero\nWriting a large integer in figures, including multiple zeros\nsparxmaths.com \u00a9 Sparx"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Calculating_with_negative_numbers",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Calculating_with_negative_numbers.pdf",
+      "pages": 13,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M527",
+        "M763"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Calculating with negative numbers\nY7\nTopics in this unit:\nUsing number lines M763\nOrdering negative numbers M527\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Calculating with negative numbers Y7 Back to topic list\nUsing number lines M763\nThese example pairs cover the following learning points:\nIdentifying a missing integer on a number line\nIdentifying a missing decimal on a number line\nAdding two decimals using a number line\nIdentifying th"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Calculating_with_negative_numbers_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Calculating_with_negative_numbers_blank.pdf",
+      "pages": 13,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M527",
+        "M763"
+      ],
+      "text": "Example pairs\nBuilding blocks - Calculating with negative numbers\nY7\nTopics in this unit:\nUsing number lines M763\nOrdering negative numbers M527\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Calculating with negative numbers Y7 Back to topic list\nUsing number lines M763\nThese example pairs cover the following learning points:\nIdentifying a missing integer on a number line\nIdentifying a missing decimal on a number line\nAdding two decimals using a number line\nIdentifying the midpoint between tw"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Dividing",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Dividing.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M704",
+        "M522"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Dividing\nY7\nTopics in this unit:\nInteger place value M704\nDecimal place value M522\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Dividing Y7 Back to topic list\nInteger place value M704\nThese example pairs cover the following learning points:\nOrdering 3-digit integers\nPartitioning a 3-digit integer\nWriting a 3-digit integer in figures, including a zero\nWriting a large integer in figures, including multiple zeros\nsparxmaths.com \u00a9 Sparx limite"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Dividing_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Dividing_blank.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M704",
+        "M522"
+      ],
+      "text": "Example pairs\nBuilding blocks - Dividing\nY7\nTopics in this unit:\nInteger place value M704\nDecimal place value M522\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Dividing Y7 Back to topic list\nInteger place value M704\nThese example pairs cover the following learning points:\nOrdering 3-digit integers\nPartitioning a 3-digit integer\nWriting a 3-digit integer in figures, including a zero\nWriting a large integer in figures, including multiple zeros\nsparxmaths.com \u00a9 Sparx limited\nTeacher question St"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Expressions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Expressions.pdf",
+      "pages": 34,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M106",
+        "M288",
+        "M521",
+        "M409",
+        "M952"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Expressions\nY7\nTopics in this unit:\nUsing the correct order of operations M521\nUsing the commutative laws M952\nUsing the associative laws M409\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Expressions Y7 Back to topic list\nUsing the correct order of operations M521\nThese example pairs cover the following learning points:\nWorking with operat"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Expressions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Expressions_blank.pdf",
+      "pages": 34,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M106",
+        "M288",
+        "M521",
+        "M409",
+        "M952"
+      ],
+      "text": "Example pairs\nBuilding blocks - Expressions\nY7\nTopics in this unit:\nUsing the correct order of operations M521\nUsing the commutative laws M952\nUsing the associative laws M409\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Expressions Y7 Back to topic list\nUsing the correct order of operations M521\nThese example pairs cover the following learning points:\nWorking with operations of equal importa"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Measures",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Measures.pdf",
+      "pages": 12,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M113",
+        "M763"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Measures\nY7\nTopics in this unit:\nMultiplying and dividing by 10, 100 and 1000 M113\nUsing number lines M763\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Measures Y7 Back to topic list\n10 100 1000\nMultiplying and dividing by , and M113\nThese example pairs cover the following learning points:\nMultiplying an integer by 10 and 100\nDividing an integer by 10 and 100\nMultiplying a decimal by 100 and 1000\nDividing a decimal by 100 and 1000\nRecognis"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Measures_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Measures_blank.pdf",
+      "pages": 12,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M113",
+        "M763"
+      ],
+      "text": "Example pairs\nBuilding blocks - Measures\nY7\nTopics in this unit:\nMultiplying and dividing by 10, 100 and 1000 M113\nUsing number lines M763\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Measures Y7 Back to topic list\n10 100 1000\nMultiplying and dividing by , and M113\nThese example pairs cover the following learning points:\nMultiplying an integer by 10 and 100\nDividing an integer by 10 and 100\nMultiplying a decimal by 100 and 1000\nDividing a decimal by 100 and 1000\nRecognising that multiplying "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Multiplying",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Multiplying.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M704",
+        "M522"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Multiplying\nY7\nTopics in this unit:\nInteger place value M704\nDecimal place value M522\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Multiplying Y7 Back to topic list\nInteger place value M704\nThese example pairs cover the following learning points:\nOrdering 3-digit integers\nPartitioning a 3-digit integer\nWriting a 3-digit integer in figures, including a zero\nWriting a large integer in figures, including multiple zeros\nsparxmaths.com \u00a9 Sparx "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Multiplying_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Multiplying_blank.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M704",
+        "M522"
+      ],
+      "text": "Example pairs\nBuilding blocks - Multiplying\nY7\nTopics in this unit:\nInteger place value M704\nDecimal place value M522\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Multiplying Y7 Back to topic list\nInteger place value M704\nThese example pairs cover the following learning points:\nOrdering 3-digit integers\nPartitioning a 3-digit integer\nWriting a 3-digit integer in figures, including a zero\nWriting a large integer in figures, including multiple zeros\nsparxmaths.com \u00a9 Sparx limited\nTeacher quest"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Order_of_operations",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Order_of_operations.pdf",
+      "pages": 64,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M187",
+        "M106",
+        "M152",
+        "M288",
+        "M429",
+        "M803",
+        "M347",
+        "M491",
+        "M928",
+        "M354",
+        "M262"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Order of operations\nY7\nTopics in this unit:\nAdding integers M928\nAdding decimals M429\nSubtracting integers M347\nSubtracting decimals M152\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nUsing a written method to divide integers M354\nUsing a written method to divide by integers to get a decimal answer M262\nUsing a written method to divide by decimals M491\nAdding and subtracting with negative num"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Order_of_operations_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Order_of_operations_blank.pdf",
+      "pages": 64,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M187",
+        "M106",
+        "M152",
+        "M288",
+        "M429",
+        "M803",
+        "M347",
+        "M491",
+        "M928",
+        "M354",
+        "M262"
+      ],
+      "text": "Example pairs\nBuilding blocks - Order of operations\nY7\nTopics in this unit:\nAdding integers M928\nAdding decimals M429\nSubtracting integers M347\nSubtracting decimals M152\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nUsing a written method to divide integers M354\nUsing a written method to divide by integers to get a decimal answer M262\nUsing a written method to divide by decimals M491\nAdding and subtracting with negative numbers M106\nMultiplying"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_SolvingEquations",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_SolvingEquations.pdf",
+      "pages": 54,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M106",
+        "M327",
+        "M288",
+        "M521",
+        "M417",
+        "M813",
+        "M175",
+        "M428"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Solving equations\nY7\nTopics in this unit:\nFunction machines with numbers M175\nFunction machines with letters M428\nAlgebraic notation M813\nSubstituting into expressions with one operation M417\nSubstituting into expressions with multiple operations M327\nUsing the correct order of operations M521\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - S"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_SolvingEquations_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_SolvingEquations_blank.pdf",
+      "pages": 54,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M106",
+        "M327",
+        "M288",
+        "M521",
+        "M417",
+        "M813",
+        "M175",
+        "M428"
+      ],
+      "text": "Example pairs\nBuilding blocks - Solving equations\nY7\nTopics in this unit:\nFunction machines with numbers M175\nFunction machines with letters M428\nAlgebraic notation M813\nSubstituting into expressions with one operation M417\nSubstituting into expressions with multiple operations M327\nUsing the correct order of operations M521\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Solving equations Y7 B"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Substitution",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Substitution.pdf",
+      "pages": 30,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M288",
+        "M521",
+        "M106",
+        "M813"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Substitution\nY7\nTopics in this unit:\nUsing the correct order of operations M521\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nAlgebraic notation M813\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Substitution Y7 Back to topic list\nUsing the correct order of operations M521\nThese example pairs cover the following learning points:\nWorking with operations of equal importance: subtraction "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_BuildingBlocks_Substitution_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_BuildingBlocks_Substitution_blank.pdf",
+      "pages": 30,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M288",
+        "M521",
+        "M106",
+        "M813"
+      ],
+      "text": "Example pairs\nBuilding blocks - Substitution\nY7\nTopics in this unit:\nUsing the correct order of operations M521\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nAlgebraic notation M813\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Substitution Y7 Back to topic list\nUsing the correct order of operations M521\nThese example pairs cover the following learning points:\nWorking with operations of equal importance: subtraction and addition Prioriti"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Adding_and_subtracting",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Adding_and_subtracting.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nAdding and subtracting Y7\ndeepen knowledge\n\u2022 Finding missing digits in calculations\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Interpreting real-life contexts including money and measures\n\u2022 Using the inverse relationship between addition and subtraction\n\u2022 Solving cross-topic questions\nWhich digits replace A and B in the boxes? Which digits replace A, B and C in the\nboxes? 3\n5 2\n4 1 0C . 7 8\n+ B 7\n\u2013 1 6. 5B 6\n6 0A\n2 5. 4 A5\nSum 29.75, 8.4, 7.86 and 26 Three items cost \u00a349"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Calculating_with_negative_numbers",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Calculating_with_negative_numbers.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nCalculating with negative numbers Y7\ndeepen knowledge\n\u2022 Calculating with repeated operations, larger integers and decimals\n\u2022 Finding missing numbers in calculations\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Solving cross-topic questions\nCalculate \u22125 + 5 Work out 1 \u2212 4 \u2212 2 Calculate 47 \u2212 82 Work out \u22123.7 + 1.8\nFind the missing number in the calculation Find the missing number in the calculation\n13 + ? = 5 ? \u2212 8 = \u221210\nThese cards can be sorted into three pairs, Work out t"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Dividing",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Dividing.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nDividing Y7\ndeepen knowledge\n\u2022 Finding missing numbers in calculations\n\u2022 Using one calculation to perform a related calculation\n\u2022 Interpreting real-life contexts, including money and measures\n\u2022 Writing divisions as fractions\nFill in the missing number in this calculation. What numbers could go in the gaps to make\nthis calculation correct?\n512 \u00f7 = 16\n\u00f7 = 27\nUse the first calculation to find the answer to\nthe second calculation.\n777 will divide exactly by 37\n400 \u00f7 16 = 25\nWhat is "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Expressions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Expressions.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nExpressions Y7\ndeepen knowledge\n\u2022 Simplifying expressions with negative coefficients and non-linear terms\n\u2022 Simplifying expressions where terms cancel\n\u2022 Simplifying expressions by recognising that ab = ba\n\u2022 Recognising when an expression is fully simplified\n\u2022 Simplifying expressions in a range of cross-topic applications\nFully simplify 3b2 \u2212 4b \u2212 9b2 Fully simplify 6p \u2212 2d \u2212 6p + 2d\nFully simplify 5cd + 6c2 + 5c \u2212 2dc + c2 + d Fully simplify 7 x b \u2212 b x 3 + b x b\nIn this pyramid"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Measures",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Measures.pdf",
+      "pages": 28,
+      "content_type": "Deepen",
+      "topic_codes": [
+        "M487",
+        "M774",
+        "M828"
+      ],
+      "text": "Example pairs\nMeasures\nY7\nTopics in this unit:\nEstimating and measuring length, mass and capacity M828\nConverting units of length, mass and capacity M774\nUsing appropriate units M487\nsparxmaths.com \u00a9 Sparx limited\nMeasures Y7 Back to topic list\nEstimating and measuring length, mass and capacity M828\nThese example pairs cover the following learning points:\nMeasuring capacity using a jug with every 100 ml labelled and divisions of 50 ml\nMeasuring mass using a scale with every 100 g labelled and di"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Multiplying",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Multiplying.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nMultiplying Y7\ndeepen knowledge\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Using the inverse relationship between multiplication and division\n\u2022 Using one calculation to perform a related calculation\n\u2022 Interpreting real-life contexts including money and measures\n\u2022 Solving cross-topic questions\nWhat number is 100 times bigger than 4.5? What number fills the gap in the calculation\nbelow?\nWhat number fills the gap in the calculation\nbelow? \u00d7 100 = 356\n\u00f7 10 = 0.7\nUse the firs"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Number_sense",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Number_sense.pdf",
+      "pages": 2,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "1 2 3 5 7 9\nSparxuserscanaccessover900questionsand200videosonnumbersense\nsparxmaths.com \u00a9 Sparx limited\n.\nOpportunities to\nNumber sense Y7\ndeepen knowledge\nUnderstanding and ordering integers, decimals and negative numbers\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Interpreting real-life contexts including measurements and temperatures\n\u2022 Constructing numbers and calculations given specified criteria\n4 5 Which city has the lowest temperature?\nWork out 1 + +\n10 100\nGive your answer as a de"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Order_of_operations",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Order_of_operations.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nOrder of operations Y7\ndeepen knowledge\n\u2022 Calculating with decimals and negative numbers\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Filling in missing numbers or operations in calculations\n\u2022 Using one calculation to perform a related calculation\nWork out (2 \u2212 10)2 Work out 0.42 Calculate 25 \u2212 4 Work out 1.2 x 102\nCalculate the value of 23 x 52 Work out (10 + 3 x (9 \u2212 1)) \u00f7 2\nWork out There are two square roots of 1156\na) 1475 b) 0475 One square root is 34\nWhat is the val"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Solving_equations",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Solving_equations.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nSolving equations Y7\ndeepen knowledge\n\u2022 Solving equations with decimals and negative numbers\n\u2022 Solving equations that require substitution or simplification\n\u2022 Using knowledge of square roots to solve equations with squared terms\n\u2022 Solving one equation and using the result to solve another\nSolve 100d = 133 Solve \u22121 = 2p \u2212 9\nSolve 5c \u2212 2.5 = 17.5 Solve 9 \u2212 2m = \u22123\nd\nSolve 16 = 3p + 4p + p\nSolve = 1\n6\n3h\ny Solve + 21 = 27\nSolve + 12 = 2 2\n2\nWhat two values can f have if f2 = 16?\nWh"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Substitution",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Substitution.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nSubstitution Y7\ndeepen knowledge\n\u2022 Substituting negative numbers and decimals into expressions with brackets and indices\n\u2022 Substituting into expressions with unfamiliar variables, such as greek letters\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Performing successive substitutions\n\u2022 Substituting expressions into expressions\nWhat is the value of b + 2 when b = 4.9? What is the value of y + 3 when y = \u22125?\nWhat is the value of 2m2 + 3 when m = 4? Given y = (a + b)(a \u2212 b), wo"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Deepen_Time",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Deepen_Time.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nTime Y7\ndeepen knowledge\n\u2022 Solving problems involving digital and analogue clocks\n\u2022 Applying knowledge of the 12 and 24 hour clock to solve problems\n\u2022 Solving problems involving time differences and leap years\nThe hands on an analogue clock are pointing How many minutes are there in each day\nin exactly opposite directions. where the time on the 24 hour clock below\nWhich two of the times below could the contains at least one 7?\nclock be showing?\n12:30\n23:27\n00 : 00\n09:43\n01:27\n15"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Adding_and_Subtracting",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Adding_and_Subtracting.pdf",
+      "pages": 24,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M152",
+        "M347",
+        "M429",
+        "M928"
+      ],
+      "text": "Example pairs - modelled solutions\nAdding and subtracting\nY7\nTopics in this unit:\nAdding integers M928\nAdding decimals M429\nSubtracting integers M347\nSubtracting decimals M152\nsparxmaths.com \u00a9 Sparx limited\nAdding and subtracting Y7 Back to topic list\nAdding integers M928\nThese example pairs cover the following learning points:\nAdding two integers with no carries\nAdding two integers with a different number of digits, with one carry\nMeasures context: adding three integers\nAdding three integers, w"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Adding_and_Subtracting_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Adding_and_Subtracting_blank.pdf",
+      "pages": 24,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M152",
+        "M347",
+        "M429",
+        "M928"
+      ],
+      "text": "Example pairs\nAdding and subtracting\nY7\nTopics in this unit:\nAdding integers M928\nAdding decimals M429\nSubtracting integers M347\nSubtracting decimals M152\nsparxmaths.com \u00a9 Sparx limited\nAdding and subtracting Y7 Back to topic list\nAdding integers M928\nThese example pairs cover the following learning points:\nAdding two integers with no carries\nAdding two integers with a different number of digits, with one carry\nMeasures context: adding three integers\nAdding three integers, with two carries inclu"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Calculating_with_negative_numbers",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Calculating_with_negative_numbers.pdf",
+      "pages": 13,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M288",
+        "M106"
+      ],
+      "text": "Example pairs - modelled solutions\nCalculating with negative numbers\nY7\nTopics in this unit:\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nsparxmaths.com \u00a9 Sparx limited\nCalculating with negative numbers Y7 Back to topic list\nAdding and subtracting with negative numbers M106\nThese example pairs cover the following learning points:\nThermometer context: positive subtract a positive, with a negative answer\nThermometer context: negative add a p"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Calculating_with_negative_numbers_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Calculating_with_negative_numbers_blank.pdf",
+      "pages": 13,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M288",
+        "M106"
+      ],
+      "text": "Example pairs\nCalculating with negative numbers\nY7\nTopics in this unit:\nAdding and subtracting with negative numbers M106\nMultiplying and dividing with negative numbers M288\nsparxmaths.com \u00a9 Sparx limited\nCalculating with negative numbers Y7 Back to topic list\nAdding and subtracting with negative numbers M106\nThese example pairs cover the following learning points:\nThermometer context: positive subtract a positive, with a negative answer\nThermometer context: negative add a positive, with a posit"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Dividing",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Dividing.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M873",
+        "M491",
+        "M462",
+        "M354",
+        "M262"
+      ],
+      "text": "Example pairs - modelled solutions\nDividing\nY7\nTopics in this unit:\nDividing numbers into equal groups M462\nUsing a written method to divide integers M354\nDividing with a remainder M873\nUsing a written method to divide by integers to get a decimal answer M262\nUsing a written method to divide by decimals M491\nsparxmaths.com \u00a9 Sparx limited\nDividing Y7 Back to topic list\nDividing numbers into equal groups M462\nThese example pairs cover the following learning points:\nDividing within familiar times "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Dividing_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Dividing_blank.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M873",
+        "M491",
+        "M462",
+        "M354",
+        "M262"
+      ],
+      "text": "Example pairs\nDividing\nY7\nTopics in this unit:\nDividing numbers into equal groups M462\nUsing a written method to divide integers M354\nDividing with a remainder M873\nUsing a written method to divide by integers to get a decimal answer M262\nUsing a written method to divide by decimals M491\nsparxmaths.com \u00a9 Sparx limited\nDividing Y7 Back to topic list\nDividing numbers into equal groups M462\nThese example pairs cover the following learning points:\nDividing within familiar times tables\nDividing items"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Expressions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Expressions.pdf",
+      "pages": 29,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M949",
+        "M795",
+        "M531",
+        "M813",
+        "M830"
+      ],
+      "text": "Example pairs - modelled solutions\nExpressions\nY7\nTopics in this unit:\nAlgebraic notation M813\nAlgebraic terminology M830\nSimplifying expressions containing a single variable M795\nSimplifying expressions containing multiple variables M531\nSimplifying expressions containing non-linear terms M949\nsparxmaths.com \u00a9 Sparx limited\nExpressions Y7 Back to topic list\nAlgebraic notation M813\nThese example pairs cover the following learning points:\nRecognising the algebraic notation for multiplication and "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Expressions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Expressions_blank.pdf",
+      "pages": 29,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M949",
+        "M795",
+        "M531",
+        "M813",
+        "M830"
+      ],
+      "text": "Example pairs\nExpressions\nY7\nTopics in this unit:\nAlgebraic notation M813\nAlgebraic terminology M830\nSimplifying expressions containing a single variable M795\nSimplifying expressions containing multiple variables M531\nSimplifying expressions containing non-linear terms M949\nsparxmaths.com \u00a9 Sparx limited\nExpressions Y7 Back to topic list\nAlgebraic notation M813\nThese example pairs cover the following learning points:\nRecognising the algebraic notation for multiplication and division\nRecognising "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Measures",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Measures.pdf",
+      "pages": 28,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M487",
+        "M774",
+        "M828"
+      ],
+      "text": "Example pairs - modelled solutions\nMeasures\nY7\nTopics in this unit:\nEstimating and measuring length, mass and capacity M828\nConverting units of length, mass and capacity M774\nUsing appropriate units M487\nsparxmaths.com \u00a9 Sparx limited\nMeasures Y7 Back to topic list\nEstimating and measuring length, mass and capacity M828\nThese example pairs cover the following learning points:\nMeasuring capacity using a jug with every 100 ml labelled and divisions of 50 ml\nMeasuring mass using a scale with every "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Measures_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Measures_blank.pdf",
+      "pages": 28,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M487",
+        "M774",
+        "M828"
+      ],
+      "text": "Example pairs\nMeasures\nY7\nTopics in this unit:\nEstimating and measuring length, mass and capacity M828\nConverting units of length, mass and capacity M774\nUsing appropriate units M487\nsparxmaths.com \u00a9 Sparx limited\nMeasures Y7 Back to topic list\nEstimating and measuring length, mass and capacity M828\nThese example pairs cover the following learning points:\nMeasuring capacity using a jug with every 100 ml labelled and divisions of 50 ml\nMeasuring mass using a scale with every 100 g labelled and di"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Multiplying",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Multiplying.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M113",
+        "M187",
+        "M911",
+        "M803"
+      ],
+      "text": "Example pairs - modelled solutions\nMultiplying\nY7\nTopics in this unit:\nMultiplying and dividing by 10, 100 and 1000 M113\nMultiplying using place value M911\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nsparxmaths.com \u00a9 Sparx limited\nMultiplying Y7 Back to topic list\n10 100 1000\nMultiplying and dividing by , and M113\nThese example pairs cover the following learning points:\nMultiplying an integer by 10 and 100\nDividing an integer by 10 and 100\nMu"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Multiplying_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Multiplying_blank.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M113",
+        "M187",
+        "M911",
+        "M803"
+      ],
+      "text": "Example pairs\nMultiplying\nY7\nTopics in this unit:\nMultiplying and dividing by 10, 100 and 1000 M113\nMultiplying using place value M911\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nsparxmaths.com \u00a9 Sparx limited\nMultiplying Y7 Back to topic list\n10 100 1000\nMultiplying and dividing by , and M113\nThese example pairs cover the following learning points:\nMultiplying an integer by 10 and 100\nDividing an integer by 10 and 100\nMultiplying a decimal b"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Number_sense",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Number_sense.pdf",
+      "pages": 34,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M704",
+        "M111",
+        "M527",
+        "M763",
+        "M431",
+        "M522"
+      ],
+      "text": "Example pairs - modelled solutions\nNumber sense\nY7\nTopics in this unit:\nUsing number lines M763\nInteger place value M704\nDecimal place value M522\nOrdering negative numbers M527\nRounding integers M111\nRounding decimals M431\nsparxmaths.com \u00a9 Sparx limited\nNumber sense Y7 Back to topic list\nUsing number lines M763\nThese example pairs cover the following learning points:\nIdentifying a missing integer on a number line\nIdentifying a missing decimal on a number line\nAdding two decimals using a number l"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Number_sense_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Number_sense_blank.pdf",
+      "pages": 34,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M704",
+        "M111",
+        "M527",
+        "M763",
+        "M431",
+        "M522"
+      ],
+      "text": "Example pairs\nNumber sense\nY7\nTopics in this unit:\nUsing number lines M763\nInteger place value M704\nDecimal place value M522\nOrdering negative numbers M527\nRounding integers M111\nRounding decimals M431\nsparxmaths.com \u00a9 Sparx limited\nNumber sense Y7 Back to topic list\nUsing number lines M763\nThese example pairs cover the following learning points:\nIdentifying a missing integer on a number line\nIdentifying a missing decimal on a number line\nAdding two decimals using a number line\nIdentifying the m"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Order_of_operations",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Order_of_operations.pdf",
+      "pages": 27,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M409",
+        "M521",
+        "M952",
+        "M135"
+      ],
+      "text": "Example pairs - modelled solutions\nOrder of operations\nY7\nTopics in this unit:\nCalculating with roots and powers M135\nUsing the correct order of operations M521\nUsing the commutative laws M952\nUsing the associative laws M409\nsparxmaths.com \u00a9 Sparx limited\nOrder of operations Y7 Back to topic list\nCalculating with roots and powers M135\nThese example pairs cover the following learning points:\nWriting multiplications in index form\nCalculating powers including an index of 1\nSquaring a negative numbe"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Order_of_operations_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Order_of_operations_blank.pdf",
+      "pages": 27,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M409",
+        "M521",
+        "M952",
+        "M135"
+      ],
+      "text": "Example pairs\nOrder of operations\nY7\nTopics in this unit:\nCalculating with roots and powers M135\nUsing the correct order of operations M521\nUsing the commutative laws M952\nUsing the associative laws M409\nsparxmaths.com \u00a9 Sparx limited\nOrder of operations Y7 Back to topic list\nCalculating with roots and powers M135\nThese example pairs cover the following learning points:\nWriting multiplications in index form\nCalculating powers including an index of 1\nSquaring a negative number\nFinding square root"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_SolvingEquations",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_SolvingEquations.pdf",
+      "pages": 22,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M707",
+        "M634",
+        "M647"
+      ],
+      "text": "Example pairs - modelled solutions\nSolving equations\nY7\nTopics in this unit:\nSolving equations with one step M707\nSolving equations of the form ax + b = c M634\nSolving equations of the form x + b = c M647\na\nsparxmaths.com \u00a9 Sparx limited\nSolving equations Y7 Back to topic list\nSolving equations with one step M707\nThese example pairs cover the following learning points:\nSolving an equation of the form x \u2212 a = b\nSolving an equation of the form x + a = b\nSolving an equation of the form ax = b\nSolvi"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_SolvingEquations_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_SolvingEquations_blank.pdf",
+      "pages": 22,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M707",
+        "M634",
+        "M647"
+      ],
+      "text": "Example pairs\nSolving equations\nY7\nTopics in this unit:\nSolving equations with one step M707\nSolving equations of the form ax + b = c M634\nSolving equations of the form x + b = c M647\na\nsparxmaths.com \u00a9 Sparx limited\nSolving equations Y7 Back to topic list\nSolving equations with one step M707\nThese example pairs cover the following learning points:\nSolving an equation of the form x \u2212 a = b\nSolving an equation of the form x + a = b\nSolving an equation of the form ax = b\nSolving an equation of the"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Substitution",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Substitution.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M979",
+        "M208",
+        "M417",
+        "M327"
+      ],
+      "text": "Example pairs - modelled solutions\nSubstitution\nY7\nTopics in this unit:\nSubstituting into expressions with one operation M417\nSubstituting into expressions with multiple operations M327\nSubstituting into algebraic formulae M208\nSubstituting into real-life formulae M979\nsparxmaths.com \u00a9 Sparx limited\nSubstitution Y7 Back to topic list\nSubstituting into expressions with one operation M417\nThese example pairs cover the following learning points:\nSubstituting into expressions involving addition\nSubs"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Substitution_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Substitution_blank.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M979",
+        "M208",
+        "M417",
+        "M327"
+      ],
+      "text": "Example pairs\nSubstitution\nY7\nTopics in this unit:\nSubstituting into expressions with one operation M417\nSubstituting into expressions with multiple operations M327\nSubstituting into algebraic formulae M208\nSubstituting into real-life formulae M979\nsparxmaths.com \u00a9 Sparx limited\nSubstitution Y7 Back to topic list\nSubstituting into expressions with one operation M417\nThese example pairs cover the following learning points:\nSubstituting into expressions involving addition\nSubstituting into express"
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Time",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Time.pdf",
+      "pages": 38,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M963",
+        "M515",
+        "M892",
+        "M627",
+        "M747"
+      ],
+      "text": "Example pairs - modelled solutions\nTime\nY7\nTopics in this unit:\nConverting units of time M515\nUsing clocks M892\nCalculating with time M627\nUsing timetables M963\nUsing calendars M747\nsparxmaths.com \u00a9 Sparx limited\nTime Y7 Back to topic list\nConverting units of time M515\nThese example pairs cover the following learning points:\nConverting between whole hours and minutes Converting weeks into days\nConverting hours and minutes into minutes Converting fractional days into hours\nConverting minutes and "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_ExamplePairs_Time_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_ExamplePairs_Time_blank.pdf",
+      "pages": 38,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M963",
+        "M515",
+        "M892",
+        "M627",
+        "M747"
+      ],
+      "text": "Example pairs\nTime\nY7\nTopics in this unit:\nConverting units of time M515\nUsing clocks M892\nCalculating with time M627\nUsing timetables M963\nUsing calendars M747\nsparxmaths.com \u00a9 Sparx limited\nTime Y7 Back to topic list\nConverting units of time M515\nThese example pairs cover the following learning points:\nConverting between whole hours and minutes Converting weeks into days\nConverting hours and minutes into minutes Converting fractional days into hours\nConverting minutes and seconds into seconds "
+    },
+    {
+      "filename": "Sparx_Year7_Term1_Revision",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term1\\Sparx_Year7_Term1_Revision.pdf",
+      "pages": 40,
+      "content_type": "Revision",
+      "topic_codes": [
+        "M828",
+        "M347",
+        "M409",
+        "M491",
+        "M928",
+        "M531",
+        "M647",
+        "M707",
+        "M262",
+        "M487",
+        "M187",
+        "M634",
+        "M111",
+        "M892",
+        "M429",
+        "M527",
+        "M911",
+        "M417",
+        "M774",
+        "M813",
+        "M354",
+        "M431",
+        "M135",
+        "M949",
+        "M113",
+        "M704",
+        "M963",
+        "M515",
+        "M803",
+        "M979",
+        "M627",
+        "M462",
+        "M952",
+        "M208",
+        "M106",
+        "M327",
+        "M152",
+        "M288",
+        "M521",
+        "M873",
+        "M795",
+        "M763",
+        "M747",
+        "M522",
+        "M830"
+      ],
+      "text": "Year 7 Term 1\nRevision Workbook\nPsapgaer x 1maths.com \u00a9\u00a9 SSppaarrxx lilmimititeedd\nAbout this workbook\nThis workbook supports the revision of topics covered in Year 7 Term 1 of the Sparx Maths\nCurriculum.\nThe workbook is divided into two sections:\n\u2022 Fluency questions on each unit to practise the key concepts.\n\u2022 Mixed questions on all topics to strengthen and deepen understanding.\nThis section contains more challenging reasoning questions, cross-topic questions and\nproblem solving questions.\nIf y"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Assessment",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Assessment.pdf",
+      "pages": 15,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7 Term 2\nAssessment\nTime allowed: 50 minutes Non-calculator\nFirst name:\nLast name:\nTeacher: Teaching group:\nInformation Instructions\nThe assessment is 50 minutes long. Use black ink and draw diagrams in pencil.\nThe maximum mark for this paper is 60. Fill in your name, teacher and teaching\ngroup in the boxes above.\nThe marks available for each question are\nshown in brackets [ ]. Answer all questions.\nAnswer the questions in the spaces\nprovided.\nMaterials Show clearly how you work out your\nan"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Assessment_Mark_Scheme",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Assessment_Mark_Scheme.pdf",
+      "pages": 7,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7 Term 2\nAssessment\nMark Scheme\nGuidance\n\u2022 Unless indicated otherwise, a correct answer with no working is awarded full marks.\n\u2022 If no answer appears on the answer line, accept answers shown in working.\n\u2022 Method marks should be awarded for any correct method, even if it differs from\nthose given in this mark scheme.\n\u2022 The following abbreviations are used in this mark scheme:\n\u2022 ft: follow through\n\u2022 oe: or equivalent\n\u2022 There is an accompanying QLA that supports this assessment.\nPsapgaerx m1ath"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Adding_and_subtracting_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Adding_and_subtracting_fractions.pdf",
+      "pages": 33,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M698",
+        "M671",
+        "M227",
+        "M410",
+        "M601"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Adding and subtracting fractions\nY7\nTopics in this unit:\nFinding the lowest common multiple (LCM) M227\nFinding the highest common factor (HCF) M698\nFinding equivalent fractions M410\nSimplifying fractions M671\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Adding and subtracting fractions Y7 Back to topic list\nFinding the lowest common multiple (LCM) M227\nThese example pairs cover t"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Adding_and_subtracting_fractions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Adding_and_subtracting_fractions_blank.pdf",
+      "pages": 33,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M698",
+        "M671",
+        "M227",
+        "M410",
+        "M601"
+      ],
+      "text": "Example pairs\nBuilding blocks - Adding and subtracting fractions\nY7\nTopics in this unit:\nFinding the lowest common multiple (LCM) M227\nFinding the highest common factor (HCF) M698\nFinding equivalent fractions M410\nSimplifying fractions M671\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Adding and subtracting fractions Y7 Back to topic list\nFinding the lowest common multiple (LCM) M227\nThese example pairs cover the following learning"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Area",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Area.pdf",
+      "pages": 28,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M187",
+        "M814",
+        "M276",
+        "M803"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Area\nY7\nTopics in this unit:\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nLine properties M814\nShape properties M276\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Area Y7 Back to topic list\nUsing a written method to multiply integers M187\nThese example pairs cover the following learning points:\nMultiplying a single-digit integer by a 2-digit integer\nMultiplying an integer with a zero digi"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Area_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Area_blank.pdf",
+      "pages": 28,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M187",
+        "M814",
+        "M276",
+        "M803"
+      ],
+      "text": "Example pairs\nBuilding blocks - Area\nY7\nTopics in this unit:\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nLine properties M814\nShape properties M276\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Area Y7 Back to topic list\nUsing a written method to multiply integers M187\nThese example pairs cover the following learning points:\nMultiplying a single-digit integer by a 2-digit integer\nMultiplying an integer with a zero digit by a single-digit i"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Coordinates_and_shapes",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Coordinates_and_shapes.pdf",
+      "pages": 9,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M276"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Coordinates and shapes\nY7\nTopic in this unit:\nShape properties M276\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Coordinates and shapes Y7 Back to topic list\nShape properties M276\nThese example pairs cover the following learning points:\nIdentifying equilateral, isosceles and scalene triangles when given their side lengths\nIdentifying equilateral, isosceles and scalene triangles when given their angles\nIdentifying right-angled, equilateral,"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Coordinates_and_shapes_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Coordinates_and_shapes_blank.pdf",
+      "pages": 9,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M276"
+      ],
+      "text": "Example pairs\nBuilding blocks - Coordinates and shapes\nY7\nTopic in this unit:\nShape properties M276\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Coordinates and shapes Y7 Back to topic list\nShape properties M276\nThese example pairs cover the following learning points:\nIdentifying equilateral, isosceles and scalene triangles when given their side lengths\nIdentifying equilateral, isosceles and scalene triangles when given their angles\nIdentifying right-angled, equilateral, isosceles and scalen"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Factors_and_multiples",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Factors_and_multiples.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M354",
+        "M462"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Factors and multiples\nY7\nTopics in this unit:\nDividing numbers into equal groups M462\nUsing a written method to divide integers M354\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Factors and multiples Y7 Back to topic list\nDividing numbers into equal groups M462\nThese example pairs cover the following learning points:\nDividing within familiar times tables\nDividing items into equal groups, with a remainder\nUsing a given multiplication to wor"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Factors_and_multiples_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Factors_and_multiples_blank.pdf",
+      "pages": 11,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M354",
+        "M462"
+      ],
+      "text": "Example pairs\nBuilding blocks - Factors and multiples\nY7\nTopics in this unit:\nDividing numbers into equal groups M462\nUsing a written method to divide integers M354\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Factors and multiples Y7 Back to topic list\nDividing numbers into equal groups M462\nThese example pairs cover the following learning points:\nDividing within familiar times tables\nDividing items into equal groups, with a remainder\nUsing a given multiplication to work out a related divis"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Perimeter",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Perimeter.pdf",
+      "pages": 27,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M276",
+        "M429",
+        "M814",
+        "M928"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Perimeter\nY7\nTopics in this unit:\nAdding integers M928\nAdding decimals M429\nLine properties M814\nShape properties M276\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Perimeter Y7 Back to topic list\nAdding integers M928\nThese example pairs cover the following learning points:\nAdding two integers with no carries\nAdding two integers with a different number of digits, with one carry\nMeasures context: adding three integers\nAdding three integers, "
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Perimeter_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Perimeter_blank.pdf",
+      "pages": 27,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M276",
+        "M429",
+        "M814",
+        "M928"
+      ],
+      "text": "Example pairs\nBuilding blocks - Perimeter\nY7\nTopics in this unit:\nAdding integers M928\nAdding decimals M429\nLine properties M814\nShape properties M276\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Perimeter Y7 Back to topic list\nAdding integers M928\nThese example pairs cover the following learning points:\nAdding two integers with no carries\nAdding two integers with a different number of digits, with one carry\nMeasures context: adding three integers\nAdding three integers, with two carries incl"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Primes",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Primes.pdf",
+      "pages": 10,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M823",
+        "M462"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Primes\nY7\nTopics in this unit:\nFinding factors and using divisibility tests M823\nDividing numbers into equal groups M462\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Primes Y7 Back to topic list\nFinding factors and using divisibility tests M823\nThese example pairs cover the following learning points:\nUsing the divisibility test for 3\nListing the factor pairs of a number that has four factors\nFinding the factors of a number that has eight f"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Primes_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Primes_blank.pdf",
+      "pages": 10,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M823",
+        "M462"
+      ],
+      "text": "Example pairs\nBuilding blocks - Primes\nY7\nTopics in this unit:\nFinding factors and using divisibility tests M823\nDividing numbers into equal groups M462\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Primes Y7 Back to topic list\nFinding factors and using divisibility tests M823\nThese example pairs cover the following learning points:\nUsing the divisibility test for 3\nListing the factor pairs of a number that has four factors\nFinding the factors of a number that has eight factors\nFinding the fa"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Single_brackets",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Single_brackets.pdf",
+      "pages": 18,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M698",
+        "M795",
+        "M813"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Single brackets\nY7\nTopics in this unit:\nAlgebraic notation M813\nSimplifying expressions containing a single variable M795\nFinding the highest common factor (HCF) M698\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Single brackets Y7 Back to topic list\nAlgebraic notation M813\nThese example pairs cover the following learning points:\nRecognising the algebraic notation for multiplication and division\nRecognising the correct expression for a subt"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Single_brackets_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Single_brackets_blank.pdf",
+      "pages": 18,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M698",
+        "M795",
+        "M813"
+      ],
+      "text": "Example pairs\nBuilding blocks - Single brackets\nY7\nTopics in this unit:\nAlgebraic notation M813\nSimplifying expressions containing a single variable M795\nFinding the highest common factor (HCF) M698\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Single brackets Y7 Back to topic list\nAlgebraic notation M813\nThese example pairs cover the following learning points:\nRecognising the algebraic notation for multiplication and division\nRecognising the correct expression for a subtraction and an additi"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Writing_and_comparing_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Writing_and_comparing_fractions.pdf",
+      "pages": 13,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M227",
+        "M698"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Writing and comparing fractions\nY7\nTopics in this unit:\nFinding the lowest common multiple (LCM) M227\nFinding the highest common factor (HCF) M698\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Writing and comparing fractions Y7 Back to topic list\nFinding the lowest common multiple (LCM) M227\nThese example pairs cover the following learning points:\nListing the multiples of a number\nFinding a specified multiple of a number\nFinding the LCM of "
+    },
+    {
+      "filename": "Sparx_Year7_Term2_BuildingBlocks_Writing_and_comparing_fractions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_BuildingBlocks_Writing_and_comparing_fractions_blank.pdf",
+      "pages": 13,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M227",
+        "M698"
+      ],
+      "text": "Example pairs\nBuilding blocks - Writing and comparing fractions\nY7\nTopics in this unit:\nFinding the lowest common multiple (LCM) M227\nFinding the highest common factor (HCF) M698\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Writing and comparing fractions Y7 Back to topic list\nFinding the lowest common multiple (LCM) M227\nThese example pairs cover the following learning points:\nListing the multiples of a number\nFinding a specified multiple of a number\nFinding the LCM of two numbers\nFinding t"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Adding_and_subtracting_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Adding_and_subtracting_fractions.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nAdding and subtracting fractions Y7\ndeepen knowledge\n\u2022 Working out missing numbers in calculations and solving equations\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Solving questions with perimeter and area\nFind the value of d. Give your answer as a Work out what improper fraction replaces\nmixed number. the ? to complete this calculation.\n4 6\nd + 1 = 2 2 13 43\n7 7 2 + + ? =\n3 5 6\nWrite down three different pairs of fractions\nWhich two number cards add together to\nthat add"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Area",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Area.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nArea Y7\ndeepen knowledge\n\u2022 Using the area of one shape to find the area of a related shape\n\u2022 Solving complex fluency and reasoning problems\nThe area of shape Each of the small shaded squares inside the\nA is 5 cm\u00b2 rectangle has an area of 9 cm\u00b2\nWhat is the area\nA B\nof shape B? What is the area of the\nrectangle?\n11 copies of the small rectangle shown below\nhave been used to make the larger rectangle.\nAndrew is making a patio for his garden that\nWhat is the area of the larger recta"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Coordinates_and_shapes",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Coordinates_and_shapes.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nCoordinates and shapes Y7\ndeepen knowledge\n\u2022 Reading the coordinates of a point of intersection of two lines\n\u2022 Finding the missing vertex of shapes, where the sides are not parallel to an axis\n\u2022 Solving problems involving perimeter\n\u2022 Solving complex fluency and reasoning problems\nWrite down the coordinates of the point Write down the coordinates of the point\nwhere line A and line B intersect. where line T and the y-axis intersect.\nUse these facts to work out the coordinates\nof p"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Factors_and_multiples",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Factors_and_multiples.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nFactors and multiples Y7\ndeepen knowledge\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Reasoning about factors of odd, even and square numbers\n\u2022 Finding the highest common factor of algebraic expressions\n\u2022 Solving cross-topic questions\nWhat is the smallest number that is divisible What number is Lucy thinking of?\nby both 4 and 6?\nMy number is amultiple of 5\nMy number is between 23 and 37\nI am thinking of a number.\nMy number iseven\nThree factors of my number are 10,15 and 9"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Line_and_shape_properties",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Line_and_shape_properties.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nLine and shape properties Y7\ndeepen knowledge\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Determining the relationships between multiple lines\n\u2022 Identifying properties of n-sided polygons\n\u2022 Investigating lines of symmetry and rotational symmetry in circles and patterns\nSelect all the correct descriptions of this All of the descriptions below are of the same\ntriangle. polygon.\nHow many sides does it have?\nRight-angled Isosceles\nEquilateral Scalene\nCan two line segments be\n"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Perimeter",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Perimeter.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nPerimeter Y7\ndeepen knowledge\n\u2022 Solving perimeter problems with algebraic side lengths\n\u2022 Using shape properties to find unknown lengths\n\u2022 Exploring how perimeter changes when additional shapes are added or removed\nWrite a simplified expression for the perimeter The equilateral triangle and the square shown\nof this triangle. below have the same perimeter.\n9b\na\nWork out the side length of the square, giving\nyour answer in cm.\n4a\nLabel the sides of this shape so\nthat the perimeter "
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Primes",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Primes.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nPrimes Y7\ndeepen knowledge\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Finding prime numbers, and sums and products of prime numbers, with given constraints\n\u2022 Reasoning and justifying statements about prime numbers\nWork out the missing number in this prime What numbers should replace A and B in the\nfactor tree. prime factor tree?\nA\n330\n5 66\n11 B\n? 22\n2 3\n2 11\nWhat number has the prime decomposition a) Write 900 as a product of its prime factors\n3 3 x 5 2 ? in index form.\n"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Single_brackets",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Single_brackets.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nSingle brackets Y7\ndeepen knowledge\n\u2022 Expanding and factorising with more than one variable\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Solving cross-topic questions involving area, perimeter or collecting like terms\nExpand and fully simplify Expand 4(4n +3q \u2212 r )\n2w (4w \u22123x )+ x (2w \u22127x )\nWrite down four expressions that expand\nExpand -3 y (2 y \u22127) to give 12x +36\nFully factorise 12 x 2y +24 x y +9 x y 2 Fill in the boxes below.\n2( \u20135x) + (4x\u20131)=2(3x+4)\nEwan was asked to"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Deepen_Writing_and_comparing_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Deepen_Writing_and_comparing_fractions.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nWriting and comparing fractions Y7\ndeepen knowledge\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Solving cross-topic questions involving measures, time and probability\n4\n=\nChoose two number cards to7 make an I am thinking of a fraction.\nequivalent fraction. 5\nIn its simplest form, it is\n6\n4 2 42 14 21 3 The numerator is odd.\n=\nThe denominator is even.\n7 20 12 5 4 28\nThe denominator is between 35 and 50\nWhat is my fraction?\n2 42 14 21 3\nWhat fraction of 1 m is 70 cm?\n20 12 "
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_AddingAndSubtractingFractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_AddingAndSubtractingFractions.pdf",
+      "pages": 19,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M835",
+        "M931"
+      ],
+      "text": "Example pairs - modelled solutions\nAdding and subtracting fractions\nY7\nTopics in this unit:\nAdding and subtracting fractions M835\nAdding and subtracting mixed numbers M931\nsparxmaths.com \u00a9 Sparx limited\nAdding and subtracting fractions Y7 Back to topic list\nAdding and subtracting fractions M835\nThese example pairs cover the following learning points:\nAdding and subtracting fractions with the same denominator\nAdding and subtracting fractions where the answer needs simplifying\nAdding and subtracti"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_AddingAndSubtractingFractions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_AddingAndSubtractingFractions_blank.pdf",
+      "pages": 19,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M835",
+        "M931"
+      ],
+      "text": "Example pairs\nAdding and subtracting fractions\nY7\nTopics in this unit:\nAdding and subtracting fractions M835\nAdding and subtracting mixed numbers M931\nsparxmaths.com \u00a9 Sparx limited\nAdding and subtracting fractions Y7 Back to topic list\nAdding and subtracting fractions M835\nThese example pairs cover the following learning points:\nAdding and subtracting fractions with the same denominator\nAdding and subtracting fractions where the answer needs simplifying\nAdding and subtracting fractions where on"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Area",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Area.pdf",
+      "pages": 30,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M900",
+        "M390",
+        "M996",
+        "M610",
+        "M269"
+      ],
+      "text": "Example pairs - modelled solutions\nArea\nY7\nTopics in this unit:\nFinding areas using grids M900\nFinding the area of rectangles M390\nFinding the area of compound shapes M269\nFinding the area of triangles M610\nFinding the area of compound shapes containing triangles M996\nsparxmaths.com \u00a9 Sparx limited\nArea Y7 Back to topic list\nFinding areas using grids M900\nThese example pairs cover the following learning points:\nFinding the area of a rectangle\nFinding the area of a compound shape\nFinding the area"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Area_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Area_blank.pdf",
+      "pages": 30,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M900",
+        "M390",
+        "M996",
+        "M610",
+        "M269"
+      ],
+      "text": "Example pairs\nArea\nY7\nTopics in this unit:\nFinding areas using grids M900\nFinding the area of rectangles M390\nFinding the area of compound shapes M269\nFinding the area of triangles M610\nFinding the area of compound shapes containing triangles M996\nsparxmaths.com \u00a9 Sparx limited\nArea Y7 Back to topic list\nFinding areas using grids M900\nThese example pairs cover the following learning points:\nFinding the area of a rectangle\nFinding the area of a compound shape\nFinding the area of a shape with half"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Coordinates_and_shapes",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Coordinates_and_shapes.pdf",
+      "pages": 17,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M618",
+        "M230"
+      ],
+      "text": "Example pairs - modelled solutions\nCoordinates and shapes\nY7\nTopics in this unit:\nReading and plotting coordinates M618\nSolving shape problems involving coordinates M230\nsparxmaths.com \u00a9 Sparx limited\nCoordinates and shapes Y7 Back to topic list\nReading and plotting coordinates M618\nThese example pairs cover the following learning points:\nReading the coordinates of points plotted in each of the four quadrants\nReading the coordinates of points plotted on the axes\nIdentifying all points which have"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Coordinates_and_shapes_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Coordinates_and_shapes_blank.pdf",
+      "pages": 17,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M618",
+        "M230"
+      ],
+      "text": "Example pairs\nCoordinates and shapes\nY7\nTopics in this unit:\nReading and plotting coordinates M618\nSolving shape problems involving coordinates M230\nsparxmaths.com \u00a9 Sparx limited\nCoordinates and shapes Y7 Back to topic list\nReading and plotting coordinates M618\nThese example pairs cover the following learning points:\nReading the coordinates of points plotted in each of the four quadrants\nReading the coordinates of points plotted on the axes\nIdentifying all points which have a given y-coordinate"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Factors_and_multiples",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Factors_and_multiples.pdf",
+      "pages": 18,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M227",
+        "M698",
+        "M823"
+      ],
+      "text": "Example pairs - modelled solutions\nFactors and multiples\nY7\nTopics in this unit:\nFinding the lowest common multiple (LCM) M227\nFinding factors and using divisibility tests M823\nFinding the highest common factor (HCF) M698\nsparxmaths.com \u00a9 Sparx limited\nFactors and multiples Y7 Back to topic list\nFinding the lowest common multiple (LCM) M227\nThese example pairs cover the following learning points:\nListing the multiples of a number\nFinding a specified multiple of a number\nFinding the LCM of two nu"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Factors_and_multiples_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Factors_and_multiples_blank.pdf",
+      "pages": 18,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M227",
+        "M698",
+        "M823"
+      ],
+      "text": "Example pairs\nFactors and multiples\nY7\nTopics in this unit:\nFinding the lowest common multiple (LCM) M227\nFinding factors and using divisibility tests M823\nFinding the highest common factor (HCF) M698\nsparxmaths.com \u00a9 Sparx limited\nFactors and multiples Y7 Back to topic list\nFinding the lowest common multiple (LCM) M227\nThese example pairs cover the following learning points:\nListing the multiples of a number\nFinding a specified multiple of a number\nFinding the LCM of two numbers\nFinding the LCM"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Line_and_shape_properties",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Line_and_shape_properties.pdf",
+      "pages": 26,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M276",
+        "M814",
+        "M523"
+      ],
+      "text": "Example pairs - modelled solutions\nLine and shape properties\nY7\nTopics in this unit:\nLine properties M814\nShape properties M276\nSymmetry M523\nsparxmaths.com \u00a9 Sparx limited\nLine and shape properties Y7 Back to topic list\nLine properties M814\nThese example pairs cover the following learning points:\nIdentifying parallel and perpendicular lines drawn on a square grid\nInterpreting parallel, perpendicular and equal-length line notation\nLabelling pairs of lines with parallel, perpendicular or equal-le"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Line_and_shape_properties_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Line_and_shape_properties_blank.pdf",
+      "pages": 26,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M276",
+        "M814",
+        "M523"
+      ],
+      "text": "Example pairs\nLine and shape properties\nY7\nTopics in this unit:\nLine properties M814\nShape properties M276\nSymmetry M523\nsparxmaths.com \u00a9 Sparx limited\nLine and shape properties Y7 Back to topic list\nLine properties M814\nThese example pairs cover the following learning points:\nIdentifying parallel and perpendicular lines drawn on a square grid\nInterpreting parallel, perpendicular and equal-length line notation\nLabelling pairs of lines with parallel, perpendicular or equal-length line notation\nIn"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Perimeter",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Perimeter.pdf",
+      "pages": 18,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M690",
+        "M920",
+        "M635"
+      ],
+      "text": "Example pairs - modelled solutions\nPerimeter\nY7\nTopics in this unit:\nFinding perimeters using grids M920\nFinding the perimeter of rectangles and simple shapes M635\nFinding the perimeter of compound shapes M690\nsparxmaths.com \u00a9 Sparx limited\nPerimeter Y7 Back to topic list\nFinding perimeters using grids M920\nThese example pairs cover the following learning points:\nFinding the perimeter of a rectangle\nFinding the perimeter of a compound shape formed from two rectangles\nFinding the perimeter of a c"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Perimeter_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Perimeter_blank.pdf",
+      "pages": 18,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M690",
+        "M920",
+        "M635"
+      ],
+      "text": "Example pairs\nPerimeter\nY7\nTopics in this unit:\nFinding perimeters using grids M920\nFinding the perimeter of rectangles and simple shapes M635\nFinding the perimeter of compound shapes M690\nsparxmaths.com \u00a9 Sparx limited\nPerimeter Y7 Back to topic list\nFinding perimeters using grids M920\nThese example pairs cover the following learning points:\nFinding the perimeter of a rectangle\nFinding the perimeter of a compound shape formed from two rectangles\nFinding the perimeter of a compound shape formed "
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Primes",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Primes.pdf",
+      "pages": 10,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M108",
+        "M322"
+      ],
+      "text": "Example pairs - modelled solutions\nPrimes\nY7\nTopics in this unit:\nFinding prime numbers M322\nPrime factor decomposition M108\nsparxmaths.com \u00a9 Sparx limited\nPrimes Y7 Back to topic list\nFinding prime numbers M322\nThese example pairs cover the following learning points:\nIdentifying numbers as prime or non-prime\nIdentifying prime numbers from a list of numbers\nsparxmaths.com \u00a9 Sparx limited\nTeacher question Student question\na) Write down the factors of 15 a) Write down the factors of 13\n1, 3, 5, 15"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Primes_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Primes_blank.pdf",
+      "pages": 10,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M108",
+        "M322"
+      ],
+      "text": "Example pairs\nPrimes\nY7\nTopics in this unit:\nFinding prime numbers M322\nPrime factor decomposition M108\nsparxmaths.com \u00a9 Sparx limited\nPrimes Y7 Back to topic list\nFinding prime numbers M322\nThese example pairs cover the following learning points:\nIdentifying numbers as prime or non-prime\nIdentifying prime numbers from a list of numbers\nsparxmaths.com \u00a9 Sparx limited\nTeacher question Student question\na) Write down the factors of 15 a) Write down the factors of 13\nAnswer: Answer:\nb) Write down th"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Single_brackets",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Single_brackets.pdf",
+      "pages": 29,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M100",
+        "M637",
+        "M237",
+        "M792"
+      ],
+      "text": "Example pairs - modelled solutions\nSingle brackets\nY7\nTopics in this unit:\nUsing the distributive law M637\nExpanding single brackets M237\nExpanding single brackets and simplifying expressions M792\nFactorising into one bracket M100\nsparxmaths.com \u00a9 Sparx limited\nSingle brackets Y7 Back to topic list\nUsing the distributive law M637\nThese example pairs cover the following learning points:\nUsing a \u00d7 (b + c) = a \u00d7 b + a \u00d7 c to carry out a calculation by first partitioning\nUsing a \u00d7 b + a \u00d7 c = a \u00d7 (b"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Single_brackets_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Single_brackets_blank.pdf",
+      "pages": 29,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M100",
+        "M637",
+        "M237",
+        "M792"
+      ],
+      "text": "Example pairs\nSingle brackets\nY7\nTopics in this unit:\nUsing the distributive law M637\nExpanding single brackets M237\nExpanding single brackets and simplifying expressions M792\nFactorising into one bracket M100\nsparxmaths.com \u00a9 Sparx limited\nSingle brackets Y7 Back to topic list\nUsing the distributive law M637\nThese example pairs cover the following learning points:\nUsing a \u00d7 (b + c) = a \u00d7 b + a \u00d7 c to carry out a calculation by first partitioning\nUsing a \u00d7 b + a \u00d7 c = a \u00d7 (b + c) to simplify and"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Writing_and_comparing_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Writing_and_comparing_fractions.pdf",
+      "pages": 44,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M335",
+        "M158",
+        "M671",
+        "M939",
+        "M410",
+        "M601"
+      ],
+      "text": "Example pairs - modelled solutions\nWriting and comparing fractions\nY7\nTopics in this unit:\nFinding fractions of shapes M158\nConstructing fractions M939\nFinding equivalent fractions M410\nSimplifying fractions M671\nOrdering fractions M335\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nWriting and comparing fractions Y7 Back to topic list\nFinding fractions of shapes M158\nThese example pairs cover the following learning points:\nIdentifying what fraction o"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_ExamplePairs_Writing_and_comparing_fractions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_ExamplePairs_Writing_and_comparing_fractions_blank.pdf",
+      "pages": 44,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M335",
+        "M158",
+        "M671",
+        "M939",
+        "M410",
+        "M601"
+      ],
+      "text": "Example pairs\nWriting and comparing fractions\nY7\nTopics in this unit:\nFinding fractions of shapes M158\nConstructing fractions M939\nFinding equivalent fractions M410\nSimplifying fractions M671\nOrdering fractions M335\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nWriting and comparing fractions Y7 Back to topic list\nFinding fractions of shapes M158\nThese example pairs cover the following learning points:\nIdentifying what fraction of a rectangle is shad"
+    },
+    {
+      "filename": "Sparx_Year7_Term2_Revision",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term2\\Sparx_Year7_Term2_Revision.pdf",
+      "pages": 40,
+      "content_type": "Revision",
+      "topic_codes": [
+        "M698",
+        "M322",
+        "M410",
+        "M108",
+        "M635",
+        "M634",
+        "M792",
+        "M618",
+        "M429",
+        "M527",
+        "M774",
+        "M814",
+        "M690",
+        "M637",
+        "M610",
+        "M135",
+        "M920",
+        "M158",
+        "M227",
+        "M900",
+        "M390",
+        "M939",
+        "M237",
+        "M601",
+        "M230",
+        "M996",
+        "M823",
+        "M269",
+        "M931",
+        "M335",
+        "M327",
+        "M671",
+        "M276",
+        "M795",
+        "M835",
+        "M100",
+        "M523"
+      ],
+      "text": "Year 7 Term 2\nRevision Workbook\nPsapgaer x 1maths.com \u00a9\u00a9 SSppaarrxx lilmimititeedd\nAbout this workbook\nThis workbook supports the revision of topics covered in Year 7 Term 2 of the Sparx Maths\nCurriculum.\nThe workbook is divided into two sections:\n\u2022 Fluency questions on each unit to practise the key concepts.\n\u2022 Mixed questions on all topics to strengthen and deepen understanding.\nThis section contains more challenging reasoning questions, cross-topic questions and\nproblem solving questions.\nIf y"
+    },
+    {
+      "filename": "Sparx_Year7_EOY_Assessment",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_EOY_Assessment.pdf",
+      "pages": 16,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7\nEnd of Year Assessment\nTime allowed: 50 minutes Non-calculator\nFirst name:\nLast name:\nTeacher: Teaching group:\nInformation Instructions\nThe assessment is 50 minutes long. Use black ink and draw diagrams in pencil.\nThe maximum mark for this paper is 60. Fill in your name, teacher and teaching\ngroup in the boxes above.\nThe marks available for each question are\nshown in brackets [ ]. Answer all questions.\nAnswer the questions in the spaces\nprovided.\nMaterials Show clearly how you work out yo"
+    },
+    {
+      "filename": "Sparx_Year7_EOY_Assessment_Mark_Scheme",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_EOY_Assessment_Mark_Scheme.pdf",
+      "pages": 5,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7\nEnd of Year Assessment\nMark Scheme\nGuidance\n\u2022 Unless indicated otherwise, a correct answer with no working is awarded full marks.\n\u2022 If no answer appears on the answer line, accept answers shown in working.\n\u2022 Method marks should be awarded for any correct method, even if it differs from\nthose given in this mark scheme.\n\u2022 The following abbreviations are used in this mark scheme:\n\u2022 ft: follow through\n\u2022 oe: or equivalent\n\u2022 There is an accompanying QLA that supports this assessment.\nsparxmaths"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Assessment",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Assessment.pdf",
+      "pages": 16,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7 Term 3\nAssessment\nTime allowed: 50 minutes Non-calculator\nFirst name:\nLast name:\nTeacher: Teaching group:\nInformation Instructions\nThe assessment is 50 minutes long. Use black ink and draw diagrams in pencil.\nThe maximum mark for this paper is 60. Fill in your name, teacher and teaching\ngroup in the boxes above.\nThe marks available for each question are\nshown in brackets [ ]. Answer all questions.\nAnswer the questions in the spaces\nprovided.\nMaterials Show clearly how you work out your\nan"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Assessment_Mark_Scheme",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Assessment_Mark_Scheme.pdf",
+      "pages": 5,
+      "content_type": "Assessment",
+      "topic_codes": [],
+      "text": "Year 7 Term 3\nAssessment\nMark Scheme\nGuidance\n\u2022 Unless indicated otherwise, a correct answer with no working is awarded full marks.\n\u2022 If no answer appears on the answer line, accept answers shown in working.\n\u2022 Method marks should be awarded for any correct method, even if it differs from\nthose given in this mark scheme.\n\u2022 The following abbreviations are used in this mark scheme:\n\u2022 ft: follow through\n\u2022 oe: or equivalent\n\u2022 There is an accompanying QLA that supports this assessment.\nsparxmaths.com "
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Averages_and_range",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Averages_and_range.pdf",
+      "pages": 58,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M187",
+        "M704",
+        "M152",
+        "M429",
+        "M803",
+        "M347",
+        "M928",
+        "M763",
+        "M354",
+        "M262"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Averages and range\nY7\nTopics in this unit:\nUsing number lines M763\nInteger place value M704\nAdding integers M928\nAdding decimals M429\nSubtracting integers M347\nSubtracting decimals M152\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nUsing a written method to divide integers M354\nUsing a written method to divide by integers to get a decimal answer M262\nsparxmaths.com \u00a9 Sparx limited\nBuilding bl"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Averages_and_range_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Averages_and_range_blank.pdf",
+      "pages": 58,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M187",
+        "M704",
+        "M152",
+        "M429",
+        "M803",
+        "M347",
+        "M928",
+        "M763",
+        "M354",
+        "M262"
+      ],
+      "text": "Example pairs\nBuilding blocks - Averages and range\nY7\nTopics in this unit:\nUsing number lines M763\nInteger place value M704\nAdding integers M928\nAdding decimals M429\nSubtracting integers M347\nSubtracting decimals M152\nUsing a written method to multiply integers M187\nUsing a written method to multiply decimals M803\nUsing a written method to divide integers M354\nUsing a written method to divide by integers to get a decimal answer M262\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Averages and r"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Collecting_and_presenting_data",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Collecting_and_presenting_data.pdf",
+      "pages": 51,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M738",
+        "M460",
+        "M841",
+        "M597",
+        "M940",
+        "M899",
+        "M644",
+        "M934",
+        "M328"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Collecting and presenting data\nY7\nTopics in this unit:\nCalculating the range M328\nCalculating the median M934\nFinding the mode M841\nCalculating the mean M940\nInterpreting frequency tables and two-way tables M899\nDrawing and interpreting tally charts M597\nDrawing and interpreting pictograms M644\nDrawing bar charts M460\nInterpreting bar charts M738\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Collecting and presenting data Y7 Back to topic l"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Collecting_and_presenting_data_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Collecting_and_presenting_data_blank.pdf",
+      "pages": 51,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M738",
+        "M460",
+        "M841",
+        "M597",
+        "M940",
+        "M899",
+        "M644",
+        "M934",
+        "M328"
+      ],
+      "text": "Example pairs\nBuilding blocks - Collecting and presenting data\nY7\nTopics in this unit:\nCalculating the range M328\nCalculating the median M934\nFinding the mode M841\nCalculating the mean M940\nInterpreting frequency tables and two-way tables M899\nDrawing and interpreting tally charts M597\nDrawing and interpreting pictograms M644\nDrawing bar charts M460\nInterpreting bar charts M738\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Collecting and presenting data Y7 Back to topic list\nCalculating the r"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Finding_unknown_angles",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Finding_unknown_angles.pdf",
+      "pages": 21,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M707",
+        "M634",
+        "M502"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Finding unknown angles\nY7\nTopics in this unit:\nTypes of angles M502\nSolving equations with one step M707\nSolving equations of the form ax + b = c M634\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Finding unknown angles Y7 Back to topic list\nTypes of angles M502\nThese example pairs cover the following learning points:\nRelating full, half and quarter turns to angles in degrees\nIdentifying acute, obtuse, reflex and right angles\nIdentifying ac"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Finding_unknown_angles_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Finding_unknown_angles_blank.pdf",
+      "pages": 21,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M707",
+        "M634",
+        "M502"
+      ],
+      "text": "Example pairs\nBuilding blocks - Finding unknown angles\nY7\nTopics in this unit:\nTypes of angles M502\nSolving equations with one step M707\nSolving equations of the form ax + b = c M634\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Finding unknown angles Y7 Back to topic list\nTypes of angles M502\nThese example pairs cover the following learning points:\nRelating full, half and quarter turns to angles in degrees\nIdentifying acute, obtuse, reflex and right angles\nIdentifying acute, obtuse, reflex a"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Fractions_decimals_and_percentages",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Fractions_decimals_and_percentages.pdf",
+      "pages": 37,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M335",
+        "M671",
+        "M939",
+        "M410",
+        "M601"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Fractions, decimals and percentages\nY7\nTopics in this unit:\nConstructing fractions M939\nFinding equivalent fractions M410\nSimplifying fractions M671\nOrdering fractions M335\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Fractions, decimals and percentages Y7 Back to topic list\nConstructing fractions M939\nThese example pairs cover the following learning points:\nWriting down a fracti"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Fractions_decimals_and_percentages_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Fractions_decimals_and_percentages_blank.pdf",
+      "pages": 37,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M335",
+        "M671",
+        "M939",
+        "M410",
+        "M601"
+      ],
+      "text": "Example pairs\nBuilding blocks - Fractions, decimals and percentages\nY7\nTopics in this unit:\nConstructing fractions M939\nFinding equivalent fractions M410\nSimplifying fractions M671\nOrdering fractions M335\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Fractions, decimals and percentages Y7 Back to topic list\nConstructing fractions M939\nThese example pairs cover the following learning points:\nWriting down a fraction from a written des"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Fractions_of_an_amount",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Fractions_of_an_amount.pdf",
+      "pages": 15,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M478",
+        "M157"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Fractions of an amount\nY7\nTopics in this unit:\nMultiplying fractions M157\nSolving proportion problems M478\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Fractions of an amount Y7 Back to topic list\nMultiplying fractions M157\nThese example pairs cover the following learning points:\nMultiplying an integer and a fraction\nMultiplying two fractions\nMultiplying a fraction by an integer with simplification\nMeasures context: Multiplying a fraction "
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Fractions_of_an_amount_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Fractions_of_an_amount_blank.pdf",
+      "pages": 15,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M478",
+        "M157"
+      ],
+      "text": "Example pairs\nBuilding blocks - Fractions of an amount\nY7\nTopics in this unit:\nMultiplying fractions M157\nSolving proportion problems M478\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Fractions of an amount Y7 Back to topic list\nMultiplying fractions M157\nThese example pairs cover the following learning points:\nMultiplying an integer and a fraction\nMultiplying two fractions\nMultiplying a fraction by an integer with simplification\nMeasures context: Multiplying a fraction and an integer to get"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Multiplying_and_dividing_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Multiplying_and_dividing_fractions.pdf",
+      "pages": 15,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M671",
+        "M601"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Multiplying and dividing fractions\nY7\nTopics in this unit:\nSimplifying fractions M671\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Multiplying and dividing fractions Y7 Back to topic list\nSimplifying fractions M671\nThese example pairs cover the following learning points:\nSimplifying a fraction where the numerator is the common factor\nSimplifying a fraction with one common factor "
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Multiplying_and_dividing_fractions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Multiplying_and_dividing_fractions_blank.pdf",
+      "pages": 15,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M671",
+        "M601"
+      ],
+      "text": "Example pairs\nBuilding blocks - Multiplying and dividing fractions\nY7\nTopics in this unit:\nSimplifying fractions M671\nConverting between mixed numbers and improper fractions M601\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Multiplying and dividing fractions Y7 Back to topic list\nSimplifying fractions M671\nThese example pairs cover the following learning points:\nSimplifying a fraction where the numerator is the common factor\nSimplifying a fraction with one common factor other than 1\nSimplify"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Theoretical_probability",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Theoretical_probability.pdf",
+      "pages": 39,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M553",
+        "M835",
+        "M939",
+        "M235",
+        "M264"
+      ],
+      "text": "Example pairs - modelled solutions\nBuilding blocks - Theoretical probability\nY7\nTopics in this unit:\nConstructing fractions M939\nAdding and subtracting fractions M835\nConverting between fractions, decimals and percentages M264\nOrdering fractions, decimals and percentages M553\nWriting numbers as percentages of other numbers M235\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Theoretical probability Y7 Back to topic list\nConstructing fractions M939\nThese example pairs cover the following learnin"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_BuildingBlocks_Theoretical_probability_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_BuildingBlocks_Theoretical_probability_blank.pdf",
+      "pages": 39,
+      "content_type": "BuildingBlocks",
+      "topic_codes": [
+        "M553",
+        "M835",
+        "M939",
+        "M235",
+        "M264"
+      ],
+      "text": "Example pairs\nBuilding blocks - Theoretical probability\nY7\nTopics in this unit:\nConstructing fractions M939\nAdding and subtracting fractions M835\nConverting between fractions, decimals and percentages M264\nOrdering fractions, decimals and percentages M553\nWriting numbers as percentages of other numbers M235\nsparxmaths.com \u00a9 Sparx limited\nBuilding blocks - Theoretical probability Y7 Back to topic list\nConstructing fractions M939\nThese example pairs cover the following learning points:\nWriting dow"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Angles",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Angles.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nAngles Y7\ndeepen knowledge\n\u2022 Using angle facts to solve complex fluency and reasoning problems\n\u2022 Investigating alternative methods of measuring angles\n\u2022 Constructing triangles by drawing angles and measuring lines\n\u2022\nThe four angles in a quadrilateral are a, b, c Estimate the difference in size between the\nand d. two angles shown below.\nUse the statements below to work out the\nsize of each angle.\nOne of the angles is 132o\nAngle b is the only acute angle\nThere is one right angle\nA"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Averages_and_range",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Averages_and_range.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nAverages and range Y7\ndeepen knowledge\n\u2022 Finding averages for a set of numbers including negatives and/or fractions\n\u2022 Working backwards to find missing values given an average or range\n\u2022 Considering the suitability of a particular average\n\u2022 Solving complex fluency and reasoning problems\nWork out the mean of the temperatures Find the median of these numbers:\nshown on the map.\n-24, -19, 3, -24, 25, -15\nWhat is the range of these three fractions?\nGive your answer as a fraction in i"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Collecting_and_presenting_data",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Collecting_and_presenting_data.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nCollecting and presenting data Y7\ndeepen knowledge\n\u2022 Designing or choosing a suitable data collection table\n\u2022 Solving problems involving averages or range for raw collected data and summarised data\n\u2022 Calculating new values for averages and range when the data is changed\n\u2022 Solving complex fluency and reasoning problems\nDesign a data collection table to record the Charlie recorded the number of items\ndata needed to test the hypothesis: bought by different people in a shop. His\nres"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Finding_unknown_angles",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Finding_unknown_angles.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nFinding unknown angles Y7\ndeepen knowledge\n\u2022 Using angle facts to solve complex fluency and reasoning problems\n\u2022 Describing which angle facts were used in order to justify an answer\nCalculate the size of angle n. A tipper truck is shown. The 70\u00b0 angle\ndecreases to 60\u00b0 as the tipper tips further.\nBy how much does angle b change?\nThree straight lines cross at a point.\nThe size of angle c is 50\u00b0.\nIf a straight line split angle c exactly in half, it\nThree straight lines cross at a p"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Fractions_decimals_and_percentages",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Fractions_decimals_and_percentages.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to Fractions, decimals\nY7\ndeepen knowledge and percentages\n\u2022 Performing calculations involving a mixture of fractions and decimals\n\u2022 Converting percentages greater than 100%\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Solving cross-topic questions involving topics such as the median and money\n3 52 52 3\nCalculate + 0.5 Calculate \u2013 0.13 Calculate 0.43 + +\n10 100 100 10\n781\nWrite as a percentage. Write 1.24 as a percentage.\n1000\n34 Write 185% as a decimal.\nWrite as a decimal.\n1"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Fractions_of_amounts",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Fractions_of_amounts.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nFractions of amounts Y7\ndeepen knowledge\n\u2022 Working backwards from a fraction of an amount to find the total amount\n\u2022 Solving cross-topic questions involving time and angles\n\u2022 Decreasing an amount by a fraction of that amount\n\u2022 Solving complex fluency and reasoning problems\n3\nCalculate the number that should go in the In a netball match, F\u0133i scored of their total\n5\nbox below. points in the first half.\n5\nNew Zealand scored of their total points in\n6\nthe second half.\nWhat was the s"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Multiplying_dividing_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Multiplying_dividing_fractions.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nMultiplying and dividing fractions Y7\ndeepen knowledge\n\u2022 Calculating reciprocals of algebraic expressions and considering the reciprocals of 0 and 1\n\u2022 Solving area questions by multiplying fractions or mixed numbers\n\u2022 Identifying a student\u2019s mistake in dividing fractions working\n\u2022 Solving complex fluency and reasoning problems\n2x\nWork out the value of the reciprocal of a) For which positive number is the reciprocal\nx + 2\ngiven that x = 7 itself?\nb) Which number does not have a r"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Proportion_word_problems",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Proportion_word_problems.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nProportion word problems Y7\ndeepen knowledge\n\u2022 Solving cross-topic questions involving topics such as angles and volume\n\u2022 Solving proportion problems involving 3 different quantities\n\u2022 Solving complex fluency and reasoning problems\nOn the speedometer of a car there are 130\u00b0 between 10 mph and 60 mph.\nHow many degrees (\u00b0) are there between 30 mph and 50 mph?\nThe image below is repeated until there are When Elodie is resting, her heart beats 8\n70 triangles. times in 6 seconds.\nHow"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Tables_and_charts",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Tables_and_charts.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nTables and charts Y7\ndeepen knowledge\n\u2022 Solving complex fluency and reasoning problems\n\u2022 Solving cross-topic questions involving rounding and fractions\n\u2022 Identifying data sets which are appropriate to display on a given chart\n\u2022 Identifying reasons why a given chart is misleading\nOn which two days were 1500 books sold, Is it possible to complete this table using just\ncorrect to the nearest hundred? the information given?\nThe pictogram shows the favourite sports of\n150 people.\nWor"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Deepen_Theoretical_probability",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Deepen_Theoretical_probability.pdf",
+      "pages": 1,
+      "content_type": "Deepen",
+      "topic_codes": [],
+      "text": "Opportunities to\nTheoretical probability Y7\ndeepen knowledge\n\u2022 Calculating probabilities and ordering them by likelihood\n\u2022 Designing spinners with given probabilities\n\u2022 Working backwards from probabilities to make deductions about events\nWhich spinner has a better chance of landing Rob has more than four coins in his pocket.\non a 4? Explain your answer. The total value of the coins is 25p.\n1\nThe probability that a coin is a 1p is\n4\nList all the coins that are in Rob\u2019s pocket.\nCopy the spinner. C"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Angles",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Angles.pdf",
+      "pages": 22,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M331",
+        "M780",
+        "M502",
+        "M541"
+      ],
+      "text": "Example pairs - modelled solutions\nAngles\nY7\nTopics in this unit:\nTypes of angles M502\nEstimating angles M541\nMeasuring angles M780\nDrawing angles M331\nsparxmaths.com \u00a9 Sparx limited\nAngles Y7 Back to topic list\nTypes of angles M502\nThese example pairs cover the following learning points:\nRelating full, half and quarter turns to angles in degrees\nIdentifying acute, obtuse, reflex and right angles\nIdentifying acute, obtuse, reflex and right angles in a shape\nIdentifying the type of angle using AB"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Angles_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Angles_blank.pdf",
+      "pages": 22,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M331",
+        "M780",
+        "M502",
+        "M541"
+      ],
+      "text": "Example pairs\nAngles\nY7\nTopics in this unit:\nTypes of angles M502\nEstimating angles M541\nMeasuring angles M780\nDrawing angles M331\nsparxmaths.com \u00a9 Sparx limited\nAngles Y7 Back to topic list\nTypes of angles M502\nThese example pairs cover the following learning points:\nRelating full, half and quarter turns to angles in degrees\nIdentifying acute, obtuse, reflex and right angles\nIdentifying acute, obtuse, reflex and right angles in a shape\nIdentifying the type of angle using ABC notation\nsparxmaths"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Averages_and_range",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Averages_and_range.pdf",
+      "pages": 27,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M841",
+        "M940",
+        "M328",
+        "M934"
+      ],
+      "text": "Example pairs - modelled solutions\nAverages and range\nY7\nTopics in this unit:\nCalculating the range M328\nCalculating the median M934\nFinding the mode M841\nCalculating the mean M940\nsparxmaths.com \u00a9 Sparx limited\nAverages and range Y7 Back to topic list\nCalculating the range M328\nThese example pairs cover the following learning points:\nFinding the maximum and minimum values and using these to calculate the range\nCalculating the range of a list of integers\nMeasures context: Calculating the range o"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Averages_and_range_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Averages_and_range_blank.pdf",
+      "pages": 27,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M841",
+        "M940",
+        "M328",
+        "M934"
+      ],
+      "text": "Example pairs\nAverages and range\nY7\nTopics in this unit:\nCalculating the range M328\nCalculating the median M934\nFinding the mode M841\nCalculating the mean M940\nsparxmaths.com \u00a9 Sparx limited\nAverages and range Y7 Back to topic list\nCalculating the range M328\nThese example pairs cover the following learning points:\nFinding the maximum and minimum values and using these to calculate the range\nCalculating the range of a list of integers\nMeasures context: Calculating the range of a list of decimals\n"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Collecting_and_presenting_data",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Collecting_and_presenting_data.pdf",
+      "pages": 17,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M945",
+        "M440",
+        "M127"
+      ],
+      "text": "Example pairs - modelled solutions\nCollecting and presenting data\nY7\nTopics in this unit:\nCollecting and recording data using tables M945\nFinding averages from frequency tables M127\nChoosing suitable averages and solving problems M440\nsparxmaths.com \u00a9 Sparx limited\nCollecting and presenting data Y7 Back to topic list\nCollecting and recording data using tables M945\nThese example pairs cover the following learning points:\nCompleting a tally chart for qualitative data\nDrawing a tally chart for use "
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Collecting_and_presenting_data_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Collecting_and_presenting_data_blank.pdf",
+      "pages": 17,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M945",
+        "M440",
+        "M127"
+      ],
+      "text": "Example pairs\nCollecting and presenting data\nY7\nTopics in this unit:\nCollecting and recording data using tables M945\nFinding averages from frequency tables M127\nChoosing suitable averages and solving problems M440\nsparxmaths.com \u00a9 Sparx limited\nCollecting and presenting data Y7 Back to topic list\nCollecting and recording data using tables M945\nThese example pairs cover the following learning points:\nCompleting a tally chart for qualitative data\nDrawing a tally chart for use with quantitative dat"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Finding_unknown_angles",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Finding_unknown_angles.pdf",
+      "pages": 19,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M818",
+        "M351",
+        "M163"
+      ],
+      "text": "Example pairs - modelled solutions\nFinding unknown angles\nY7\nTopics in this unit:\nAngles on a line and about a point M818\nVertically opposite angles M163\nAngles in triangles M351\nsparxmaths.com \u00a9 Sparx limited\nFinding unknown angles Y7 Back to topic list\nAngles on a line and about a point M818\nThese example pairs cover the following learning points:\nCalculating the size of an angle given another angle at the same point on a straight line\nCalculating the size of an angle given two other angles at"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Finding_unknown_angles_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Finding_unknown_angles_blank.pdf",
+      "pages": 19,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M818",
+        "M351",
+        "M163"
+      ],
+      "text": "Example pairs\nFinding unknown angles\nY7\nTopics in this unit:\nAngles on a line and about a point M818\nVertically opposite angles M163\nAngles in triangles M351\nsparxmaths.com \u00a9 Sparx limited\nFinding unknown angles Y7 Back to topic list\nAngles on a line and about a point M818\nThese example pairs cover the following learning points:\nCalculating the size of an angle given another angle at the same point on a straight line\nCalculating the size of an angle given two other angles at the same point on a "
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Fractions_decimals_and_percentages",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Fractions_decimals_and_percentages.pdf",
+      "pages": 30,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M235",
+        "M553",
+        "M264",
+        "M958"
+      ],
+      "text": "Example pairs - modelled solutions\nFractions, decimals and percentages\nY7\nTopics in this unit:\nConverting between fractions and decimals M958\nConverting between fractions, decimals and percentages M264\nOrdering fractions, decimals and percentages M553\nWriting numbers as percentages of other numbers M235\nsparxmaths.com \u00a9 Sparx limited\nFractions, decimals and percentages Y7 Back to topic list\nConverting between fractions and decimals M958\nThese example pairs cover the following learning points:\nCo"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Fractions_decimals_and_percentages_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Fractions_decimals_and_percentages_blank.pdf",
+      "pages": 30,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M235",
+        "M553",
+        "M264",
+        "M958"
+      ],
+      "text": "Example pairs\nFractions, decimals and percentages\nY7\nTopics in this unit:\nConverting between fractions and decimals M958\nConverting between fractions, decimals and percentages M264\nOrdering fractions, decimals and percentages M553\nWriting numbers as percentages of other numbers M235\nsparxmaths.com \u00a9 Sparx limited\nFractions, decimals and percentages Y7 Back to topic list\nConverting between fractions and decimals M958\nThese example pairs cover the following learning points:\nConverting a decimal wi"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Fractions_of_an_amount",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Fractions_of_an_amount.pdf",
+      "pages": 12,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M684",
+        "M695"
+      ],
+      "text": "Example pairs - modelled solutions\nFractions of an amount\nY7\nTopics in this unit:\nFinding fractions of amounts without a calculator M695\nFinding fractions of amounts with a calculator M684\nsparxmaths.com \u00a9 Sparx limited\nFractions of an amount Y7 Back to topic list\nFinding fractions of amounts without a calculator M695\nThese example pairs cover the following learning points:\nFinding fractions of amounts, with unit fractions\nFinding a fraction of an amount\nFinding a fraction of an amount, worded c"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Fractions_of_an_amount_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Fractions_of_an_amount_blank.pdf",
+      "pages": 12,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M684",
+        "M695"
+      ],
+      "text": "Example pairs\nFractions of an amount\nY7\nTopics in this unit:\nFinding fractions of amounts without a calculator M695\nFinding fractions of amounts with a calculator M684\nsparxmaths.com \u00a9 Sparx limited\nFractions of an amount Y7 Back to topic list\nFinding fractions of amounts without a calculator M695\nThese example pairs cover the following learning points:\nFinding fractions of amounts, with unit fractions\nFinding a fraction of an amount\nFinding a fraction of an amount, worded context\nFinding a frac"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Multiplying_and_dividing_fractions",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Multiplying_and_dividing_fractions.pdf",
+      "pages": 31,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M110",
+        "M197",
+        "M157",
+        "M216",
+        "M265"
+      ],
+      "text": "Example pairs - modelled solutions\nMultiplying and dividing fractions\nY7\nTopics in this unit:\nReciprocals M216\nMultiplying fractions M157\nDividing fractions M110\nMultiplying with mixed numbers M197\nDividing with mixed numbers M265\nsparxmaths.com \u00a9 Sparx limited\nMultiplying and dividing fractions Y7 Back to topic list\nReciprocals M216\nThese example pairs cover the following learning points:\nFinding the reciprocal of a proper fraction and an improper fraction\nFinding the reciprocal of a unit fract"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Multiplying_and_dividing_fractions_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Multiplying_and_dividing_fractions_blank.pdf",
+      "pages": 31,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M110",
+        "M197",
+        "M157",
+        "M216",
+        "M265"
+      ],
+      "text": "Example pairs\nMultiplying and dividing fractions\nY7\nTopics in this unit:\nReciprocals M216\nMultiplying fractions M157\nDividing fractions M110\nMultiplying with mixed numbers M197\nDividing with mixed numbers M265\nsparxmaths.com \u00a9 Sparx limited\nMultiplying and dividing fractions Y7 Back to topic list\nReciprocals M216\nThese example pairs cover the following learning points:\nFinding the reciprocal of a proper fraction and an improper fraction\nFinding the reciprocal of a unit fraction and an integer\nFi"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Proportion_word_problems",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Proportion_word_problems.pdf",
+      "pages": 8,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M478"
+      ],
+      "text": "Example pairs - modelled solutions\nProportion word problems\nY7\nTopic in this unit:\nSolving proportion problems M478\nsparxmaths.com \u00a9 Sparx limited\nProportion word problems Y7 Back to topic list\nSolving proportion problems M478\nThese example pairs cover the following learning points:\nUsing multiplication to find an amount when given a unitary proportional relationship\nUsing division to find a unitary amount when given a proportional relationship\nUsing multiplication to find an amount when given a"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Proportion_word_problems_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Proportion_word_problems_blank.pdf",
+      "pages": 8,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M478"
+      ],
+      "text": "Example pairs\nProportion word problems\nY7\nTopic in this unit:\nSolving proportion problems M478\nsparxmaths.com \u00a9 Sparx limited\nProportion word problems Y7 Back to topic list\nSolving proportion problems M478\nThese example pairs cover the following learning points:\nUsing multiplication to find an amount when given a unitary proportional relationship\nUsing division to find a unitary amount when given a proportional relationship\nUsing multiplication to find an amount when given a proportional relatio"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Tables_and_charts",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Tables_and_charts.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M738",
+        "M460",
+        "M597",
+        "M644",
+        "M899"
+      ],
+      "text": "Example pairs - modelled solutions\nTables and charts\nY7\nTopics in this unit:\nInterpreting frequency tables and two-way tables M899\nDrawing and interpreting tally charts M597\nDrawing and interpreting pictograms M644\nDrawing bar charts M460\nInterpreting bar charts M738\nsparxmaths.com \u00a9 Sparx limited\nTables and charts Y7 Back to topic list\nInterpreting frequency tables and two-way tables M899\nThese example pairs cover the following learning points:\nInterpreting a frequency table containing qualitat"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Tables_and_charts_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Tables_and_charts_blank.pdf",
+      "pages": 25,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M738",
+        "M460",
+        "M597",
+        "M644",
+        "M899"
+      ],
+      "text": "Example pairs\nTables and charts\nY7\nTopics in this unit:\nInterpreting frequency tables and two-way tables M899\nDrawing and interpreting tally charts M597\nDrawing and interpreting pictograms M644\nDrawing bar charts M460\nInterpreting bar charts M738\nsparxmaths.com \u00a9 Sparx limited\nTables and charts Y7 Back to topic list\nInterpreting frequency tables and two-way tables M899\nThese example pairs cover the following learning points:\nInterpreting a frequency table containing qualitative data\nInterpreting"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Theoretical_probability",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Theoretical_probability.pdf",
+      "pages": 36,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M938",
+        "M718",
+        "M755",
+        "M941",
+        "M655"
+      ],
+      "text": "Example pairs - modelled solutions\nTheoretical probability\nY7\nTopics in this unit:\nUsing probability phrases M655\nWriting probabilities as fractions M941\nWriting probabilities as fractions, decimals and percentages M938\nProbabilities of mutually exclusive events M755\nSample space diagrams M718\nsparxmaths.com \u00a9 Sparx limited\nTheoretical probability Y7 Back to topic list\nUsing probability phrases M655\nThese example pairs cover the following learning points:\nCompleting a probability scale to add ph"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_ExamplePairs_Theoretical_probability_blank",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_ExamplePairs_Theoretical_probability_blank.pdf",
+      "pages": 36,
+      "content_type": "ExamplePairs",
+      "topic_codes": [
+        "M938",
+        "M718",
+        "M755",
+        "M941",
+        "M655"
+      ],
+      "text": "Example pairs\nTheoretical probability\nY7\nTopics in this unit:\nUsing probability phrases M655\nWriting probabilities as fractions M941\nWriting probabilities as fractions, decimals and percentages M938\nProbabilities of mutually exclusive events M755\nSample space diagrams M718\nsparxmaths.com \u00a9 Sparx limited\nTheoretical probability Y7 Back to topic list\nUsing probability phrases M655\nThese example pairs cover the following learning points:\nCompleting a probability scale to add phrases or values\nIdent"
+    },
+    {
+      "filename": "Sparx_Year7_Term3_Revision",
+      "file_path": "e:\\OneDrive\\Coding\\Javascript\\Maths Site\\Sparx-files\\Sparx_Year7_Term3\\Sparx_Year7_Term3_Revision.pdf",
+      "pages": 48,
+      "content_type": "Revision",
+      "topic_codes": [
+        "M110",
+        "M351",
+        "M157",
+        "M127",
+        "M938",
+        "M265",
+        "M934",
+        "M755",
+        "M945",
+        "M818",
+        "M460",
+        "M478",
+        "M684",
+        "M597",
+        "M163",
+        "M958",
+        "M941",
+        "M197",
+        "M553",
+        "M841",
+        "M939",
+        "M644",
+        "M440",
+        "M235",
+        "M450",
+        "M328",
+        "M655",
+        "M331",
+        "M502",
+        "M216",
+        "M738",
+        "M288",
+        "M718",
+        "M780",
+        "M940",
+        "M899",
+        "M541",
+        "M264",
+        "M695"
+      ],
+      "text": "Year 7 Term 3\nRevision Workbook\nsparxmaths.com \u00a9 Sparx limited\nAbout this workbook\nThis workbook supports the revision of topics covered in Year 7 Term 3 of the Sparx Maths Curriculum.\nThe workbook is divided into two sections:\n\u2022\nFluency questions on each unit to practise the key concepts.\n\u2022\nMixed questions on all topics to strengthen and deepen understanding.\nThis section contains more challenging reasoning questions, cross-topic questions and problem\nsolving questions.\nIf you use Sparx Maths y"
+    }
+  ]
+}
