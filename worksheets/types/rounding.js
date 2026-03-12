@@ -80,8 +80,12 @@ function generateNumber(rand, difficulty, roundingType) {
             places = randInt(rand, 1, 2);
         } else {
             // Place value rounding: round to whole number or 10
-            number = randInt(rand, 10, 999);
             placeValue = randInt(rand, 0, 1) === 0 ? 1 : 10; // whole number (1) or 10s
+            if (placeValue === 1) {
+                number = randInt(rand, 10, 999) + randInt(rand, 1, 9) / 10;
+            } else {
+                number = randInt(rand, 10, 999);
+            }
         }
     } else if (difficulty === "normal") {
         // Medium numbers, 1-3 dp/sf
@@ -95,9 +99,14 @@ function generateNumber(rand, difficulty, roundingType) {
             places = randInt(rand, 2, 3);
         } else {
             // Place value rounding: whole, 10s, or 100s
-            number = randInt(rand, 100, 9999);
             const pvChoice = randInt(rand, 0, 2);
             placeValue = pvChoice === 0 ? 1 : pvChoice === 1 ? 10 : 100;
+            if (placeValue === 1) {
+                // Need a decimal so rounding to whole number is non-trivial
+                number = randInt(rand, 100, 9999) + randInt(rand, 1, 9) / 10;
+            } else {
+                number = randInt(rand, 100, 9999);
+            }
         }
     } else {
         // Large numbers or very precise decimals, 1-4 dp/sf
