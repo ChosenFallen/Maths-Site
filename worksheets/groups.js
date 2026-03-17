@@ -107,6 +107,7 @@ import pythagoras from "./types/pythagoras.js";
 import basicProbability from "./types/basic-probability.js";
 import linearGraphs from "./types/linear-graphs.js";
 import circles from "./types/circles.js";
+import metricUnits from "./types/metric-units.js";
 
 export const WORKSHEET_TYPES = [
     addition,
@@ -218,6 +219,7 @@ export const WORKSHEET_TYPES = [
     basicProbability,
     linearGraphs,
     circles,
+    metricUnits,
 ];
 
 export const WORKSHEET_GROUPS = [
@@ -331,7 +333,7 @@ export const WORKSHEET_GROUPS = [
     { label: "Surds", types: ["simplify-surds", "surds-add-sub", "surds-expand", "surds-rationalise"] },
     { label: "Sequences", types: ["sequences-continue", "sequences-nth-term", "sequences-nth-term-fractions", "sequences-geometric", "sequences-quadratic", "sequences-missing-term", "sequences-fibonacci", "sequences-term-to-term", "sequences-patterns"] },
     { label: "Graphs & Functions", types: ["linear-graphs"] },
-    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras", "trigonometry", "circles"] },
+    { label: "Measurement & Geometry", types: ["area-rectangle", "area-triangle", "perimeter", "pythagoras", "trigonometry", "circles", "metric-units"] },
     { label: "Statistics", types: ["mean-median-mode-range"] },
     { label: "Probability", types: ["basic-probability"] },
 ];

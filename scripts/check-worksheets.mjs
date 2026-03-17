@@ -66,6 +66,7 @@ const DUPLICATE_TOLERANCE = {
     "standard-form-operations": 25,
     "standard-form-multiply-divide": 25,
     "basic-probability": 10,
+    "metric-units": 8,
     "best-buys": 20,
     "inverse-operations": 15,
     "percentages-as-percentage": 25,
