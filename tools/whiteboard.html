@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Whiteboard</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                touch-action: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+
+            body {
+                overflow: hidden;
+                background: #1a1a2e;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            #canvas {
+                display: block;
+                cursor: crosshair;
+            }
+
+            /* ── Toolbar ── */
+            #toolbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 60px;
+                background: rgba(30, 30, 50, 0.92);
+                backdrop-filter: blur(8px);
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 0 10px;
+                z-index: 100;
+                box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+                transition: opacity 0.3s, transform 0.3s;
+            }
+
+            #toolbar.hidden {
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-100%);
+            }
+
+            .sep {
+                width: 1px;
+                height: 36px;
+                background: rgba(255,255,255,0.2);
+                margin: 0 4px;
+                flex-shrink: 0;
+            }
+
+            /* Buttons */
+            .btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 44px;
+                min-width: 44px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 22px;
+                background: rgba(255,255,255,0.08);
+                color: #fff;
+                transition: background 0.15s, transform 0.1s;
+                padding: 0 10px;
+                flex-shrink: 0;
+            }
+
+            .btn:hover { background: rgba(255,255,255,0.18); }
+            .btn:active { transform: scale(0.93); }
+            .btn.active {
+                background: rgba(255,255,255,0.28);
+                box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
+            }
+
+            /* Color swatches */
+            .color-btn {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                cursor: pointer;
+                transition: border-color 0.15s, transform 0.1s;
+                flex-shrink: 0;
+            }
+
+            .color-btn:hover { transform: scale(1.15); }
+            .color-btn.active { border-color: #fff; transform: scale(1.15); }
+
+            /* Pen size slider */
+            #sizeSlider {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 90px;
+                height: 6px;
+                border-radius: 3px;
+                background: rgba(255,255,255,0.3);
+                outline: none;
+                cursor: pointer;
+                flex-shrink: 0;
+            }
+
+            #sizeSlider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #fff;
+                cursor: pointer;
+            }
+
+            #sizePreview {
+                width: 28px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            #sizePreview span {
+                border-radius: 50%;
+                background: #fff;
+                display: block;
+            }
+
+            /* Custom colour input */
+            #customColor {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border: 3px solid rgba(255,255,255,0.4);
+                cursor: pointer;
+                background: none;
+                padding: 0;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+
+            #customColor::-webkit-color-swatch-wrapper { padding: 0; }
+            #customColor::-webkit-color-swatch { border: none; border-radius: 50%; }
+
+            /* Hide toolbar toggle */
+            #toggleToolbar {
+                position: fixed;
+                top: 8px;
+                right: 10px;
+                z-index: 200;
+                font-size: 16px;
+                height: 36px;
+                min-width: 36px;
+                padding: 0 8px;
+                background: rgba(30,30,50,0.85);
+                border: 1px solid rgba(255,255,255,0.2);
+            }
+
+            #toggleToolbar.toolbar-hidden {
+                top: 10px;
+            }
+
+            /* Label text in toolbar */
+            .label {
+                color: rgba(255,255,255,0.5);
+                font-size: 11px;
+                flex-shrink: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+
+        <div id="toolbar">
+            <!-- Board mode -->
+            <button class="btn" id="btnWhiteboard" title="Whiteboard (white)">⬜</button>
+            <button class="btn" id="btnBlackboard" title="Blackboard (black)">⬛</button>
+            <button class="btn" id="btnDyslexia"   title="Dyslexia-friendly (cream)">🟨</button>
+
+            <div class="sep"></div>
+
+            <!-- Tools -->
+            <button class="btn active" id="btnPen" title="Pen">✏️</button>
+            <button class="btn" id="btnEraser" title="Eraser">⬜</button>
+
+            <div class="sep"></div>
+
+            <!-- Colours (always visible, useful for both modes) -->
+            <div class="color-btn active" id="colorBlack"   style="background:#111111" data-color="#111111" title="Black"></div>
+            <div class="color-btn"        id="colorWhite"   style="background:#f5f5f5; border-color:rgba(255,255,255,0.3)" data-color="#f5f5f5" title="White"></div>
+            <div class="color-btn"        id="colorRed"     style="background:#e53935" data-color="#e53935" title="Red"></div>
+            <div class="color-btn"        id="colorBlue"    style="background:#1e88e5" data-color="#1e88e5" title="Blue"></div>
+            <div class="color-btn"        id="colorGreen"   style="background:#43a047" data-color="#43a047" title="Green"></div>
+            <div class="color-btn"        id="colorOrange"  style="background:#fb8c00" data-color="#fb8c00" title="Orange"></div>
+            <div class="color-btn"        id="colorYellow"  style="background:#fdd835" data-color="#fdd835" title="Yellow"></div>
+            <input type="color" id="customColor" value="#ff69b4" title="Custom colour" />
+
+            <div class="sep"></div>
+
+            <!-- Size -->
+            <span class="label">Size</span>
+            <input type="range" id="sizeSlider" min="2" max="60" value="6" />
+            <div id="sizePreview"><span id="sizeCircle"></span></div>
+
+            <div class="sep"></div>
+
+            <!-- Actions -->
+            <button class="btn" id="btnUndo"       title="Undo (Ctrl+Z)">↩️</button>
+            <button class="btn" id="btnClear"      title="Clear board">🗑️</button>
+            <button class="btn" id="btnFullscreen" title="Toggle fullscreen">⛶</button>
+
+            <div class="sep"></div>
+
+            <a href="../index.html" class="btn" title="Back to home">🏠</a>
+        </div>
+
+        <!-- Floating toggle so toolbar can be hidden for a clean display -->
+        <button class="btn" id="toggleToolbar" title="Hide toolbar">✕</button>
+
+        <script>
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // ── State ──────────────────────────────────────────────
+            let mode = 'whiteboard';   // 'whiteboard' | 'blackboard'
+            let tool = 'pen';          // 'pen' | 'eraser'
+            let color = '#111111';
+            let penSize = 6;
+            let drawing = false;
+            let lastX = 0, lastY = 0, lastMidX = 0, lastMidY = 0;
+            let undoStack = [];        // snapshots (ImageData)
+            const MAX_UNDO = 30;
+
+            // ── Canvas sizing ──────────────────────────────────────
+            function resizeCanvas() {
+                const snapshot = undoStack.length ? ctx.getImageData(0, 0, canvas.width, canvas.height) : null;
+                canvas.width  = window.innerWidth;
+                canvas.height = window.innerHeight;
+                fillBackground();
+                if (snapshot) {
+                    // Restore previous drawing (best-effort on resize)
+                    ctx.putImageData(snapshot, 0, 0);
+                }
+            }
+
+            function fillBackground() {
+                ctx.fillStyle = mode === 'whiteboard' ? '#ffffff' : mode === 'dyslexia' ? '#f8f0d0' : '#000000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // ── Undo ───────────────────────────────────────────────
+            function saveSnapshot() {
+                undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+                if (undoStack.length > MAX_UNDO) undoStack.shift();
+            }
+
+            function undo() {
+                if (!undoStack.length) return;
+                ctx.putImageData(undoStack.pop(), 0, 0);
+            }
+
+            // ── Drawing ────────────────────────────────────────────
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                if (e.touches && e.touches.length) {
+                    return {
+                        x: e.touches[0].clientX - rect.left,
+                        y: e.touches[0].clientY - rect.top
+                    };
+                }
+                return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+            }
+
+            function startDraw(e) {
+                if (e.target === canvas || e.target.closest('#toolbar') === null) {
+                    // Only start drawing when not touching the toolbar
+                    if (e.target !== canvas) return;
+                }
+                e.preventDefault();
+                saveSnapshot();
+                drawing = true;
+                const pos = getPos(e);
+                lastX = pos.x;
+                lastY = pos.y;
+                lastMidX = pos.x;
+                lastMidY = pos.y;
+
+                // Draw a dot for a tap/click
+                ctx.beginPath();
+                ctx.arc(lastX, lastY, currentRadius(), 0, Math.PI * 2);
+                ctx.fillStyle = currentColor();
+                ctx.fill();
+            }
+
+            function draw(e) {
+                if (!drawing) return;
+                e.preventDefault();
+                const pos = getPos(e);
+
+                const midX = (lastX + pos.x) / 2;
+                const midY = (lastY + pos.y) / 2;
+
+                ctx.beginPath();
+                ctx.moveTo(lastMidX, lastMidY);
+                ctx.quadraticCurveTo(lastX, lastY, midX, midY);
+                ctx.lineWidth = currentRadius() * 2;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.strokeStyle = currentColor();
+                ctx.stroke();
+
+                lastX = pos.x;
+                lastY = pos.y;
+                lastMidX = midX;
+                lastMidY = midY;
+            }
+
+            function endDraw(e) {
+                drawing = false;
+            }
+
+            function currentColor() {
+                if (tool === 'eraser') {
+                    return mode === 'whiteboard' ? '#ffffff' : mode === 'dyslexia' ? '#f8f0d0' : '#000000';
+                }
+                return color;
+            }
+
+            function currentRadius() {
+                return tool === 'eraser' ? penSize * 3 : penSize;
+            }
+
+            // ── Event listeners: mouse ─────────────────────────────
+            canvas.addEventListener('mousedown',  startDraw);
+            canvas.addEventListener('mousemove',  draw);
+            canvas.addEventListener('mouseup',    endDraw);
+            canvas.addEventListener('mouseleave', endDraw);
+
+            // ── Event listeners: touch ─────────────────────────────
+            canvas.addEventListener('touchstart', startDraw, { passive: false });
+            canvas.addEventListener('touchmove',  draw,      { passive: false });
+            canvas.addEventListener('touchend',   endDraw);
+
+            // ── Toolbar: board mode ────────────────────────────────
+            document.getElementById('btnWhiteboard').addEventListener('click', () => {
+                mode = 'whiteboard';
+                undoStack = [];
+                fillBackground();
+                // Reset active colour if it was the eraser-white
+                if (tool === 'eraser') setTool('pen');
+                updateBoardButtons();
+                // Switch default colour to black for whiteboard
+                setColor('#111111');
+            });
+
+            document.getElementById('btnBlackboard').addEventListener('click', () => {
+                mode = 'blackboard';
+                undoStack = [];
+                fillBackground();
+                if (tool === 'eraser') setTool('pen');
+                updateBoardButtons();
+                setColor('#f5f5f5');
+            });
+
+            document.getElementById('btnDyslexia').addEventListener('click', () => {
+                mode = 'dyslexia';
+                undoStack = [];
+                fillBackground();
+                if (tool === 'eraser') setTool('pen');
+                updateBoardButtons();
+                setColor('#111111');
+            });
+
+            function updateBoardButtons() {
+                document.getElementById('btnWhiteboard').classList.toggle('active', mode === 'whiteboard');
+                document.getElementById('btnBlackboard').classList.toggle('active', mode === 'blackboard');
+                document.getElementById('btnDyslexia').classList.toggle('active', mode === 'dyslexia');
+            }
+
+            // ── Toolbar: tools ─────────────────────────────────────
+            document.getElementById('btnPen').addEventListener('click', () => setTool('pen'));
+            document.getElementById('btnEraser').addEventListener('click', () => setTool('eraser'));
+
+            function setTool(t) {
+                tool = t;
+                document.getElementById('btnPen').classList.toggle('active', t === 'pen');
+                document.getElementById('btnEraser').classList.toggle('active', t === 'eraser');
+                canvas.style.cursor = t === 'eraser' ? 'cell' : 'crosshair';
+                updateSizePreview();
+            }
+
+            // ── Toolbar: colours ───────────────────────────────────
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.addEventListener('click', () => setColor(btn.dataset.color));
+            });
+
+            document.getElementById('customColor').addEventListener('input', e => {
+                setColor(e.target.value, 'custom');
+            });
+
+            function setColor(c, source) {
+                color = c;
+                if (tool === 'eraser') setTool('pen');
+                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+                if (source !== 'custom') {
+                    const match = document.querySelector(`.color-btn[data-color="${c}"]`);
+                    if (match) match.classList.add('active');
+                }
+            }
+
+            // ── Toolbar: size ──────────────────────────────────────
+            const sizeSlider = document.getElementById('sizeSlider');
+            const sizeCircle = document.getElementById('sizeCircle');
+
+            sizeSlider.addEventListener('input', () => {
+                penSize = parseInt(sizeSlider.value);
+                updateSizePreview();
+            });
+
+            function updateSizePreview() {
+                const r = currentRadius();
+                const d = Math.min(r * 2, 28);
+                sizeCircle.style.width  = d + 'px';
+                sizeCircle.style.height = d + 'px';
+            }
+
+            // ── Toolbar: actions ───────────────────────────────────
+            document.getElementById('btnUndo').addEventListener('click', undo);
+            document.getElementById('btnClear').addEventListener('click', () => {
+                saveSnapshot();
+                fillBackground();
+            });
+
+            // ── Keyboard shortcuts ─────────────────────────────────
+            document.addEventListener('keydown', e => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'z') { e.preventDefault(); undo(); }
+                if (e.key === 'e') setTool('eraser');
+                if (e.key === 'p') setTool('pen');
+                if (e.key === 'Delete' || e.key === 'Backspace') { if (document.activeElement === document.body) { saveSnapshot(); fillBackground(); } }
+            });
+
+            // ── Fullscreen ─────────────────────────────────────────
+            const btnFullscreen = document.getElementById('btnFullscreen');
+
+            function updateFullscreenBtn() {
+                btnFullscreen.textContent = document.fullscreenElement ? '✕' : '⛶';
+                btnFullscreen.title = document.fullscreenElement ? 'Exit fullscreen' : 'Toggle fullscreen';
+            }
+
+            btnFullscreen.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+
+            document.addEventListener('fullscreenchange', updateFullscreenBtn);
+
+            // ── Toggle toolbar ─────────────────────────────────────
+            const toolbar     = document.getElementById('toolbar');
+            const toggleBtn   = document.getElementById('toggleToolbar');
+            let toolbarVisible = true;
+
+            toggleBtn.addEventListener('click', () => {
+                toolbarVisible = !toolbarVisible;
+                toolbar.classList.toggle('hidden', !toolbarVisible);
+                toggleBtn.textContent = toolbarVisible ? '✕' : '☰';
+                toggleBtn.classList.toggle('toolbar-hidden', !toolbarVisible);
+            });
+
+            // ── Init ───────────────────────────────────────────────
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            fillBackground();
+            updateSizePreview();
+            setColor('#111111');
+        </script>
+    </body>
+</html>
