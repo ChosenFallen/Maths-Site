@@ -6,6 +6,7 @@ import mixed from "./types/mixed.js";
 import oddEvenNumbers from "./types/odd-even-numbers.js";
 import placeValue from "./types/place-value.js";
 import orderingNumbers from "./types/ordering-numbers.js";
+import numberLines from "./types/number-lines.js";
 import triangularNumbers from "./types/triangular-numbers.js";
 import negativeNumbersOrdering from "./types/negative-numbers-ordering.js";
 import negativeNumbers from "./types/negative-numbers.js";
@@ -118,6 +119,7 @@ export const WORKSHEET_TYPES = [
     oddEvenNumbers,
     placeValue,
     orderingNumbers,
+    numberLines,
     triangularNumbers,
     negativeNumbersOrdering,
     negativeNumbers,
@@ -237,6 +239,7 @@ export const WORKSHEET_GROUPS = [
             "inverse-operations",
             "odd-even-numbers",
             "ordering-numbers",
+            "number-lines",
             "place-value",
             "estimation",
         ],

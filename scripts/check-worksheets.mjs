@@ -57,6 +57,7 @@ const DUPLICATE_TOLERANCE = {
     "odd-even-numbers": 10,
     "place-value": 30,
     "ordering-numbers": 20,
+    "number-lines": 10,
     // Triangular numbers: normal pool of 25, shuffle → exactly 25 duplicates in 50
     "triangular-numbers": 30,
     "negative-numbers-ordering": 15,
