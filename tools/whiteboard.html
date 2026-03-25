@@ -187,8 +187,9 @@
             <div class="sep"></div>
 
             <!-- Tools -->
-            <button class="btn active" id="btnPen" title="Pen">✏️</button>
-            <button class="btn" id="btnEraser" title="Eraser">⬜</button>
+            <button class="btn active" id="btnPen"      title="Freehand pen">✏️</button>
+            <button class="btn"        id="btnLine"     title="Straight line">📏</button>
+            <button class="btn"        id="btnEraser"   title="Eraser">⬜</button>
 
             <div class="sep"></div>
 
@@ -278,9 +279,10 @@
                 return { x: e.clientX - rect.left, y: e.clientY - rect.top };
             }
 
+            let lineSnapshot = null; // snapshot before line preview starts
+
             function startDraw(e) {
                 if (e.target === canvas || e.target.closest('#toolbar') === null) {
-                    // Only start drawing when not touching the toolbar
                     if (e.target !== canvas) return;
                 }
                 e.preventDefault();
@@ -292,11 +294,16 @@
                 lastMidX = pos.x;
                 lastMidY = pos.y;
 
-                // Draw a dot for a tap/click
-                ctx.beginPath();
-                ctx.arc(lastX, lastY, currentRadius(), 0, Math.PI * 2);
-                ctx.fillStyle = currentColor();
-                ctx.fill();
+                if (tool === 'line') {
+                    // Save snapshot so we can redraw the preview on each move
+                    lineSnapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                } else {
+                    // Draw a dot for a tap/click
+                    ctx.beginPath();
+                    ctx.arc(lastX, lastY, currentRadius(), 0, Math.PI * 2);
+                    ctx.fillStyle = currentColor();
+                    ctx.fill();
+                }
             }
 
             function draw(e) {
@@ -304,26 +311,53 @@
                 e.preventDefault();
                 const pos = getPos(e);
 
-                const midX = (lastX + pos.x) / 2;
-                const midY = (lastY + pos.y) / 2;
+                if (tool === 'line') {
+                    // Restore to before the preview so we draw a fresh line each move
+                    ctx.putImageData(lineSnapshot, 0, 0);
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(pos.x, pos.y);
+                    ctx.lineWidth = currentRadius() * 2;
+                    ctx.lineCap = 'round';
+                    ctx.strokeStyle = currentColor();
+                    ctx.stroke();
+                } else {
+                    const midX = (lastX + pos.x) / 2;
+                    const midY = (lastY + pos.y) / 2;
 
-                ctx.beginPath();
-                ctx.moveTo(lastMidX, lastMidY);
-                ctx.quadraticCurveTo(lastX, lastY, midX, midY);
-                ctx.lineWidth = currentRadius() * 2;
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round';
-                ctx.strokeStyle = currentColor();
-                ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(lastMidX, lastMidY);
+                    ctx.quadraticCurveTo(lastX, lastY, midX, midY);
+                    ctx.lineWidth = currentRadius() * 2;
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+                    ctx.strokeStyle = currentColor();
+                    ctx.stroke();
 
-                lastX = pos.x;
-                lastY = pos.y;
-                lastMidX = midX;
-                lastMidY = midY;
+                    lastX = pos.x;
+                    lastY = pos.y;
+                    lastMidX = midX;
+                    lastMidY = midY;
+                }
             }
 
             function endDraw(e) {
+                if (drawing && tool === 'line' && e.changedTouches) {
+                    // Commit the final line position on touch end
+                    const rect = canvas.getBoundingClientRect();
+                    const t = e.changedTouches[0];
+                    const pos = { x: t.clientX - rect.left, y: t.clientY - rect.top };
+                    ctx.putImageData(lineSnapshot, 0, 0);
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(pos.x, pos.y);
+                    ctx.lineWidth = currentRadius() * 2;
+                    ctx.lineCap = 'round';
+                    ctx.strokeStyle = currentColor();
+                    ctx.stroke();
+                }
                 drawing = false;
+                lineSnapshot = null;
             }
 
             function currentColor() {
@@ -385,12 +419,14 @@
             }
 
             // ── Toolbar: tools ─────────────────────────────────────
-            document.getElementById('btnPen').addEventListener('click', () => setTool('pen'));
+            document.getElementById('btnPen').addEventListener('click',    () => setTool('pen'));
+            document.getElementById('btnLine').addEventListener('click',   () => setTool('line'));
             document.getElementById('btnEraser').addEventListener('click', () => setTool('eraser'));
 
             function setTool(t) {
                 tool = t;
-                document.getElementById('btnPen').classList.toggle('active', t === 'pen');
+                document.getElementById('btnPen').classList.toggle('active',    t === 'pen');
+                document.getElementById('btnLine').classList.toggle('active',   t === 'line');
                 document.getElementById('btnEraser').classList.toggle('active', t === 'eraser');
                 canvas.style.cursor = t === 'eraser' ? 'cell' : 'crosshair';
                 updateSizePreview();
