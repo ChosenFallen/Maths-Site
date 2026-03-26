@@ -25,6 +25,11 @@ const difficultySettings = {
         startFlash: 450,
         speedUp: 60,
     },
+    expert: {
+        startFlash: 450,
+        speedUp: 60,
+        freshSequence: true,
+    },
 };
 
 let currentDifficulty = "normal";
@@ -49,10 +54,12 @@ const bestRoundsBox = document.getElementById("best-rounds");
 const bestEasyToday = document.getElementById("best-easy-today");
 const bestNormalToday = document.getElementById("best-normal-today");
 const bestHardToday = document.getElementById("best-hard-today");
+const bestExpertToday = document.getElementById("best-expert-today");
 
 const bestEasyAlltime = document.getElementById("best-easy-alltime");
 const bestNormalAlltime = document.getElementById("best-normal-alltime");
 const bestHardAlltime = document.getElementById("best-hard-alltime");
+const bestExpertAlltime = document.getElementById("best-expert-alltime");
 
 document.querySelectorAll(".difficulty-buttons button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -99,7 +106,12 @@ function nextRound() {
     round++;
     updateRoundDisplay();
 
-    sequence.push(randomColor());
+    const settings = difficultySettings[currentDifficulty];
+    if (settings.freshSequence) {
+        sequence = Array.from({ length: round }, randomColor);
+    } else {
+        sequence.push(randomColor());
+    }
 
     flashDuration = Math.max(
         minimumFlashDuration,
@@ -234,13 +246,15 @@ function updateBestRoundsDisplay() {
     bestEasyToday.textContent = `Easy: ${bestToday.easy || "–"}`;
     bestNormalToday.textContent = `Normal: ${bestToday.normal || "–"}`;
     bestHardToday.textContent = `Hard: ${bestToday.hard || "–"}`;
+    bestExpertToday.textContent = `Expert: ${bestToday.expert || "–"}`;
 
     bestEasyAlltime.textContent = `Easy: ${bestAlltime.easy || "–"}`;
     bestNormalAlltime.textContent = `Normal: ${bestAlltime.normal || "–"}`;
     bestHardAlltime.textContent = `Hard: ${bestAlltime.hard || "–"}`;
+    bestExpertAlltime.textContent = `Expert: ${bestAlltime.expert || "–"}`;
 
-    if (bestToday.easy || bestToday.normal || bestToday.hard ||
-        bestAlltime.easy || bestAlltime.normal || bestAlltime.hard) {
+    if (bestToday.easy || bestToday.normal || bestToday.hard || bestToday.expert ||
+        bestAlltime.easy || bestAlltime.normal || bestAlltime.hard || bestAlltime.expert) {
         bestRoundsBox.classList.remove("hidden");
     } else {
         bestRoundsBox.classList.add("hidden");
@@ -256,13 +270,14 @@ function getBestRoundsToday() {
     const data = localStorage.getItem(getTodayKey());
 
     if (!data) {
-        return { easy: 0, normal: 0, hard: 0 };
+        return { easy: 0, normal: 0, hard: 0, expert: 0 };
     }
 
     try {
-        return JSON.parse(data);
+        const parsed = JSON.parse(data);
+        return { easy: 0, normal: 0, hard: 0, expert: 0, ...parsed };
     } catch {
-        return { easy: 0, normal: 0, hard: 0 };
+        return { easy: 0, normal: 0, hard: 0, expert: 0 };
     }
 }
 
@@ -274,13 +289,14 @@ function getBestRoundsAlltime() {
     const data = localStorage.getItem("simon-best-alltime");
 
     if (!data) {
-        return { easy: 0, normal: 0, hard: 0 };
+        return { easy: 0, normal: 0, hard: 0, expert: 0 };
     }
 
     try {
-        return JSON.parse(data);
+        const parsed = JSON.parse(data);
+        return { easy: 0, normal: 0, hard: 0, expert: 0, ...parsed };
     } catch {
-        return { easy: 0, normal: 0, hard: 0 };
+        return { easy: 0, normal: 0, hard: 0, expert: 0 };
     }
 }
 
