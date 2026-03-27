@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Maths Hangman</title>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="game.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>📐 Maths Hangman</h1>
+
+            <div class="hint-row">
+                <button id="hint-btn" class="hint-btn">💡 Show Hint</button>
+                <div class="hint-text hidden" id="hint-text"></div>
+            </div>
+
+            <div class="game-area">
+                <svg id="hangman-svg" viewBox="0 0 240 270">
+                    <!-- Gallows -->
+                    <line x1="20" y1="255" x2="130" y2="255" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+                    <line x1="75" y1="255" x2="75" y2="15"  stroke="#555" stroke-width="6" stroke-linecap="round"/>
+                    <line x1="75" y1="15"  x2="175" y2="15" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+                    <line x1="175" y1="15" x2="175" y2="45" stroke="#555" stroke-width="4" stroke-linecap="round"/>
+                    <!-- Body parts -->
+                    <circle id="h-head" cx="175" cy="65" r="20" fill="none" stroke="#e53935" stroke-width="4" class="body-part hidden"/>
+                    <line   id="h-body" x1="175" y1="85"  x2="175" y2="148" stroke="#e53935" stroke-width="4" stroke-linecap="round" class="body-part hidden"/>
+                    <line   id="h-larm" x1="175" y1="105" x2="140" y2="133" stroke="#e53935" stroke-width="4" stroke-linecap="round" class="body-part hidden"/>
+                    <line   id="h-rarm" x1="175" y1="105" x2="210" y2="133" stroke="#e53935" stroke-width="4" stroke-linecap="round" class="body-part hidden"/>
+                    <line   id="h-lleg" x1="175" y1="148" x2="148" y2="190" stroke="#e53935" stroke-width="4" stroke-linecap="round" class="body-part hidden"/>
+                    <line   id="h-rleg" x1="175" y1="148" x2="202" y2="190" stroke="#e53935" stroke-width="4" stroke-linecap="round" class="body-part hidden"/>
+                </svg>
+
+                <div class="word-section">
+                    <div class="word-display" id="word-display"></div>
+                    <div class="wrong-count" id="wrong-count">0 / 6 wrong</div>
+                    <div class="wrong-letters" id="wrong-letters"></div>
+                </div>
+            </div>
+
+            <div class="keyboard" id="keyboard"></div>
+
+            <div class="game-message hidden" id="game-message"></div>
+
+            <button id="new-game-btn" class="new-game-btn">New Word</button>
+
+            <a href="../" class="back-link" style="display:block;text-align:center;margin-top:20px;">← Back to Games</a>
+        </div>
+
+        <script src="game.js"></script>
+    </body>
+</html>

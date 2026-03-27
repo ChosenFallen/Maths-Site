@@ -769,3 +769,142 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Full-viewport layout when game is active — no scrolling needed */
+body.game-active {
+    overflow: hidden;
+    height: 100vh;
+    padding: 0;
+}
+
+body.game-active .container {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 20px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+body.game-active h1,
+body.game-active .back-link,
+body.game-active .instructions {
+    display: none !important;
+}
+
+body.game-active #game-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    max-width: 100%;
+}
+
+/* Compact horizontal score strip */
+body.game-active .player-panels {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-bottom: 8px;
+}
+
+body.game-active .player-panel {
+    flex: 1;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    height: 48px;
+    overflow: hidden;
+}
+
+body.game-active .player-name {
+    font-size: 0.85em;
+    margin-bottom: 0;
+}
+
+body.game-active .player-score {
+    font-size: 1.4em;
+    margin: 0;
+}
+
+body.game-active .player-status {
+    display: none;
+}
+
+body.game-active .answer-indicator {
+    position: static;
+    font-size: 1.1em;
+}
+
+body.game-active .player-panel.has-answered {
+    opacity: 0.4;
+}
+
+/* Question header */
+body.game-active .question-header {
+    flex-shrink: 0;
+    margin-bottom: 6px;
+}
+
+body.game-active .question-number {
+    font-size: 1.1em;
+}
+
+body.game-active .timer-text {
+    font-size: 1em;
+}
+
+/* Question box */
+body.game-active .question-section {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    margin-bottom: 6px;
+}
+
+body.game-active .question-text {
+    font-size: 1.4em;
+}
+
+/* Answers fill remaining height */
+body.game-active .answers-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: 6px;
+    margin-bottom: 6px;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+body.game-active .answer-option {
+    flex: 1;
+    padding: 0 16px;
+    font-size: 1.1em;
+}
+
+body.game-active .answer-letter {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9em;
+}
+
+body.game-active .game-status {
+    flex-shrink: 0;
+    padding: 4px 12px;
+    font-size: 1.1em;
+    min-height: 0;
+}
+
+body.game-active .end-game-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin-top: 4px;
+}

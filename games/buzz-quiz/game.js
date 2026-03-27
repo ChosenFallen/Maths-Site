@@ -5,7 +5,7 @@ let ledStates = [false, false, false, false]; // Track LED state for all 4 playe
 let webHIDPromptShown = false; // Track if we've already prompted for WebHID
 
 // Game settings
-let selectedMode = "buzzer";
+let selectedMode = "all-answer";
 let selectedDifficulty = "normal";
 let totalQuestions = 10;
 let buzzerTimeLimit = 10; // Configurable buzzer answer time
@@ -256,9 +256,9 @@ function updateStartButton() {
 
 function enableKeyboardMode() {
     isKeyboardMode = true;
-    numPlayers = 4; // Default to 4 players for keyboard
-    playerReady = [false, false, false, false];
-    updateControllerStatus();
+    numPlayers = 4;
+    playerReady = [true, true, true, true];
+    startGame();
 }
 
 // Gamepad events
@@ -316,6 +316,7 @@ function startGame() {
     playerCorrect = new Array(count).fill(0);
     playerAnswers = new Array(count).fill(null);
 
+    document.body.classList.add("game-active");
     setupScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
     resultsScreen.classList.add("hidden");
@@ -390,7 +391,7 @@ function startRound() {
 
     // Clear player statuses
     document.querySelectorAll(".player-panel").forEach((panel) => {
-        panel.classList.remove("active", "correct", "wrong");
+        panel.classList.remove("active", "correct", "wrong", "has-answered");
         panel.querySelector(".player-status").textContent = "";
         const indicator = panel.querySelector(".answer-indicator");
         indicator.textContent = "";
@@ -729,8 +730,9 @@ function handleAllAnswer(playerIndex, answerIndex) {
 
     // Show checkmark
     const panel = document.querySelectorAll(".player-panel")[playerIndex];
-    panel.querySelector(".answer-indicator").textContent = "✓";
-    panel.querySelector(".player-status").textContent = "Answered";
+    panel.querySelector(".answer-indicator").textContent = "";
+    panel.querySelector(".player-status").textContent = "";
+    panel.classList.add("has-answered");
 
     // Check if all answered
     allAnswered = playerAnswers.every((a) => a !== null);
@@ -824,6 +826,7 @@ function endGame() {
     // Turn off all LEDs when game ends
     setAllLEDs(false);
 
+    document.body.classList.remove("game-active");
     gameScreen.classList.add("hidden");
     resultsScreen.classList.remove("hidden");
 
