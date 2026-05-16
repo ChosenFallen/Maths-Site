@@ -75,15 +75,15 @@ function generateMixedProblem(rand, difficulty, options) {
             b = Math.max(1, b);
             a = a * b;
         }
+
+        const first = applyOpExtended(a, b, op1);
+
         if (op2 === "÷") {
-            c = Math.max(1, c);
-            b = b * c;
+            const firstAbs = Math.max(2, Math.abs(Math.round(first)));
+            c = getRandomFactor(firstAbs, rand);
         }
 
-        const question = `(${formatOp(a, b, op1)}) ${formatOpSymbol(
-            op2,
-        )} ${c} =`;
-        const first = applyOpExtended(a, b, op1);
+        const question = `(${formatOp(a, b, op1)}) ${formatOpSymbol(op2)} ${c} =`;
         const answer = applyOpExtended(first, c, op2);
         return { questionHtml: question, answer, wrongAnswers: generateNumericDistracters(answer, rand) };
     }
@@ -91,7 +91,7 @@ function generateMixedProblem(rand, difficulty, options) {
     const precedenceFirst =
         isHighPrecedenceExtended(op1) && !isHighPrecedenceExtended(op2);
     const precedenceSecond =
-        !isHighPrecedenceExtended(op1) && isHighPrecedenceExtended(op2);
+        (!isHighPrecedenceExtended(op1) && isHighPrecedenceExtended(op2)) || op2 === "^";
 
     if (precedenceFirst || (!precedenceFirst && !precedenceSecond)) {
         // (a op1 b) op2 c
@@ -146,12 +146,7 @@ function generateMixedProblem(rand, difficulty, options) {
 
 function applyOpExtended(x, y, op) {
     if (op === "^") return Math.pow(x, y);
-    const result = applyOp(x, y, op);
-    // Round division results to avoid long decimals
-    if (op === "÷") {
-        return Math.round(result * 10) / 10; // Max 1 decimal place
-    }
-    return result;
+    return applyOp(x, y, op);
 }
 
 function isHighPrecedenceExtended(op) {
